@@ -1,0 +1,185 @@
+# Copyright (C) 2017 Automattic
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: _s 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/tags/_s\n"
+"POT-Creation-Date: 2016-12-23 16:00+0100\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2017-MO-DA HO:MI+ZONE\n"
+"Last-Translator:\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Generator: grunt-wp-i18n 0.5.4\n"
+
+#: 404.php:16
+msgid "Oops! That page can&rsquo;t be found."
+msgstr ""
+
+#: 404.php:20
+msgid ""
+"It looks like nothing was found at this location. Maybe try one of the "
+"links below or a search?"
+msgstr ""
+
+#: 404.php:29
+msgid "Most Used Categories"
+msgstr ""
+
+#: 404.php:46
+#. translators: %1$s: smiley
+msgid "Try looking in the monthly archives. %1$s"
+msgstr ""
+
+#: comments.php:33
+#. translators: 1: title.
+msgid "One thought on &ldquo;%1$s&rdquo;"
+msgstr ""
+
+#: comments.php:64
+msgid "Comments are closed."
+msgstr ""
+
+#: footer.php:33
+msgid ". All Rights Reserved."
+msgstr ""
+
+#: footer.php:35
+msgid "https://www.classicpress.net/"
+msgstr ""
+
+#: footer.php:35
+msgid "Proudly powered by %s"
+msgstr ""
+
+#: footer.php:41
+#. translators: 1: Theme name, 2: Theme author.
+msgid "Theme: %1$s by %2$s."
+msgstr ""
+
+#: functions.php:40
+msgid "Primary"
+msgstr ""
+
+#: functions.php:41
+msgid "Footer Links"
+msgstr ""
+
+#: functions.php:127
+msgid "Left Sidebar"
+msgstr ""
+
+#: functions.php:128
+msgid "The first (primary) sidebar. Add widgets here."
+msgstr ""
+
+#: functions.php:136
+msgid "Right Sidebar"
+msgstr ""
+
+#: functions.php:137
+msgid "The second (secondary) sidebar. Add widgets here."
+msgstr ""
+
+#: header.php:21
+msgid "Skip to content"
+msgstr ""
+
+#: header.php:61
+msgid "Home"
+msgstr ""
+
+#: header.php:77
+msgid "Primary Menu"
+msgstr ""
+
+#: header.php:82
+msgid "Close menu"
+msgstr ""
+
+#: inc/template-tags.php:58
+#. translators: used between list items, there is a space after the comma
+msgid ", "
+msgstr ""
+
+#: inc/template-tags.php:61
+#. translators: 1: list of categories.
+msgid "Posted in %1$s"
+msgstr ""
+
+#: inc/template-tags.php:68
+#. translators: 1: list of tags.
+msgid "Tagged %1$s"
+msgstr ""
+
+#: inc/template-tags.php:78
+#. translators: %s: post title
+msgid "Leave a Comment<span class=\"screen-reader-text\"> on %s</span>"
+msgstr ""
+
+#: inc/template-tags.php:95 template-parts/content-page.php:36
+#. translators: %s: Name of current post. Only visible to screen readers
+msgid "Edit <span class=\"screen-reader-text\">%s</span>"
+msgstr ""
+
+#: search.php:20
+#. translators: %s: search query.
+msgid "Search Results for: %s"
+msgstr ""
+
+#: template-parts/content-none.php:14
+msgid "Nothing Found"
+msgstr ""
+
+#: template-parts/content-none.php:24
+#. translators: 1: link to WP admin new post page.
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr ""
+
+#: template-parts/content-none.php:37
+msgid ""
+"Sorry, but nothing matched your search terms. Please try again with some "
+"different keywords."
+msgstr ""
+
+#: template-parts/content-none.php:44
+msgid ""
+"It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
+"searching can help."
+msgstr ""
+
+#: template-parts/content-page.php:23 template-parts/content.php:50
+msgid "Pages:"
+msgstr ""
+
+#: template-parts/content.php:39
+#. translators: %s: Name of current post. Only visible to screen readers
+msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
+msgstr ""
+
+#: comments.php:39
+#. translators: 1: comment count number, 2: title.
+msgctxt "comments title"
+msgid "%1$s thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/template-tags.php:25
+#. translators: %s: post date.
+msgctxt "post date"
+msgid "Posted on %s"
+msgstr ""
+
+#: inc/template-tags.php:41
+#. translators: %s: post author.
+msgctxt "post author"
+msgid "by %s"
+msgstr ""
+
+#: inc/template-tags.php:65
+#. translators: used between list items, there is a space after the comma
+msgctxt "list item separator"
+msgid ", "
+msgstr ""

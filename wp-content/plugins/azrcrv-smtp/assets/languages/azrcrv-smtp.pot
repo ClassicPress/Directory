@@ -1,0 +1,232 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: SMTP\n"
+"POT-Creation-Date: 2022-08-02 14:08+0100\n"
+"PO-Revision-Date: 2019-02-24 18:52+0000\n"
+"Last-Translator: \n"
+"Language-Team: translate@azurecurve.co.uk\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
+"X-Poedit-Basepath: ../..\n"
+"X-Poedit-KeywordsList: __;_e;esc_html__;esc_html_e\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: includes/azurecurve-menu-display.php:55
+msgid "Active Plugins"
+msgstr ""
+
+#: includes/azurecurve-menu-display.php:87
+#, php-format
+msgid "%1$s was one of the first plugin developers to start developing for ClassicPress; all plugins are available from %2$s and are integrated with the %3$s plugin for fully integrated, no hassle, updates."
+msgstr ""
+
+#: includes/azurecurve-menu-display.php:90
+#, php-format
+msgid "The %s plugins active on your site are:"
+msgstr ""
+
+#: includes/azurecurve-menu-display.php:109
+msgid "Other Available Plugins"
+msgstr ""
+
+#: includes/azurecurve-menu-display.php:135
+#, php-format
+msgid "Congratulations! You're using all of the %s plugins."
+msgstr ""
+
+#: includes/azurecurve-menu-display.php:147
+#, php-format
+msgid "The other plugins available from %s are:"
+msgstr ""
+
+#: includes/azurecurve-menu-tabs-output.php:50 includes/tabs-output.php:147
+#, php-format
+msgid "Support %s"
+msgstr ""
+
+#: includes/azurecurve-menu-tabs-output.php:60 includes/tabs-output.php:157
+msgid "You can help support the development of our free plugins by donating a small amount of money."
+msgstr ""
+
+#: includes/functions-menu.php:23 includes/functions-menu.php:39
+#: includes/tab-settings.php:15
+msgid "Settings"
+msgstr ""
+
+#: includes/functions-settings.php:53
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: includes/functions-settings.php:80
+msgid "Found Easy WP SMTP settings that can be imported."
+msgstr ""
+
+#: includes/functions-settings.php:83
+msgid "Import settings"
+msgstr ""
+
+#: includes/functions-settings.php:97
+msgid "Settings have been saved."
+msgstr ""
+
+#: includes/functions-settings.php:108
+msgid "Test email has been sent successfully."
+msgstr ""
+
+#: includes/functions-settings.php:120
+msgid "Error sending test email:"
+msgstr ""
+
+#: includes/functions-settings.php:153 includes/functions-settings.php:219
+#: includes/functions-settings.php:235 includes/plugin-functionality.php:145
+msgid "You do not have permissions to perform this action"
+msgstr ""
+
+#: includes/tab-instructions.php:14
+msgid "Instructions"
+msgstr ""
+
+#: includes/tab-instructions.php:22
+msgid "SMTP Settings"
+msgstr ""
+
+#: includes/tab-instructions.php:33
+#, php-format
+msgid "Simply configure the settings on the %s Settings tab and email will automatically be intercepted and sent by PHPMailer using the supplied SMTP server details."
+msgstr ""
+
+#: includes/tab-instructions.php:45 includes/tab-test-email.php:15
+msgid "Test Email"
+msgstr ""
+
+#: includes/tab-instructions.php:56
+msgid "You can use the Test Email tab to check if the SMTP details are correct and that sending of emails is working correctly."
+msgstr ""
+
+#: includes/tab-other-plugins.php:32
+msgid "Other Plugins"
+msgstr ""
+
+#: includes/tab-other-plugins.php:41
+#, php-format
+msgid "%s was one of the first plugin developers to start developing for ClassicPress; all plugins are available from %s and are integrated with the %s plugin for fully integrated, no hassle, updates."
+msgstr ""
+
+#: includes/tab-other-plugins.php:44
+#, php-format
+msgid "Other plugins available from %s, which you are not using, are:"
+msgstr ""
+
+#: includes/tab-settings.php:24
+msgid "This Simple Mail Transport Protocol (SMTP) plugin will intercept the standard wp_mail and send emails via an SMTP server using PHPMAILER."
+msgstr ""
+
+#: includes/tab-settings.php:37
+msgid "SMTP Host"
+msgstr ""
+
+#: includes/tab-settings.php:46
+msgid "Your mail server address."
+msgstr ""
+
+#: includes/tab-settings.php:58
+msgid "SMTP EncryptionType"
+msgstr ""
+
+#: includes/tab-settings.php:71
+msgid "For most servers SSL/TLS is the recommended encryption type."
+msgstr ""
+
+#: includes/tab-settings.php:83
+msgid "SMTP Port"
+msgstr ""
+
+#: includes/tab-settings.php:92
+msgid "The port to your mail server (Standards are 25 for no encryption, 465 for SSL/TLS and 587 for StartTLS)."
+msgstr ""
+
+#: includes/tab-settings.php:103
+msgid "SMTP Username"
+msgstr ""
+
+#: includes/tab-settings.php:112
+msgid "The username to login to your mail server."
+msgstr ""
+
+#: includes/tab-settings.php:124
+msgid "SMTP Password"
+msgstr ""
+
+#: includes/tab-settings.php:133
+msgid "The password to login to your mail server. NB. The password is stored in plain text in the database."
+msgstr ""
+
+#: includes/tab-settings.php:145
+msgid "Allow No Authentication"
+msgstr ""
+
+#: includes/tab-settings.php:155
+msgid "Allow no authentication when username not set."
+msgstr ""
+
+#: includes/tab-settings.php:168
+msgid "From Email Address"
+msgstr ""
+
+#: includes/tab-settings.php:177
+msgid "This will be used as the \"From\" email address; leave blank to use the admin email."
+msgstr ""
+
+#: includes/tab-settings.php:189
+msgid "From Email Name"
+msgstr ""
+
+#: includes/tab-settings.php:198
+#, php-format
+msgid "This will be used as the name for the \"From\" email address; leave blank to use %s."
+msgstr ""
+
+#: includes/tab-test-email.php:24
+msgid "Test your email configuration by sending a test email."
+msgstr ""
+
+#: includes/tab-test-email.php:37
+msgid "Email Address"
+msgstr ""
+
+#: includes/tab-test-email.php:57
+msgid "Email Subject"
+msgstr ""
+
+#: includes/tab-test-email.php:77
+msgid "Email Message"
+msgstr ""
+
+#: includes/tabs-output.php:81
+msgid "Save Settings"
+msgstr ""
+
+#: includes/tabs-output.php:108
+msgid "Send Test Email"
+msgstr ""
+
+#: libraries/updateclient/UpdateClient.class.php:185
+msgid "Compatible up to:"
+msgstr ""
+
+#: libraries/updateclient/UpdateClient.class.php:185
+msgid "Reviews"
+msgstr ""
+
+#: libraries/updateclient/UpdateClient.class.php:185
+msgid "Read all reviews"
+msgstr ""
+
+#: libraries/updateclient/UpdateClient.class.php:382
+msgid "View details"
+msgstr ""

@@ -1,0 +1,39 @@
+body.login {
+	background-color: #d9f2ee;
+}
+body.login div#login form#loginform input#user_login:hover,
+body.login div#login form#loginform input#user_login:focus,
+body.login div#login form#loginform input#user_pass:hover,
+body.login div#login form#loginform input#user_pass:focus,
+body.login div#login form#loginform p.forgetmenot input#rememberme:hover,
+body.login div#login form#loginform p.forgetmenot input#rememberme:focus {
+	border: 1px solid #034a59;
+}
+body.login div#login form#loginform p.submit input#wp-submit {
+	height: auto;
+	border-color: #000000;
+	background-color: #057f99;
+}
+body.login div#login form#loginform p.submit input#wp-submit:hover {
+	background-color: #006b81;
+}
+body.login div#login p#nav a,
+body.login div#login p#backtoblog a {
+	color: #034a59;
+	text-decoration: underline;
+}
+body.login div#login p#nav a:hover,
+body.login div#login p#backtoblog a:hover {
+	text-decoration: none;
+}
+body.login .message,
+body.login .success {
+	border-left: 4px solid #034a59;
+}
+.login input[type="url"] {
+	font-size: 24px;
+	width: 100%;
+	padding: 3px;
+	margin: 2px 6px 16px 0;
+	background: #fbfbfb;
+}

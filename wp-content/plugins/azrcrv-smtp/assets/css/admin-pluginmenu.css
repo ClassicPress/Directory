@@ -1,0 +1,45 @@
+/*
+azurecurve plugin index
+----------------------------------------------- */
+a.azrcrv-plugin-index, a.azrcrv-premium-plugin-index, a.azrcrv-bright-plugin-index, a.azrcrv-grey-plugin-index {
+	display: block;
+	float: left;
+	text-align: center;
+	margin: 4px;
+	color: #fff;
+	width: 220px;
+	height: 75px;
+	line-height: 75px;
+	text-decoration: none;
+	font-weight: 700;
+	border-radius: 5px;
+}
+a.azrcrv-plugin-index{
+	background-color: #007FFF;
+}
+a.azrcrv-premium-plugin-index {
+	background-color: #ff8000;
+}
+a.azrcrv-bright-plugin-index {
+	background-color: #7fff00;
+	color: #000;
+}
+a.azrcrv-grey-plugin-index {
+	background-color: #808080;
+}
+a.azrcrv-plugin-index:hover, a.azrcrv-premium-plugin-index:hover, a.azrcrv-bright-plugin-index:hover, a.azrcrv-grey-plugin-index:hover {
+	text-decoration: underline;
+}
+a.azrcrv-plugin-index:hover {
+	background-color: #0000ff;
+}
+a.azrcrv-premium-plugin-index:hover {
+	background-color: #ff0000;
+}
+a.azrcrv-bright-plugin-index:hover {
+	background-color: #8000ff;
+	color: #fff;
+}
+a.azrcrv-grey-plugin-index:hover {
+	background-color: #36454F;
+}

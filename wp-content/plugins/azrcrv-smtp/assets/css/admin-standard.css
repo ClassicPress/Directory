@@ -1,0 +1,83 @@
+/*
+	tabs
+*/
+.azrcrv-ui-tabs {
+	display: block;
+	position: relative;
+	margin-bottom: 6px;
+	overflow: auto;
+}
+.azrcrv-ui-tabs .azrcrv-ui-tabs-nav {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: left;
+	background: transparent;
+	border: none;
+	font-size: 1.3em;
+}
+.azrcrv-ui-tabs-nav .azrcrv-ui-state-default a{
+	border: 1px solid grey;
+	border-bottom: 4px solid grey;
+	color: grey;
+	background: transparent;
+	font-weight: 700;
+	padding: 6px;
+}
+.azrcrv-ui-tabs-nav .azrcrv-ui-state-active a{
+	border: 1px solid #007FFF;
+	border-bottom: 4px solid #007FFF;
+	color: #007FFF;
+	background: transparent;
+	font-weight: 700;
+	padding: 6px;
+}
+.azrcrv-ui-tabs-nav .azrcrv-ui-state-default a:hover{
+	border: 1px solid #0000ff;
+	border-bottom: 4px solid #0000ff;
+	color: #0000ff;
+	background: transparent;
+	font-weight: 700;
+	padding: 6px;
+}
+.azrcrv-ui-tabs-scroll {
+	margin-top: -12px;
+	border: 1px solid grey;
+	padding: 12px;
+}
+.azrcrv-ui-tabs-hidden{
+	display: none;
+}
+/*
+	section table
+*/
+table.azrcrv-settings{
+}
+th.azrcrv-settings-section-heading {
+	margin: 0;
+	padding: 0;
+	padding-left: 6px;
+	line-height: 1em;
+	border-bottom: 5px solid #007fff;
+}
+h2.azrcrv-settings-section-heading {
+	line-height: 1em;
+}
+table.azrcrv.settings th {
+	padding-left: 12px;
+}
+/*
+	Donate button
+*/
+div.azrcrv-donate {
+	color: #007fff;
+	font-size: 1.25em;
+	font-weight: 700;
+	text-align: center;
+	float:right;
+	width: 300px;
+}
+div.azrcrv-donate span {
+	font-size: 1em;
+	color: #000;
+	font-weight: 400;
+}
