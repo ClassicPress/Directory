@@ -247,7 +247,9 @@ function kts_review_response_form_redirect() {
 	}
 
 	# Check that the download link corresponds with the Update URI 
-	$update_uri = get_post_meta( $software_id, 'update_uri', true );
+	$user_id = get_current_user_id();
+	$github_username = get_user_meta( $user_id, 'github_username', true );
+	$update_uri = esc_url_raw( 'https://github.com/' . $github_username . '/' );
 	if ( stripos( $_POST['download_link'], $update_uri ) !== 0 ) {
 		wp_safe_redirect( esc_url_raw( $referer . '?notification=invalid-github' ) );
 		exit;
