@@ -58,7 +58,7 @@ add_action( 'init', 'kts_register_review_post_type' );
 function kts_rename_excerpt( $translation, $original ) {
 	global $post, $pagenow;
 	
-	if ( $pagenow === 'post.php' && isset( $post ) && $post->post_type === 'review' ) {
+	if ( in_array( $pagenow, [ 'post.php', 'post-new.php' ] ) && isset( $post ) && $post->post_type === 'review' ) {
 
 		if ( 'Excerpt' == $original ) {
 			return __( 'Private Comments (seen only by editors and administrators and not sent to the software developer)' );
