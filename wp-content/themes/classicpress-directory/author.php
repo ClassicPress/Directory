@@ -7,9 +7,10 @@
 $author = get_queried_object();
 $big = 999999999; // need an unlikely integer
 
-$plugins_count  = count_user_posts( $author-> ID, 'plugin', true );
-$themes_count   = count_user_posts( $author-> ID, 'theme', true );
-$snippets_count = count_user_posts( $author-> ID, 'snippet', true );
+$cached_count   = kts_get_user_stat( $author-> ID );
+$plugins_count  = $cached_count['plugin'];
+$themes_count   = $cached_count['theme'];
+$snippets_count = $cached_count['snippet'];
 
 get_header();
 ?>
