@@ -162,7 +162,9 @@ function kts_list_developers() {
 /* REFRESH DEVELOPERS TRANSIENT AS NECESSARY */
 function kts_purge_developers_cache( $user_id ) {
 	delete_transient( 'developers' );
+	delete_transient( 'dir-user-stats' );
 }
+
 add_action( 'user_register', 'kts_purge_developers_cache' );
 add_action( 'delete_user', 'kts_purge_developers_cache' );
 add_action( 'profile_update', 'kts_purge_developers_cache' );
@@ -180,6 +182,7 @@ function kts_purge_developers_cpt_cache( $post_id ) {
 	}
 
 	delete_transient( 'developers' );
+	delete_transient( 'dir-user-stats' );
 }
 add_action( 'save_post', 'kts_purge_developers_cpt_cache' );
 add_action( 'delete_post', 'kts_purge_developers_cpt_cache' );
@@ -222,3 +225,20 @@ function kts_query_post_type( $query ) {
 	}
 }
 add_action( 'pre_get_posts', 'kts_query_post_type' );
+
+
+/* CACHE USER POST COUNT, USEFUL UNTIL COUNT_USER_POSTS WILL IMPLEMENT A CACHING SYSTEM. */
+function kts_get_user_stat ($id) {
+	$saved = get_transient( 'dir-user-stats' );
+	if ( $saved !== false && isset($saved[$id]) ) {
+		return $saved[$id];
+	}
+	if ( $saved === false ) {
+		$saved = [];
+	}
+	foreach ( [ 'theme', 'plugin', 'snippet' ] as $item_type ) {
+		$saved[$id][$item_type] = count_user_posts( $id, $item_type, true );
+	}
+	set_transient( 'dir-user-stats', $saved, 5 * MINUTE_IN_SECONDS );
+	return $saved[$id];
+}
