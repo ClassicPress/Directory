@@ -7,11 +7,6 @@
 $author = get_queried_object();
 $big = 999999999; // need an unlikely integer
 
-$cached_count   = kts_get_user_stat( $author-> ID );
-$plugins_count  = $cached_count['plugin'];
-$themes_count   = $cached_count['theme'];
-$snippets_count = $cached_count['snippet'];
-
 get_header();
 ?>
 
@@ -33,11 +28,11 @@ get_header();
 			<div id="tabs" class="ui-tabs">
 				<div id="ui-tabs-nav" class="ui-tabs-nav" role="tablist">
 
-					<button id="ui-id-1" class="ui-button ui-state-active plugins" aria-controls="tabs-1" aria-selected="true" role="tab" tabindex="0">Plugins (<?php echo $plugins_count; ?>)</button>
+					<button id="ui-id-1" class="ui-button ui-state-active plugins" aria-controls="tabs-1" aria-selected="true" role="tab" tabindex="0">Plugins</button>
 
-					<button id="ui-id-2" class="ui-button" aria-controls="tabs-2" aria-selected="false" role="tab" tabindex="-1">Themes (<?php echo $themes_count; ?>)</button>
+					<button id="ui-id-2" class="ui-button" aria-controls="tabs-2" aria-selected="false" role="tab" tabindex="-1">Themes</button>
 
-					<button id="ui-id-3" class="ui-button" aria-controls="tabs-3" aria-selected="false" role="tab" tabindex="-1">Snippets (<?php echo $snippets_count; ?>)</button>
+					<button id="ui-id-3" class="ui-button" aria-controls="tabs-3" aria-selected="false" role="tab" tabindex="-1">Snippets</button>
 
 				</div><!-- #ui-tabs-nav -->
 
