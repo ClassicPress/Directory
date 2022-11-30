@@ -364,16 +364,7 @@ function kts_add_toolbar_links( $admin_bar ) {
 	$user_id = get_current_user_id();
 
 	$admin_bar->add_menu( array(
-		'id'    => 'my-software',
-		'title' => __( 'Software Links' ),
-		'href'  => '#',
-		'meta'  => array(
-		'title' => __( 'Software Links' ),            
-		),
-	) );
-	$admin_bar->add_menu( array(
 		'id'    => 'my-plugins',
-		'parent' => 'my-software',
 		'title' => __( 'My Plugins' ),
 		'href'  => esc_url( get_author_posts_url( $user_id ) . '#ui-id-1' ),
 		'meta'  => array(
@@ -384,7 +375,6 @@ function kts_add_toolbar_links( $admin_bar ) {
 	) );
 	$admin_bar->add_menu( array(
 		'id'    => 'my-themes',
-		'parent' => 'my-software',
 		'title' => __( 'My Themes' ),
 		'href'  => esc_url( get_author_posts_url( $user_id ) . '#ui-id-2' ),
 		'meta'  => array(
@@ -395,7 +385,6 @@ function kts_add_toolbar_links( $admin_bar ) {
 	) );
 	$admin_bar->add_menu( array(
 		'id'    => 'my-snippets',
-		'parent' => 'my-software',
 		'title' => __( 'My Snippets' ),
 		'href'  => esc_url( get_author_posts_url( $user_id ) . '#ui-id-3' ),
 		'meta'  => array(
