@@ -848,7 +848,7 @@ nav ul li:focus-within ul {
 }
 
 .software-grid .hentry p {
-	min-height: 6em;
+	min-height: 8em;
 }
 
 .content .software-grid > li {
