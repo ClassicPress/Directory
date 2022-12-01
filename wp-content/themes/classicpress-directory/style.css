@@ -564,7 +564,11 @@ footer a:focus {
 	display: block;
 }
 .hentry {
-	margin: 0 0 1.5em;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
 }
 .pwd-field-website,
 .updated:not(.published) {
@@ -844,8 +848,7 @@ nav ul li:focus-within ul {
 }
 
 .software-grid .hentry p {
-	margin: 1em 0;
-	min-height: 8em;
+	min-height: 6em;
 }
 
 .content .software-grid > li {
@@ -859,7 +862,7 @@ nav ul li:focus-within ul {
 	padding: 1em;
 	margin: 0 -1em;
 	border-top: 1px solid rgba(0, 0, 0, 0.2);
-	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+	border-bottom: none;
 	display: flex;
 	justify-content: space-around;
 }
