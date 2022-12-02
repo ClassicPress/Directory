@@ -73,6 +73,7 @@
 		
 		<header>
 			<?php the_title( '<h2  class="h3"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );	?>
+			<span class="software-author-link"><?php echo get_the_author_posts_link(); ?></span>
 		</header>
 
 		<p><?php kts_excerpt_fallback( $post ); ?></p>
