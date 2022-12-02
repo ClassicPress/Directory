@@ -20,7 +20,21 @@
 		</header>
 
 		<div id="software" class="software">
-			<h2 class="h5 description"><?php _e( 'Plugin Description', 'classicpress' ); ?></h2>	
+			<h2 class="h5 description">
+			<?php
+			switch (get_post_type()) {
+				case 'plugin':
+					esc_html_e( 'Plugin Description', 'classicpress' );
+					break;
+				case 'theme':
+					esc_html_e( 'Theme Description', 'classicpress' );
+					break;
+				case 'snippet':
+					esc_html_e( 'Snippet Description', 'classicpress' );
+					break;
+			}
+			?>
+			</h2>
 			<?php
 			the_content( sprintf(
 				wp_kses(
