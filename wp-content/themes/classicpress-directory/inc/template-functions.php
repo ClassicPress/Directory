@@ -242,3 +242,22 @@ function kts_get_user_stat ($id) {
 	set_transient( 'dir-user-stats', $saved, 5 * MINUTE_IN_SECONDS );
 	return $saved[$id];
 }
+
+function kts_render_user_tabs ( $cached_count ) {
+	$activated   = false;
+	$item_number = 0;
+	foreach ( [ 'plugin', 'theme', 'snippet' ] as $item_type ) {
+		$item_number++;
+		$class         = 'ui-button ' . $item_type;
+		$aria_selected = 'aria-selected="false"';
+		$tabindex      = 'tabindex="-1"';
+		$name          = ucfirst($item_type) . 's (' . $cached_count[$item_type] . ')';
+		if ( $cached_count[$item_type] > 0 && $activated === false) {
+			$activated     = true;
+			$class        .= ' ui-state-active';
+			$aria_selected = 'aria-selected="true"';
+			$tabindex      = 'tabindex="0"';
+		}
+		echo '<button id="ui-id-' . $item_number . '" class="' . $class . '" aria-controls="tabs-' . $item_number .'" ' . $aria_selected .' role="tab" ' . $tabindex . '>' . $name . '</button>';
+	}
+}
