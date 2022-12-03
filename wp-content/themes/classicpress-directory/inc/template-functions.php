@@ -243,9 +243,11 @@ function kts_get_user_stat ($id) {
 	return $saved[$id];
 }
 
+/* RENDER USER TABS. RETURN THE ACTIVE ITEM TYPE*/
 function kts_render_user_tabs ( $cached_count ) {
 	$activated   = false;
 	$item_number = 0;
+	$active_item = '';
 	foreach ( [ 'plugin', 'theme', 'snippet' ] as $item_type ) {
 		$item_number++;
 		$class         = 'ui-button ' . $item_type;
@@ -257,7 +259,9 @@ function kts_render_user_tabs ( $cached_count ) {
 			$class        .= ' ui-state-active';
 			$aria_selected = 'aria-selected="true"';
 			$tabindex      = 'tabindex="0"';
+			$active_item   = $item_type;
 		}
 		echo '<button id="ui-id-' . $item_number . '" class="' . $class . '" aria-controls="tabs-' . $item_number .'" ' . $aria_selected .' role="tab" ' . $tabindex . '>' . $name . '</button>';
 	}
+	return $active_item;
 }
