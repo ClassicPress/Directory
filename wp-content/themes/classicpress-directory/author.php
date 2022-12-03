@@ -7,11 +7,7 @@
 $author = get_queried_object();
 $big = 999999999; // need an unlikely integer
 
-$cached_count   = kts_get_user_stat( $author-> ID );
-$plugins_count  = $cached_count['plugin'];
-$themes_count   = $cached_count['theme'];
-$snippets_count = $cached_count['snippet'];
-
+$cached_count = kts_get_user_stat( $author-> ID );
 get_header();
 ?>
 
@@ -32,10 +28,10 @@ get_header();
 
 			<div id="tabs" class="ui-tabs">
 				<div id="ui-tabs-nav" class="ui-tabs-nav" role="tablist">
-					<?php kts_render_user_tabs ( $cached_count ); ?>
+					<?php $active_tab = kts_render_user_tabs ( $cached_count ); ?>
 				</div><!-- #ui-tabs-nav -->
 
-				<div id="tabs-1" class="ui-panel" role="tabpanel">
+				<div id="tabs-1" class="ui-panel" role="tabpanel"<?php echo $active_tab === 'plugin' ? '' : ' hidden' ?>>
 					<ul class="software-grid">
 
 					<?php
@@ -95,7 +91,7 @@ get_header();
 
 				</div><!-- #tabs-1 -->
 
-				<div id="tabs-2" class="ui-panel" role="tabpanel" hidden>
+				<div id="tabs-2" class="ui-panel" role="tabpanel"<?php echo $active_tab === 'theme' ? '' : ' hidden' ?>>
 					<ul class="software-grid">
 
 					<?php
@@ -153,7 +149,7 @@ get_header();
 
 				</div><!-- #tabs-2 -->
 
-				<div id="tabs-3" class="ui-panel" role="tabpanel" hidden>
+				<div id="tabs-3" class="ui-panel" role="tabpanel"<?php echo $active_tab === 'snippet' ? '' : ' hidden' ?>>
 					<ul class="software-grid">
 
 					<?php
