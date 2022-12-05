@@ -1161,6 +1161,7 @@ ul.aside-items{
     padding: 0.5em 0;
     border-bottom: 1px solid var(--gray-border);
     font-size: 85%;
+	margin-left: 0;
 }
 .aside-item ul.post-categories{
 	list-style: none;
