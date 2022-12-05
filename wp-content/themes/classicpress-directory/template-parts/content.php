@@ -10,13 +10,13 @@
 
 ?>
 
-<?php if (is_singular()) { 
+<?php if (is_singular()) {
 	$class = "single-software";
-}else{
+} else {
 	$class = "grid-item-software";
 } ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class( $class ); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class($class); ?>>
 
 	<?php
 	if (is_singular()) :
@@ -25,7 +25,13 @@
 		<header>
 			<div class="header-content">
 				<?php the_title('<h1>', '</h1>'); ?>
-				<div class="software-author-link"><?php _e('Developed by', 'classicpress'); ?> <span><?php echo get_the_author_posts_link(); ?></span></div>
+				<div class="software-author-link">
+					<?php
+					if ($post->post_type === 'snippet') {
+						_e('Posted by', 'classicpress');
+					} else {
+						_e('Developed by', 'classicpress');
+					} ?> <span><?php echo get_the_author_posts_link(); ?></span></div>
 			</div>
 			<div class="software-action">
 				<a href="<?php echo get_post_meta($post->ID, 'download_link', true); ?>" title="<?php _e('Download', 'classicpress'); ?> <?php echo esc_attr($post->post_title); ?>" class="btn" role="button"><img src="<?php echo esc_url(get_template_directory_uri() . '/images/download-white.svg'); ?>" alt="download" width="18" height="18" aria-hidden="true"> <?php _e('Download', 'classicpress'); ?></a>

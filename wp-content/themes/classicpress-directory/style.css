@@ -1130,6 +1130,9 @@ ul.aside-items{
 .aside-item ul.post-categories{
 	list-style: none;
 }
+.aside-item .item-data{
+	font-weight: 600;
+}
 
 /* tags */
 .tag a{
@@ -1141,7 +1144,9 @@ ul.aside-items{
     border-radius: var(--border-radius);
     margin-right: 0.5em;
 }
-
+.tag:last-child a{
+	margin-right: 0;
+}
 .tag a:hover,
 .tag a:active,
 .tag a:focus{
