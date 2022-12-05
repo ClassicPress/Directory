@@ -105,24 +105,24 @@
 				}
 				?>
 
-				<?php 
+				<?php
 
-					$download_url = get_post_meta($post->ID, 'download_link', true);
-					
-					// check if GitHub and get repo URL
-					if (strpos($download_url, 'github.com') !== false) {
-						$url_parts = explode('releases', $download_url);
-						$repo = array(
-							"url" => $url_parts[0],
-							"name" => "GitHub"
-						);
-					}else{
-						// TO-DO: Add support for other Git platforms
-					}
+				$download_url = get_post_meta($post->ID, 'download_link', true);
+
+				// check if GitHub and get repo URL
+				if (strpos($download_url, 'github.com') !== false) {
+					$url_parts = explode('releases', $download_url);
+					$repo = array(
+						"url" => $url_parts[0],
+						"name" => "GitHub"
+					);
+				} else {
+					// TO-DO: Add support for other Git platforms
+				}
 				?>
 				<li class="aside-item">
 					<?php _e('Repository', 'classicpress'); ?>
-					<span class="item-data repo-link"><a href="<?php esc_url($repo['url']); ?>" target="_blank" rel="noopener noreferrer"><img src="<?php echo esc_url(get_template_directory_uri() . '/images/'.$repo['name'].'.svg'); ?>" alt="<?php echo $repo['name']; ?>" aria-hidden="true"> <?php echo $repo['name']; ?></a></span>
+					<span class="item-data repo-link"><a href="<?php echo esc_url($repo['url']); ?>" target="_blank" rel="noopener noreferrer" title="<?php _e('Visit repository', 'classicpress'); ?>"><img src="<?php echo esc_url(get_template_directory_uri() . '/images/' . $repo['name'] . '.svg'); ?>" alt="<?php echo $repo['name']; ?>" width="14" height="14" aria-hidden="true"><?php echo $repo['name']; ?></a></span>
 				</li>
 			</ul>
 		</aside>

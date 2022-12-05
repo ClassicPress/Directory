@@ -1133,6 +1133,11 @@ ul.aside-items{
 .aside-item .item-data:not(.repo-link){
 	font-weight: 600;
 }
+.repo-link img{
+	position: relative;
+	top: 2px;
+	right: 2px;
+}
 
 /* tags */
 .tag a{
