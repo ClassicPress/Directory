@@ -1135,6 +1135,12 @@ article.single-software{
 	align-content: center;
 	align-items: center;
 }
+.single-software aside{
+	grid-area: sidebar;
+}
+.single-software section{
+	grid-area: content;
+}
 .single-software header h1{
 	margin: 0;
 }
@@ -1490,16 +1496,11 @@ ul.aside-items{
 	}
 
 	.single-software section{
-		grid-area: content;
 		padding-right: 4em;
 	}
 
 	.single-software .description{
 		margin: 0 0 1em;
-	}
-
-	.single-software aside{
-		grid-area: sidebar;
 	}
 }
 
