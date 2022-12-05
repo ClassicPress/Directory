@@ -1112,6 +1112,24 @@ footer#legal {
 	display: block;
 	margin-bottom: 1em;
 }
+/* single software layout */
+.single-software header{
+	grid-area: header;
+	margin: 3em 0;
+	border-bottom: 1px solid var(--gray-border);
+	padding-bottom: 1em;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-content: center;
+	align-items: center;
+}
+.single-software header h1{
+	margin: 0;
+}
+.single-software header .software-action .btn{
+	display: block;
+}
 
 /* single software aside */
 ul.aside-items{
@@ -1140,6 +1158,11 @@ ul.aside-items{
 	position: relative;
 	top: 2px;
 	right: 2px;
+}
+
+/* readme-md-content */
+.readme-md-content{
+	word-break: break-word;
 }
 
 /* tags */
@@ -1447,23 +1470,10 @@ ul.aside-items{
 	}
 
 	.single-software header{
-		grid-area: header;
-		margin: 3em 0;
-		border-bottom: 1px solid var(--gray-border);
-		padding-bottom: 1em;
-		display: flex;
 		flex-direction: row;
-		justify-content: space-between;
-		align-content: center;
-		align-items: center;
-	}
-
-	.single-software header h1{
-		margin: 0;
 	}
 
 	.single-software header .software-action .btn{
-		display: block;
 		padding: 0.4em 5em;
 		font-size: unset;
 		line-height: unset;
