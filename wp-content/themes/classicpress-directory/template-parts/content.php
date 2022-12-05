@@ -10,7 +10,13 @@
 
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class('single-software'); ?>>
+<?php if (is_singular()) { 
+	$class = "single-software";
+}else{
+	$class = "grid-item-software";
+} ?>
+
+<article id="post-<?php the_ID(); ?>" <?php post_class( $class ); ?>>
 
 	<?php
 	if (is_singular()) :
