@@ -1130,8 +1130,11 @@ ul.aside-items{
 .aside-item ul.post-categories{
 	list-style: none;
 }
-.aside-item .item-data:not(.repo-link){
+.aside-item .item-data{
 	font-weight: 600;
+}
+.aside-item .item-data a{
+	font-weight: normal;
 }
 .repo-link img{
 	position: relative;
