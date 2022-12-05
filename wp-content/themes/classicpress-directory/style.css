@@ -47,9 +47,10 @@ Susty was itself based on Underscores https://underscores.me/, (C) 2012-2017 Aut
  * by changing the value of the custom property here.
  * 
  *------------------------------------------------------------*/ 
-:root {
+ :root {
 	--main-bg-color: #fffefc;
 	--cp-brand: #057f99;
+	--cp-brand-darker: #034a59;
 	--classic-bg-color: linear-gradient(-135deg, #3ebca6 18%, var(--cp-brand) 50%, #006b81 100%);
 	--hover-bg-color: var(--cp-brand);
 	--font: "Source Sans Pro", "Helvetica Neue", Verdana, sans-serif;
@@ -388,7 +389,8 @@ select,
 #status-select {
 	width: 100%;
 	padding: 3px 3px 3px 0;
-	border: 1px solid var(--hover-bg-color);
+	color: var(--dark-gray);
+	border: 1px solid var(--gray-border);
 	border-radius: var(--border-radius);
 }
 select {
@@ -857,9 +859,7 @@ nav ul li:focus-within ul {
 	gap: 1.5rem;
 	margin: 0 0 2em;
 }
-.software-grid article a{
-	text-decoration: none;
-}
+
 .software-grid .hentry p {
 	min-height: 8em;
 }
@@ -935,7 +935,7 @@ nav ul li:focus-within ul {
 	font-size: 1em;
 	padding: 0;
 	text-align: left;
-	background: var(--link-color);
+	background: var(--cp-brand-darker);
 }
 #colophon li {
 	margin-bottom: 0.3em;
