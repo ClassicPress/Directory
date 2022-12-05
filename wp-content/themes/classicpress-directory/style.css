@@ -209,7 +209,7 @@ body {
 	background-color: var(--font-alt-color);
 }
 .outer-content {
-	background-color: var(--main-bg-color);
+	background-color: var(--font-alt-color);
 }
 hr {
 	background-color: var(--gray-border);
