@@ -1143,7 +1143,7 @@ ul.aside-items{
 }
 
 /* tags */
-.tag a{
+.tag-badge a{
 	text-decoration: none;
     padding: 2px 7px 3px;
     font-size: 14px;
@@ -1153,12 +1153,12 @@ ul.aside-items{
     margin-right: 0.5em;
 	font-weight: normal;
 }
-.tag:last-child a{
+.tag-badge:last-child a{
 	margin-right: 0;
 }
-.tag a:hover,
-.tag a:active,
-.tag a:focus{
+.tag-badge a:hover,
+.tag-badge a:active,
+.tag-badge a:focus{
 	background: var(--light-gray)
 }
 
