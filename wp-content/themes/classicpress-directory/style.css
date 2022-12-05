@@ -270,7 +270,8 @@ legend {
 button,
 input[type="button"],
 input[type="reset"],
-input[type="submit"] {
+input[type="submit"],
+.btn {
 	border: 1px solid var(--nav-link-color);
 	border-radius: var(--border-radius);
 	background: var(--button-bg);
@@ -322,7 +323,8 @@ button:hover,
 button:focus,
 input[type="button"]:hover,
 input[type="reset"]:hover,
-input[type="submit"]:hover {
+input[type="submit"]:hover,
+.btn:hover {
 	background: var(--button-bg-hover);
 }
 button:active,
@@ -332,7 +334,9 @@ input[type="button"]:focus,
 input[type="reset"]:active,
 input[type="reset"]:focus,
 input[type="submit"]:active,
-input[type="submit"]:focus {
+input[type="submit"]:focus,
+.btn:active,
+.btn:focus {
 	border: 1px solid var(--hover-bg-color);
 }
 input[type="text"],
@@ -1108,6 +1112,41 @@ footer#legal {
 	margin-bottom: 1em;
 }
 
+/* single software aside */
+ul.aside-items{
+	list-style: none;
+	font-size: 85%;
+}
+
+.aside-items .aside-item{
+	display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.5em 0;
+    border-bottom: 1px solid var(--gray-border);
+    font-size: 85%;
+}
+.aside-item ul.post-categories{
+	list-style: none;
+}
+
+/* tags */
+.tag a{
+	text-decoration: none;
+    padding: 2px 7px 3px;
+    font-size: 14px;
+    background: var(--gray-border);
+    color: var(--font-color);
+    border-radius: var(--border-radius);
+    margin-right: 0.5em;
+}
+
+.tag a:hover,
+.tag a:active,
+.tag a:focus{
+	background: var(--light-gray)
+}
+
 /*--------------------------------------------------------------
 ## CSS for larger tablets upwards
 --------------------------------------------------------------*/
@@ -1366,6 +1405,48 @@ footer#legal {
 	.page article,
 	.single article {
 		font-size: 19px;
+	}
+
+	/* single software page */
+
+	article.single-software{
+	display: grid;
+    grid-template-columns: 70% 30%;
+    grid-template-rows: auto auto;
+    gap: 0px 2em;
+    grid-template-areas:
+        "header header"
+        "content sidebar";
+	}
+
+	.single-software header{
+		grid-area: header;
+		margin: 3em 0;
+		border-bottom: 1px solid var(--gray-border);
+		padding-bottom: 1em;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-content: center;
+		align-items: center;
+	}
+
+	.single-software header h1{
+		margin: 0;
+	}
+
+	.single-software header .software-action .btn{
+		display: block;
+		min-width: 5em;
+	}
+
+	.single-software section{
+		grid-area: content;
+		padding-right: 4em;
+	}
+
+	.single-software aside{
+		grid-area: sidebar;
 	}
 }
 
