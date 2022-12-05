@@ -262,7 +262,7 @@ fieldset {
 	padding: 0.5em 1em;
 	margin-bottom: 1em;
 	border-radius: var(--border-radius);
-	border: 1px solid var(--hover-bg-color);
+	border: 1px solid var(--gray-border);
 }
 legend {
 	float: left;
