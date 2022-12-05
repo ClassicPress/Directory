@@ -98,7 +98,7 @@
 				?>
 					<li class="aside-item">
 						<?php _e('Tags', 'classicpress'); ?>
-						<span class="item-data"><?php the_tags('<div class="tags"><span class=-badge">', '</span><span class="tag-badge">', '</span></div>'); ?></span>
+						<span class="item-data"><?php the_tags('<div class="tags"><span class="tag-badge">', '</span><span class="tag-badge">', '</span></div>'); ?></span>
 					</li>
 
 				<?php
