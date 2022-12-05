@@ -1143,6 +1143,7 @@ ul.aside-items{
     color: var(--font-color);
     border-radius: var(--border-radius);
     margin-right: 0.5em;
+	font-weight: normal;
 }
 .tag:last-child a{
 	margin-right: 0;
