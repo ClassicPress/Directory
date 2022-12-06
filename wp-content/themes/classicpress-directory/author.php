@@ -12,17 +12,17 @@ $cached_count = kts_get_user_stat($author->ID);
 get_header();
 ?>
 
-<div id="primary">
+<div id="primary" class="developer-profile">
 	<main id="main">
 
 		<header>
 			<h1><span class="brand"><?php echo get_avatar($author->ID, 32); ?></span><?php echo esc_html($author->display_name); ?></h1>
-			<div class="developer-profile">
+			<div class="dev-meta">
 				<div class="dev-bio"><?php echo esc_html(substr(get_user_meta($author->ID, 'description', true), 0, 150)); ?></div>
-				<div class="dev-url"><a href="<?php echo esc_url($author->url); ?>" rel="noffolow noopener noreferrer" target="_blank"><?php echo esc_url($author->url); ?></a></div>
+				<div class="dev-url"><a href="<?php echo esc_url($author->user_url); ?>" rel="noffolow noopener noreferrer" target="_blank"><?php echo esc_url($author->url); ?></a></div>
 			</div>
 		</header>
-		<pre style="display: none;"><?php var_dump($author); ?></pre>
+
 		<?php
 		/* temporarily disable faceted search
 			if ( class_exists( 'SearchAndFilter' ) ) {

@@ -1209,6 +1209,26 @@ ul.aside-items{
     top: 1px;
 }
 
+/* developer profile */
+.author .developer-profile header{
+	margin: 3em 0;
+}
+.author .developer-profile header h1{
+	margin: 0;
+}
+.dev-meta{
+	display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    width: 50%;
+    font-size: 85%;
+    align-items: center;
+    margin: 0 auto;
+}
+.dev-meta .dev-bio{
+	color: var(--dark-gray);
+}
+
 /*--------------------------------------------------------------
 ## CSS for larger tablets upwards
 --------------------------------------------------------------*/
@@ -1502,6 +1522,11 @@ ul.aside-items{
 
 	.single-software .description{
 		margin: 0 0 1em;
+	}
+
+	/* dev profile */
+	.dev-meta{
+		margin: 0;
 	}
 }
 
