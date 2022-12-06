@@ -1535,6 +1535,9 @@ ul.aside-items{
 		margin: 0;
 		align-items: baseline;
 		width: 50%;
+	}
+
+	.developer-profile header h1{
 		text-align: left;
 	}
 }
