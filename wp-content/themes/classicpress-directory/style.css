@@ -1214,7 +1214,7 @@ ul.aside-items{
 	margin: 3em 0;
 }
 .author .developer-profile .dev-header h1{
-	margin: 0;
+	margin: 0 0 0.2em;
 }
 .dev-meta{
 	display: flex;
@@ -1527,6 +1527,7 @@ ul.aside-items{
 	/* dev profile */
 	.dev-meta{
 		margin: 0;
+		align-items: baseline;
 	}
 }
 
