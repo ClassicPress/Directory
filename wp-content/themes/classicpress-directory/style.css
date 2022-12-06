@@ -1537,7 +1537,7 @@ ul.aside-items{
 		width: 50%;
 	}
 
-	.developer-profile header h1{
+	.author .developer-profile .dev-header h1{
 		text-align: left;
 	}
 }
