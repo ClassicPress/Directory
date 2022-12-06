@@ -18,10 +18,14 @@ get_header();
 
 		<header class="dev-header">
 			<h1><span class="brand"><?php echo get_avatar($author->ID, 32); ?></span><?php echo esc_html($author->display_name); ?></h1>
-			<div class="dev-meta">
-				<div class="dev-bio"><?php echo esc_html(substr(get_user_meta($author->ID, 'description', true), 0, 200)); ?></div>
-				<div class="dev-url"><a href="<?php echo esc_url($author->user_url); ?>" rel="nofollow noopener noreferrer" target="_blank"><?php echo esc_html( parse_url( $author->user_url, PHP_URL_HOST ) ); ?></a></div>
-			</div>
+			<?php if( !empty(get_user_meta($author->ID, 'description', true)) ): ?>
+				<div class="dev-meta">
+					<div class="dev-bio"><?php echo esc_html(substr(get_user_meta($author->ID, 'description', true), 0, 200)); ?></div>
+					<?php if( !empty($author->user_url) ): ?>
+						<div class="dev-url"><a href="<?php echo esc_url($author->user_url); ?>" rel="nofollow noopener noreferrer" target="_blank"><?php echo esc_html( parse_url( $author->user_url, PHP_URL_HOST ) ); ?></a></div>
+					<?php endif; ?>
+				</div>
+			<?php endif; ?>
 		</header>
 
 		<div id="tabs" class="ui-tabs">
