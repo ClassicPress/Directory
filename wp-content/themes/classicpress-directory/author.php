@@ -17,8 +17,8 @@ get_header();
 			<header>
 				<h1><span class="brand"><?php echo get_avatar( $author->ID, 32 ); ?></span><?php echo esc_html( $author->display_name ); ?></h1>
 				<div class="developer-profile">
-					<div class="dev-bio"><?php echo esc_html( get_user_meta($author->ID, 'description', true) ); ?></div>
-					<div class="dev-url"><a href="<?php echo esc_url( get_user_meta($author->ID, 'website', true) ); ?>" rel="noffolow noopener noreferrer" target="_blank"><?php echo esc_url( get_user_meta($author->ID, 'website', true) ); ?></a></div>
+					<div class="dev-bio"><?php echo esc_html( substr( get_user_meta($author->ID, 'description', true), 0, 150) ); ?></div>
+					<div class="dev-url"><a href="<?php echo esc_url( get_user_meta($author->ID, 'url', true) ); ?>" rel="noffolow noopener noreferrer" target="_blank"><?php echo esc_url( get_user_meta($author->ID, 'website', true) ); ?></a></div>
 				</div>
 			</header>
 

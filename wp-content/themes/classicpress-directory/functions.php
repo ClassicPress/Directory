@@ -224,3 +224,19 @@ require get_template_directory() . '/inc/template-functions.php';
  * Customizer additions.
  */
 require get_template_directory() . '/inc/customizer.php';
+
+/**
+ * Limit author bio HTML tags
+ */
+add_filter('pre_user_description','classicpress_whitelist_tags_in_bio');
+function classicpress_whitelist_tags_in_bio($description){
+    $allowed_tags = array(
+                         'strong'=>array(),
+                         'em'=>array(),
+						 'b'=>array(),
+						 'i'=>array(),
+                        );
+    $description = wp_kses($description,$allowed_tags);
+    
+	return $description;
+}
