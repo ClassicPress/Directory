@@ -206,10 +206,10 @@ src: url("fonts/cpicons.woff") format("woff");
 # Elements
 --------------------------------------------------------------*/
 body {
-	background-color: aliceblue;
+	background-color: var(--font-alt-color);
 }
 .outer-content {
-	background-color: var(--main-bg-color);
+	background-color: var(--font-alt-color);
 }
 hr {
 	background-color: var(--gray-border);
@@ -262,7 +262,7 @@ fieldset {
 	padding: 0.5em 1em;
 	margin-bottom: 1em;
 	border-radius: var(--border-radius);
-	border: 1px solid var(--hover-bg-color);
+	border: 1px solid var(--gray-border);
 }
 legend {
 	float: left;
@@ -270,7 +270,8 @@ legend {
 button,
 input[type="button"],
 input[type="reset"],
-input[type="submit"] {
+input[type="submit"],
+.btn {
 	border: 1px solid var(--nav-link-color);
 	border-radius: var(--border-radius);
 	background: var(--button-bg);
@@ -280,6 +281,7 @@ input[type="submit"] {
 	margin: 1em 0;
 	padding: 0.55em 1em 0.5em;
 	cursor: default;
+	text-decoration: none;
 }
 .alphadevelopers {
 	display: flex;
@@ -322,7 +324,8 @@ button:hover,
 button:focus,
 input[type="button"]:hover,
 input[type="reset"]:hover,
-input[type="submit"]:hover {
+input[type="submit"]:hover,
+.btn:hover {
 	background: var(--button-bg-hover);
 }
 button:active,
@@ -332,7 +335,9 @@ input[type="button"]:focus,
 input[type="reset"]:active,
 input[type="reset"]:focus,
 input[type="submit"]:active,
-input[type="submit"]:focus {
+input[type="submit"]:focus,
+.btn:active,
+.btn:focus {
 	border: 1px solid var(--hover-bg-color);
 }
 input[type="text"],
@@ -1107,6 +1112,102 @@ footer#legal {
 	display: block;
 	margin-bottom: 1em;
 }
+/* single software layout */
+article.single-software{
+	display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto;
+    gap: 1em 0px;
+    grid-template-areas:
+        "header"
+        "sidebar"
+		"content";
+	margin-bottom: 2em;
+}
+.single-software header{
+	grid-area: header;
+	margin: 3em 0;
+	border-bottom: 1px solid var(--gray-border);
+	padding-bottom: 1em;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-content: center;
+	align-items: center;
+}
+.single-software aside{
+	grid-area: sidebar;
+}
+.single-software section{
+	grid-area: content;
+}
+.single-software header h1{
+	margin: 0;
+}
+.single-software header .software-action .btn{
+	display: block;
+}
+
+/* single software aside */
+ul.aside-items{
+	list-style: none;
+	font-size: 85%;
+}
+
+.aside-items .aside-item{
+	display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.5em 0;
+    border-bottom: 1px solid var(--gray-border);
+    font-size: 85%;
+	margin-left: 0;
+}
+.aside-item ul.post-categories{
+	list-style: none;
+}
+.aside-item .item-data{
+	font-weight: 600;
+}
+.aside-item .item-data a{
+	font-weight: normal;
+}
+.repo-link img{
+	position: relative;
+	top: 2px;
+	right: 2px;
+}
+
+/* readme-md-content */
+.readme-md-content{
+	word-break: break-word;
+}
+
+/* tags */
+.tag-badge a{
+	text-decoration: none;
+    padding: 2px 7px 3px;
+    font-size: 14px;
+    background: var(--gray-border);
+    color: var(--font-color);
+    border-radius: var(--border-radius);
+    margin-right: 0.5em;
+	font-weight: normal;
+}
+.tag-badge:last-child a{
+	margin-right: 0;
+}
+.tag-badge a:hover,
+.tag-badge a:active,
+.tag-badge a:focus{
+	background: var(--light-gray)
+}
+
+.software-action .btn img{
+	margin-right: 0.3em;
+    position: relative;
+    top: 1px;
+}
 
 /*--------------------------------------------------------------
 ## CSS for larger tablets upwards
@@ -1172,12 +1273,18 @@ footer#legal {
 }
 
 @media only screen and (min-width: 768px) {
+	.narrow-page article{
+		max-width: 900px;
+		margin-bottom: 2em;
+	}
+	.narrow-page header h1{
+		margin: 2em 0 0em;
+	}
 	.page article,
 	.single article,
 	.error404 #main section {
 		font-size: 18px;
 		padding-right: 2em;
-		max-width: 900px;
 		margin: 0 auto 1.5em;
 	}
 	.buttons-menu {
@@ -1366,6 +1473,35 @@ footer#legal {
 	.page article,
 	.single article {
 		font-size: 19px;
+	}
+
+	/* single software page */
+	article.single-software{
+    grid-template-columns: 70% 30%;
+    grid-template-rows: auto auto;
+    gap: 0px 2em;
+    grid-template-areas:
+        "header header"
+        "content sidebar";
+	}
+
+	.single-software header{
+		flex-direction: row;
+	}
+
+	.single-software header .software-action .btn{
+		padding: 0.4em 5em;
+		font-size: unset;
+		line-height: unset;
+		margin: 0;
+	}
+
+	.single-software section{
+		padding-right: 4em;
+	}
+
+	.single-software .description{
+		margin: 0 0 1em;
 	}
 }
 
