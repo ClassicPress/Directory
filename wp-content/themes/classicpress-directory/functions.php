@@ -102,7 +102,7 @@ function bedrock_scripts() {
 	wp_enqueue_script( 'bedrock-js', get_template_directory_uri() . '/js/scripts.js', null, null, true );
 
 	# jQuery
-	wp_enqueue_script('jQuery');
+	wp_enqueue_script('jquery');
 
 	wp_deregister_script( 'wp-embed' );
 
