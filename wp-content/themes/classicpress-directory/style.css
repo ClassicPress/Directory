@@ -830,6 +830,18 @@ nav ul li:focus-within ul {
 .logged-in .show-loggedin{
 	display: unset;
 }
+.search-form-wrapper{
+	margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 86rem;
+}
+.nav-search form{
+	max-width: 50%;
+}
 /*--------------------------------------------------------------
 ## Content
 --------------------------------------------------------------*/
