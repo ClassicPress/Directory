@@ -16,7 +16,7 @@ get_header();
 <div id="primary" class="developer-profile">
 	<main id="main">
 
-		<header>
+		<header class="dev-header">
 			<h1><span class="brand"><?php echo get_avatar($author->ID, 32); ?></span><?php echo esc_html($author->display_name); ?></h1>
 			<div class="dev-meta">
 				<div class="dev-bio"><?php echo esc_html(substr(get_user_meta($author->ID, 'description', true), 0, 200)); ?></div>

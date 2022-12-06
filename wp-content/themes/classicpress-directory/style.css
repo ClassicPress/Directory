@@ -1210,10 +1210,10 @@ ul.aside-items{
 }
 
 /* developer profile */
-.author .developer-profile header{
+.author .developer-profile .dev-header{
 	margin: 3em 0;
 }
-.author .developer-profile header h1{
+.author .developer-profile .dev-header h1{
 	margin: 0;
 }
 .dev-meta{
