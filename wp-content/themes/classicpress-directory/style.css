@@ -831,21 +831,30 @@ nav ul li:focus-within ul {
 .logged-in .show-loggedin{
 	display: unset;
 }
+#search-form-wrapper{
+	display: block;
+    width: 100%;
+    max-width: 86rem;
+    margin: 0 auto;
+}
 .search-form-flex{
-	margin: 0 auto;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    max-width: 86rem;
 }
-.nav-search form{
-	max-width: 50%;
-}
+
 .nav-search input,
 .nav-search select{
-	background-color: var(--font-alt-color);
+	margin: 0;
+}
+.nav-search ul{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 0.5em;
 }
 /*--------------------------------------------------------------
 ## Content

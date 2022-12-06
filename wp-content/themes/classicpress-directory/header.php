@@ -84,6 +84,23 @@
 			</div>
 		</div>
 
+		<script>
+			(function($) {
+				$( ".open-search a" ).click(function(e) {
+					e.preventDefault();
+					$( "#masthead-inner" ).slideUp();
+					$( "#search-form-wrapper" ).slideDown();
+					$( "#masthead" ).css('background', '#fff');
+				});
+				$( ".close-search button" ).click(function(e) {
+					$( "#search-form-wrapper" ).slideUp();
+					$( "#masthead-inner" ).slideDown();
+					$( "#masthead" ).removeAttr('style');
+				});
+				
+			})( jQuery );
+		</script>
+
 			<div id="masthead-inner" class="masthead-inner outer-width aligncenter">
 
 				<div class="site-introduction">
