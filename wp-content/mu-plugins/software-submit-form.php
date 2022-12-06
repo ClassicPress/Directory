@@ -71,7 +71,7 @@ function kts_render_software_submit_form() {
 
 	else { // Contributor role or above
 		_e( '<p>Please use the form below to upload your plugin, theme, or code snippet. All fields are required.</p>', 'classicpress' );
-		_e( '<p>Before submitting your software, please ensure that it complies with the <a href="' . esc_url( home_url( '/requirements/' ) ) . '">Requirements</a> that must be met for listing in the ClassicPress Directory.</p>', 'classicpress' );
+		_e( '<p>Before submitting your software, please ensure that it complies with the <a href="https://docs.classicpress.net/plugin-guidelines/directory-requirements/">Requirements</a> that must be met for listing in the ClassicPress Directory.</p>', 'classicpress' );
 		_e( '<p>We also recommend that you run your code through the <a href="https://wpseek.com/pluginfilecheck/">Plugin Doctor</a>.</p>', 'classicpress' );
 		_e( '<p>Once your software has been approved, details will be made public in this directory.</p>', 'classicpress' );
 
