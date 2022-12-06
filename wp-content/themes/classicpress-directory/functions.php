@@ -249,8 +249,8 @@ function classicpress_search_form(  ) {
 	return '<form action="" method="post" class="searchandfilter">
 	<div>
 		<ul>
-			<li><label for="ofsearch" class="screen-reader-text">Search</label><input type="text" id="ofsearch" name="ofsearch" placeholder="Search…" value="" required="required"></li>
-			<li><select class="postform" name="ofpost_types">
+			<li><label for="ofsearch" class="screen-reader-text">Search</label><input type="text" id="ofsearch" name="s" placeholder="Search…" value="" required="required"></li>
+			<li><select class="postform" name="post_types">
 					<option class="level-0" value="plugin,theme,snippet">All Software</option>
 					<option class="level-0" value="plugin">Plugins</option>
 					<option class="level-0" value="theme">Themes</option>
