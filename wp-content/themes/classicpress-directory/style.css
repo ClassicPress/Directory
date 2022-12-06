@@ -824,6 +824,12 @@ nav ul li:focus-within ul {
 	justify-content: right;
 	flex-wrap: wrap;
 }
+.show-loggedin{
+	display: none;
+}
+.logged-in .show-loggedin{
+	display: unset;
+}
 /*--------------------------------------------------------------
 ## Content
 --------------------------------------------------------------*/
