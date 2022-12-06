@@ -68,16 +68,16 @@ document.addEventListener('DOMContentLoaded', function() {
 		e.preventDefault();
 		document.getElementById('masthead-inner').style.display = 'none';
 		document.getElementById('search-form-wrapper').removeAttribute('style');
-		document.getElementById('masthead').style.background = '#fff';
+		document.getElementById('masthead').classList.add('masthead-search');
 		document.getElementById('ofsearch').focus();
 	}, false);
 
-	const close = document.querySelector('.close-search a');
+	const close = document.querySelector('.close-search button');
 	if( close ){
 		close.addEventListener('click', function() {
 			document.getElementById('masthead-inner').removeAttribute('style');
 			document.getElementById('search-form-wrapper').style.display = 'none';
-			document.getElementById('masthead').removeAttribute('style');
+			document.getElementById('masthead').classList.remove('masthead-search');
 			document.querySelector('.open-search a').focus();
 		}, false);
 	}

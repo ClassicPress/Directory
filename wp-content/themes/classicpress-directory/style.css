@@ -836,6 +836,7 @@ nav ul li:focus-within ul {
     width: 100%;
     max-width: 86rem;
     margin: 0 auto;
+	padding: 0 1em;
 }
 .search-form-flex{
     display: flex;
@@ -864,6 +865,12 @@ nav ul li:focus-within ul {
     width: 100%;
     gap: 0.5em;
 }
+.masthead.masthead-search{
+	background: var(--font-alt-color) !important;
+	padding: 0.5em 0;
+	max-height: 91px;
+}
+
 /*--------------------------------------------------------------
 ## Content
 --------------------------------------------------------------*/
