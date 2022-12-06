@@ -46,8 +46,59 @@ function kts_register_theme_post_type() {
         'publicly_queryable' 	=> true,
 		'show_in_rest'			=> true,
 		'rest_base'				=> 'themes',
+		'taxonomies'			=> array( 'post_tag', 'theme_categories' ),
 	);
 
 	register_post_type( 'theme', $args );
 }
 add_action( 'init', 'kts_register_theme_post_type' );
+
+// Register custom taxonomy
+function theme_categories() {
+
+	# Define labels
+	$labels = array(
+		'name'                       => _x( 'Categories', 'Taxonomy General Name', 'classicpress' ),
+		'singular_name'              => _x( 'Category', 'Taxonomy Singular Name', 'classicpress' ),
+		'menu_name'                  => __( 'Taxonomy', 'classicpress' ),
+		'all_items'                  => __( 'All Items', 'classicpress' ),
+		'parent_item'                => __( 'Parent Item', 'classicpress' ),
+		'parent_item_colon'          => __( 'Parent Item:', 'classicpress' ),
+		'new_item_name'              => __( 'New Item Name', 'classicpress' ),
+		'add_new_item'               => __( 'Add New Item', 'classicpress' ),
+		'edit_item'                  => __( 'Edit Item', 'classicpress' ),
+		'update_item'                => __( 'Update Item', 'classicpress' ),
+		'view_item'                  => __( 'View Item', 'classicpress' ),
+		'separate_items_with_commas' => __( 'Separate items with commas', 'classicpress' ),
+		'add_or_remove_items'        => __( 'Add or remove items', 'classicpress' ),
+		'choose_from_most_used'      => __( 'Choose from the most used', 'classicpress' ),
+		'popular_items'              => __( 'Popular Items', 'classicpress' ),
+		'search_items'               => __( 'Search Items', 'classicpress' ),
+		'not_found'                  => __( 'Not Found', 'classicpress' ),
+		'no_terms'                   => __( 'No items', 'classicpress' ),
+		'items_list'                 => __( 'Items list', 'classicpress' ),
+		'items_list_navigation'      => __( 'Items list navigation', 'classicpress' ),
+	);
+	
+	$rewrite = array(
+		'slug'                       => 'theme-category',
+		'with_front'                 => true,
+		'hierarchical'               => false,
+	);
+	
+	$args = array(
+		'labels'                     => $labels,
+		'hierarchical'               => true,
+		'public'                     => true,
+		'show_ui'                    => true,
+		'show_admin_column'          => true,
+		'show_in_nav_menus'          => true,
+		'show_tagcloud'              => false,
+		'rewrite'                    => $rewrite,
+		'show_in_rest'               => true,
+	);
+	
+	register_taxonomy( 'theme_categories', array( 'theme' ), $args );
+
+}
+add_action( 'init', 'theme_categories', 0 );
