@@ -29,10 +29,20 @@
 			<div class="footerright">
 				<div class="menu-footermenu-container">
 					<ul id="footmenu" class="nav">
+						<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/developers/">Developer Directory</a></li>
+						<li class="menu-item menu-item-type-custom menu-item-object-custom"><a target="_blank" rel="noreferrer noopener" href="https://docs.classicpress.net/plugin-guidelines/">Plugin Guidelines</a></li>
+						<li class="menu-item menu-item-type-custom menu-item-object-custom"><a target="_blank" rel="noreferrer noopener" href="https://docs.classicpress.net/plugin-guidelines/directory-requirements/">Directory Requirements</a></li>
+						<li class="menu-item menu-item-type-custom menu-item-object-custom"><a target="_blank" rel="noreferrer noopener" href="https://forums.classicpress.net/c/support/directory-support/75">Directory Support</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="footerright">
+				<div class="menu-footermenu-container">
+					<ul id="footmenu" class="nav">
 						<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.classicpress.net/contact/">Contact Us</a></li>
-						<li class="menu-item menu-item-type-custom menu-item-object-custom"><a target="_blank" rel="noreferrer noopener" href="https://forums.classicpress.net/c/support">Get Support</a></li>
-						<li class="menu-item menu-item-type-custom menu-item-object-custom"><a target="_blank" rel="noreferrer noopener" href="https://www.classicpress.net/join-slack/">Chat with us on Slack</a></li>
-						<li class="menu-item menu-item-type-custom menu-item-object-custom"><a target="_blank" rel="noreferrer noopener" href="https://forums.classicpress.net/c/governance/petitions/77">Start or Vote on a Petition</a></li>
+						<li class="menu-item menu-item-type-custom menu-item-object-custom"><a target="_blank" rel="noreferrer noopener" href="https://forums.classicpress.net/c/support">Forum Support</a></li>
+						<li class="menu-item menu-item-type-custom menu-item-object-custom"><a target="_blank" rel="noreferrer noopener" href="https://www.classicpress.net/join-slack/">Join on Slack</a></li>
+						<li class="menu-item menu-item-type-custom menu-item-object-custom"><a target="_blank" rel="noreferrer noopener" href="https://github.com/ClassicPress/ClassicPress/issues/new/choose">Feature Requests</a></li>
 					</ul>
 				</div>
 			</div>
