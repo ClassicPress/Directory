@@ -429,6 +429,7 @@ textarea {
 #cats {
 	margin-bottom: 1em;
 }
+/*
 .searchandfilter {
 	margin: -1em 1em 2em -1em;
 }
@@ -459,7 +460,7 @@ select[name="ofpost_types"] {
 	padding: 0.45em 1em;
 	width: auto;
 }
-
+*/
 /*--------------------------------------------------------------
 # Links
 --------------------------------------------------------------*/
@@ -830,7 +831,7 @@ nav ul li:focus-within ul {
 .logged-in .show-loggedin{
 	display: unset;
 }
-.search-form-wrapper{
+.search-form-flex{
 	margin: 0 auto;
     display: flex;
     flex-direction: row;
@@ -841,6 +842,10 @@ nav ul li:focus-within ul {
 }
 .nav-search form{
 	max-width: 50%;
+}
+.nav-search input,
+.nav-search select{
+	background-color: var(--font-alt-color);
 }
 /*--------------------------------------------------------------
 ## Content
@@ -1257,6 +1262,7 @@ ul.aside-items{
 	}
 }
 
+/*
 @media only screen and (min-width: 680px) {
 	.searchandfilter {
 		float: right;
@@ -1289,7 +1295,7 @@ ul.aside-items{
 		margin: 0;
 	}
 }
-
+*/
 @media only screen and (min-width: 768px) {
 	.narrow-page article{
 		max-width: 900px;
@@ -1530,23 +1536,24 @@ ul.aside-items{
 }
 
 @media only screen and (min-width: 990px) {
-	.searchandfilter {
+	/*.searchandfilter {
 		margin-top: -3.75em;
 	}
 	.searchandfilter li:first-child {
 		margin-right: 1.2em;
-	}
+	}*/
 	.page article,
 	.single article {
 		font-size: 20px;
 	}
+	/*
 	.searchandfilter input[type="submit"] {
 		padding: 0.2em 1em;
 		display: inline-block;
 		border: 1px solid transparent;
 		font-size: unset;
 		line-height: unset;
-	}
+	}*/
 	.alphadevelopers button {
 		padding: 0.3em 0.5em;
 	}
