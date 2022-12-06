@@ -91,7 +91,7 @@ get_header();
 					<?php wp_reset_postdata(); ?>
 
 				<?php else : ?>
-					<p>Empty</p>
+					<p class="software-grid-empty"><?php _e('This developer has no listed plugins', 'classicpress'); ?></p>
 				<?php endif; ?>
 
 			</div><!-- #tabs-1 -->
@@ -155,7 +155,7 @@ get_header();
 				<?php wp_reset_postdata(); ?>
 
 				<?php else : ?>
-					<p>Empty</p>
+					<p class="software-grid-empty"><?php _e('This developer has no listed themes', 'classicpress'); ?></p>
 				<?php endif; ?>
 
 			</div><!-- #tabs-2 -->
@@ -219,7 +219,7 @@ get_header();
 				<?php wp_reset_postdata(); ?>
 
 				<?php else : ?>
-					<p>Empty</p>
+					<p class="software-grid-empty"><?php _e('This developer has no listed code snippets', 'classicpress'); ?></p>
 				<?php endif; ?>
 
 			</div><!-- #tabs-3 -->

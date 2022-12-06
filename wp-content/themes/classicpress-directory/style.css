@@ -1228,6 +1228,11 @@ ul.aside-items{
 .dev-meta .dev-bio{
 	color: var(--dark-gray);
 }
+.software-grid-empty{
+	text-align: center;
+    padding: 2em;
+	color: var(--dark-gray)
+}
 
 /*--------------------------------------------------------------
 ## CSS for larger tablets upwards
