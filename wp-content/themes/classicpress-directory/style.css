@@ -867,9 +867,18 @@ nav ul li:focus-within ul {
 }
 .masthead.masthead-search{
 	background: var(--font-alt-color) !important;
-	padding: 0.5em 0;
 }
-
+.close-search button{
+	background: var(--gray);
+	color: var(--font-color);
+}
+.open-search a{
+	position: relative;
+}
+.open-search a img{
+	position: absolute;
+    left: -5px;
+}
 /*--------------------------------------------------------------
 ## Content
 --------------------------------------------------------------*/
