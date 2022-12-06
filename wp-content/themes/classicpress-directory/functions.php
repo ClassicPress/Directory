@@ -246,7 +246,7 @@ function classicpress_whitelist_tags_in_bio($description){
  */
 add_shortcode( 'search-form','classicpress_search_form'  );
 function classicpress_search_form(  ) {
-	return '<form action="" method="post" class="searchandfilter">
+	return '<form action="/" method="get" class="searchandfilter">
 	<div>
 		<ul>
 			<li><label for="ofsearch" class="screen-reader-text">Search</label><input type="text" id="ofsearch" name="s" placeholder="Search…" value="" required="required"></li>
