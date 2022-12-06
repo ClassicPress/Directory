@@ -256,7 +256,7 @@ function classicpress_search_form(  ) {
 					<option class="level-0" value="theme">Themes</option>
 					<option class="level-0" value="snippet">Snippets</option>
 				</select></li>
-			<li><input type="hidden" name="ofsubmitted" value="1">
+			<li>
 				<input type="submit" value="Search">
 			</li>
 		</ul>

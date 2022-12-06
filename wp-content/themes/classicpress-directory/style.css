@@ -865,7 +865,7 @@ nav ul li:focus-within ul {
 	margin: 0 0 2em;
 }
 
-.software-grid .hentry p {
+.software-grid .hentry p:not(.wp-caption-text) {
 	min-height: 8em;
 }
 
