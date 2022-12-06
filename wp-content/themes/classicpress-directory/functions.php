@@ -101,6 +101,9 @@ function bedrock_scripts() {
 	wp_enqueue_style( 'bedrock-style', get_stylesheet_uri() );
 	wp_enqueue_script( 'bedrock-js', get_template_directory_uri() . '/js/scripts.js', null, null, true );
 
+	# jQuery
+	wp_enqueue_script('jQuery');
+
 	wp_deregister_script( 'wp-embed' );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
