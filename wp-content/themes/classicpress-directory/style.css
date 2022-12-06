@@ -1215,12 +1215,13 @@ ul.aside-items{
 }
 .author .developer-profile .dev-header h1{
 	margin: 0 0 0.2em;
+	text-align: center;
 }
 .dev-meta{
 	display: flex;
     flex-direction: column;
     gap: 0.5em;
-    width: 50%;
+    width: 100%;
     font-size: 85%;
     align-items: center;
     margin: 0 auto;
@@ -1533,6 +1534,8 @@ ul.aside-items{
 	.dev-meta{
 		margin: 0;
 		align-items: baseline;
+		width: 50%;
+		text-align: left;
 	}
 }
 
