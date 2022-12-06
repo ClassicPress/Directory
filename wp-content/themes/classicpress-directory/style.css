@@ -868,7 +868,6 @@ nav ul li:focus-within ul {
 .masthead.masthead-search{
 	background: var(--font-alt-color) !important;
 	padding: 0.5em 0;
-	max-height: 91px;
 }
 
 /*--------------------------------------------------------------
@@ -1550,6 +1549,10 @@ ul.aside-items{
 
 	.single-software .description{
 		margin: 0 0 1em;
+	}
+
+	.masthead{
+		max-height: 91px;
 	}
 }
 
