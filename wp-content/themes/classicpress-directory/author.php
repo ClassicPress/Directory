@@ -16,11 +16,15 @@ get_header();
 
 			<header>
 				<h1><span class="brand"><?php echo get_avatar( $author->ID, 32 ); ?></span><?php echo esc_html( $author->display_name ); ?></h1>
+				<div class="developer-profile">
+					<div class="dev-bio"><?php echo esc_html( get_user_meta($author->ID, 'description', true) ); ?></div>
+					<div class="dev-url"><a href="<?php echo esc_url( get_user_meta($author->ID, 'website', true) ); ?>" rel="noffolow noopener noreferrer" target="_blank"><?php echo esc_url( get_user_meta($author->ID, 'website', true) ); ?></a></div>
+				</div>
 			</header>
 
 			<?php
 			if ( class_exists( 'SearchAndFilter' ) ) {
-				echo do_shortcode( '[searchandfilter fields="search,post_types,category,post_tag" post_types="plugin,theme,snippet"]' );
+				echo do_shortcode( '[searchandfilter fields="search,post_types" post_types="plugin,theme,snippet"]' );
 			}
 			?>
 
@@ -32,6 +36,7 @@ get_header();
 				</div><!-- #ui-tabs-nav -->
 
 				<div id="tabs-1" class="ui-panel" role="tabpanel"<?php echo $active_tab === 'plugin' ? '' : ' hidden' ?>>
+					<?php if ($cached_count > 0) :?>
 					<ul class="software-grid">
 
 					<?php
@@ -68,7 +73,7 @@ get_header();
 					</ul>
 					
 					<nav class="navigation pagination">
-						<h2 class="screen-reader-text">Plugins navigation</h2>
+						<h2 class="screen-reader-text"><?php _e( 'Plugins navigation', 'classicpress' ); ?></h2>
 						<div class="nav-links">
 
 						<?php
@@ -87,7 +92,13 @@ get_header();
 						</div>
 					</nav>
 
+					
+
 					<?php wp_reset_postdata(); ?>
+					
+					<?php else: ?>
+						<p>Empty</p>
+					<?php endif; ?>
 
 				</div><!-- #tabs-1 -->
 
@@ -126,7 +137,7 @@ get_header();
 					</ul>
 					
 					<nav class="navigation pagination">
-						<h2 class="screen-reader-text">Themes navigation</h2>
+						<h2 class="screen-reader-text"><?php _e( 'Themes navigation', 'classicpress' ); ?></h2>
 						<div class="nav-links">
 
 						<?php
@@ -184,7 +195,7 @@ get_header();
 					</ul>
 					
 					<nav class="navigation pagination">
-						<h2 class="screen-reader-text">Snippets navigation</h2>
+						<h2 class="screen-reader-text"><?php _e( 'Snippets navigation', 'classicpress' ); ?></h2>
 						<div class="nav-links">
 
 						<?php
