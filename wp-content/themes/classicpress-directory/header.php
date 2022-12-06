@@ -74,7 +74,7 @@
 										<option class="level-0" value="snippet">Snippets</option>
 									</select></li>
 								<li>
-									<input type="submit" value="Search">
+									<input type="submit" value="Search" id="search-submit">
 								</li>
 							</ul>
 						</div>

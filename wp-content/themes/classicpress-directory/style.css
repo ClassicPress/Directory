@@ -847,6 +847,14 @@ nav ul li:focus-within ul {
 .nav-search input,
 .nav-search select{
 	margin: 0;
+	padding: 0.2em 1em 0.2em 0.5em;
+	width: unset;
+}
+.nav-search input#search-submit{
+	font-size: unset;
+    line-height: unset;
+    text-align: center;
+    padding: 0.2em 1em;
 }
 .nav-search ul{
     display: flex;

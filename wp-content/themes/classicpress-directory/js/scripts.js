@@ -72,8 +72,14 @@ document.addEventListener('DOMContentLoaded', function() {
 		document.getElementById('ofsearch').focus();
 	}, false);
 
-	document.querySelector('.close-search a').addEventListener('click', function() {
-		console.log('close');
-	}, false);
+	const close = document.querySelector('.close-search a');
+	if( close ){
+		close.addEventListener('click', function() {
+			document.getElementById('masthead-inner').removeAttribute('style');
+			document.getElementById('search-form-wrapper').style.display = 'none';
+			document.getElementById('masthead').removeAttribute('style');
+			document.querySelector('.open-search a').focus();
+		}, false);
+	}
 
 });
