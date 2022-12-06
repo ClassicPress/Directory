@@ -22,7 +22,7 @@ get_header();
 				<div class="dev-url"><a href="<?php echo esc_url($author->url); ?>" rel="noffolow noopener noreferrer" target="_blank"><?php echo esc_url($author->url); ?></a></div>
 			</div>
 		</header>
-
+		<pre style="display: none;"><?php var_dump($author); ?></pre>
 		<?php
 		/* temporarily disable faceted search
 			if ( class_exists( 'SearchAndFilter' ) ) {
@@ -31,22 +31,7 @@ get_header();
 			*/
 		?>
 
-		<form action="" method="post" class="searchandfilter">
-			<div>
-				<ul>
-					<li><label for="ofsearch" class="screen-reader-text">Search</label><input type="text" id="ofsearch" name="ofsearch" placeholder="Search …" value=""></li>
-					<li><select class="postform" name="ofpost_types">
-							<option class="level-0" value="plugin,theme,snippet">All Software</option>
-							<option class="level-0" value="plugin">Plugins</option>
-							<option class="level-0" value="theme">Themes</option>
-							<option class="level-0" value="snippet">Snippets</option>
-						</select></li>
-					<li><input type="hidden" name="ofsubmitted" value="1">
-						<input type="submit" value="Search">
-					</li>
-				</ul>
-			</div>
-		</form>
+		<?php echo do_shortcode( '[search-form]' ); ?>
 
 		<div class="clear"></div>
 

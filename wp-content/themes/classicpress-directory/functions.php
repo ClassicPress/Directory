@@ -240,3 +240,26 @@ function classicpress_whitelist_tags_in_bio($description){
     
 	return $description;
 }
+
+/** 
+ * Search shortcode
+ */
+add_shortcode( 'search-form','classicpress_search_form'  );
+function classicpress_search_form(  ) {
+	return '<form action="" method="post" class="searchandfilter">
+	<div>
+		<ul>
+			<li><label for="ofsearch" class="screen-reader-text">Search</label><input type="text" id="ofsearch" name="ofsearch" placeholder="Search…" value="" required="required"></li>
+			<li><select class="postform" name="ofpost_types">
+					<option class="level-0" value="plugin,theme,snippet">All Software</option>
+					<option class="level-0" value="plugin">Plugins</option>
+					<option class="level-0" value="theme">Themes</option>
+					<option class="level-0" value="snippet">Snippets</option>
+				</select></li>
+			<li><input type="hidden" name="ofsubmitted" value="1">
+				<input type="submit" value="Search">
+			</li>
+		</ul>
+	</div>
+</form>';
+}
