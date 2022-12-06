@@ -9,6 +9,7 @@ $author = get_queried_object();
 $big = 999999999; // need an unlikely integer
 
 $cached_count = kts_get_user_stat($author->ID);
+
 get_header();
 ?>
 
@@ -18,22 +19,10 @@ get_header();
 		<header>
 			<h1><span class="brand"><?php echo get_avatar($author->ID, 32); ?></span><?php echo esc_html($author->display_name); ?></h1>
 			<div class="dev-meta">
-				<div class="dev-bio"><?php echo esc_html(substr(get_user_meta($author->ID, 'description', true), 0, 150)); ?></div>
-				<div class="dev-url"><a href="<?php echo esc_url($author->user_url); ?>" rel="noffolow noopener noreferrer" target="_blank"><?php echo esc_url($author->url); ?></a></div>
+				<div class="dev-bio"><?php echo esc_html(substr(get_user_meta($author->ID, 'description', true), 0, 200)); ?></div>
+				<div class="dev-url"><a href="<?php echo esc_url($author->user_url); ?>" rel="nofollow noopener noreferrer" target="_blank"><?php echo esc_url( parse_url( $author->user_url, PHP_URL_HOST ) ); ?></a></div>
 			</div>
 		</header>
-
-		<?php
-		/* temporarily disable faceted search
-			if ( class_exists( 'SearchAndFilter' ) ) {
-				echo do_shortcode( '[searchandfilter fields="search,post_types" post_types="plugin,theme,snippet"]' );
-			}
-			*/
-		?>
-
-		<?php echo do_shortcode( '[search-form]' ); ?>
-
-		<div class="clear"></div>
 
 		<div id="tabs" class="ui-tabs">
 			<div id="ui-tabs-nav" class="ui-tabs-nav" role="tablist">
@@ -41,7 +30,7 @@ get_header();
 			</div><!-- #ui-tabs-nav -->
 
 			<div id="tabs-1" class="ui-panel" role="tabpanel" <?php echo $active_tab === 'plugin' ? '' : ' hidden' ?>>
-				<?php if ($cached_count > 0) : ?>
+				<?php if ($cached_count['plugin'] > 0) : ?>
 					<ul class="software-grid">
 
 						<?php
@@ -108,6 +97,8 @@ get_header();
 			</div><!-- #tabs-1 -->
 
 			<div id="tabs-2" class="ui-panel" role="tabpanel" <?php echo $active_tab === 'theme' ? '' : ' hidden' ?>>
+			
+			<?php if ($cached_count['theme'] > 0) : ?>
 				<ul class="software-grid">
 
 					<?php
@@ -163,9 +154,15 @@ get_header();
 
 				<?php wp_reset_postdata(); ?>
 
+				<?php else : ?>
+					<p>Empty</p>
+				<?php endif; ?>
+
 			</div><!-- #tabs-2 -->
 
 			<div id="tabs-3" class="ui-panel" role="tabpanel" <?php echo $active_tab === 'snippet' ? '' : ' hidden' ?>>
+
+			<?php if ($cached_count['snippet'] > 0) : ?>
 				<ul class="software-grid">
 
 					<?php
@@ -220,6 +217,10 @@ get_header();
 				</nav>
 
 				<?php wp_reset_postdata(); ?>
+
+				<?php else : ?>
+					<p>Empty</p>
+				<?php endif; ?>
 
 			</div><!-- #tabs-3 -->
 
