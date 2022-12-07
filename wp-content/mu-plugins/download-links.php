@@ -150,14 +150,15 @@ add_action( 'init', 'kts_cp_directory_cronjobs' );
  * To create a token, go to https://github.com/settings/tokens and generate a new token.
  * When generating the new token don't select any scope.
  *
- * @param int $software_id ID of the custom post types.
+ * @param int  $software_id ID of the custom post types.
+ * @param bool $force       Force reloading data.
  *
  * @return bool|array      An array containing updated data,
  *                         true if there is no update,
  *                         false if the check failed.
  *
  */
-function kts_maybe_update( $software_id ) {
+function kts_maybe_update( $software_id, $force = false ) {
 
 	# Construct the URL to the GitHub API
 	$download_link = get_post_meta( $software_id, 'download_link', true );
@@ -199,8 +200,7 @@ function kts_maybe_update( $software_id ) {
 	$new_version = str_replace( ['releases/download/v', 'releases/download/', '/'], '', $new_matches[0] );
 
 	# Update download link and current version if newer
-	if ( version_compare( $new_version, $orig_version ) === 1 ) {
-		
+	if ( version_compare( $new_version, $orig_version ) === 1 || $force ) {
 		# Enable the download_url() and wp_handle_sideload() functions
 		require_once( ABSPATH . 'wp-admin/includes/file.php' );
 
@@ -235,9 +235,7 @@ function kts_maybe_update( $software_id ) {
 		# Get description
 		$readme_index = $zip->locateName( 'README.md', ZipArchive::FL_NOCASE|ZipArchive::FL_NODIR );
 		$readme_md = $zip->getFromIndex( $readme_index, 0, ZipArchive::FL_UNCHANGED );
-		$parsedown_md = new Parsedown();
-		$parsedown_md->setSafeMode(true);
-		$description = $parsedown_md->text( $readme_md );
+		$description = kts_render_md( $readme_md );
 		$description = wp_kses_post( preg_replace('~<h1>.*<\/h1>~', '', $description ) );
 
 		# Check themes
@@ -249,10 +247,10 @@ function kts_maybe_update( $software_id ) {
 			$style_txt = $zip->getFromIndex( $style_index, 8192, ZipArchive::FL_UNCHANGED );
 
 			$headers = kts_get_plugin_data( $style_txt );
-		
+
 			# If still no headers or no description from style.css file above, try readme.txt file
 			if ( empty( $headers['RequiresCP'] ) || empty( $description ) ) {
-			
+
 				$readme_txt_index = $zip->locateName( 'readme.txt', ZipArchive::FL_NOCASE|ZipArchive::FL_NODIR );
 				$readme_txt = $zip->getFromIndex( $readme_txt_index, 8192, ZipArchive::FL_UNCHANGED );
 
@@ -261,12 +259,9 @@ function kts_maybe_update( $software_id ) {
 				}
 
 				if ( empty( $description ) ) {
-					$parsedown_txt = new Parsedown();
-					$parsedown_txt->setSafeMode(true);
-
 					$readme_txt = str_replace( ['====', '===', '=='], ['####', '###', '##'], $readme_txt );
 
-					$description = $parsedown_txt->text( str_replace( '## Description ##', '', strstr( $readme_txt, '## Description ##' ) ) );
+					$description = kts_render_md( str_replace( '## Description ##', '', strstr( $readme_txt, '## Description ##' ) ) );
 					$description = wp_kses_post( $description );
 				}
 			}
@@ -320,10 +315,10 @@ function kts_maybe_update( $software_id ) {
 					}
 				}
 			}
-		
+
 			# If still no headers or no description from README.md file above, try readme.txt file
 			if ( empty( $headers['RequiresCP'] ) || empty( $description ) ) {
-			
+
 				$readme_txt_index = $zip->locateName( 'readme.txt', ZipArchive::FL_NOCASE|ZipArchive::FL_NODIR );
 				$readme_txt = $zip->getFromIndex( $readme_txt_index, 8192, ZipArchive::FL_UNCHANGED );
 
@@ -332,12 +327,9 @@ function kts_maybe_update( $software_id ) {
 				}
 
 				if ( empty( $description ) ) {
-					$parsedown_txt = new Parsedown();
-					$parsedown_txt->setSafeMode(true);
-
 					$readme_txt = str_replace( ['====', '===', '=='], ['####', '###', '##'], $readme_txt );
 
-					$description = $parsedown_txt->text( str_replace( '## Description ##', '', strstr( $readme_txt, '## Description ##' ) ) );
+					$description = kts_render_md( str_replace( '## Description ##', '', strstr( $readme_txt, '## Description ##' ) ) );
 					$description = wp_kses_post( $description );
 				}
 			}
@@ -367,9 +359,7 @@ function kts_maybe_update( $software_id ) {
 			$readme = wp_remote_get( $readme_url );
 
 			if ( wp_remote_retrieve_response_code( $readme ) === 200 ) {
-				$parsedown_md = new Parsedown();
-				$parsedown_md->setSafeMode(true);
-				$description = $parsedown_md->text( $readme['body'] );
+				$description = kts_render_md( $readme['body'] );
 				$description = wp_kses_post( preg_replace('~<h1>.*<\/h1>~', '', $description ) );
 			}
 			else {
@@ -405,4 +395,42 @@ function kts_maybe_update( $software_id ) {
 	}
 
 	return true;
+}
+
+function kts_render_md($md) {
+
+	$body = [ 'text' => $md ];
+	$url  = 'https://api.github.com/markdown';
+	$args = [
+		'headers' => [
+			'Accept'               => 'application/vnd.github+json',
+			'X-GitHub-Api-Version' => '2022-11-28',
+			'Authorization'        => 'token ' . GITHUB_API_TOKEN,
+			'Content-Type'         => 'text/x-markdown'
+		],
+		'body' => json_encode( $body ),
+	];
+	$response = wp_remote_post( $url, $args );
+
+	// Request failed
+	if ( is_wp_error( $response ) ) {
+		trigger_error( 'kts_render_md: ' . $response->get_error_message() );
+		return '';
+	}
+
+	// Request is valid
+	if ( isset( $response[ 'response' ][ 'code' ] ) && $response[ 'response' ][ 'code' ] === 200 ) {
+		return $response['body'];
+	}
+
+	// Uncaught error
+	$api_error = json_decode( $response['body'], true );
+	if ( $api_error === null || ! isset ( $api_error[ 'message'] ) ) {
+		return '';
+	}
+
+	// API error
+	trigger_error( 'kts_render_md (API error): ' . $api_error[ 'message'] );
+	return '';
+
 }
