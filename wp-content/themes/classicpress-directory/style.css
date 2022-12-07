@@ -56,6 +56,7 @@ Susty was itself based on Underscores https://underscores.me/, (C) 2012-2017 Aut
 	--font: "Source Sans Pro", "Helvetica Neue", Verdana, sans-serif;
 	--pre-font: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
 	--code-font: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+	--readme-font: -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
 	--font-color: #040402;
 	--font-alt-color: white;
 	--sidebar-bg-color: #d9f2ee;
@@ -1266,6 +1267,9 @@ ul.aside-items{
 /* readme-md-content */
 .readme-md-content{
 	word-break: break-word;
+	font-family: var(--readme-font);
+    font-size: 16px;
+    line-height: 1.5;
 }
 .readme-md-content .anchor{
 	float: left;
