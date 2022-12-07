@@ -22,10 +22,6 @@ get_header();
 				</h1>
 			</header><!-- .page-header -->
 
-			<?php echo do_shortcode( '[search-form]' ); ?>
-
-			<div class="clear"></div>
-
 			<ul class="software-grid">
 
 			<?php
