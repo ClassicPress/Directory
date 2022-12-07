@@ -17,15 +17,24 @@ get_header();
 				<h1>
 
 					<?php
-
 					if ( get_query_var('post_types') ) {
-
-						// If so echo the value
-						echo get_query_var('post_types');
-
+						if( get_query_var('post_types') == "plugin"){
+							/* translators: %s: search query. */
+							printf( esc_html__( 'Plugin Search Results for: %s', 'classicpress' ), '<span>' . get_search_query() . '</span>' );
+						}elseif( get_query_var('post_types') == "theme"){
+							/* translators: %s: search query. */
+							printf( esc_html__( 'Theme Search Results for: %s', 'classicpress' ), '<span>' . get_search_query() . '</span>' );
+						}elseif( get_query_var('post_types') == "snippet"){
+							/* translators: %s: search query. */
+							printf( esc_html__( 'Code Snippet Search Results for: %s', 'classicpress' ), '<span>' . get_search_query() . '</span>' );
+						}else{
+							/* translators: %s: search query. */
+							printf( esc_html__( 'Search Results for: %s', 'classicpress' ), '<span>' . get_search_query() . '</span>' );
+						}
+					}else{
+						/* translators: %s: search query. */
+						printf( esc_html__( 'Search Results for: %s', 'classicpress' ), '<span>' . get_search_query() . '</span>' );
 					}
-					/* translators: %s: search query. */
-					printf( esc_html__( 'Search Results for: %s', 'classicpress' ), '<span>' . get_search_query() . '</span>' );
 					?>
 				</h1>
 			</header><!-- .page-header -->
