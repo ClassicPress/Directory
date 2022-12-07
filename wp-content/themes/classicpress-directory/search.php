@@ -15,7 +15,15 @@ get_header();
 
 			<header>
 				<h1>
+
 					<?php
+
+					if ( get_query_var('post_type') ) {
+
+						// If so echo the value
+						echo get_query_var('post_type');
+
+					}
 					/* translators: %s: search query. */
 					printf( esc_html__( 'Search Results for: %s', 'classicpress' ), '<span>' . get_search_query() . '</span>' );
 					?>
