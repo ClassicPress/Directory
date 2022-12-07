@@ -920,10 +920,6 @@ nav ul li:focus-within ul {
 	margin: 0 0 2em;
 }
 
-.software-grid .hentry p:not(.wp-caption-text) {
-	min-height: 8em;
-}
-
 .content .software-grid > li {
 	list-style: none;
 	padding: 0 1em;
