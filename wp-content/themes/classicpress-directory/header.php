@@ -114,7 +114,12 @@
 					<div class="main-navigation-wrapper" id="main-navigation-wrapper">
 						<nav id="primary-menu-header" class="main-navigation">
 
-							<?php wp_nav_menu(['theme_location' => 'menu-1']); ?>
+						<?php wp_nav_menu(array(
+							'menu' => 'Main Menu',
+							'theme_location' => 'menu-1',
+							'link_before' => '<span>',
+							'link_after' => '</span>'
+						)); ?>
 
 						</nav><!-- #menu-header -->
 					</div><!-- .main-navigation-wrapper -->
@@ -130,9 +135,7 @@
 
 						<?php wp_nav_menu(array(
 							'menu' => 'Main Menu',
-							'theme_location' => 'menu-1',
-							'link_before' => '<span>',
-							'link_after' => '</span>'
+							'theme_location' => 'menu-1'
 						)); ?>
 
 					</nav><!-- #menu-header -->
