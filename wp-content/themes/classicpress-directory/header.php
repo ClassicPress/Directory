@@ -129,6 +129,7 @@
 					<nav id="menu-header" class="main-navigation">
 
 						<?php wp_nav_menu(array(
+							'menu' => 'Main Menu',
 							'theme_location' => 'menu-1',
 							'link_before' => '<span>',
 							'link_after' => '</span>'
