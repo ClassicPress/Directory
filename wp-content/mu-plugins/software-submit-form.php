@@ -462,9 +462,7 @@ function kts_software_submit_form_redirect() {
 	# Get description
 	$readme_index = $zip->locateName( 'README.md', ZipArchive::FL_NOCASE|ZipArchive::FL_NODIR );
 	$readme_md = $zip->getFromIndex( $readme_index, 0, ZipArchive::FL_UNCHANGED );
-	$parsedown_md = new Parsedown();
-	$parsedown_md->setSafeMode(true);
-	$description = $parsedown_md->text( $readme_md );
+	$description = kts_render_md( $readme_md );
 	$description = wp_kses_post( preg_replace('~<h1>.*<\/h1>~', '', $description ) );
 
 	# Check that slug is unique, holding errors until temporary file deleted
@@ -505,12 +503,9 @@ function kts_software_submit_form_redirect() {
 				}
 
 				if ( empty( $description ) ) {
-					$parsedown_txt = new Parsedown();
-					$parsedown_txt->setSafeMode(true);
-
 					$readme_txt = str_replace( ['====', '===', '=='], ['####', '###', '##'], $readme_txt );
 
-					$description = $parsedown_txt->text( str_replace( '## Description ##', '', strstr( $readme_txt, '## Description ##' ) ) );
+					$description = kts_render_md( str_replace( '## Description ##', '', strstr( $readme_txt, '## Description ##' ) ) );
 					$description = wp_kses_post( $description );
 				}
 			}
@@ -604,12 +599,9 @@ function kts_software_submit_form_redirect() {
 				}
 
 				if ( empty( $description ) ) {
-					$parsedown_txt = new Parsedown();
-					$parsedown_txt->setSafeMode(true);
-
 					$readme_txt = str_replace( ['====', '===', '=='], ['####', '###', '##'], $readme_txt );
 
-					$description = $parsedown_txt->text( str_replace( '## Description ##', '', strstr( $readme_txt, '## Description ##' ) ) );
+					$description = kts_render_md( str_replace( '## Description ##', '', strstr( $readme_txt, '## Description ##' ) ) );
 					$description = wp_kses_post( $description );
 				}
 			}
@@ -671,9 +663,7 @@ function kts_software_submit_form_redirect() {
 		$readme = wp_remote_get( $readme_url );
 
 		if ( wp_remote_retrieve_response_code( $readme ) === 200 ) {
-			$parsedown_md = new Parsedown();
-			$parsedown_md->setSafeMode(true);
-			$description = $parsedown_md->text( $readme['body'] );
+			$description = kts_render_md( $readme['body'] );
 			$description = wp_kses_post( preg_replace('~<h1>.*<\/h1>~', '', $description ) );
 		}
 		else {
