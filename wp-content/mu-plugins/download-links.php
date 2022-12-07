@@ -398,18 +398,39 @@ function kts_maybe_update( $software_id, $force = false ) {
 }
 
 function kts_render_md($md) {
+
 	$body = [ 'text' => $md ];
 	$url  = 'https://api.github.com/markdown';
 	$args = [
 		'headers' => [
-			'Accept'        => 'application/vnd.github+json',
+			'Accept'               => 'application/vnd.github+json',
 			'X-GitHub-Api-Version' => '2022-11-28',
-			'Authorization' => 'token ' . GITHUB_API_TOKEN,
-			'Content-Type'  => 'text/x-markdown'
+			'Authorization'        => 'token ' . GITHUB_API_TOKEN,
+			'Content-Type'         => 'text/x-markdown'
 		],
 		'body' => json_encode( $body ),
 	];
 	$response = wp_remote_post( $url, $args );
-	return $response['body'];
-}
 
+	// Request failed
+	if ( is_wp_error( $response ) ) {
+		trigger_error( 'kts_render_md: ' . $response->get_error_message() );
+		return '';
+	}
+
+	// Request is valid
+	if ( isset( $response[ 'response' ][ 'code' ] ) && $response[ 'response' ][ 'code' ] === 200 ) {
+		return $response['body'];
+	}
+
+	// Uncaught error
+	$api_error = json_decode( $response['body'], true );
+	if ( $api_error === null || ! isset ( $api_error[ 'message'] ) ) {
+		return '';
+	}
+
+	// API error
+	trigger_error( 'kts_render_md (API error): ' . $api_error[ 'message'] );
+	return '';
+
+}
