@@ -109,6 +109,12 @@ function kts_render_review_response_form() {
 		}
 		?>
 
+		<section>
+		<div class="section-header">
+			<h2><?php _e( 'Your Response', 'classicpress' ); ?></h2>
+			<small class="required-text"><?php _e( 'All fields are required.', 'classicpress' ); ?></small>
+		</div>
+
 		<form id="review-code-response-form" method="post" autocomplete="off">
 
 			<label for="name"><?php _e( 'Name of Software', 'classicpress' ); ?></label>
@@ -149,7 +155,7 @@ function kts_render_review_response_form() {
 			<button type="reset" enterkeyhint="go">Clear</button>
 
 		</form>
-
+		</section>
 	<?php
 	}		
 	echo ob_get_clean();

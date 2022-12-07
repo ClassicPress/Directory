@@ -174,8 +174,12 @@ function kts_render_software_submit_form() {
 		}
 		?>
 
-		<h2><?php _e( 'Software Information', 'classicpress' ); ?></h2>
-
+		<section>
+		<div class="section-header">
+			<h2><?php _e( 'Software Information', 'classicpress' ); ?></h2>
+			<small class="required-text"><?php _e( 'All fields are required.', 'classicpress' ); ?></small>
+		</div>
+		
 		<noscript><div class="error-message" role="alert"><p><?php _e( 'This form will not work without JavaScript turned on.', 'classicpress' ); ?></p></div></noscript>
 
 		<form id="submit-cp-code-form" method="post" autocomplete="off">
@@ -248,7 +252,7 @@ function kts_render_software_submit_form() {
 			<button type="reset" enterkeyhint="go">Clear</button>
 
 		</form>
-
+		</section>
 	<?php
 	}
 	echo ob_get_clean();
