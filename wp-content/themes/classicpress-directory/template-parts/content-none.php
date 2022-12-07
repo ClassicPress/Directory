@@ -36,14 +36,14 @@
 
 			<p><?php esc_html_e( 'Sorry, but nothing matched your search terms. Please try again with some different keywords.', 'classicpress' ); ?></p>
 			<?php
-			get_search_form();
+			echo do_shortcode('[search-form]');
 
 		else :
 			?>
 
 			<p><?php esc_html_e( 'It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps a search might help.', 'classicpress' ); ?></p>
 			<?php
-			get_search_form();
+			echo do_shortcode('[search-form]');
 
 		endif;
 		?>

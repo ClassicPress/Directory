@@ -429,38 +429,17 @@ textarea {
 #cats {
 	margin-bottom: 1em;
 }
-/*
-.searchandfilter {
-	margin: -1em 1em 2em -1em;
+
+.section-header{
+	margin: 1em 0;
 }
-.searchandfilter ul {
-	display: block;
+.section-header h2{
+	margin:0;
 }
-.searchandfilter li {
-	display: inline;
-	padding-right: 0;
+.required-text{
+	color: var(--dark-gray);
 }
-.searchandfilter input,
-.searchandfilter select {
-	width: 45%;
-	padding: 3px 3em 3px 0.5em;
-}
-select[name="ofpost_types"] {
-	margin: -1em -3em -1em 1.2em;
-}
-#ofcategory {
-	margin-bottom: -1em;
-}
-#ofpost_tag {
-	margin: -1em -3em -1em 1em;
-}
-.searchandfilter input[type="submit"] {
-	margin: 1.2em 0 0 1em;
-	border-radius: var(--border-radius);
-	padding: 0.45em 1em;
-	width: auto;
-}
-*/
+
 /*--------------------------------------------------------------
 # Links
 --------------------------------------------------------------*/
