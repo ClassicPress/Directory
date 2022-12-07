@@ -871,7 +871,7 @@ nav ul li:focus-within ul {
 	margin: 0 0 2em;
 }
 
-.software-grid .hentry p {
+.software-grid .hentry p:not(.wp-caption-text) {
 	min-height: 8em;
 }
 
@@ -1215,6 +1215,32 @@ ul.aside-items{
     top: 1px;
 }
 
+/* developer profile */
+.author .developer-profile .dev-header{
+	margin: 3em 0;
+}
+.author .developer-profile .dev-header h1{
+	margin: 0 0 0.2em;
+	text-align: center;
+}
+.dev-meta{
+	display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    width: 100%;
+    font-size: 85%;
+    align-items: center;
+    margin: 0 auto;
+}
+.dev-meta .dev-bio{
+	color: var(--dark-gray);
+}
+.software-grid-empty{
+	text-align: center;
+    padding: 2em;
+	color: var(--dark-gray)
+}
+
 /*--------------------------------------------------------------
 ## CSS for larger tablets upwards
 --------------------------------------------------------------*/
@@ -1508,6 +1534,17 @@ ul.aside-items{
 
 	.single-software .description{
 		margin: 0 0 1em;
+	}
+
+	/* dev profile */
+	.dev-meta{
+		margin: 0;
+		align-items: baseline;
+		width: 50%;
+	}
+
+	.author .developer-profile .dev-header h1{
+		text-align: left;
 	}
 }
 

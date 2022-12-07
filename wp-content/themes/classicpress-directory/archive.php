@@ -22,11 +22,7 @@ get_header();
 				?>
 			</header>
 
-			<?php
-			if ( class_exists( 'SearchAndFilter' ) ) {
-				echo do_shortcode( '[searchandfilter fields="search,post_types,category,post_tag" post_types="plugin,theme,snippet"]' );
-			}
-			?>
+			<?php echo do_shortcode( '[search-form]' ); ?>
 
 			<div class="clear"></div>
 
