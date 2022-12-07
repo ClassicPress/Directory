@@ -1271,6 +1271,10 @@ ul.aside-items{
     font-size: 16px;
     line-height: 1.5;
 }
+.readme-md-content b, 
+.readme-md-content strong{
+	font-weight: 600;
+}
 .readme-md-content .anchor{
 	float: left;
     padding-right: 4px;
