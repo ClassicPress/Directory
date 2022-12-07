@@ -18,10 +18,10 @@ get_header();
 
 					<?php
 
-					if ( get_query_var('post_type') ) {
+					if ( get_query_var('post_types') ) {
 
 						// If so echo the value
-						echo get_query_var('post_type');
+						echo get_query_var('post_types');
 
 					}
 					/* translators: %s: search query. */
