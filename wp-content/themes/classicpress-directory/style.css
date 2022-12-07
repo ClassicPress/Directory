@@ -1289,6 +1289,23 @@ ul.aside-items{
 .readme-md-content h6:hover .anchor .octicon{
 	visibility: visible;
 }
+
+.readme-md-content h3{
+	font-size: 1.3em;
+}
+.readme-md-content h4{
+	font-size: 1.25em;
+}
+.readme-md-content h5{
+	font-size: 1.15em;
+}
+.readme-md-content h6{
+	font-size: 1em;
+}
+
+.readme-md-content ul, .readme-md-content ol {
+    padding-left: 2em;
+}
 /* tags */
 .tag-badge a{
 	text-decoration: none;
