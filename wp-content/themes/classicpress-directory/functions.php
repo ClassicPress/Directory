@@ -154,11 +154,11 @@ add_action( 'admin_enqueue_scripts', 'kts_admin_css' );
 function bedrock_modify_menu( $items, $args ) {
 	if ( $args->theme_location === 'menu-1' ) {
 		if ( is_user_logged_in() ) {
-			$new_item = '<li><a href="' . esc_url( wp_logout_url() ) . '" class="menu-item menu-item-type-post_type menu-item-object-page">Log Out</a></li>';
+			$new_item = '<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="' . esc_url( wp_logout_url() ) . '"><span>Log Out</span></a></li>';
 			$items = $items . $new_item;
 		}
 		else {
-			$new_item = '<li><a href="' . esc_url( wp_login_url() ) . '" class="menu-item menu-item-type-post_type menu-item-object-page">Log In</a></li>';
+			$new_item = '<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="' . esc_url( wp_login_url() ) . '"><span>Log In</span></a></li>';
 			$items = $items . $new_item;
 		}
 	}
