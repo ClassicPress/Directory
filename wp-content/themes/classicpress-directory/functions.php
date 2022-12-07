@@ -224,3 +224,42 @@ require get_template_directory() . '/inc/template-functions.php';
  * Customizer additions.
  */
 require get_template_directory() . '/inc/customizer.php';
+
+/**
+ * Limit author bio HTML tags
+ */
+add_filter('pre_user_description','classicpress_whitelist_tags_in_bio');
+function classicpress_whitelist_tags_in_bio($description){
+    $allowed_tags = array(
+                         'strong'=>array(),
+                         'em'=>array(),
+						 'b'=>array(),
+						 'i'=>array(),
+                        );
+    $description = wp_kses($description,$allowed_tags);
+    
+	return $description;
+}
+
+/** 
+ * Search shortcode
+ */
+add_shortcode( 'search-form','classicpress_search_form'  );
+function classicpress_search_form(  ) {
+	return '<form action="/" method="get" class="searchandfilter">
+	<div>
+		<ul>
+			<li><label for="ofsearch" class="screen-reader-text">Search</label><input type="text" id="ofsearch" name="s" placeholder="Search…" value="" required="required"></li>
+			<li><select class="postform" name="post_types">
+					<option class="level-0" value="plugin,theme,snippet">All Software</option>
+					<option class="level-0" value="plugin">Plugins</option>
+					<option class="level-0" value="theme">Themes</option>
+					<option class="level-0" value="snippet">Snippets</option>
+				</select></li>
+			<li>
+				<input type="submit" value="Search">
+			</li>
+		</ul>
+	</div>
+</form>';
+}
