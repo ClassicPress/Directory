@@ -1481,8 +1481,7 @@ ul.aside-items{
 	#menu-main-menu > .menu-item > a span{
 		position: relative;
 	}
-	#menu-main-menu > .menu-item > a span::before,
-	#menu-main-menu > .menu-item.current-menu-item > a span::before{
+	#menu-main-menu > .menu-item > a span::before{
 		content: '';
 		display: block;
 		position: absolute;
@@ -1499,7 +1498,8 @@ ul.aside-items{
 		background-color: rgb(255 255 255 / 60%);
 	}
 	#menu-main-menu > .menu-item > a:hover span::before, 
-	#menu-main-menu > .menu-item > a:focus span::before {
+	#menu-main-menu > .menu-item > a:focus span::before,
+	#menu-main-menu > .menu-item.current-menu-item > a span::before {
 		transform-origin: left top;
 		transform: scale(1, 1);
 	}
