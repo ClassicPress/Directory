@@ -1474,15 +1474,15 @@ ul.aside-items{
 		line-height: 1em;
 	}
 
-	#menu-main-menu:not(.sub-menu) .menu-item > a{
+	#menu-main-menu .menu-item > a{
 		transition: color 0.1s,background-color 0.1s,padding 0.2s ease-in;
 		background: transparent !important;
 		border: 1px solid transparent !important;
 	}
-	#menu-main-menu:not(.sub-menu) .menu-item > a span{
+	#menu-main-menu .menu-item > a span{
 		position: relative;
 	}
-	#menu-main-menu:not(.sub-menu) .menu-item > a span::before,
+	#menu-main-menu .menu-item > a span::before,
 	#menu-main-menu .menu-item.current-menu-item > a span::before{
 		content: '';
 		display: block;
@@ -1496,10 +1496,10 @@ ul.aside-items{
 		transform: scale(0, 1);
 		transition: color 0.1s,transform 0.2s ease-out;
 	}
-	#menu-main-menu:not(.sub-menu) .menu-item > a:active span::before {
+	#menu-main-menu .menu-item > a:active span::before {
 		background-color: rgb(255 255 255 / 60%);
 	}
-	#menu-main-menu:not(.sub-menu) .menu-item > a:hover span::before, #menu-main-menu:not(.sub-menu) .menu-item > a:focus span::before {
+	#menu-main-menu .menu-item > a:hover span::before, #menu-main-menu .menu-item > a:focus span::before {
 		transform-origin: left top;
 		transform: scale(1, 1);
 	}
