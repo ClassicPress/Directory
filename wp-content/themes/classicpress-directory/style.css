@@ -920,16 +920,18 @@ nav ul li:focus-within ul {
 	margin: 0 0 2em;
 }
 
-.software-grid .hentry p {
-	min-height: 8em;
-}
-
 .content .software-grid > li {
 	list-style: none;
 	padding: 0 1em;
 	border-radius: var(--border-radius);
 	margin-left: 0;
 	box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2);
+}
+.software-grid .software-item-info p{
+	display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 .software-item-meta {
 	padding: 1em;
@@ -938,6 +940,9 @@ nav ul li:focus-within ul {
 	border-bottom: none;
 	display: flex;
 	justify-content: space-around;
+}
+.software-item-footer{
+	display: none;
 }
 .software-author-link a{
 	color: var(--dark-gray);

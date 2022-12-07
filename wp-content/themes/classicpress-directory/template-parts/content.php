@@ -130,14 +130,14 @@
 	<?php
 	else :
 	?>
+		<div class="software-item-info">
+			<header>
+				<?php the_title('<h2  class="h3"><a href="' . esc_url(get_permalink()) . '" rel="bookmark">', '</a></h2>');	?>
+				<span class="software-author-link"><?php echo get_the_author_posts_link(); ?></span>
+			</header>
 
-		<header>
-			<?php the_title('<h2  class="h3"><a href="' . esc_url(get_permalink()) . '" rel="bookmark">', '</a></h2>');	?>
-			<span class="software-author-link"><?php echo get_the_author_posts_link(); ?></span>
-		</header>
-
-		<p><?php kts_excerpt_fallback($post); ?></p>
-
+			<p><?php kts_excerpt_fallback($post); ?></p>
+		</div>
 		<div class="software-item-meta">
 			<div class="meta-item left">
 				<a href="<?php echo esc_url(get_post_meta($post->ID, 'download_link', true)); ?>" title="<?php _e('Download', 'classicpress') . ' ' . esc_attr($post->post_title); ?>" target="_blank" rel="noopener noreferrer">
@@ -159,7 +159,7 @@
 	if (!is_singular()) {
 	?>
 
-		<footer>
+		<footer class="software-item-footer">
 
 			<?php // Add update button if author archive is of the current user
 			kts_render_software_update_link_form($post);
