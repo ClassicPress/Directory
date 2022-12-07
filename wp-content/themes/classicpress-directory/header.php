@@ -60,29 +60,29 @@
 		</section>
 
 		<header id="masthead" class="masthead">
-		<div id="search-form-wrapper" style="display: none;">
-			<div class="search-form-flex">
-				<div class="nav-search">
-					<form action="/" method="get" class="searchandfilter">
-						<div>
-							<ul>
-								<li><label for="ofsearch" class="screen-reader-text">Search</label><input type="text" id="ofsearch" name="s" placeholder="Search…" value="" required="required"></li>
-								<li><select class="postform" name="post_types">
-										<option class="level-0" value="plugin,theme,snippet">All Software</option>
-										<option class="level-0" value="plugin">Plugins</option>
-										<option class="level-0" value="theme">Themes</option>
-										<option class="level-0" value="snippet">Snippets</option>
-									</select></li>
-								<li>
-									<input type="submit" value="Search" id="search-submit">
-								</li>
-							</ul>
-						</div>
-					</form>
+			<div id="search-form-wrapper" style="display: none;">
+				<div class="search-form-flex">
+					<div class="nav-search">
+						<form action="/" method="get" class="searchandfilter">
+							<div>
+								<ul>
+									<li><label for="ofsearch" class="screen-reader-text">Search</label><input type="text" id="ofsearch" name="s" placeholder="Search…" value="" required="required"></li>
+									<li><select class="postform" name="post_types">
+											<option class="level-0" value="plugin,theme,snippet">All Software</option>
+											<option class="level-0" value="plugin">Plugins</option>
+											<option class="level-0" value="theme">Themes</option>
+											<option class="level-0" value="snippet">Snippets</option>
+										</select></li>
+									<li>
+										<input type="submit" value="Search" id="search-submit">
+									</li>
+								</ul>
+							</div>
+						</form>
+					</div>
+					<div class="close-search"><button type="button" title="Close search">Close</button></div>
 				</div>
-				<div class="close-search"><button type="button" title="Close search">Close</button></div>
 			</div>
-		</div>
 
 			<div id="masthead-inner" class="masthead-inner outer-width aligncenter">
 
@@ -128,7 +128,11 @@
 				<div class="main-navigation-wrapper" id="main-navigation-wrapper">
 					<nav id="menu-header" class="main-navigation">
 
-						<?php wp_nav_menu(['theme_location' => 'menu-1']); ?>
+						<?php wp_nav_menu(array(
+							'theme_location' => 'menu-1',
+							'link_before' => '<span>',
+							'link_after' => '</span>'
+						)); ?>
 
 					</nav><!-- #menu-header -->
 				</div><!-- .main-navigation-wrapper -->
