@@ -9,14 +9,17 @@
 
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-	<header>
-		<?php the_title( '<h2  class="h3"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );	?>
-		<span class="software-author-link"><?php echo get_the_author_posts_link(); ?></span>
-	</header>
+<article id="post-<?php the_ID(); ?>" <?php post_class('grid-item-software'); ?>>
 
-	<p><?php kts_excerpt_fallback( $post ); ?></p>
-		
+	<div class="software-item-info">
+		<header>
+			<?php the_title( '<h2  class="h3"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );	?>
+			<span class="software-author-link"><?php echo get_the_author_posts_link(); ?></span>
+		</header>
+
+		<p><?php kts_excerpt_fallback( $post ); ?></p>
+	</div>
+
 	<div class="software-item-meta">
 		<div class="meta-item left">
 			<a href="<?php echo esc_url( get_post_meta( $post->ID, 'download_link', true ) ); ?>" title="<?php _e( 'Download', 'classicpress' ) . ' ' . esc_attr( $post->post_title ); ?>" target="_blank" rel="noopener noreferrer">
@@ -32,7 +35,7 @@
 		</div>
 	</div>
 
-	<footer class="entry-footer">
+	<footer class="software-item-footer">
 		<div id="info-<?php echo absint( $post->ID ); ?>" class="info-panel" hidden>
 
 			<?php

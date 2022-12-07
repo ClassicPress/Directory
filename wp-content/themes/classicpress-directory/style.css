@@ -931,6 +931,30 @@ nav ul li:focus-within ul {
 	margin-left: 0;
 	box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2);
 }
+.search .content .software-grid > li{
+    position: relative;
+}
+.search .content .software-grid > li::before{
+    position: absolute;
+    top: 0;
+    font-size: 12px;
+    border-top-right-radius: 3px;
+    padding: 2px 5px;
+    right: 0;
+    border-bottom-left-radius: 3px;
+}
+.search .content .software-grid > li:has(article.type-plugin)::before{
+	content: "Plugin";
+	background: #DEF3FD;
+}
+.search .content .software-grid > li:has(article.type-snippet)::before{
+	content: "Snippet";
+	background: #DEFDE0;
+}
+.search .content .software-grid > li:has(article.type-theme)::before{
+	content: "Theme";
+	background: #F0DEFD;
+}
 .software-grid .software-item-info p{
 	display: -webkit-box;
     -webkit-line-clamp: 3;
