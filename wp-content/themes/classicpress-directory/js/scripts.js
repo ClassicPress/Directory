@@ -63,4 +63,23 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 	}, false);
 
+	/* NAV SEARCH */
+	document.querySelector('.open-search a').addEventListener('click', function(e) {
+		e.preventDefault();
+		document.getElementById('masthead-inner').style.display = 'none';
+		document.getElementById('search-form-wrapper').removeAttribute('style');
+		document.getElementById('masthead').classList.add('masthead-search');
+		document.getElementById('ofsearch').focus();
+	}, false);
+
+	const close = document.querySelector('.close-search button');
+	if( close ){
+		close.addEventListener('click', function() {
+			document.getElementById('masthead-inner').removeAttribute('style');
+			document.getElementById('search-form-wrapper').style.display = 'none';
+			document.getElementById('masthead').classList.remove('masthead-search');
+			document.querySelector('.open-search a').focus();
+		}, false);
+	}
+
 });
