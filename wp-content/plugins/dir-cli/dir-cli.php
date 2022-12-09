@@ -80,6 +80,7 @@ class Dir{
 
 			if ($update === false || $update === true || $update['description'] === '') {
 				\WP_CLI::error('Something went wrong updating "'.$title.'". Check logs for errors.', false);
+				continue;
 			}
 
 			wp_update_post( [
