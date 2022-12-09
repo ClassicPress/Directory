@@ -40,11 +40,6 @@ class Dir{
 	/**
 	* Force an update of an item.
 	*
-	* ## OPTIONS
-	*
-	* [--id=<ID>]
-	* : ID of the item.
-	*
 	*
 	* ## EXAMPLES
 	*
@@ -76,12 +71,13 @@ class Dir{
 		
 		$valid_types = ['plugin', 'theme', 'snippet'];
 		if (!in_array($type, $valid_types)) {
-			\WP_CLI::error('You can\' update a '.$type.'.');
+			\WP_CLI::error('You can\'t update a '.$type.'.');
 		}
 
 		$update = kts_maybe_update($id, true);
-		if ( $update === false || $update === true ) {
-			\WP_CLI::error('Strange!');;
+
+		if ($update === false || $update === true || $update['description'] === '') {
+			\WP_CLI::error('Something went wrong updating '.$title.'. Check logs for errors.');
 		}
 
 		wp_update_post( [
