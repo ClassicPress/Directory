@@ -233,7 +233,7 @@ function kts_maybe_update( $software_id, $force = false ) {
 		}
 
 		# Get description
-		$readme_index = $zip->locateName( 'README.md', ZipArchive::FL_NOCASE|ZipArchive::FL_NODIR );
+		$readme_index = $zip->locateName( '/README.md', ZipArchive::FL_NOCASE );
 		$readme_md = $zip->getFromIndex( $readme_index, 0, ZipArchive::FL_UNCHANGED );
 		$description = kts_render_md( $readme_md );
 		$description = wp_kses_post( preg_replace('~<h1>.*<\/h1>~', '', $description ) );
