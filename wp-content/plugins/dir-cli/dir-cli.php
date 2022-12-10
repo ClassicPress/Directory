@@ -70,7 +70,7 @@ class Dir{
 			$type  = $post->post_type;
 			$title = $post->post_title;
 
-			$valid_types = ['plugin', 'theme', 'snippet'];
+			$valid_types = ['plugin', 'theme'];
 			if (!in_array($type, $valid_types)) {
 				\WP_CLI::error('You can\'t update "'.$title.'" that is a '.$type.'.', false);
 				continue;
@@ -93,7 +93,6 @@ class Dir{
 					'requires_cp'		=> $update['requires_cp'],
 				],
 			] );
-	
 
 			\WP_CLI::success('"'.$title.'" update successfully.');
 

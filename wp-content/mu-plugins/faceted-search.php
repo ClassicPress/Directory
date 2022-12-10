@@ -23,7 +23,7 @@ function kts_modify_searchandfilter( $output, $tag ) {
 	$output = str_replace( $copies[0], '<label for="ofsearch" class="screen-reader-text">Search</label><input type="text" id="ofsearch" name="ofsearch"', $output );
 
 	# Replace "All Post Types" with "All Software"
-	$pattern2 = '~value="plugin,theme,snippet">(.*?)</option>~s';
+	$pattern2 = '~value="plugin,theme">(.*?)</option>~s';
 	preg_match( $pattern2, $output, $matches );
 	$new_output = str_replace( $matches[1], 'All Software', $output );
 
@@ -52,8 +52,8 @@ add_filter( 'pre_do_shortcode_tag', 'kts_searchandfilter_cache', 10, 2 );
 /* REFRESH SEARCHANDFILTER CACHE AS NECESSARY */
 function kts_purge_searchandfilter_cache( $post_id ) {
 
-	# Only purge when a plugin, theme, or code snippet is involved
-	if ( ! in_array( get_post_type( $post_id ), ['plugin', 'theme', 'snippet'] ) ) {
+	# Only purge when a plugin or theme is involved
+	if ( ! in_array( get_post_type( $post_id ), ['plugin', 'theme'] ) ) {
 		return;
 	}
 

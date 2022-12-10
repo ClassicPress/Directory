@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	const anchors = document.querySelectorAll('.ui-button');
 	const tabs = document.querySelectorAll('.ui-panel');
 	const firstTab = document.getElementById('ui-id-1');
-	const lastTab = document.getElementById('ui-id-3');
+	const lastTab = document.getElementById('ui-id-2');
 
 	for (let i = 0, n = anchors.length; i < n; i++) {
 		anchors[i].addEventListener('click', function() {

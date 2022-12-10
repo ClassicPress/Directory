@@ -18,10 +18,7 @@ function kts_redirect_from_404() {
 	}
 
 	$uri = $_SERVER['REQUEST_URI'];
-	if ( strpos( $uri, '/snippets/' ) !== false ) {
-		wp_safe_redirect( esc_url_raw( home_url( '/snippets/' ) ) );
-	}
-	elseif ( strpos( $uri, '/themes/' ) !== false ) {
+	if ( strpos( $uri, '/themes/' ) !== false ) {
 		wp_safe_redirect( esc_url_raw( home_url( '/themes/' ) ) );
 	}
 	else {

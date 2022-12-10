@@ -221,7 +221,6 @@ add_action( 'user_profile_update_errors', 'kts_user_profile_update_errors', 10, 
 function kts_add_user_admin_columns( $columns ) {
 	$columns['plugin'] = __( 'Plugins', 'classicpress' );
 	$columns['theme'] = __( 'Themes', 'classicpress' );
-	$columns['snippet'] = __( 'Snippets', 'classicpress' );
 	$columns['github_username'] = __( 'GitHub Username', 'classicpress' );
 	$columns['last_login'] = __( 'Last Login', 'classicpress' );
 	unset( $columns['posts'] );
@@ -238,9 +237,6 @@ function kts_user_meta_columns( $custom_column, $column_name, $user_id ) {
 		break;
 		case 'theme':
 			return count_user_posts( $user_id, 'theme' );
-		break;
-		case 'snippet':
-			return count_user_posts( $user_id, 'snippet' );
 		break;
 		case 'github_username':
 			return get_user_meta( $user_id, 'github_username', true );
@@ -343,7 +339,6 @@ function kts_remove_admin_menu_items() {
 		remove_menu_page( 'edit.php' );
 		remove_menu_page( 'edit.php?post_type=plugin' );
 		remove_menu_page( 'edit.php?post_type=theme' );
-		remove_menu_page( 'edit.php?post_type=snippet' );
 		remove_menu_page( 'edit.php?post_type=review' );
 		remove_menu_page( 'edit.php?post_type=message' );
 		remove_menu_page( 'edit.php?post_type=page' );
@@ -379,16 +374,6 @@ function kts_add_toolbar_links( $admin_bar ) {
 		'href'  => esc_url( get_author_posts_url( $user_id ) . '#ui-id-2' ),
 		'meta'  => array(
 			'title' => __( 'My Themes' ),
-			'target' => '_blank',
-			'class' => 'my_menu_item_class'
-		),
-	) );
-	$admin_bar->add_menu( array(
-		'id'    => 'my-snippets',
-		'title' => __( 'My Snippets' ),
-		'href'  => esc_url( get_author_posts_url( $user_id ) . '#ui-id-3' ),
-		'meta'  => array(
-			'title' => __( 'My Snippets' ),
 			'target' => '_blank',
 			'class' => 'my_menu_item_class'
 		),

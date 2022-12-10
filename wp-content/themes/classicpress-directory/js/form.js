@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function() {
 	// Toggle 
 	const softwares = document.getElementsByName('software_type');
 	const plugin = document.getElementById('plugin');
-	const snippet = document.getElementById('snippet');
 	const category = document.getElementById('category');
 	const categories = document.getElementsByName('categories[]');
 	const tagsDiv = document.getElementById('tags-div');
@@ -47,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					cat.setAttribute('disabled', 'disabled');
 				});
 			}
-			if (snippet.checked) {
+			if (theme.checked) {
 				tagsDiv.removeAttribute('hidden');
 				tags.removeAttribute('disabled');
 				tags.setAttribute('required', 'required');

@@ -132,7 +132,7 @@ function kts_list_developers() {
 
 		if ( ! empty( $users ) ) {
 			foreach ( $users as $user ) {
-				if ( count_user_posts( $user->ID, [ 'plugin', 'theme', 'snippet' ], true ) === '0' ) {
+				if ( count_user_posts( $user->ID, [ 'plugin', 'theme' ], true ) === '0' ) {
 					continue;
 				}
 
@@ -176,8 +176,8 @@ function kts_purge_developers_cpt_cache( $post_id ) {
 		return;
 	}
 
-	# Bail if not a plugin, theme, or snippet CPT
-	if ( ! in_array( get_post_type( $post_id ), ['plugin', 'theme', 'snippet'] ) ) {
+	# Bail if not a plugin or theme CPT
+	if ( ! in_array( get_post_type( $post_id ), ['plugin', 'theme'] ) ) {
 		return;
 	}
 
@@ -218,10 +218,10 @@ function kts_query_post_type( $query ) {
         $query->set( 'post_type', 'plugin' );
     }
     elseif ( is_tag() ) {
-        $query->set( 'post_type', 'snippet' );
+        $query->set( 'post_type', 'theme' );
     }
     elseif ( is_author() ) {
-		$query->set( 'post_type', ['plugin', 'theme', 'snippet'] );
+		$query->set( 'post_type', ['plugin', 'theme'] );
 	}
 }
 add_action( 'pre_get_posts', 'kts_query_post_type' );
@@ -236,7 +236,7 @@ function kts_get_user_stat ($id) {
 	if ( $saved === false ) {
 		$saved = [];
 	}
-	foreach ( [ 'theme', 'plugin', 'snippet' ] as $item_type ) {
+	foreach ( [ 'theme', 'plugin' ] as $item_type ) {
 		$saved[$id][$item_type] = count_user_posts( $id, $item_type, true );
 	}
 	set_transient( 'dir-user-stats', $saved, 5 * MINUTE_IN_SECONDS );
@@ -248,7 +248,7 @@ function kts_render_user_tabs ( $cached_count ) {
 	$activated   = false;
 	$item_number = 0;
 	$active_item = '';
-	foreach ( [ 'plugin', 'theme', 'snippet' ] as $item_type ) {
+	foreach ( [ 'plugin', 'theme' ] as $item_type ) {
 		$item_number++;
 		$class         = 'ui-button ' . $item_type;
 		$aria_selected = 'aria-selected="false"';

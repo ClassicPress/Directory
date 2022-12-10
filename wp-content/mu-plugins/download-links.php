@@ -267,27 +267,6 @@ function kts_maybe_update( $software_id, $force = false ) {
 			}
 		}
 
-		# Snippets
-		elseif ( $post_type === 'snippet' ) {
-
-			# Get headers
-			for ( $i = 0; $i < $zip->numFiles; $i++ ) {
-				if ( ! preg_match( '~\.php$~', $zip->getNameIndex( $i ) ) || substr_count( $zip->getNameIndex( $i ), '/' ) !== 1 ) {
-
-					# Only check PHP files and don't recourse into subdirs
-					continue;
-				}
-				$file_data = $zip->getFromIndex( $i, 8192 );
-				$headers = kts_get_plugin_data( $file_data );
-				if ( ! empty( $headers['RequiresCP'] ) ) {
-
-					# We have the headers
-					$main_plugin_file = $zip->getNameIndex( $i );
-					break;
-				}
-			}
-		}
-
 		# Plugins
 		else {
 
