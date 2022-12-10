@@ -321,8 +321,8 @@ function kts_software_submit_form_redirect() {
 		} // and check no more than three provided
 		else {
 			$tags = str_replace( '#', '', strtolower( $tags ) );
-			$tags_array = explode( $tags );
-			if ( count( $tags ) > 3 ) {
+			$tags_array = explode( ',', $tags );
+			if ( count( $tags_array ) > 3 ) {
 				wp_safe_redirect( esc_url_raw( $referer . '?notification=too-many-tags' ) );
 				exit;
 			}				
