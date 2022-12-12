@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		anchors[i].addEventListener('keydown', function(e) {
 			if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
 				e.preventDefault();
-				if (anchors[i].id === 'ui-id-3') {	
+				if (anchors[i].id === 'ui-id-2') {	
 					firstTab.focus();
 					firstTab.click();
 				} else {
@@ -60,6 +60,13 @@ document.addEventListener('DOMContentLoaded', function() {
 				lastTab.click();
 			}
 		});
+	}
+
+	var hash = window.top.location.hash.substr(1);
+	console.log (hash);
+	if (hash === 'ui-id-2') {
+		lastTab.focus();
+		lastTab.click();
 	}
 
 });
