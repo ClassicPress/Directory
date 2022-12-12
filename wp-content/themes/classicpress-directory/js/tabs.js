@@ -63,7 +63,6 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 
 	var hash = window.top.location.hash.substr(1);
-	console.log (hash);
 	if (hash === 'ui-id-2') {
 		lastTab.focus();
 		lastTab.click();
