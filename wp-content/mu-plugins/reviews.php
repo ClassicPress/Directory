@@ -34,7 +34,7 @@ function kts_register_review_post_type() {
 	# Define args
 	$args = array (
 		'labels' 				=> $labels,
-    	'description'			=> __( 'Provides a post type for reviews of ClassicPress plugins, themes, and code snippets', 'classicpress' ),
+    	'description'			=> __( 'Provides a post type for reviews of ClassicPress plugins and themes', 'classicpress' ),
     	'hierarchical'			=> false,
 		'public' 				=> true,
 		'show_in_menu'			=> true,
@@ -91,7 +91,7 @@ function kts_show_software_info_meta_box( $post ) {
 	wp_nonce_field( 'software_info_meta_box_nonce', 'software_info_meta_box_nonce' );
 	?>
 
-	<label for="post-type"><strong>Software Type (plugin, theme, or snippet)</strong></label>
+	<label for="post-type"><strong>Software Type (plugin or theme)</strong></label>
 	<input type="text" name="post-type" id="post-type" value="<?php echo esc_attr( get_post_meta( $post->ID, 'post-type', true ) ); ?>" required>
 
 	<label for="post-id"><strong>Software ID</strong></label>
@@ -105,7 +105,6 @@ function kts_show_software_info_meta_box( $post ) {
 function kts_add_cpts_to_object_relationships( $objects ) {
 	$objects[] = 'plugin';
 	$objects[] = 'theme';
-	$objects[] = 'snippet';
 	$objects[] = 'review';
 	return $objects;
 }
@@ -132,7 +131,7 @@ function kts_check_review_meta( $data, $postarr ) {
 
 	# Prevent review from being published if no specified CPT type
 	$new_post_type = isset( $_POST['post-type'] ) ? wp_unslash( $_POST['post-type'] ) : '';
-	if ( empty( $new_post_type ) || ! in_array( $new_post_type, ['plugin', 'theme', 'snippet'] ) ) {
+	if ( empty( $new_post_type ) || ! in_array( $new_post_type, ['plugin', 'theme'] ) ) {
 		if ( $data['post_status'] === 'publish' ) {
 			$data['post_status'] = 'draft';
 		}
@@ -184,7 +183,7 @@ function kts_save_review_meta_fields( $post_id, $post, $update ) {
 	# Get current values and update if appropriate
 	$old_post_type = get_post_meta( $post->ID, 'post-type', true );
 	$new_post_type = sanitize_text_field( wp_unslash( $_POST['post-type'] ) );
-	if ( ! empty( $new_post_type ) && in_array( $new_post_type, ['plugin', 'theme', 'snippet'] ) && $new_post_type !== $old_post_type ) {
+	if ( ! empty( $new_post_type ) && in_array( $new_post_type, ['plugin', 'theme'] ) && $new_post_type !== $old_post_type ) {
 		update_post_meta( $post_id, 'post-type', $new_post_type );
 	}
 
@@ -215,13 +214,10 @@ function kts_email_faculty_protocol( $new_status, $old_status, $post ) {
 		return;
 	}
 
-	# Get ID of plugin, theme, or snippet reviewed
+	# Get ID of plugin or theme reviewed
 	$software_ids = kts_get_object_relationship_ids( $post->ID, 'review', 'plugin' );
 	if ( empty( $software_ids ) ) {
 		$software_ids = kts_get_object_relationship_ids( $post->ID, 'review', 'theme' );
-	}
-	if ( empty( $software_ids ) ) {
-		$software_ids = kts_get_object_relationship_ids( $post->ID, 'review', 'snippet' );
 	}
 
 	# Bail if not associated with software

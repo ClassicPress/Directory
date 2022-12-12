@@ -64,13 +64,16 @@ document.addEventListener('DOMContentLoaded', function() {
 	}, false);
 
 	/* NAV SEARCH */
-	document.querySelector('.open-search a').addEventListener('click', function(e) {
-		e.preventDefault();
-		document.getElementById('masthead-inner').style.display = 'none';
-		document.getElementById('search-form-wrapper').removeAttribute('style');
-		document.getElementById('masthead').classList.add('masthead-search');
-		document.getElementById('ofsearch').focus();
-	}, false);
+	const openSearch=document.querySelector('.open-search a');
+	if ( openSearch ) {
+		openSearch.addEventListener('click', function(e) {
+			e.preventDefault();
+			document.getElementById('masthead-inner').style.display = 'none';
+			document.getElementById('search-form-wrapper').removeAttribute('style');
+			document.getElementById('masthead').classList.add('masthead-search');
+			document.getElementById('ofsearch').focus();
+		}, false);
+	}
 
 	const close = document.querySelector('.close-search button');
 	if( close ){

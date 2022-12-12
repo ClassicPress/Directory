@@ -70,7 +70,7 @@ function kts_render_software_submit_form() {
 	}
 
 	else { // Contributor role or above
-		_e( '<p>Please use the form below to upload your plugin, theme, or code snippet. All fields are required.</p>', 'classicpress' );
+		_e( '<p>Please use the form below to upload your plugin or theme. All fields are required.</p>', 'classicpress' );
 		_e( '<p>Before submitting your software, please ensure that it complies with the <a href="https://docs.classicpress.net/plugin-guidelines/directory-requirements/">Requirements</a> that must be met for listing in the ClassicPress Directory.</p>', 'classicpress' );
 		_e( '<p>We also recommend that you run your code through the <a href="https://wpseek.com/pluginfilecheck/">Plugin Doctor</a>.</p>', 'classicpress' );
 		_e( '<p>Once your software has been approved, details will be made public in this directory.</p>', 'classicpress' );
@@ -112,10 +112,10 @@ function kts_render_software_submit_form() {
 				echo '<div class="error-message" role="alert"><p>' . __( 'The categories you have specified are not recognized!', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'no-tags' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'You must specify at least one tag for your code snippet!', 'classicpress' ) . '</p></div>';
+				echo '<div class="error-message" role="alert"><p>' . __( 'You must specify at least one tag for your theme!', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'too-many-tags' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'You cannot specify more than three tags for your code snippet!', 'classicpress' ) . '</p></div>';
+				echo '<div class="error-message" role="alert"><p>' . __( 'You cannot specify more than three tags for your theme!', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'no-current-version' ) {
 				echo '<div class="error-message" role="alert"><p>' . __( 'You must specify the current version of your software!', 'classicpress' ) . '</p></div>';
@@ -143,9 +143,6 @@ function kts_render_software_submit_form() {
 			}
 			elseif ( $_GET['notification'] === 'duplicate-theme-slug' ) {
 				echo '<div class="error-message" role="alert"><p>' . __( 'Your theme\'s slug is already taken. Please rebuild your zip file so that the top level folder within it has a unique name.', 'classicpress' ) . '</p></div>';
-			}
-			elseif ( $_GET['notification'] === 'duplicate-snippet-slug' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'Your snippet\'s slug is already taken. Please rebuild your zip file so that the top level folder within it has a unique name.', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'duplicate-plugin-slug' ) {
 				echo '<div class="error-message" role="alert"><p>' . __( 'Your plugin\'s slug is already taken. Please rebuild your zip file so that the top level folder within it has a unique name.', 'classicpress' ) . '</p></div>';
@@ -195,11 +192,6 @@ function kts_render_software_submit_form() {
 				<label for="theme">
 					<input id="theme" class="mgr-lg" name="software_type" type="radio" value="theme" required>
 					Theme
-				</label>
-				<br>
-				<label for="snippet">
-					<input id="snippet" class="mgr-lg" name="software_type" type="radio" value="snippet" required>
-					Code Snippet
 				</label>
 			</fieldset>
 
@@ -322,15 +314,15 @@ function kts_software_submit_form_redirect() {
 
 	# Check that at least one tag has been specified for a code snippet	
 	$tags = isset( $_POST['tags'] ) ? sanitize_text_field( wp_unslash( $_POST['tags'] ) ) : '';
-	if ( $post_type === 'snippet' ) {
+	if ( $post_type === 'theme' ) {
 		if ( empty( $tags ) ) {
 			wp_safe_redirect( esc_url_raw( $referer . '?notification=no-tags' ) );
 			exit;
 		} // and check no more than three provided
 		else {
 			$tags = str_replace( '#', '', strtolower( $tags ) );
-			$tags_array = explode( $tags );
-			if ( count( $tags ) > 3 ) {
+			$tags_array = explode( ',', $tags );
+			if ( count( $tags_array ) > 3 ) {
 				wp_safe_redirect( esc_url_raw( $referer . '?notification=too-many-tags' ) );
 				exit;
 			}				
@@ -511,42 +503,6 @@ function kts_software_submit_form_redirect() {
 			}
 		}
 	}
-
-	elseif ( $post_type === 'snippet' ) { // Snippets
-		$slugs = get_terms( array(
-			'taxonomy' => 'snippet_slugs',
-			'hide_empty' => false,
-			'fields' => 'names',
-		) );
-
-		if ( in_array( sanitize_title( $slug ), $slugs ) ) {
-			$slug_problem = 'snippet';
-		}
-
-		$slug_taxonomy = 'snippet_slugs';
-
-		# Don't bother with further processing if there's a slug problem
-		if ( empty( $slug_problem ) ) {
-
-			# Get headers
-			for ( $i = 0; $i < $zip->numFiles; $i++ ) {
-				if ( ! preg_match( '~\.php$~', $zip->getNameIndex( $i ) ) || substr_count( $zip->getNameIndex( $i ), '/' ) !== 1 ) {
-
-					# Only check PHP files and don't recourse into subdirs
-					continue;
-				}
-				$file_data = $zip->getFromIndex( $i, 8192 );
-				$headers = kts_get_plugin_data( $file_data );
-				if ( ! empty( $headers['RequiresCP'] ) ) {
-
-					# We have the headers
-					$main_plugin_file = $zip->getNameIndex( $i );
-					break;
-				}
-			}
-		}
-	}
-
 	else { // Plugins
 		$slugs = get_terms( array(
 			'taxonomy' => 'plugin_slugs',
@@ -615,10 +571,6 @@ function kts_software_submit_form_redirect() {
 	if ( ! empty( $slug_problem ) ) {
 		if ( $slug_problem === 'theme' ) {
 			wp_safe_redirect( esc_url_raw( $referer . '?notification=duplicate-theme-slug' ) );
-			exit;
-		}
-		if ( $slug_problem === 'snippet' ) {
-			wp_safe_redirect( esc_url_raw( $referer . '?notification=duplicate-snippet-slug' ) );
 			exit;
 		}
 		if ( $slug_problem === 'plugin' ) {
@@ -693,7 +645,7 @@ function kts_software_submit_form_redirect() {
 	if ( $post_type === 'plugin' ) {
 		$post_info['post_category'] = $category_ids;
 	}
-	elseif ( $post_type === 'snippet' ) {
+	elseif ( $post_type === 'theme' ) {
 		$tags_array = array_map( 'trim', $tags_array );
 		$post_info['tags_input'] = $tags_array;
 	}
@@ -742,7 +694,7 @@ function kts_software_submit_form_redirect() {
 		add_post_meta( $post_id, 'category_names', $cat_names );
 		add_post_meta( $post_id, 'category_slugs', $cat_slugs );
 	}
-	elseif ( $post_type === 'snippet' ) {
+	elseif ( $post_type === 'theme' ) {
 		add_post_meta( $post_id, 'tags', implode( ',', $tags_array ) );
 	}
 
@@ -758,7 +710,7 @@ function kts_email_on_software_submitted( $post_id, $meta_key, $_meta_value ) {
 
 	# Bail if not relevant CPT
 	$post = get_post( $post_id );
-	if ( ! in_array( $post->post_type, ['plugin', 'theme', 'snippet'] ) ) {
+	if ( ! in_array( $post->post_type, ['plugin', 'theme'] ) ) {
 		return;
 	}
 

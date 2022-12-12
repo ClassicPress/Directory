@@ -46,6 +46,7 @@ function kts_register_theme_post_type() {
         'publicly_queryable' 	=> true,
 		'show_in_rest'			=> true,
 		'rest_base'				=> 'themes',
+		'taxonomies'			=> array( 'post_tag' ),
 	);
 
 	register_post_type( 'theme', $args );

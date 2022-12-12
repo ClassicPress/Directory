@@ -102,7 +102,7 @@ function kts_render_review_response_form() {
 		} else {
 			$precompiled_id = '';
 		}
-		if ( isset( $_REQUEST['reviewed-item-type'] ) && in_array( $_REQUEST['reviewed-item-type'], ['plugin', 'theme', 'snippet'] ) ) {
+		if ( isset( $_REQUEST['reviewed-item-type'] ) && in_array( $_REQUEST['reviewed-item-type'], ['plugin', 'theme'] ) ) {
 			$precompiled_type = wp_unslash( $_REQUEST['reviewed-item-type'] );
 		} else {
 			$precompiled_type = '';
@@ -131,11 +131,6 @@ function kts_render_review_response_form() {
 				<label for="theme">
 					<input id="theme" class="mgr-lg" name="software-type" type="radio" value="theme" <?php checked( $precompiled_type, 'theme' ) ?> required>
 					Theme
-				</label>
-				<br>
-				<label for="snippet">
-					<input id="snippet" class="mgr-lg" name="software-type" type="radio" value="snippet" <?php checked( $precompiled_type, 'snippet' ) ?> required>
-					Code Snippet
 				</label>
 			</fieldset>
 
@@ -200,7 +195,7 @@ function kts_review_response_form_redirect() {
 	}
 
 	# Check that the type of software specified actually exists
-	$software_types = array( 'plugin', 'theme', 'snippet' );
+	$software_types = array( 'plugin', 'theme' );
 	if ( ! in_array( $post_type, $software_types ) ) {
 		wp_safe_redirect( esc_url_raw( $referer . '?notification=wrong-software-type' ) );
 		exit;

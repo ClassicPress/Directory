@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	const anchors = document.querySelectorAll('.ui-button');
 	const tabs = document.querySelectorAll('.ui-panel');
 	const firstTab = document.getElementById('ui-id-1');
-	const lastTab = document.getElementById('ui-id-3');
+	const lastTab = document.getElementById('ui-id-2');
 
 	for (let i = 0, n = anchors.length; i < n; i++) {
 		anchors[i].addEventListener('click', function() {
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		anchors[i].addEventListener('keydown', function(e) {
 			if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
 				e.preventDefault();
-				if (anchors[i].id === 'ui-id-3') {	
+				if (anchors[i].id === 'ui-id-2') {	
 					firstTab.focus();
 					firstTab.click();
 				} else {
@@ -60,6 +60,12 @@ document.addEventListener('DOMContentLoaded', function() {
 				lastTab.click();
 			}
 		});
+	}
+
+	var hash = window.top.location.hash.substr(1);
+	if (hash === 'ui-id-2') {
+		lastTab.focus();
+		lastTab.click();
 	}
 
 });

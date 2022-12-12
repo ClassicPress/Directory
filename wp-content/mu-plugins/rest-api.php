@@ -154,77 +154,15 @@ function kts_register_meta_with_rest_api() {
 	);
 	register_meta( 'post', 'developer_name', $theme_args7 );
 
-	$snippet_args1 = array(
-		'type'			=> 'string',
-		'description'	=> 'Current Version of Software',
-		'single'		=> true,
-		'object_subtype'=> 'snippet',
-		'show_in_rest'	=> true,
-	);
-	register_meta( 'post', 'current_version', $snippet_args1 );
-
-	$snippet_args2 = array(
-		'type'			=> 'string',
-		'description'	=> 'Git Provider',
-		'single'		=> true,
-		'object_subtype'=> 'snippet',
-		'show_in_rest'	=> true,
-	);
-	register_meta( 'post', 'git_provider', $snippet_args2 );
-
-	$snippet_args3 = array(
-		'type'			=> 'string',
-		'description'	=> 'Minimum Required Version of ClassicPress',
-		'single'		=> true,
-		'object_subtype'=> 'snippet',
-		'show_in_rest'	=> true,
-	);
-	register_meta( 'post', 'requires_cp', $snippet_args3 );
-
-	$snippet_args4 = array(
-		'type'			=> 'string',
-		'description'	=> 'Download Link URL',
-		'single'		=> true,
-		'object_subtype'=> 'snippet',
-		'show_in_rest'	=> true,
-	);
-	register_meta( 'post', 'download_link', $snippet_args4 );
-
-	$snippet_args5 = array(
-		'type'			=> 'string',
-		'description'	=> 'Minimum Required Version of PHP',
-		'single'		=> true,
-		'object_subtype'=> 'snippet',
-		'show_in_rest'	=> true,
-	);
-	register_meta( 'post', 'requires_php', $snippet_args5 );
-
-	$snippet_args6 = array(
-		'type'			=> 'string',
-		'description'	=> 'Snippet slug',
-		'single'		=> true,
-		'object_subtype'=> 'snippet',
-		'show_in_rest'	=> true,
-	);
-	register_meta( 'post', 'slug', $snippet_args6 );
-
-	$snippet_args7 = array(
-		'type'			=> 'string',
-		'description'	=> 'Developer name',
-		'single'		=> true,
-		'object_subtype'=> 'snippet',
-		'show_in_rest'	=> true,
-	);
-	register_meta( 'post', 'developer_name', $snippet_args7 );
-
-	$snippet_args8 = array(
+	$theme_args8 = array(
 		'type'			=> 'string',
 		'description'	=> 'Tags',
 		'single'		=> true,
-		'object_subtype'=> 'snippet',
+		'object_subtype'=> 'theme',
 		'show_in_rest'	=> true,
 	);
-	register_meta( 'post', 'tags', $snippet_args8 );
+	register_meta( 'post', 'tags', $theme_args8 );
+
 }
 add_action( 'init', 'kts_register_meta_with_rest_api' );
 
@@ -259,7 +197,7 @@ function kts_prepare_rest( $response, $post, $request ) {
 	if ( $post->post_type === 'plugin' ) {
 		unset( $data['categories'] );
 	}
-	elseif ( $post->post_type === 'snippet' ) {
+	elseif ( $post->post_type === 'theme' ) {
 		unset( $data['tags'] );
 	}
 
@@ -271,17 +209,15 @@ function kts_prepare_rest( $response, $post, $request ) {
 }
 add_filter( 'rest_prepare_plugin', 'kts_prepare_rest', 10, 3 );
 add_filter( 'rest_prepare_theme', 'kts_prepare_rest', 10, 3 );
-add_filter( 'rest_prepare_snippet', 'kts_prepare_rest', 10, 3 );
 
 
 /* REST API SECURITY */
 function kts_modify_rest_software_routes( $response, $handler, $request ) {
 
-	# Prevent editing and deletion of plugin, theme, and snippet CPTs
+	# Prevent editing and deletion of plugin and theme CPTs
 	$routes = array(
         '/wp/v2/plugins',
         '/wp/v2/themes',
-        '/wp/v2/snippets',
 	);
 
 	if ( in_array( $request->get_route(), $routes ) ) {		
@@ -324,4 +260,3 @@ function kts_filter_posts_by_slug_field( $args, $request ) {
 }
 add_filter( 'rest_plugin_query', 'kts_filter_posts_by_slug_field', 999, 2 );
 add_filter( 'rest_theme_query', 'kts_filter_posts_by_slug_field', 999, 2 );
-add_filter( 'rest_snippet_query', 'kts_filter_posts_by_slug_field', 999, 2 );

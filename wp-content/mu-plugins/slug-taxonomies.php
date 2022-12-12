@@ -36,15 +36,5 @@ function kts_register_slug_taxonomies() {
 	);
 	register_taxonomy( 'theme_slugs', array( 'theme' ), $theme_args );
 
-	$snippet_args = array(
-		'hierarchical'		=> false,
-		'label'				=> __( 'Snippet Slugs', 'classicpress' ),
-		'show_ui'			=> false,
-		'public'			=> false,
-		'show_admin_column'	=> false,
-		'rewrite'			=> false,
-	);
-	register_taxonomy( 'snippet_slugs', array( 'snippet' ), $snippet_args );
-
 }
 add_action( 'init', 'kts_register_slug_taxonomies' );
