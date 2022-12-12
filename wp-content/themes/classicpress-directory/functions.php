@@ -262,3 +262,22 @@ function classicpress_search_form(  ) {
 	</div>
 </form>';
 }
+
+/**
+ * Add body class when logged in developer visits his/her profile
+ */
+add_filter(
+    'body_class',
+    function( $classes ) {
+        if ( is_author() ) {
+            $post = get_queried_object();
+            $user = wp_get_current_user();
+
+            if ( $user->ID == $post->post_author ) {
+                $classes[] = 'developer-visit';
+            }
+        }
+
+        return $classes;
+    }
+);

@@ -945,10 +945,6 @@ nav ul li:focus-within ul {
 	content: "Plugin";
 	background: #DEF3FD;
 }
-.search .content .software-grid > li:has(article.type-snippet)::before{
-	content: "Snippet";
-	background: #DEFDE0;
-}
 .search .content .software-grid > li:has(article.type-theme)::before{
 	content: "Theme";
 	background: #F0DEFD;
@@ -967,7 +963,7 @@ nav ul li:focus-within ul {
 	display: flex;
 	justify-content: space-around;
 }
-.software-item-footer{
+body:not(.developer-visit) .software-item-footer{
 	display: none;
 }
 .software-author-link a{
@@ -1396,40 +1392,6 @@ ul.aside-items{
 	}
 }
 
-/*
-@media only screen and (min-width: 680px) {
-	.searchandfilter {
-		float: right;
-		margin-right: 0;
-	}
-	.searchandfilter ul {
-		display: flex;
-		justify-content: space-between;
-	}
-	.searchandfilter li {
-		flex: 0 1 18%;
-		max-width: 180px;
-	}
-	.searchandfilter input,
-	.searchandfilter select {
-		padding: 0.2em 1em 0.2em 0.5em;
-		width: unset;
-	}
-	select[name="ofpost_types"] {
-		margin: 0 0 0 1em;
-	}
-	#ofsearch {
-		padding-right: 0;
-	}
-	#ofcategory,
-	#ofpost_tag {
-		margin: 0;
-	}
-	.searchandfilter input[type="submit"] {
-		margin: 0;
-	}
-}
-*/
 @media only screen and (min-width: 768px) {
 	.narrow-page article{
 		max-width: 900px;
