@@ -273,7 +273,7 @@ add_filter(
             $post = get_queried_object();
             $user = wp_get_current_user();
 
-            if ( $user->ID == $post->post_author ) {
+            if ( $user->ID == $post->ID ) {
                 $classes[] = 'developer-visit';
             }
         }
