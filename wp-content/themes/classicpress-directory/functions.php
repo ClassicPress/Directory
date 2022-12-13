@@ -281,3 +281,15 @@ add_filter(
         return $classes;
     }
 );
+
+/** 
+ * Make all external links nofollow to prevent spam
+ */
+function classicpress_nofollow_external($text){
+	$text = stripslashes(wp_rel_nofollow($text));
+	$in = array('target="_blank"','  ','rel="nofollow"');
+	$out = array('',' ','rel="nofollow external"');
+	$text = str_replace($in,$out,$text);
+	return $text;
+}
+add_filter('the_content','classicpress_nofollow_external',13);
