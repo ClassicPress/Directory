@@ -285,23 +285,19 @@ add_filter(
 /** 
  * Make all external links nofollow to prevent spam
  */
-function add_rel_nofollow( $text ) {
-    // This is a pre save filter, so text is already escaped.
-    $text = stripslashes($text);
-    $text = preg_replace_callback('|<a (.+?)>|i', 'add_rel_nofollow_callback', $text);
-    return $text;
+function add_nofollow_external_links( $content ) {
+	if( is_singular( array( 'plugin', 'theme' ) ) ){
+    	return preg_replace_callback( '/<a>]+/', 'auto_nofollow_callback', $content );
+	}
 }
-
-function add_rel_nofollow_callback( $matches ) {
-    $text = $matches[1];
+function auto_nofollow_callback( $matches ) {
+    $link = $matches[0];
     $site_link = get_bloginfo('url');
-
-    if (strpos($text, 'rel') === false) {
-        $text = preg_replace("%(href=S(?!$site_link))%i", 'rel="nofollow" $1', $text);
-    } elseif (preg_match("%href=S(?!$site_link)%i", $site_link)) {
-        $text = str_replace(array(' rel="nofollow"', " rel='nofollow'"), '', $text);
-    }       
-
-    return "<a $text rel=\"nofollow external noreferrer noopener\">";
+    if (strpos($link, 'rel') === false) {
+        $link = preg_replace("%(href=S(?!$site_link))%i", 'rel="nofollow noreferrer noopener external ugc" $1', $link);
+    } elseif (preg_match("%href=S(?!$site_link)%i", $link)) {
+        $link = preg_replace('/rel=S(?!nofollow)S*/i', 'rel="nofollow"', $link);
+    }
+    return $link;
 }
-add_filter( 'the_content', 'add_rel_nofollow' );
+add_filter( 'the_content', 'add_nofollow_external_links' );
