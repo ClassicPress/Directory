@@ -298,10 +298,10 @@ function add_rel_nofollow_callback( $matches ) {
 
     if (strpos($text, 'rel') === false) {
         $text = preg_replace("%(href=S(?!$site_link))%i", 'rel="nofollow" $1', $text);
-    } elseif (preg_match("%href=S(?!$site_link)%i", $link)) {
+    } elseif (preg_match("%href=S(?!$site_link)%i", $site_link)) {
         $text = str_replace(array(' rel="nofollow"', " rel='nofollow'"), '', $text);
     }       
 
-    return "<a $text rel=\"nofollow\">";
+    return "<a $text rel=\"nofollow external noreferrer noopener\">";
 }
 add_filter( 'the_content', 'add_rel_nofollow' );
