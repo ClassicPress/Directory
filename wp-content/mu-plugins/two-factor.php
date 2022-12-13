@@ -57,9 +57,14 @@ function kts_email_admins_when_2fa_enabled( $check, $user_id, $meta_key, $meta_v
 		return $check;
 	}
 
+	# Bail if two-factor-enabled already set
+	$meta2fa = get_user_meta( $user_id, 'two-factor-enabled', true );
+	if ( $meta2fa === '1' ) {
+		return $check;
+	}
+
 	# Email admins when 2FA enabled for the first time
 	if ( ( is_string( $prev_value ) && $prev_value === '' ) || ( is_array( $prev_value ) && count( array_intersect( ['', 'Two_Factor_Dummy'], $prev_value ) ) > 0 ) ) {
-
 		if ( is_array( $meta_value ) && count( array_intersect( ['', 'Two_Factor_Dummy'], $meta_value ) ) === 0 ) {
 
 			$admins = get_users( array( 'role' => 'administrator' ) );
@@ -76,7 +81,7 @@ function kts_email_admins_when_2fa_enabled( $check, $user_id, $meta_key, $meta_v
 				wp_mail( $admin->user_email, $subject, $message, $headers );
 			}
 
-			update_user_meta( $user_id, 'two-factor-enabled', 1 );
+			add_user_meta( $user_id, 'two-factor-enabled', 1, true );
 		}
 	}
 
