@@ -1142,6 +1142,9 @@ footer#legal {
 	border: 1px solid transparent;
 	border-radius: var(--border-radius);
 }
+.software-item-footer .alert{
+	text-align: center;
+}
 .alert.success-message {
 	background-color: var(--alert-success-bg);
 	color: var(--alert-success-color);
