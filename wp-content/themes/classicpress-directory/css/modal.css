@@ -74,3 +74,9 @@
 	margin-bottom: -1.2em;
 	border-radius: var(--border-radius);
 }
+
+button.dialog-close:focus,
+button.dialog-close:hover,
+button.dialog-close:active{
+	color: var(--font-alt-color);
+}
