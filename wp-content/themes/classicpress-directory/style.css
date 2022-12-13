@@ -1155,6 +1155,7 @@ footer#legal {
 }
 .alert a{
 	font-weight: 600;
+	color: inherit;
 }
 .alert.error-message {
 	background-color: var(--alert-danger-bg);
