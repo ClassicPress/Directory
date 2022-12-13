@@ -1141,7 +1141,6 @@ footer#legal {
 	margin: 1em auto;
 	border: 1px solid transparent;
 	border-radius: var(--border-radius);
-	font-weight: bold;
 }
 .alert.success-message {
 	background-color: var(--alert-success-bg);
@@ -1149,9 +1148,9 @@ footer#legal {
 	border-color: var(--alert-success-border);
 }
 .alert.error-message {
-	background-color: var(--alert-error-bg);
-	color: var(--alert-error-color);
-	border-color: var(--alert-error-border);
+	background-color: var(--alert-danger-bg);
+	color: var(--alert-danger-color);
+	border-color: var(--alert-danger-border);
 }
 .alert.success-message p,
 .alert.error-message p {

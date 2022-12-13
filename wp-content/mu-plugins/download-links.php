@@ -26,13 +26,13 @@ function kts_render_software_update_link_form( $post ) {
 			
 	if ( isset( $_GET['notification'] ) ) {
 		if ( $_GET['notification'] === 'nonce-wrong-' . absint( $post->ID ) ) {
-			echo '<div class="alert error-message" role="alert"><p>' . __( 'You have already submitted this', 'classicpress' ) . '</p></div>';
+			echo '<div class="alert error-message" role="alert"><p>' . __( 'You have already submitted this.', 'classicpress' ) . '</p></div>';
 		}
 		elseif ( $_GET['notification'] === 'github-api-wrong-' . absint( $post->ID ) ) {
-			echo '<div class="alert error-message" role="alert"><p>' . __( 'Something went wrong with the GitHub API', 'classicpress' ) . '</p></div>';
+			echo '<div class="alert error-message" role="alert"><p>' . __( 'Something went wrong with the GitHub API.', 'classicpress' ) . '</p></div>';
 		}
 		elseif ( $_GET['notification'] === 'success-' . absint( $post->ID ) ) {
-			echo '<div class="alert success-message" role="polite"><p class="wp-caption-text">' . __( 'The link has been updated', 'classicpress' ) . '</p></div>';
+			echo '<div class="alert success-message" role="polite"><p>' . __( 'The link has been updated.', 'classicpress' ) . '</p></div>';
 		}
 	}
 

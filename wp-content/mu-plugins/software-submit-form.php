@@ -85,88 +85,88 @@ function kts_render_software_submit_form() {
 		# Error Messages
 		if ( isset( $_GET['notification'] ) ) {
 			if ( $_GET['notification'] === 'nonce-wrong' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'You have already submitted this form.', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'You have already submitted this form.', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'no-software-type' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'You must specify the type of software that you are submitting!', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'You must specify the type of software that you are submitting!', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'wrong-software-type' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'The software type you have specified is not recognized!', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'The software type you have specified is not recognized!', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'no-name' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'You must provide a name for your software!', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'You must provide a name for your software!', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'no-slug' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'You must specify a suitable slug for your software!', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'You must specify a suitable slug for your software!', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'no-excerpt' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'You must provide a brief description of your software!', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'You must provide a brief description of your software!', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'wrong-excerpt' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'The brief description of your software is longer than 100 characters!', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'The brief description of your software is longer than 100 characters!', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'no-categories' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'You must specify at least one category for your plugin!', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'You must specify at least one category for your plugin!', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'wrong-categories' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'The categories you have specified are not recognized!', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'The categories you have specified are not recognized!', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'no-tags' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'You must specify at least one tag for your theme!', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'You must specify at least one tag for your theme!', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'too-many-tags' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'You cannot specify more than three tags for your theme!', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'You cannot specify more than three tags for your theme!', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'no-current-version' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'You must specify the current version of your software!', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'You must specify the current version of your software!', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'no-git-provider' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'You must specify your Git provider!', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'You must specify your Git provider!', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'wrong-git-provider' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'The Git provider you have specified is not recognized!', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'The Git provider you have specified is not recognized!', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'no-download-link' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'You must provide a download link!', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'You must provide a download link!', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'invalid-download-link' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'You must provide a valid URL for the download link!', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'You must provide a valid URL for the download link!', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'invalid-github' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'You must provide a download link to a GitHub repository that is associated with the GitHub Username you have registered with the ClassicPress Directory.', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'You must provide a download link to a GitHub repository that is associated with the GitHub Username you have registered with the ClassicPress Directory.', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'github-repo-error' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'There was a problem accessing the associated GitHub repository.', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'There was a problem accessing the associated GitHub repository.', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'temp-file-error' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'There was a problem creating a temporary file.', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'There was a problem creating a temporary file.', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'duplicate-theme-slug' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'Your theme\'s slug is already taken. Please rebuild your zip file so that the top level folder within it has a unique name.', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'Your theme\'s slug is already taken. Please rebuild your zip file so that the top level folder within it has a unique name.', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'duplicate-plugin-slug' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'Your plugin\'s slug is already taken. Please rebuild your zip file so that the top level folder within it has a unique name.', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'Your plugin\'s slug is already taken. Please rebuild your zip file so that the top level folder within it has a unique name.', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'no-headers' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'Your software is lacking required headers.', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'Your software is lacking required headers.', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'no-requires-php' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'You need to specify in a header called "Requires PHP" the minimum version of PHP compatible with your software.', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'You need to specify in a header called "Requires PHP" the minimum version of PHP compatible with your software.', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'wrong-php-version' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'The minimum version of PHP you have specified is unrecognized!', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'The minimum version of PHP you have specified is unrecognized!', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'no-requires-cp' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'You need to specify in a header called "Requires CP" the minimum version of ClassicPress compatible with your software.', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'You need to specify in a header called "Requires CP" the minimum version of ClassicPress compatible with your software.', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'wrong-cp-version' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'The minimum version of ClassicPress you have specified is unrecognized!', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'The minimum version of ClassicPress you have specified is unrecognized!', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'no-description' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'You must provide a description of your software in either a README.md file or a header called "Description".', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'You must provide a description of your software in either a README.md file or a header called "Description".', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'not-sent' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'There was a problem submitting the form. Your message has not been sent.', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'There was a problem submitting the form. Your message has not been sent.', 'classicpress' ) . '</p></div>';
 			}
 		}
 		?>
@@ -177,7 +177,7 @@ function kts_render_software_submit_form() {
 			<small class="required-text"><?php _e( 'All fields are required.', 'classicpress' ); ?></small>
 		</div>
 		
-		<noscript><div class="error-message" role="alert"><p><?php _e( 'This form will not work without JavaScript turned on.', 'classicpress' ); ?></p></div></noscript>
+		<noscript><div class="alert error-message" role="alert"><p><?php _e( 'This form will not work without JavaScript turned on.', 'classicpress' ); ?></p></div></noscript>
 
 		<form id="submit-cp-code-form" method="post" autocomplete="off">
 
@@ -217,7 +217,7 @@ function kts_render_software_submit_form() {
 
 			<div id="tags-div" hidden>
 				<label for="tags"><?php _e( 'Tags (you must specify at least one, and up to three, separated by commas)', 'classicpress' ); ?></label>
-				<span id="max" class="error-message" role="alert" hidden><?php _e( 'You have specified more than three tags!', 'classicpress' ); ?></span>
+				<span id="max" class="alert error-message" role="alert" hidden><?php _e( 'You have specified more than three tags!', 'classicpress' ); ?></span>
 				<input id="tags" name="tags" type="text" disabled>
 			</div>
 
