@@ -29,13 +29,13 @@ function kts_render_software_update_link_form( $post ) {
 			echo '<div class="alert error-message" role="alert"><p>' . __( 'You have already submitted this.', 'classicpress' ) . '</p></div>';
 		}
 		elseif ( $_GET['notification'] === 'github-api-wrong-' . absint( $post->ID ) ) {
-			echo '<div class="alert error-message" role="alert"><p>' . __( 'Something went wrong with the GitHub API.', 'classicpress' ) . '</p></div>';
+			echo '<div class="alert error-message" role="alert"><p>' . __( 'Oops! Something went wrong. Please try again. If you continue to experience an error <a href="/contact-form/">contact us</a>.', 'classicpress' ) . '</p></div>';
 		}
 		elseif ( $_GET['notification'] === 'success-' . absint( $post->ID ) ) {
 			echo '<div class="alert success-message" role="polite"><p>' . __( 'The link has been updated.', 'classicpress' ) . '</p></div>';
 		}
 		elseif ( $_GET['notification'] === 'success-notnecessary-' . absint( $post->ID ) ) {
-			echo '<div class="success-message" role="polite"><p class="wp-caption-text">' . __( 'No new version found', 'classicpress' ) . '</p></div>';
+			echo '<div class="alert warning-message" role="polite"><p class="wp-caption-text">' . __( 'No new version found.', 'classicpress' ) . '</p></div>';
 		}
 	}
 
