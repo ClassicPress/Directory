@@ -298,7 +298,7 @@ function auto_nofollow_callback( $matches ) {
     if (strpos($link, 'rel') === false) {
         $link = preg_replace("%(href=S(?!$site_link))%i", 'rel="nofollow noreferrer noopener external ugc" $1', $link);
     } elseif (preg_match("%href=S(?!$site_link)%i", $link)) {
-        $link = preg_replace('/rel=S(?!nofollow)S*/i', 'rel="nofollow"', $link);
+        $link = preg_replace('/rel=S(?!nofollow)S*/i', 'rel="nofollow noreferrer noopener external ugc"', $link);
     }
     return $link;
 }
