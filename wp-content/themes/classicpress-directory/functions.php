@@ -285,11 +285,23 @@ add_filter(
 /** 
  * Make all external links nofollow to prevent spam
  */
-function classicpress_nofollow_external($text){
-	$text = stripslashes(wp_rel_nofollow($text));
-	$in = array('target="_blank"','  ','rel="nofollow"');
-	$out = array('',' ','rel="nofollow external"');
-	$text = str_replace($in,$out,$text);
-	return $text;
+function add_rel_nofollow( $text ) {
+    // This is a pre save filter, so text is already escaped.
+    $text = stripslashes($text);
+    $text = preg_replace_callback('|<a (.+?)>|i', 'add_rel_nofollow_callback', $text);
+    return $text;
 }
-add_filter('the_content','classicpress_nofollow_external',13);
+
+function add_rel_nofollow_callback( $matches ) {
+    $text = $matches[1];
+    $site_link = get_bloginfo('url');
+
+    if (strpos($text, 'rel') === false) {
+        $text = preg_replace("%(href=S(?!$site_link))%i", 'rel="nofollow" $1', $text);
+    } elseif (preg_match("%href=S(?!$site_link)%i", $link)) {
+        $text = str_replace(array(' rel="nofollow"', " rel='nofollow'"), '', $text);
+    }       
+
+    return "<a $text rel=\"nofollow\">";
+}
+add_filter( 'the_content', 'add_rel_nofollow' );
