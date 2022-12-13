@@ -286,8 +286,10 @@ add_filter(
  * Make all external links nofollow to prevent spam
  */
 function add_nofollow_external_links( $content ) {
-	if( is_singular( array( 'plugin', 'theme' ) ) ){
+	if ( is_singular( array( 'plugin', 'theme' ) ) ) {
     	return preg_replace_callback( '/<a>]+/', 'auto_nofollow_callback', $content );
+	} else {
+		return $content;
 	}
 }
 function auto_nofollow_callback( $matches ) {
