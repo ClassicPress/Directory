@@ -305,3 +305,14 @@ function classicpress_nofollow_callback($matches) {
 	}
     	return $link;
 };
+
+/**
+ * Developer profile bio label
+ */
+add_filter( 'gettext', 'dev_bio_label' );
+function dev_bio_label( $text ) {
+ 
+    $text = str_ireplace( 'Share a little biographical information to fill out your profile. This may be shown publicly.', 'Fill out your bio. Up to 200 characters. Only <code>&lt;b&gt; &lt;strong&gt; &lt;i&gt; &lt;em&gt;</code> tags are allowed.', $text );
+
+    return $text;
+}
