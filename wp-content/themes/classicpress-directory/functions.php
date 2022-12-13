@@ -296,11 +296,11 @@ function classicpress_nofollow_callback($matches) {
  
 	preg_match_all('/<a[^>]+href=([\'"])(?<href>.+?)\1[^>]*/i', $link, $result);
 
-	if (filter_var($result['href'][0], FILTER_VALIDATE_URL)) {
+	if (filter_var($result['href'][0], FILTER_VALIDATE_URL) && is_singular( array( 'plugin', 'theme' ) ) ) {
 		if (strpos($link, 'rel') === false) {
 			$link = preg_replace("%(href=\S(?!$site_link))%i", 'rel="nofollow noreferrer noopener external ugc" $1', $link);
 		} elseif (preg_match("%href=\S(?!$site_link)%i", $link)) {
-			$link = preg_replace('/rel=\S(?!nofollow)\S*/i', 'rel="nofollow noreferrer noopener external ugc"', $link);
+			$link = preg_replace('/rel=(?!nofollow|noffolow)\S*/i', 'rel="nofollow noreferrer noopener external ugc"', $link);
     	}
 	}
     	return $link;
