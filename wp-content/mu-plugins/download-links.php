@@ -34,6 +34,9 @@ function kts_render_software_update_link_form( $post ) {
 		elseif ( $_GET['notification'] === 'success-' . absint( $post->ID ) ) {
 			echo '<div class="alert success-message" role="polite"><p>' . __( 'The link has been updated.', 'classicpress' ) . '</p></div>';
 		}
+		elseif ( $_GET['notification'] === 'success-notnecessary-' . absint( $post->ID ) ) {
+			echo '<div class="success-message" role="polite"><p class="wp-caption-text">' . __( 'No new version found', 'classicpress' ) . '</p></div>';
+		}
 	}
 
 	echo '<form id="update-form" class="update-form" method="POST" autocomplete="off">';
@@ -67,6 +70,11 @@ function kts_software_update_link_redirect() {
 
 	if ( $update === false ) {
 		wp_safe_redirect( esc_url_raw( $referer . '?notification=github-api-wrong-' . $software_id ) );
+		exit;
+	}
+
+	if ( $update === true ) {
+		wp_safe_redirect( esc_url_raw( $referer . '?notification=success-notnecessary-' . $software_id ) );
 		exit;
 	}
 
