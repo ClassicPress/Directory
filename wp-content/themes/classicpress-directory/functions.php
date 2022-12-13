@@ -294,10 +294,14 @@ function classicpress_nofollow_callback($matches) {
     $link = $matches[0];
     $site_link = get_bloginfo('url');
  
-    if (strpos($link, 'rel') === false) {
-        $link = preg_replace("%(href=\S(?!$site_link))%i", 'rel="nofollow noreferrer noopener external ugc" $1', $link);
-    } elseif (preg_match("%href=\S(?!$site_link)%i", $link)) {
-        $link = preg_replace('/rel=\S(?!nofollow)\S*/i', 'rel="nofollow noreferrer noopener external ugc"', $link);
-    }
-    return $link;
+	preg_match_all('/<a[^>]+href=([\'"])(?<href>.+?)\1[^>]*/i', $link, $result);
+
+	if (filter_var($result['href'][0], FILTER_VALIDATE_URL)) {
+		if (strpos($link, 'rel') === false) {
+			$link = preg_replace("%(href=\S(?!$site_link))%i", 'rel="nofollow noreferrer noopener external ugc" $1', $link);
+		} elseif (preg_match("%href=\S(?!$site_link)%i", $link)) {
+			$link = preg_replace('/rel=\S(?!nofollow)\S*/i', 'rel="nofollow noreferrer noopener external ugc"', $link);
+    	}
+	}
+    	return $link;
 };
