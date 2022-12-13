@@ -71,7 +71,12 @@ Susty was itself based on Underscores https://underscores.me/, (C) 2012-2017 Aut
 	--light-gray: #eee;
 	--dark-gray: #666;
 	--highlight: #fff9c0;
-	--alert-danger: #990000;
+	--alert-danger-color: #721c24;
+	--alert-danger-bg: #f8d7da;
+	--alert-danger-border: #f5c6cb;
+	--alert-success-color: #155724;
+    --alert-success-bg: #d4edda;
+    --alert-success-border: #c3e6cb;
 	--border-radius: 3px;
 	--pre-bg-color: #f6f8fa;
 	--code-bg-color: rgba(175,184,193,0.2);
@@ -1131,20 +1136,25 @@ footer#legal {
 	border-radius: var(--border-radius);
 	overflow: hidden;
 }
-.success-message,
-.error-message {
-	color: var(--font-alt-color);
-	background-color: var(--alert-danger);
+.alert {
+	background-color: transparent;
 	margin: 1em auto;
-	border: 1px solid var(--hover-bg-color);
+	border: 1px solid transparent;
 	border-radius: var(--border-radius);
 	font-weight: bold;
 }
-.success-message {
-	background-color: var(--hover-bg-color);
+.alert.success-message {
+	background-color: var(--alert-success-bg);
+	color: var(--alert-success-color);
+	border-color: var(--alert-success-border);
 }
-.success-message p,
-.error-message p {
+.alert.error-message {
+	background-color: var(--alert-error-bg);
+	color: var(--alert-error-color);
+	border-color: var(--alert-error-border);
+}
+.alert.success-message p,
+.alert.error-message p {
 	padding: 0 1em;
 }
 

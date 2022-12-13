@@ -45,49 +45,49 @@ function kts_render_review_response_form() {
 		# Error Messages
 		if ( isset( $_GET['notification'] ) ) {
 			if ( $_GET['notification'] === 'nonce-wrong' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'You have already submitted this form.', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert alert error-message" role="alert"><p>' . __( 'You have already submitted this form.', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'no-name' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'You must provide a name for your software!', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'You must provide a name for your software!', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'no-software-type' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'You must specify the type of software that you are submitting!', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'You must specify the type of software that you are submitting!', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'wrong-software-type' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'The software type you have specified is not recognized!', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'The software type you have specified is not recognized!', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'no-software-id' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'You must specify the software ID!', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'You must specify the software ID!', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'wrong-software-id' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'The software ID you have specified is not recognized!', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'The software ID you have specified is not recognized!', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'id-type-mismatch' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'The software ID you have specified does not match the software type!', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'The software ID you have specified does not match the software type!', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'wrong-author' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'Only the software author may respond to a code review!', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'Only the software author may respond to a code review!', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'no-comments' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'You must provide some comments!', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'You must provide some comments!', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'no-download-link' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'You must provide a download link!', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'You must provide a download link!', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'invalid-download-link' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'You must provide a valid URL for the download link!', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'You must provide a valid URL for the download link!', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'invalid-github' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'You must provide a URL for a GitHub repository!', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'You must provide a URL for a GitHub repository!', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'no-later-link' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'The download link you provide must be to a later release than your previous submission!', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'The download link you provide must be to a later release than your previous submission!', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'no-comment' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'There was a problem submitting this reponse. Your comments have not been sent.', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'There was a problem submitting this reponse. Your comments have not been sent.', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'success' ) {
-				echo '<div class="success-message" role="polite"><p>' . __( 'Your comments have been submitted successfully. Your reviewer will respond by email.', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert success-message" role="polite"><p>' . __( 'Your comments have been submitted successfully. Your reviewer will respond by email.', 'classicpress' ) . '</p></div>';
 			}
 		}
 

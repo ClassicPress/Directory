@@ -67,19 +67,19 @@ function kts_render_contact_us_form() {
 		# Error Messages
 		if ( isset( $_GET['notification'] ) ) {
 			if ( $_GET['notification'] === 'nonce-wrong' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'You have already submitted this form.', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'You have already submitted this form.', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'no-subject' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'You must give your message a subject!', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'You must give your message a subject!', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'no-message' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'You must write some content for your message!', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'You must write some content for your message!', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'not-sent' ) {
-				echo '<div class="error-message" role="alert"><p>' . __( 'There was a problem submitting the form. Your message has not been sent.', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert error-message" role="alert"><p>' . __( 'There was a problem submitting the form. Your message has not been sent.', 'classicpress' ) . '</p></div>';
 			}
 			elseif ( $_GET['notification'] === 'success' ) {
-				echo '<div class="success-message" role="polite"><p>' . __( 'Your message has been submitted successfully. If appropriate, we will respond in due course.', 'classicpress' ) . '</p></div>';
+				echo '<div class="alert success-message" role="polite"><p>' . __( 'Your message has been submitted successfully. If appropriate, we will respond in due course.', 'classicpress' ) . '</p></div>';
 			}
 		}
 	?>
