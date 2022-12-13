@@ -24,7 +24,7 @@
 }
 
 .dialog-content {
-	background-color: rgb(255, 255, 255);
+	background-color: var(--font-alt-color);
 	margin: auto;
 	z-index: 2;
 	position: relative;
@@ -59,10 +59,10 @@
 }
 
 .dialog-close {
-	border: 1px solid #444;
+	border: 1px solid var(--dark-gray);
 	padding: 0;
-	color: #444;
-	background-color: transparent;
+	color: var(--dark-gray);
+	background-color: var(--font-alt-color);
 	font-weight: bold;
 	font-size: 2em;
 	width: 1em;
@@ -72,4 +72,5 @@
 	transition: 0.15s;
 	float: right;
 	margin-bottom: -1.2em;
+	border-radius: var(--border-radius);
 }
