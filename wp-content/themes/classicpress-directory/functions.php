@@ -285,21 +285,19 @@ add_filter(
 /** 
  * Make all external links nofollow to prevent spam
  */
-function add_nofollow_external_links( $content ) {
-	if ( is_singular( array( 'plugin', 'theme' ) ) ) {
-    	return preg_replace_callback( '/<a>]+/', 'auto_nofollow_callback', $content );
-	} else {
-		return $content;
-	}
-}
-function auto_nofollow_callback( $matches ) {
+add_filter( 'the_content', 'add_nofollow_external_links', 13 );
+function add_nofollow_external_links($content) {
+    return preg_replace_callback('/<a[^>]+/', 'classicpress_nofollow_callback', $content);
+};
+ 
+function classicpress_nofollow_callback($matches) {
     $link = $matches[0];
     $site_link = get_bloginfo('url');
+ 
     if (strpos($link, 'rel') === false) {
-        $link = preg_replace("%(href=S(?!$site_link))%i", 'rel="nofollow noreferrer noopener external ugc" $1', $link);
-    } elseif (preg_match("%href=S(?!$site_link)%i", $link)) {
-        $link = preg_replace('/rel=S(?!nofollow)S*/i', 'rel="nofollow noreferrer noopener external ugc"', $link);
+        $link = preg_replace("%(href=\S(?!$site_link))%i", 'rel="nofollow noreferrer noopener external ugc" $1', $link);
+    } elseif (preg_match("%href=\S(?!$site_link)%i", $link)) {
+        $link = preg_replace('/rel=\S(?!nofollow)\S*/i', 'rel="nofollow noreferrer noopener external ugc"', $link);
     }
     return $link;
-}
-add_filter( 'the_content', 'add_nofollow_external_links' );
+};
