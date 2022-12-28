@@ -245,7 +245,7 @@ function kts_filter_posts_by_slug_field( $args, $request ) {
 	$slug_value = sanitize_text_field( $request['byslug'] );
 	$slug_meta_query = array(
 		'key' => 'slug',
-		'value' => $slug_value
+		'value' => explode( ',', $slug_value ),
 	);
 
 	if ( isset( $args['meta_query'] ) ) {
