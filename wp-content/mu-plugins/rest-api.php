@@ -248,6 +248,10 @@ function kts_filter_posts_by_slug_field( $args, $request ) {
 		'value' => explode( ',', $slug_value ),
 	);
 
+	foreach ( explode( ',', $slug_value ) as $slug) {
+		apply_filters( 'cpdir_rest_search', $slug, $_SERVER['HTTP_USER_AGENT'], $request->get_route() );
+	}
+
 	if ( isset( $args['meta_query'] ) ) {
 		$args['meta_query']['relation'] = 'AND';
 		$args['meta_query'][] = $slug_meta_query;

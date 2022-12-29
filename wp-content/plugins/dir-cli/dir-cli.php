@@ -25,7 +25,7 @@ if (defined('WP_CLI') && WP_CLI) {
 }
 
 /**
-* Commands to work with Icons for CP.
+* Commands to work with ClassicPress directory.
 *
 *
 * ## EXAMPLES
@@ -98,6 +98,21 @@ class Dir{
 
 		}
 
+	}
+
+	/**
+	* Regenerate active installation statistics.
+	*
+	*
+	* ## EXAMPLES
+	*
+	*     wp dir regenerate_stats
+	*
+	*
+	*/
+	public function regenerate_stats($args, $assoc_args) {
+		\ClassicPress\StatsForCPDir\StatsForCPDir::regenerate_data();
+		\WP_CLI::success('Statistics regenerated successfully.');
 	}
 
 }
