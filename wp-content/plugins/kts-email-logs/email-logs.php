@@ -31,7 +31,7 @@ function kts_send_data_to_email_logs_on_success( $args ) { // $mail_data
 
 	$email_array = array(
 		'status'				=> 1,
-		'recipient'			=> sanitize_text_field( $user->display_name ),
+		'recipient'			=> ( $user === false ) ? '' : sanitize_text_field( $user->display_name ),
 		'email'				=> sanitize_email( $args['to'] ),
 		'subject'			=> sanitize_text_field( $args['subject'] ),
 		'message'			=> esc_html( preg_replace('~<script[^>]*>.*</script\s*>~is', '', ( $args['message'] ) ) ),
