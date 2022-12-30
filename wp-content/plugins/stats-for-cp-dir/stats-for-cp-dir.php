@@ -40,6 +40,12 @@ class StatsForCPDir{
 		// Hook to Update Manager filter request.
 		add_filter('cpdir_rest_search', [$this, 'log_request'], 10, 3);
 
+		// Add Active installations column
+		foreach (['plugin', 'theme'] as $item) {
+			add_filter('manage_'.$item.'_posts_columns', [$this, 'active_installation_column']);
+			add_action('manage_'.$item.'_posts_custom_column' , [$this, 'manage_active_installation_column'], 10, 2);
+		}
+
 		// Activation and deactivation.
 		register_activation_hook(__FILE__, [$this, 'activate']);
 		register_deactivation_hook(__FILE__, [$this, 'deactivate']);
@@ -50,6 +56,18 @@ class StatsForCPDir{
 			wp_schedule_event(time(), 'daily', 'sfcp_clean_table');
 		}
 
+	}
+
+	public function active_installation_column($columns) {
+		$columns['active_installations'] = 'Active installations';
+		return $columns;
+	}
+
+	public function manage_active_installation_column($column, $post_id) {
+		if ($column !== 'active_installations') {
+			return;
+		}
+		echo number_format_i18n((int) get_post_meta($post_id, 'active_installations', true));
 	}
 
 	// Log requests to the db.

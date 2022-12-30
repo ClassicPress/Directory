@@ -91,6 +91,15 @@ function kts_register_meta_with_rest_api() {
 	);
 	register_meta( 'post', 'category_slugs', $plugin_args9 );
 
+	$plugin_args10 = array(
+		'type'			=> 'string',
+		'description'	=> 'Active installations',
+		'single'		=> true,
+		'object_subtype'=> 'plugin',
+		'show_in_rest'	=> true,
+	);
+	register_meta( 'post', 'active_installations', $plugin_args9 );
+
 	$theme_args1 = array(
 		'type'			=> 'string',
 		'description'	=> 'Current Version of Software',
@@ -162,6 +171,15 @@ function kts_register_meta_with_rest_api() {
 		'show_in_rest'	=> true,
 	);
 	register_meta( 'post', 'tags', $theme_args8 );
+
+	$theme_args8 = array(
+		'type'			=> 'string',
+		'description'	=> 'Active installations',
+		'single'		=> true,
+		'object_subtype'=> 'theme',
+		'show_in_rest'	=> true,
+	);
+	register_meta( 'post', 'active_installations', $theme_args8 );
 
 }
 add_action( 'init', 'kts_register_meta_with_rest_api' );
