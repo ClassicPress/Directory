@@ -79,6 +79,10 @@
 					<?php _e('ClassicPress Version', 'classicpress'); ?>
 					<span class="item-data"><?php echo esc_html(get_post_meta($post->ID, 'requires_cp', true)) . '.0'; ?></span>
 				</li>
+				<li class="aside-item">
+					<?php _e('PHP Version', 'classicpress'); ?>
+					<span class="item-data"><?php echo esc_html(get_post_meta($post->ID, 'requires_php', true)) . '.0'; ?></span>
+				</li>
 				<?php
 				if ($post->post_type === 'plugin') {
 				?>
