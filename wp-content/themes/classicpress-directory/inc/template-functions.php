@@ -261,7 +261,8 @@ function kts_render_user_tabs ( $cached_count ) {
 			$tabindex      = 'tabindex="0"';
 			$active_item   = $item_type;
 		}
-		echo '<button id="ui-id-' . $item_number . '" class="' . $class . '" aria-controls="tabs-' . $item_number .'" ' . $aria_selected .' role="tab" ' . $tabindex . '>' . $name . '</button>';
+		$hidden = $cached_count[$item_type] === "0" ? ' hidden' : '';
+		echo '<button id="ui-id-' . $item_number . '" class="' . $class . '" aria-controls="tabs-' . $item_number .'" ' . $aria_selected .' role="tab"' . $hidden . '>' . $name . '</button>';
 	}
 	return $active_item;
 }
