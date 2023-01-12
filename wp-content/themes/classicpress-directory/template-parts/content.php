@@ -130,7 +130,7 @@
 			?>
 				<div class="donation-box">
 					<p><?php printf(__('Support development of this %s by donating directly to the author.', 'classicpress'), get_post_type()); ?></p>
-					<a href="<?php echo esc_url($donation_link); ?>" target="blank" class="btn" title="Click to donate" rel="nofollow ugc external noopener"><?php _e('Donate', 'classicpress'); ?></a>
+					<a href="<?php echo esc_url($donation_link); ?>" target="blank" class="btn" title="<?php _e('Click to donate', 'classicpress'); ?>" rel="nofollow ugc external noopener"><?php _e('Donate', 'classicpress'); ?></a>
 				</div>
 			<?php endif; ?>
 		</aside>
