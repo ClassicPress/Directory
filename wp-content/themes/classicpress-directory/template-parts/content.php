@@ -69,7 +69,7 @@
 		</section>
 
 		<aside>
-			<h2 class="screen-reader-text">Meta</h2>
+			<h2 class="screen-reader-text"><?php _e('Meta', 'classicpress'); ?></h2>
 			<ul class="aside-items">
 				<li class="aside-item">
 					<?php _e('Version', 'classicpress'); ?>
@@ -123,6 +123,16 @@
 					<span class="item-data repo-link"><a href="<?php echo esc_url($repo['url']); ?>" target="_blank" rel="noopener noreferrer" title="<?php _e('Visit repository', 'classicpress'); ?>"><img src="<?php echo esc_url(get_template_directory_uri() . '/images/' . $repo['name'] . '.svg'); ?>" alt="<?php echo $repo['name']; ?>" width="14" height="14" aria-hidden="true"><?php echo $repo['name']; ?></a></span>
 				</li>
 			</ul>
+
+			<?php
+			$donation_link = filter_var(get_the_author_meta('donation_url'), FILTER_VALIDATE_URL);
+			if ($donation_link !== FALSE) :
+			?>
+				<div class="donation-box">
+					<p><?php printf(__('Support development of this %s by donating directly to the author.', 'classicpress'), get_post_type()); ?></p>
+					<a href="<?php echo esc_url($donation_link); ?>" target="blank" class="btn" title="Click to donate" rel="nofollow ugc external noopener">
+				</div>
+			<?php endif; ?>
 		</aside>
 
 	<?php
