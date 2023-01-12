@@ -14,14 +14,6 @@ RewriteRule wp-content/.*/[^/]*(responsive|css|js|dynamic|loader|fonts)\.php - [
 RewriteRule favicon\.ico$ - [E=cache-control:max-age=86400]
 ### marker FAVICON end ###
 
-### marker WEBP start ###
-RewriteCond %{HTTP_ACCEPT} "image/webp"
-RewriteRule .* - [E=Cache-Control:vary=%{ENV:LSCACHE_VARY_VALUE}+webp]
-RewriteCond %{HTTP_USER_AGENT} iPhone.*Version/(\d{2}).*Safari
-RewriteCond %1 >13
-RewriteRule .* - [E=Cache-Control:vary=%{ENV:LSCACHE_VARY_VALUE}+webp]
-### marker WEBP end ###
-
 ### marker DROPQS start ###
 CacheKeyModify -qs:fbclid
 CacheKeyModify -qs:gclid
@@ -36,6 +28,12 @@ CacheKeyModify -qs:_ga
 ## LITESPEED WP CACHE PLUGIN - Do not edit the contents of this block! ##
 ## LITESPEED WP CACHE PLUGIN - Do not edit the contents of this block! ##
 # END NON_LSCACHE
+php_value upload_max_filesize 128M
+php_value post_max_size 128M
+php_value memory_limit 516M
+php_value max_execution_time 3000
+php_value max_input_time 3000
+
 Header set X-Robots-Tag "noindex,nofollow"
 
 # BEGIN ClassicPress
@@ -53,11 +51,20 @@ RewriteRule . /index.php [L]
 # BEGIN LiteSpeed
 <IfModule Litespeed>
 SetEnv noabort 1
+
+# Disable cache for staging
+CacheDisable public /
 </IfModule>
 # END LiteSpeed
 
-# Disable XMLRPC
+# Security settings
 <Files xmlrpc.php>
 order deny,allow
 deny from all
 </Files>
+
+#<IfModule php7_module>
+php_value error_log /var/www/public/staging-directory.classicpress.net/log/php_errors.log
+;php_value upload_tmp_dir /var/www/public/staging-directory.classicpress.net/tmp/
+;php_admin_value upload_tmp_dir /var/www/public/staging-directory.classicpress.net/tmp
+#</IfModule>

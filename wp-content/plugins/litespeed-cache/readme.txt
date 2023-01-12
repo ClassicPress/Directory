@@ -2,8 +2,8 @@
 Contributors: LiteSpeedTech
 Tags: caching, optimize, performance, pagespeed, core web vitals, seo, speed, image optimize, compress, object cache, redis, memcached, database cleaner
 Requires at least: 4.0
-Tested up to: 6.0.3
-Stable tag: 5.3
+Tested up to: 6.1.1
+Stable tag: 5.3.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 
@@ -249,6 +249,27 @@ For more detailed information about crawler setup, please see [the Crawler docum
 The vast majority of plugins and themes are compatible with LiteSpeed Cache. The most up-to-date compatibility information can be found [in our documentation](https://docs.litespeedtech.com/lscache/lscwp/thirdparty/)
 
 == Changelog ==
+
+= 5.3.2 - Jan 10 2023 =
+* **Object** Fixed object cache lib incr, decr functions (thanks bdrbros/DANIEL) #516
+* **Database Optimize** Database optimizer now handles postmeta when cleaning revisions #515
+* **Cache** Made nocache the default for 4xx/5xx response codes.
+* **Cache** Default cache TTL settings removed for 403 response code, changed to 10 mins for 500 response code.
+* **GUI** Added a description for the redetect nodes function.
+* **GUI** Added a description for the refresh button sync function.
+
+= 5.3.1 - Dec 12 2022 =
+* **CLI** Presets feature is now usable from the CLI. (xLukii)
+* **CLI** Added 'import_remote' for litespeed-option to enable importing options from URLs. (xLukii)
+* **Cache** Added LiteSpeed headers to site health check for full page cache.
+* **Crawler* Fixed unauthorized crawler toggle operation. (#CVE-2022-46800)
+* **UCSS** Fixed a bug where items weren't added back to the UCSS queue after purging.
+* **Page Optimize** Fixed a bug where generated CSS would return 404 after upgrading via CLI.
+* **3rd** Fixed a bug where a WooCommerce session doesn't exist when checking cart, notices (Jason Levy/Gilles)
+* **GUI** Made LiteSpeed admin notice icon grayscale to avoid distraction. (martinsauter)
+* **GUI** Fixed RTL style for notification icon.
+* **API** Added a new hook `litespeed_optm_uri_exc` to exclude URI from page optimization.
+* **API** Excluded `.well-known` path from page optimization.
 
 = 5.3 - Oct 31 2022 =
 * 🌱**Presets** New `Presets` feature and menu item.

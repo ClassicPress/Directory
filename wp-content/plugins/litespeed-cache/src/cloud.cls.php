@@ -560,6 +560,14 @@ class Cloud extends Base {
 			return false;
 		}
 
+		// Deny if is IP
+		if ( preg_match( '#^(([1-9]?\d|1\d\d|25[0-5]|2[0-4]\d)\.){3}([1-9]?\d|1\d\d|25[0-5]|2[0-4]\d)$#', Utility::parse_url_safe($home_url, PHP_URL_HOST) ) ) {
+			self::debug( "IP home url is not allowed for cloud service." );
+			$msg = __( 'In order to use QC services, need a real domain name, cannot use an IP.', 'litespeed-cache' );
+			Admin_Display::error( $msg );
+			return false;
+		}
+
 		/** @since 5.0 If in valid err_domains, bypass request */
 		if ( $this->_is_err_domain( $home_url ) ) {
 			return false;
@@ -995,14 +1003,22 @@ class Cloud extends Base {
 		$json = json_decode( $response[ 'body' ], true );
 
 		if (!$json['success']) {
+			$contactSupport = false;
 			if (isset($json['info']['errors'])) {
 				$errs = array();
 				foreach ($json['info']['errors'] as $err) {
 					$errs[] = 'Error ' . $err['code'] . ': ' . $err['message'];
+					if ($err['code'] == 1113) {
+						$contactSupport = true;
+					}
 				}
 				$error_message = implode('<br>', $errs);
 			} else {
-				$error_message = 'Unknown error, contact QUIC.cloud support.';
+				$error_message = __('Unknown error.', 'litespeed-cache');
+				$contactSupport = true;
+			}
+			if ($contactSupport) {
+				$error_message .= ' <a href="https://www.quic.cloud/support/" target="_blank">' . __( 'Contact QUIC.cloud support', 'litespeed-cache' ) . '</a>';
 			}
 			Admin_Display::error( __( 'Cloud REST API returned error: ', 'litespeed-cache' ) . $error_message );
 			return $error_message;

@@ -94,7 +94,7 @@ class Control extends Root {
 		}
 
 		$roles = explode( ',', $role );
-		$found = array_intersect( $roles, array_keys( $this->conf( Base::O_CACHE_EXC_ROLES ) ) );
+		$found = array_intersect( $roles, $this->conf( Base::O_CACHE_EXC_ROLES ) );
 
 		return $found ? implode( ',', $found ) : false;
 	}
@@ -149,6 +149,11 @@ class Control extends Root {
 
 			// Set TTL
 			self::set_custom_ttl( $this->_response_header_ttls[ $code ] );
+		}
+		elseif (self::is_cacheable()) {
+			if ( substr($code, 0, 1)==4 || substr($code, 0, 1)==5 ) {
+				self::set_nocache( '[Ctrl] 4xx/5xx default to no cache [status_header] ' . $code );
+			}
 		}
 
 		// Set cache tag
