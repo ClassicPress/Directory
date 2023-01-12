@@ -399,3 +399,10 @@ function kts_email_on_role_to_contributor( $user_id, $new_role, $old_roles ) {
 	}	
 }
 add_action( 'set_user_role', 'kts_email_on_role_to_contributor', 10, 3 );
+
+/* ADD DONATION LINK INPUT TO PROFILES */
+function cp_donation_link( $contactmethods ) {
+	$contactmethods[ 'donation_url' ] = 'Donation URL';
+	return $contactmethods;
+}
+add_filter( 'user_contactmethods', 'cp_donation_link' );
