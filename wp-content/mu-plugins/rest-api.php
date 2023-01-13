@@ -98,7 +98,16 @@ function kts_register_meta_with_rest_api() {
 		'object_subtype'=> 'plugin',
 		'show_in_rest'	=> true,
 	);
-	register_meta( 'post', 'active_installations', $plugin_args9 );
+	register_meta( 'post', 'active_installations', $plugin_args10 );
+	
+	$plugin_args11 = array(
+		'type'			=> 'string',
+		'description'	=> 'Release date',
+		'single'		=> true,
+		'object_subtype'=> 'plugin',
+		'show_in_rest'	=> true,
+	);
+	register_meta( 'post', 'published_at', $plugin_args11 );
 
 	$theme_args1 = array(
 		'type'			=> 'string',
@@ -172,14 +181,23 @@ function kts_register_meta_with_rest_api() {
 	);
 	register_meta( 'post', 'tags', $theme_args8 );
 
-	$theme_args8 = array(
+	$theme_args9 = array(
 		'type'			=> 'string',
 		'description'	=> 'Active installations',
 		'single'		=> true,
 		'object_subtype'=> 'theme',
 		'show_in_rest'	=> true,
 	);
-	register_meta( 'post', 'active_installations', $theme_args8 );
+	register_meta( 'post', 'active_installations', $theme_args9 );
+
+	$theme_args10 = array(
+		'type'			=> 'string',
+		'description'	=> 'Release date',
+		'single'		=> true,
+		'object_subtype'=> 'theme',
+		'show_in_rest'	=> true,
+	);
+	register_meta( 'post', 'published_at', $theme_args10 );
 
 }
 add_action( 'init', 'kts_register_meta_with_rest_api' );

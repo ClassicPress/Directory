@@ -673,6 +673,7 @@ function kts_software_submit_form_redirect() {
 	add_post_meta( $post_id, 'download_link', $download_link );
 	add_post_meta( $post_id, 'requires_php', $headers['RequiresPHP'] );
 	add_post_meta( $post_id, 'requires_cp', $headers['RequiresCP'] );
+	add_post_meta( $post_id, 'published_at', date("Y-m-d") );
 
 	# Add names of categories and tags to meta fields for REST API
 	if ( $post_type === 'plugin' ) {
