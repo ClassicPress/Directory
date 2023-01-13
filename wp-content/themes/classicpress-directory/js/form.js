@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
 	'use strict';
 
 	// Toggle 
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	const max = document.getElementById('max');
 	const submitBtn = document.getElementById('submit-btn');
 	softwares.forEach(software => {
-		software.addEventListener('change', function() {
+		software.addEventListener('change', function () {
 			console.log('Yes');
 			if (plugin.checked) {
 				category.removeAttribute('hidden');
@@ -20,10 +20,10 @@ document.addEventListener('DOMContentLoaded', function() {
 					cat.setAttribute('required', 'required');
 
 					// Toggle required attribute according to whether checkbox already selected
-					cat.addEventListener('change', function() {
+					cat.addEventListener('change', function () {
 						let flag = false;
 						for (let i = 0, n = categories.length; i < n; i++) {
-							if (categories[i].checked ) {
+							if (categories[i].checked) {
 								categories.forEach(cat => {
 									cat.removeAttribute('required');
 									flag = true;
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				tagsDiv.removeAttribute('hidden');
 				tags.removeAttribute('disabled');
 				tags.setAttribute('required', 'required');
-				tags.addEventListener('input', function() {
+				tags.addEventListener('input', function () {
 					let count = 0;
 					for (let i = 0, n = tags.value.length; i < n; i++) {
 						if (tags.value.charAt(i) === ',') {
@@ -74,5 +74,26 @@ document.addEventListener('DOMContentLoaded', function() {
 			}
 		});
 	});
+
+	// Character counter
+	let excerptTxt = document.getElementById('excerpt');
+	let characterCounter = document.getElementById('char-count');
+	const maxNumOfChars = 150;
+
+	const countCharacters = () => {
+		let numOfEnteredChars = excerptTxt.value.length;
+		let counter = maxNumOfChars - numOfEnteredChars;
+		characterCounter.textContent = counter + '/100';
+
+		if (counter < 0) {
+			characterCounter.style.color = 'red';
+		} else if (counter < 20) {
+			characterCounter.style.color = 'orange';
+		} else {
+			characterCounter.style.color = 'black';
+		}
+	};
+
+	excerptTxt.addEventListener('input', countCharacters);
 
 });

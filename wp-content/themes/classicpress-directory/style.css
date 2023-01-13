@@ -551,6 +551,26 @@ textarea {
 	color: var(--dark-gray);
 }
 
+.form-group{
+	margin-bottom: 1rem;
+}
+
+.form-text{
+	margin-top: 0.25rem;
+	display: block;
+	color: var(--dark-gray);
+}
+.excerpt-group{
+	display: flex;
+	flex-direction:column;
+}
+.excerpt-group #char-count{
+	text-align: right;
+	padding: 0.2rem 0;
+	font-size: 85%;
+	font-weight: bold;
+}
+
 /*--------------------------------------------------------------
 # Links
 --------------------------------------------------------------*/
@@ -2029,4 +2049,20 @@ ul.aside-items {
 	.software-grid {
 		grid-template-columns: repeat(4, minmax(0, 1fr));
 	}
+}
+
+/*--------------------------------------------------------------
+# Utilities
+--------------------------------------------------------------*/
+.mb-0, .my-0 {
+    margin-bottom: 0!important;
+}
+.mt-0, .my-0 {
+    margin-top: 0!important;
+}
+.mr-0, .mx-0 {
+    margin-right: 0!important;
+}
+.ml-0, .mx-0 {
+    margin-left: 0!important;
 }

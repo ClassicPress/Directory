@@ -195,12 +195,16 @@ function kts_render_software_submit_form() {
 				</label>
 			</fieldset>
 
-			<label for="name"><?php _e( 'Name of Software', 'classicpress' ); ?></label>
-			<input id="name" name="name" type="text" required>
+			<div class="form-group">
+				<label for="name"><?php _e( 'Name of Software', 'classicpress' ); ?></label>
+				<input id="name" name="name" type="text" required>
+			</div>
 
-			<label for="excerpt"><?php _e( 'Brief Description of Software (not more than 150 characters)', 'classicpress' ); ?></label>
-			<input id="excerpt" name="excerpt" type="text" maxlength="150" required>
-
+			<div class="form-group excerpt-group">
+				<label for="excerpt"><?php _e( 'Brief Description of Software (no HTML)', 'classicpress' ); ?></label>
+				<textarea id="excerpt" name="excerpt" maxlength="150" rows="3" required></textarea>
+				<span id="char-count">150/150</span>
+			</div>
 			<fieldset id="category" hidden>
 				<legend id="cats"><?php _e( 'Specify to which of the following categories your plugin relates. (You must choose at least one.)', 'classicpress' ); ?></legend>
 				<div class="clear"></div>
@@ -235,14 +239,17 @@ function kts_render_software_submit_form() {
 				</label>
 			</fieldset>
 
-			<label for="download_link"><?php _e( 'Software Download Link (full URL including https://)', 'classicpress' ); ?></label>
-			<input id="download_link" name="download_link" type="url" required>
-
+			<div class="form-group">
+				<label for="download_link"><?php _e( 'Software Download Link (full URL including https://)', 'classicpress' ); ?></label>
+				<input id="download_link" name="download_link" class="mb-0" type="url" placeholder="https://" required>
+				<small class="form-text">Example: https://github.com/classicpress/classic-seo/releases/download/v1.0.0/classic-seo.zip</small>
+			</div>
 			<input type="hidden" name="cp-nonce-name" value="<?php echo $cp_nonce['name']; ?>">
 			<input type="hidden" name="cp-nonce-value" value="<?php echo $cp_nonce['value']; ?>">
-			<button id="submit-btn" type="submit" enterkeyhint="send">Submit</button>
-			<button type="reset" enterkeyhint="go">Clear</button>
-
+			<div class="form-btn">
+				<button id="submit-btn" type="submit" enterkeyhint="send">Submit</button>
+				<button type="reset" enterkeyhint="go">Clear</button>
+			</div>
 		</form>
 		</section>
 	<?php
