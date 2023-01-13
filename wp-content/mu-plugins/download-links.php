@@ -126,7 +126,7 @@ function kts_cron_update_download_links() {
 			'meta_input'	=> array(
 				'download_link'		=> $update['download_link'],
 				'current_version'	=> $update['current_version'],
-				'published_at'      => $update['published_at'],
+				'published_at'		=> $update['published_at'],
 				'requires_php'		=> $update['requires_php'],
 				'requires_cp'		=> $update['requires_cp'],
 			),
@@ -380,7 +380,7 @@ function kts_maybe_update( $software_id, $force = false ) {
 			'description'		=> $description,
 			'requires_php'		=> $headers['RequiresPHP'],
 			'requires_cp'		=> $headers['RequiresCP'],
-			'published_at'      => \DateTime::createFromFormat( 'Y-m-d\TH:i:s\Z', $result->published_at )->format( "Y-m-d" ),
+			'published_at'		=> \DateTime::createFromFormat( 'Y-m-d\TH:i:s\Z', $result->published_at )->format( "Y-m-d" ),
 		);
 	}
 
