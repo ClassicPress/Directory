@@ -202,7 +202,7 @@ function kts_render_software_submit_form() {
 
 			<div class="form-group excerpt-group">
 				<label for="excerpt"><?php _e( 'Brief Description of Software (no HTML)', 'classicpress' ); ?></label>
-				<textarea id="excerpt" name="excerpt" maxlength="150" rows="3" required></textarea>
+				<textarea id="excerpt" class="mb-0" name="excerpt" maxlength="150" rows="3" required></textarea>
 				<span id="char-count">150/150</span>
 			</div>
 			<fieldset id="category" hidden>

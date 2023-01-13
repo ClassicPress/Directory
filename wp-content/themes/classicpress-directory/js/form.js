@@ -83,11 +83,11 @@ document.addEventListener('DOMContentLoaded', function () {
 	const countCharacters = () => {
 		let numOfEnteredChars = excerptTxt.value.length;
 		let counter = maxNumOfChars - numOfEnteredChars;
-		characterCounter.textContent = counter + '/100';
+		characterCounter.textContent = counter + '/150';
 
-		if (counter < 0) {
+		if (counter == 0) {
 			characterCounter.style.color = 'red';
-		} else if (counter < 20) {
+		} else if (counter < 30) {
 			characterCounter.style.color = 'orange';
 		} else {
 			characterCounter.style.color = 'black';
