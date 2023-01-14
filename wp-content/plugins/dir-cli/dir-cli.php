@@ -91,6 +91,7 @@ class Dir{
 					'current_version'	=> $update['current_version'],
 					'requires_php'		=> $update['requires_php'],
 					'requires_cp'		=> $update['requires_cp'],
+					'published_at'		=> $update['published_at'],
 				],
 			] );
 
