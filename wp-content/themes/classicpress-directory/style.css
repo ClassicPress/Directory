@@ -570,6 +570,11 @@ textarea {
 	font-size: 85%;
 	font-weight: bold;
 }
+.form-btn{
+	display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 
 /*--------------------------------------------------------------
 # Links

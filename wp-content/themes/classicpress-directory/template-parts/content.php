@@ -74,7 +74,14 @@
 				<li class="aside-item">
 					<?php _e('Version', 'classicpress'); ?>
 					<span class="item-data"><?php echo esc_html(get_post_meta($post->ID, 'current_version', true)); ?></span>
-				<li>
+				<?php
+				$published_at = get_post_meta($post->ID, 'published_at', true);
+				if(isset($published_at)): ?>
+				<li class="aside-item">
+				<?php _e('Last Updated', 'classicpress'); ?>
+					<span class="item-data"><time datetime="<?php esc_attr_e($published_at); ?>"><?php esc_html_e( human_time_diff( $published_at, current_time('timestamp') ) ) . ' ago'; ?></time></span>
+				</li>
+				<?php endif; ?>
 				<li class="aside-item">
 					<?php _e('ClassicPress Version', 'classicpress'); ?>
 					<span class="item-data"><?php echo esc_html(get_post_meta($post->ID, 'requires_cp', true)) . '.0'; ?></span>
