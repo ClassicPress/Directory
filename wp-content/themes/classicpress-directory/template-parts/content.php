@@ -77,7 +77,7 @@
 				<?php
 				$published_at = get_post_meta($post->ID, 'published_at', true);
 				$published_at_atom = date(DateTimeInterface::ATOM, $published_at);
-				$published_at_human = date("F j, Y - g:i a", strtotime($published_at));
+				$published_at_human = date("F j, Y - g:i a", $published_at);
 				$published_at_diff = human_time_diff( $published_at, current_time('timestamp') );
 				if(isset($published_at)): ?>
 					<li class="aside-item">
