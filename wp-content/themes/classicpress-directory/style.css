@@ -2071,3 +2071,12 @@ ul.aside-items {
 .ml-0, .mx-0 {
     margin-left: 0!important;
 }
+.text-left{
+	text-align: left !important;
+}
+.text-right{
+	text-align: right !important;
+}
+.text-center{
+	text-align: center !important;
+}

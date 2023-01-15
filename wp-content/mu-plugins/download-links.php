@@ -380,7 +380,7 @@ function kts_maybe_update( $software_id, $force = false ) {
 			'description'		=> $description,
 			'requires_php'		=> $headers['RequiresPHP'],
 			'requires_cp'		=> $headers['RequiresCP'],
-			'published_at'		=> \DateTime::createFromFormat( 'Y-m-d\TH:i:s\Z', $result->published_at )->format( "Y-m-d" ),
+			'published_at'		=> \DateTime::createFromFormat( 'Y-m-d\TH:i:s\Z', $result->published_at )->format( 'U' ),
 		);
 	}
 

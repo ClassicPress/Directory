@@ -77,10 +77,10 @@
 				<?php
 				$published_at = get_post_meta($post->ID, 'published_at', true);
 				if(isset($published_at)): ?>
-				<li class="aside-item">
-				<?php _e('Last Updated', 'classicpress'); ?>
-					<span class="item-data"><time datetime="<?php esc_attr_e($published_at); ?>"><?php esc_html_e( human_time_diff( $published_at, current_time('timestamp') ) ) . ' ago'; ?></time></span>
-				</li>
+					<li class="aside-item">
+					<?php _e('Last Updated', 'classicpress'); ?>
+						<span class="item-data"><time datetime="<?php esc_attr_e( date(DateTimeInterface::ATOM, $published_at) ); ?>"><?php esc_html_e( human_time_diff( $published_at, current_time('timestamp') ) ) . ' ago'; ?></time></span>
+					</li>
 				<?php endif; ?>
 				<li class="aside-item">
 					<?php _e('ClassicPress Version', 'classicpress'); ?>
