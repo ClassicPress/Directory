@@ -76,10 +76,13 @@
 					<span class="item-data"><?php echo esc_html(get_post_meta($post->ID, 'current_version', true)); ?></span>
 				<?php
 				$published_at = get_post_meta($post->ID, 'published_at', true);
+				$published_at_atom = date(DateTimeInterface::ATOM, $published_at);
+				$published_at_human = date("F j, Y - g:i a", strtotime($published_at));
+				$published_at_diff = human_time_diff( $published_at, current_time('timestamp') );
 				if(isset($published_at)): ?>
 					<li class="aside-item">
 					<?php _e('Last Updated', 'classicpress'); ?>
-						<span class="item-data"><time datetime="<?php esc_attr_e( date(DateTimeInterface::ATOM, $published_at) ); ?>"><?php esc_html_e( human_time_diff( $published_at, current_time('timestamp') ) ) . ' ago'; ?></time></span>
+						<span class="item-data"><time datetime="<?php esc_attr_e( $published_at_atom ); ?>" title="<?php esc_attr_e( $published_at_human ); ?>"><?php esc_html_e( $published_at_diff ); ?></time> <?php _e('ago', 'classicpress'); ?></span>
 					</li>
 				<?php endif; ?>
 				<li class="aside-item">
