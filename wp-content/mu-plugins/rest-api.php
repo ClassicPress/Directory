@@ -227,7 +227,7 @@ function kts_prepare_rest( $response, $post, $request ) {
 	unset( $data['featured_media'] );	
 	unset( $data['guid'] );
 	unset( $data['modified_gmt'] );
-	unset( $data['status'] );
+	//unset( $data['status'] );
 
 	# Unset cats and tags because they return only IDs; names set as meta above
 	if ( $post->post_type === 'plugin' ) {
