@@ -168,7 +168,7 @@ function kts_render_software_submit_form() {
 			elseif ( $_GET['notification'] === 'not-sent' ) {
 				echo '<div class="alert error-message" role="alert"><p>' . __( 'There was a problem submitting the form. Your message has not been sent.', 'classicpress' ) . '</p></div>';
 			}
-			elseif ( $_GET['notification'] === 'bad_slug' ) {
+			elseif ( $_GET['notification'] === 'bad-slug' ) {
 				echo '<div class="alert error-message" role="alert"><p>' . sprintf( __( 'The base folder name (used to determine the slug) can contain just letters, numbers, underscores or dashes.', 'classicpress' ) , 'link' ). '</p></div>';
 			}
 		}
