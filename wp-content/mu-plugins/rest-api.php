@@ -109,6 +109,15 @@ function kts_register_meta_with_rest_api() {
 	);
 	register_meta( 'post', 'published_at', $plugin_args11 );
 
+	$plugin_args12 = array(
+		'type'			=> 'string',
+		'description'	=> 'Status',
+		'single'		=> true,
+		'object_subtype'=> 'plugin',
+		'show_in_rest'	=> true,
+	);
+	register_meta( 'post', 'item_status', $plugin_args12 );
+
 	$theme_args1 = array(
 		'type'			=> 'string',
 		'description'	=> 'Current Version of Software',
@@ -198,6 +207,15 @@ function kts_register_meta_with_rest_api() {
 		'show_in_rest'	=> true,
 	);
 	register_meta( 'post', 'published_at', $theme_args10 );
+	
+	$theme_args11 = array(
+		'type'			=> 'string',
+		'description'	=> 'Status',
+		'single'		=> true,
+		'object_subtype'=> 'theme',
+		'show_in_rest'	=> true,
+	);
+	register_meta( 'post', 'item_status', $theme_args11 );
 
 }
 add_action( 'init', 'kts_register_meta_with_rest_api' );

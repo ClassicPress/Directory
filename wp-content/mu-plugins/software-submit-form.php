@@ -168,6 +168,9 @@ function kts_render_software_submit_form() {
 			elseif ( $_GET['notification'] === 'not-sent' ) {
 				echo '<div class="alert error-message" role="alert"><p>' . __( 'There was a problem submitting the form. Your message has not been sent.', 'classicpress' ) . '</p></div>';
 			}
+			elseif ( $_GET['notification'] === 'bad-slug' ) {
+				echo '<div class="alert error-message" role="alert"><p>' . sprintf( __( 'The base folder name (used to determine the slug) can contain just letters, numbers, underscores or dashes.', 'classicpress' ) , 'link' ). '</p></div>';
+			}
 		}
 		?>
 
@@ -457,6 +460,12 @@ function kts_software_submit_form_redirect() {
 	$zip = new ZipArchive();
 	$zip->open( $file['tmp_name'] );
 	$slug = strstr( $zip->getNameIndex(0), '/', true );
+
+	# Validate slug
+	if ( preg_match('/^[a-zA-Z0-9_\-]+$/', $slug ) === 0 ) {
+		wp_safe_redirect( esc_url_raw( $referer . '?notification=bad-slug' ) );
+		exit;
+	}
 
 	# Get description
 	$readme_index = $zip->locateName( '/README.md', ZipArchive::FL_NOCASE );
