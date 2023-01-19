@@ -318,3 +318,55 @@ function dev_bio_label( $text ) {
 
     return $text;
 }
+
+/**
+ * Add pending review counters to the menu
+ */
+add_action('admin_menu', function () {
+
+	global $menu;
+
+	$theme_args = array(
+		'numberposts'   => -1,
+		'post_type'     => array('theme'),
+		'fields' => 'ids',
+		'no_found_rows' => true,
+		'post_status'   => array('draft'),
+
+	);
+	$plugin_args = array(
+		'numberposts'   => -1,
+		'post_type'     => array('plugin'),
+		'fields' => 'ids',
+		'no_found_rows' => true,
+		'post_status'   => array('draft'),
+
+	);
+	$theme_drafts = count(get_posts($theme_args));
+	$plugin_drafts = count(get_posts($plugin_args));
+
+	if ($theme_drafts > 0) {
+
+		$menu_item = wp_list_filter(
+			$menu,
+			array(2 => 'edit.php?post_type=theme')
+		);
+
+		if (!empty($menu_item)) {
+			$menu_item_position = key($menu_item);
+			$menu[$menu_item_position][0] .= ' <span class="awaiting-mod">' . $theme_drafts . '</span>';
+		}
+	}
+
+	if ($plugin_drafts > 0) {
+
+		$menu_item = wp_list_filter(
+			$menu,
+			array(2 => 'edit.php?post_type=plugin')
+		);
+		if (!empty($menu_item)) {
+			$menu_item_position = key($menu_item);
+			$menu[$menu_item_position][0] .= ' <span class="awaiting-mod">' . $plugin_drafts . '</span>';
+		}
+	}
+});
