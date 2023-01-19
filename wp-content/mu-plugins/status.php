@@ -26,7 +26,7 @@ class Status{
 				'suspended' => esc_html__('Suspended', 'classicpress-directory'),
 				'closed'    => esc_html__('Closed', 'classicpress-directory'),
 				'ownership' => esc_html__('Ownership changed', 'classicpress-directory'),
-				'adoption'  => esc_html__('Adobtable', 'classicpress-directory'),
+				'adoption'  => esc_html__('Adoptable', 'classicpress-directory'),
 			];
 
 		add_action('add_meta_boxes', [$this, 'status_add_meta_box']);
