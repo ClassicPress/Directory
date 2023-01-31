@@ -47,7 +47,6 @@ class Status{
 			echo '<option value="'.sanitize_key($key).'"'.sanitize_key($selected).'>'.esc_html($value).'</option>';
 		}
 		echo '</select>';
-		wp_nonce_field('change_status', 'change_status__nonce');
 		echo '</div>';
 	}
 
