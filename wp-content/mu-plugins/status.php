@@ -64,9 +64,6 @@ class Status{
 		if (!current_user_can('edit_post', $post_ID)) {
 			return;
 		}
-		if (check_admin_referer('change_status', 'change_status__nonce') === false) {
-			return;
-		}
 		if (!array_key_exists('cpdir_status', $_REQUEST)) {
 			return;
 		}

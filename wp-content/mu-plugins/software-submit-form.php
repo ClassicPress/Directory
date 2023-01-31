@@ -23,6 +23,8 @@ function kts_get_plugin_data( $file_data ) {
 		'RequiresWP'	=> 'Requires at least',
 		'RequiresPHP'	=> 'Requires PHP',
 		'RequiresCP'	=> 'Requires CP', // lowest compatible version of ClassicPress
+		'UpdateURI'		=> 'Update URI',
+		'PremiumURI'	=> 'Premium URI',
 	);
 	$plugin_data = kts_get_file_data( $file_data, $default_headers );
 	$plugin_data['Network'] = ( 'true' == strtolower( $plugin_data['Network'] ) );
@@ -689,6 +691,7 @@ function kts_software_submit_form_redirect() {
 	add_post_meta( $post_id, 'download_link', $download_link );
 	add_post_meta( $post_id, 'requires_php', $headers['RequiresPHP'] );
 	add_post_meta( $post_id, 'requires_cp', $headers['RequiresCP'] );
+	add_post_meta( $post_id, 'premium_uri', $headers['PremiumURI'] );
 	add_post_meta( $post_id, 'published_at', time() );
 
 	# Add names of categories and tags to meta fields for REST API
