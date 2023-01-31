@@ -117,6 +117,16 @@ function kts_register_meta_with_rest_api() {
 		'show_in_rest'	=> true,
 	);
 	register_meta( 'post', 'item_status', $plugin_args12 );
+	
+	$plugin_args13 = array(
+		'type'			=> 'string',
+		'description'	=> 'Premium URI',
+		'single'		=> true,
+		'object_subtype'=> 'plugin',
+		'show_in_rest'	=> true,
+	);
+	register_meta( 'post', 'premium_uri', $plugin_args13 );
+
 
 	$theme_args1 = array(
 		'type'			=> 'string',
@@ -216,6 +226,15 @@ function kts_register_meta_with_rest_api() {
 		'show_in_rest'	=> true,
 	);
 	register_meta( 'post', 'item_status', $theme_args11 );
+
+	$theme_args12 = array(
+		'type'			=> 'string',
+		'description'	=> 'Premium URI',
+		'single'		=> true,
+		'object_subtype'=> 'theme',
+		'show_in_rest'	=> true,
+	);
+	register_meta( 'post', 'premium_uri', $theme_args12 );
 
 }
 add_action( 'init', 'kts_register_meta_with_rest_api' );

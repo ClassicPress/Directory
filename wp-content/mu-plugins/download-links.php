@@ -88,6 +88,7 @@ function kts_software_update_link_redirect() {
 				'published_at'      => $update['published_at'],
 				'requires_php'		=> $update['requires_php'],
 				'requires_cp'		=> $update['requires_cp'],
+				'premium_uri'		=> $update['premium_uri'],
 			),
 		) );
 	}
@@ -129,6 +130,7 @@ function kts_cron_update_download_links() {
 				'published_at'		=> $update['published_at'],
 				'requires_php'		=> $update['requires_php'],
 				'requires_cp'		=> $update['requires_cp'],
+				'premium_uri'		=> $update['premium_uri'],
 			),
 		) );
 	}
@@ -380,6 +382,7 @@ function kts_maybe_update( $software_id, $force = false ) {
 			'description'		=> $description,
 			'requires_php'		=> $headers['RequiresPHP'],
 			'requires_cp'		=> $headers['RequiresCP'],
+			'premium_uri'		=> $headers['PremiumURI'],
 			'published_at'		=> \DateTime::createFromFormat( 'Y-m-d\TH:i:s\Z', $result->published_at )->format( 'U' ),
 		);
 	}

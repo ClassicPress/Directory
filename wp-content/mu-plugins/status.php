@@ -47,7 +47,6 @@ class Status{
 			echo '<option value="'.sanitize_key($key).'"'.sanitize_key($selected).'>'.esc_html($value).'</option>';
 		}
 		echo '</select>';
-		wp_nonce_field('change_status', 'change_status__nonce');
 		echo '</div>';
 	}
 
@@ -62,9 +61,6 @@ class Status{
 			return;
 		}
 		if (!current_user_can('edit_post', $post_ID)) {
-			return;
-		}
-		if (check_admin_referer('change_status', 'change_status__nonce') === false) {
 			return;
 		}
 		if (!array_key_exists('cpdir_status', $_REQUEST)) {
