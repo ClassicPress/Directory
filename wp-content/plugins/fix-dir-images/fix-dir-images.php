@@ -43,7 +43,7 @@ class FixDirImages {
 		}
 
 		$prefix = preg_replace(
-			'~https://github.com/([a-zA-Z1-9\-_]+)/([a-zA-Z1-9\-_]+)/releases/download/([a-zA-Z1-9\-_\.]+)/.*$~',
+			'~https://github.com/([a-zA-Z0-9\-_]+)/([a-zA-Z0-9\-_]+)/releases/download/([a-zA-Z0-9\-_\.]+)/.*$~',
 			'https://raw.githubusercontent.com/$1/$2/$3/',
 			$github_repo
 		);
