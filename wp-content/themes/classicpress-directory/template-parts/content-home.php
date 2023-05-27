@@ -17,8 +17,8 @@
         <div class="home-search-form">
             <form action="/" method="get">
                 <div class="home-search-input">
-                    <label for="ofsearch" class="screen-reader-text">Search</label>
-                    <input type="text" id="ofsearch" name="s" placeholder="Search…" value="" required="required">
+                    <label for="ofsearch" class="screen-reader-text">Search plugins and themes</label>
+                    <input type="text" id="ofsearch" name="s" placeholder="Search plugins and themes" value="" required="required">
                     <input type="hidden" name="post_types" value="plugin,theme">
                 </div>
                 <div class="home-search-btn">
