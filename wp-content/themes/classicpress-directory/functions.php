@@ -585,3 +585,14 @@ function custom_redirect() {
     }
 }
 add_action( 'template_redirect', 'custom_redirect' );
+
+/**
+ * Rewrite download URL
+ */
+function change_download_url($url) {
+    // Replace 'github.com' with 'domain.com'
+    $new_url = str_replace('github.com', 'staging-directory.classicpress.net', $url);
+    
+    // Return the new URL
+    return $new_url;
+}

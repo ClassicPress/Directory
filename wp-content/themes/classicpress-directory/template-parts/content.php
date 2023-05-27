@@ -31,7 +31,7 @@
 				</div>
 			</div>
 			<div class="software-action">
-				<a href="<?php echo get_post_meta($post->ID, 'download_link', true); ?>" title="<?php _e('Download', 'classicpress'); ?> <?php echo esc_attr($post->post_title); ?>" class="btn" role="button"><img src="<?php echo esc_url(get_template_directory_uri() . '/images/download-white.svg'); ?>" alt="download" width="18" height="18" aria-hidden="true"> <?php _e('Download', 'classicpress'); ?></a>
+				<a href="<?php echo esc_url(change_download_url(get_post_meta($post->ID, 'download_link', true))); ?>" title="<?php _e('Download', 'classicpress'); ?> <?php echo esc_attr($post->post_title); ?>" class="btn" role="button"><img src="<?php echo esc_url(get_template_directory_uri() . '/images/download-white.svg'); ?>" alt="download" width="18" height="18" aria-hidden="true"> <?php _e('Download', 'classicpress'); ?></a>
 			</div>
 		</header>
 
@@ -74,64 +74,64 @@
 				<li class="aside-item">
 					<?php _e('Version', 'classicpress'); ?>
 					<span class="item-data"><?php echo esc_html(get_post_meta($post->ID, 'current_version', true)); ?></span>
-				<?php
-				$published_at = get_post_meta($post->ID, 'published_at', true);
-				$published_at_atom = date(DateTimeInterface::ATOM, $published_at);
-				$published_at_human = date("F j, Y - g:i a", $published_at);
-				$published_at_diff = human_time_diff( $published_at, current_time('timestamp') );
-				if(isset($published_at)): ?>
-					<li class="aside-item">
+					<?php
+					$published_at = get_post_meta($post->ID, 'published_at', true);
+					$published_at_atom = date(DateTimeInterface::ATOM, $published_at);
+					$published_at_human = date("F j, Y - g:i a", $published_at);
+					$published_at_diff = human_time_diff($published_at, current_time('timestamp'));
+					if (isset($published_at)) : ?>
+				<li class="aside-item">
 					<?php _e('Last Updated', 'classicpress'); ?>
-						<span class="item-data"><time datetime="<?php esc_attr_e( $published_at_atom ); ?>" title="<?php esc_attr_e( $published_at_human ); ?>"><?php esc_html_e( $published_at_diff ); ?></time> <?php _e('ago', 'classicpress'); ?></span>
-					</li>
-				<?php endif; ?>
-				<li class="aside-item">
-					<?php _e('ClassicPress Version', 'classicpress'); ?>
-					<span class="item-data"><?php echo esc_html(get_post_meta($post->ID, 'requires_cp', true)) . '.0'; ?></span>
+					<span class="item-data"><time datetime="<?php esc_attr_e($published_at_atom); ?>" title="<?php esc_attr_e($published_at_human); ?>"><?php esc_html_e($published_at_diff); ?></time> <?php _e('ago', 'classicpress'); ?></span>
 				</li>
+			<?php endif; ?>
+			<li class="aside-item">
+				<?php _e('ClassicPress Version', 'classicpress'); ?>
+				<span class="item-data"><?php echo esc_html(get_post_meta($post->ID, 'requires_cp', true)) . '.0'; ?></span>
+			</li>
+			<li class="aside-item">
+				<?php _e('PHP Version', 'classicpress'); ?>
+				<span class="item-data"><?php echo esc_html(get_post_meta($post->ID, 'requires_php', true)) . '.0'; ?></span>
+			</li>
+			<?php
+			if ($post->post_type === 'plugin') {
+			?>
 				<li class="aside-item">
-					<?php _e('PHP Version', 'classicpress'); ?>
-					<span class="item-data"><?php echo esc_html(get_post_meta($post->ID, 'requires_php', true)) . '.0'; ?></span>
+					<?php _e('Categories', 'classicpress'); ?>
+					<span class="item-data"><?php the_category(); ?></span>
 				</li>
-				<?php
-				if ($post->post_type === 'plugin') {
-				?>
-					<li class="aside-item">
-						<?php _e('Categories', 'classicpress'); ?>
-						<span class="item-data"><?php the_category(); ?></span>
-					</li>
 
-				<?php
-				} elseif ($post->post_type === 'theme') {
-				?>
-					<li class="aside-item">
-						<?php _e('Tags', 'classicpress'); ?>
-						<span class="item-data"><?php the_tags('<div class="tags"><span class="tag-badge">', '</span><span class="tag-badge">', '</span></div>'); ?></span>
-					</li>
-
-				<?php
-				}
-				?>
-
-				<?php
-
-				$download_url = get_post_meta($post->ID, 'download_link', true);
-
-				// check if GitHub and get repo URL
-				if (strpos($download_url, 'github.com') !== false) {
-					$url_parts = explode('releases', $download_url);
-					$repo = array(
-						"url" => $url_parts[0],
-						"name" => "GitHub"
-					);
-				} else {
-					// TO-DO: Add support for other Git platforms
-				}
-				?>
+			<?php
+			} elseif ($post->post_type === 'theme') {
+			?>
 				<li class="aside-item">
-					<?php _e('Repository', 'classicpress'); ?>
-					<span class="item-data repo-link"><a href="<?php echo esc_url($repo['url']); ?>" target="_blank" rel="noopener noreferrer" title="<?php _e('Visit repository', 'classicpress'); ?>"><img src="<?php echo esc_url(get_template_directory_uri() . '/images/' . $repo['name'] . '.svg'); ?>" alt="<?php echo $repo['name']; ?>" width="14" height="14" aria-hidden="true"><?php echo $repo['name']; ?></a></span>
+					<?php _e('Tags', 'classicpress'); ?>
+					<span class="item-data"><?php the_tags('<div class="tags"><span class="tag-badge">', '</span><span class="tag-badge">', '</span></div>'); ?></span>
 				</li>
+
+			<?php
+			}
+			?>
+
+			<?php
+
+			$download_url = get_post_meta($post->ID, 'download_link', true);
+
+			// check if GitHub and get repo URL
+			if (strpos($download_url, 'github.com') !== false) {
+				$url_parts = explode('releases', $download_url);
+				$repo = array(
+					"url" => $url_parts[0],
+					"name" => "GitHub"
+				);
+			} else {
+				// TO-DO: Add support for other Git platforms
+			}
+			?>
+			<li class="aside-item">
+				<?php _e('Repository', 'classicpress'); ?>
+				<span class="item-data repo-link"><a href="<?php echo esc_url($repo['url']); ?>" target="_blank" rel="noopener noreferrer" title="<?php _e('Visit repository', 'classicpress'); ?>"><img src="<?php echo esc_url(get_template_directory_uri() . '/images/' . $repo['name'] . '.svg'); ?>" alt="<?php echo $repo['name']; ?>" width="14" height="14" aria-hidden="true"><?php echo $repo['name']; ?></a></span>
+			</li>
 			</ul>
 
 			<?php
@@ -158,7 +158,7 @@
 		</div>
 		<div class="software-item-meta">
 			<div class="meta-item left">
-				<a href="<?php echo esc_url(get_post_meta($post->ID, 'download_link', true)); ?>" title="<?php _e('Download', 'classicpress') . ' ' . esc_attr($post->post_title); ?>" target="_blank" rel="noopener noreferrer">
+				<a href="<?php echo esc_url(change_download_url(get_post_meta($post->ID, 'download_link', true))); ?>" title="<?php _e('Download', 'classicpress') . ' ' . esc_attr($post->post_title); ?>" target="_blank" rel="noopener noreferrer">
 					<img src="<?php echo esc_url(get_template_directory_uri() . '/images/download.svg'); ?>" alt="<?php _e('Download', 'classicpress'); ?>" width="18" height="18" aria-hidden="true">
 					<span><?php _e('Download', 'classicpress'); ?></span>
 				</a>
