@@ -501,3 +501,60 @@ function get_random_theme_posts()
 		echo '<p>No themes found.</p>';
 	}
 }
+
+/**
+ * Total counts and shortcodes
+ */
+function get_total_plugin_count() {
+    // Try to get data from the transient
+    $count = get_transient('total_plugin_count');
+
+    // If the transient doesn't exist or has expired
+    if (false === $count) {
+        // Query to get total plugin posts count
+        $args = array(
+            'post_type' => 'plugin',
+            'post_status' => 'publish',
+        );
+
+        $query = new WP_Query($args);
+        $count = $query->found_posts;
+
+        // Store the count in a transient, set to expire after 12 hours
+        set_transient('total_plugin_count', $count, 12 * HOUR_IN_SECONDS);
+    }
+
+    return $count;
+}
+
+function get_total_theme_count() {
+    // Try to get data from the transient
+    $count = get_transient('total_theme_count');
+
+    // If the transient doesn't exist or has expired
+    if (false === $count) {
+        // Query to get total theme posts count
+        $args = array(
+            'post_type' => 'theme',
+            'post_status' => 'publish',
+        );
+
+        $query = new WP_Query($args);
+        $count = $query->found_posts;
+
+        // Store the count in a transient, set to expire after 12 hours
+        set_transient('total_theme_count', $count, 12 * HOUR_IN_SECONDS);
+    }
+
+    return $count;
+}
+
+function total_plugin_count_shortcode() {
+    return get_total_plugin_count();
+}
+add_shortcode('total_plugin_count', 'total_plugin_count_shortcode');
+
+function total_theme_count_shortcode() {
+    return get_total_theme_count();
+}
+add_shortcode('total_theme_count', 'total_theme_count_shortcode');

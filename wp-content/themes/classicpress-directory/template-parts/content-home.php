@@ -10,6 +10,12 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
+    <section class="home-search">
+        <h1>ClassicPress Directory</h1>
+        <p class="home-lead">Extend your ClassicPress website with <?php echo do_shortcode( '[total_plugin_count]' ); ?> plugins and <?php echo do_shortcode( '[total_theme_count]' ); ?> themes.</p>
+        <?php echo do_shortcode( '[search-form]' ); ?>
+    </section>
+
 	<section class="featured-software">
     <?php
 			echo "<h2>Featured Plugins</h2>";
