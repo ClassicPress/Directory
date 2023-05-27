@@ -4,7 +4,7 @@
 get_header();
 ?>
 
-	<div id="primary" class="narrow-page">
+	<div id="primary" class="home-page">
 		<main id="main">
 
 		<?php

@@ -421,15 +421,18 @@ function get_random_plugin_posts()
 	if (!empty($cached_posts)) {
 		echo '<ul class="software-grid" id="home-featured-themes">';
 		foreach ($cached_posts as $post_id) {
+			$post = get_post($post_id);
 
 			$title = get_the_title($post_id);
 			$permalink = get_permalink($post_id);
-			$author = get_the_author_posts_link();
+			$author = get_author_posts_url($post->post_author);
+			$author_name = get_the_author_meta('display_name', $post->post_author);
 
 			echo '<li>';
-			echo '<h3 class="h3"><a href="' . $permalink . '">' . $title . '</a></h3>';
-			echo '<span class="software-author-link">' . $author . '</span>';
-			echo '</li>';
+			echo '<h3 class="h3"><a href="' . esc_url($permalink) . '">' . esc_html($title) . '</a></h3>';
+			echo '<span class="software-author-link"><a href="' . esc_url($author) . '">' . esc_html($author_name) . '</a></span><p>';
+			kts_excerpt_fallback($post);
+			echo '</p></li>';
 		}
 		echo '</ul>';
 	} else {
@@ -480,15 +483,18 @@ function get_random_theme_posts()
 	if (!empty($cached_posts)) {
 		echo '<ul class="software-grid" id="home-featured-themes">';
 		foreach ($cached_posts as $post_id) {
+			$post = get_post($post_id);
 
 			$title = get_the_title($post_id);
 			$permalink = get_permalink($post_id);
-			$author = get_the_author_posts_link();
+			$author = get_author_posts_url($post->post_author);
+			$author_name = get_the_author_meta('display_name', $post->post_author);
 
 			echo '<li>';
-			echo '<h3 class="h3"><a href="' . $permalink . '">' . $title . '</a></h3>';
-			echo '<span class="software-author-link">' . $author . '</span>';
-			echo '</li>';
+			echo '<h3 class="h3"><a href="' . esc_url($permalink) . '">' . esc_html($title) . '</a></h3>';
+			echo '<span class="software-author-link"><a href="' . esc_url($author) . '">' . esc_html($author_name) . '</a></span><p>';
+			kts_excerpt_fallback($post);
+			echo '</p></li>';
 		}
 		echo '</ul>';
 	} else {
