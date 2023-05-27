@@ -31,7 +31,7 @@
 				</div>
 			</div>
 			<div class="software-action">
-				<a href="<?php echo esc_url(change_download_url(get_post_meta($post->ID, 'download_link', true))); ?>" title="<?php _e('Download', 'classicpress'); ?> <?php echo esc_attr($post->post_title); ?>" class="btn" role="button"><img src="<?php echo esc_url(get_template_directory_uri() . '/images/download-white.svg'); ?>" alt="download" width="18" height="18" aria-hidden="true"> <?php _e('Download', 'classicpress'); ?></a>
+				<a href="<?php echo esc_url(get_post_meta($post->ID, 'download_link', true)); ?>" title="<?php _e('Download', 'classicpress'); ?> <?php echo esc_attr($post->post_title); ?>" class="btn" role="button"><img src="<?php echo esc_url(get_template_directory_uri() . '/images/download-white.svg'); ?>" alt="download" width="18" height="18" aria-hidden="true"> <?php _e('Download', 'classicpress'); ?></a>
 			</div>
 		</header>
 
@@ -158,7 +158,7 @@
 		</div>
 		<div class="software-item-meta">
 			<div class="meta-item left">
-				<a href="<?php echo esc_url(change_download_url(get_post_meta($post->ID, 'download_link', true))); ?>" title="<?php _e('Download', 'classicpress') . ' ' . esc_attr($post->post_title); ?>" target="_blank" rel="noopener noreferrer">
+				<a href="<?php echo esc_url(get_post_meta($post->ID, 'download_link', true)); ?>" title="<?php _e('Download', 'classicpress') . ' ' . esc_attr($post->post_title); ?>" target="_blank" rel="noopener noreferrer">
 					<img src="<?php echo esc_url(get_template_directory_uri() . '/images/download.svg'); ?>" alt="<?php _e('Download', 'classicpress'); ?>" width="18" height="18" aria-hidden="true">
 					<span><?php _e('Download', 'classicpress'); ?></span>
 				</a>
