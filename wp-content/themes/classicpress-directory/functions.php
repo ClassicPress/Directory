@@ -559,3 +559,29 @@ function total_theme_count_shortcode() {
     return get_total_theme_count();
 }
 add_shortcode('total_theme_count', 'total_theme_count_shortcode');
+
+/**
+ * Download URL redirect
+ */
+function custom_redirect() {
+    // Get the requested URL path
+    $request_uri = $_SERVER['REQUEST_URI'];
+
+    // Check if $request_uri starts with '/github'
+    if (strpos($request_uri, '/github') === 0) {
+        // Define the new base URL
+        $new_base_url = 'https://github.com';
+
+        // Remove 'github' from the requested URL path
+        $request_uri = substr($request_uri, strlen('/github'));
+
+        // Create the new URL
+        $new_url = $new_base_url . $request_uri;
+
+        // Perform the redirect
+        if ( wp_redirect( $new_url, 302 ) ) {
+            exit;
+        }
+    }
+}
+add_action( 'template_redirect', 'custom_redirect' );
