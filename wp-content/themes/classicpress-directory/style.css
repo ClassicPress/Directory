@@ -51,7 +51,7 @@ Susty was itself based on Underscores https://underscores.me/, (C) 2012-2017 Aut
 	--main-bg-color: #fffefc;
 	--cp-brand: #057f99;
 	--cp-brand-darker: #034a59;
-	--classic-bg-color: linear-gradient(-135deg, #3ebca6 18%, var(--cp-brand) 50%, #006b81 100%);
+	--classic-bg-color: var(var(--cp-brand));
 	--hover-bg-color: var(--cp-brand);
 	--font: "Source Sans Pro", "Helvetica Neue", Verdana, sans-serif;
 	--pre-font: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
@@ -1920,7 +1920,7 @@ ul.aside-items {
 		line-height: 1em;
 	}
 
-	#menu-main-menu>.menu-item>a {
+	#menu-main-menu>.menu-item:not(.get-btn)>a {
 		background: transparent !important;
 		border: 1px solid transparent !important;
 	}
@@ -1929,7 +1929,7 @@ ul.aside-items {
 		position: relative;
 	}
 
-	#menu-main-menu>.menu-item>a span::before {
+	#menu-main-menu>.menu-item:not(.get-btn)>a span::before {
 		content: '';
 		display: block;
 		position: absolute;
@@ -1943,17 +1943,21 @@ ul.aside-items {
 		transition: color 0.1s, transform 0.2s ease-out;
 	}
 
-	#menu-main-menu>.menu-item>a:active span::before {
+	#menu-main-menu>.menu-item:not(.get-btn)>a:active span::before {
 		background-color: rgb(255 255 255 / 60%);
 	}
 
-	#menu-main-menu>.menu-item>a:hover span::before,
-	#menu-main-menu>.menu-item>a:focus span::before,
-	#menu-main-menu>.menu-item.current-menu-item>a span::before {
+	#menu-main-menu>.menu-item:not(.get-btn)>a:hover span::before,
+	#menu-main-menu>.menu-item:not(.get-btn)>a:focus span::before,
+	#menu-main-menu>.menu-item.current-menu-item:not(.get-btn)>a span::before {
 		transform-origin: left top;
 		transform: scale(1, 1);
 	}
-
+	#menu-main-menu>.menu-item.get-btn a{
+		border: 1px solid #fff;
+		background: #fff;
+		color: var(--cp-brand);
+	}
 	.sub-menu {
 		width: 180px;
 	}
