@@ -15,8 +15,14 @@ get_header();
 
 	<div id="primary">
 		<main id="main">
+		<?php if( is_page(9) ){
+			echo "<h2>Featured Plugins</h2>";
+			get_random_plugin_posts();
+			echo "<hr>";
+			echo "<h2>Featured Themes</h2>";
+			get_random_theme_posts();
+		}
 
-		<?php
 		while ( have_posts() ) :
 			the_post();
 
