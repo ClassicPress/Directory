@@ -591,7 +591,7 @@ add_action( 'template_redirect', 'custom_redirect' );
  */
 function change_download_url($url) {
     // Replace 'github.com' with 'domain.com'
-    $new_url = str_replace('github.com', 'staging-directory.classicpress.net', $url);
+    $new_url = str_replace('github.com', 'staging-directory.classicpress.net/github-download', $url);
     
     // Return the new URL
     return $new_url;
