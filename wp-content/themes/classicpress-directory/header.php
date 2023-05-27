@@ -87,7 +87,7 @@
 
 				<div class="site-introduction">
 					<span class="logo" role="banner">
-						<a href="https://www.classicpress.net/" rel="home"><img src="https://www.classicpress.net/wp-content/themes/classicpress-susty-child/images/logo-white.svg" alt="ClassicPress logo" width="250"> <span class="screen-reader-text">Home</span></a>
+						<a href="/" rel="home"><img src="https://www.classicpress.net/wp-content/themes/classicpress-susty-child/images/logo-white.svg" alt="ClassicPress logo" width="250"> <span class="screen-reader-text">Home</span></a>
 					</span>
 				</div>
 
