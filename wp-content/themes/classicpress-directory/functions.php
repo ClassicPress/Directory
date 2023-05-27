@@ -569,12 +569,12 @@ function custom_redirect() {
 	wp_die($request_uri);
 
     // Check if $request_uri starts with '/github'
-    if (strpos($request_uri, '/github') === 0) {
+    if (strpos($request_uri, '/github-download') === 0) {
         // Define the new base URL
         $new_base_url = 'https://github.com';
 
         // Remove 'github' from the requested URL path
-        $request_uri = substr($request_uri, strlen('/github'));
+        $request_uri = substr($request_uri, strlen('/github-download'));
 
         // Create the new URL
         $new_url = $new_base_url . $request_uri;
