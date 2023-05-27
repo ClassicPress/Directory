@@ -160,7 +160,8 @@ function bedrock_modify_menu($items, $args)
 			$items = $items . $new_item;
 		} else {
 			$new_item = '<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="' . esc_url(wp_login_url()) . '"><span>Log In</span></a></li>';
-			$items = $items . $new_item;
+			$get_btn = '<li class="menu-item menu-item-type-post_type menu-item-object-page get-btn"><a href="https://www.classicpress.net/download?ref=directory"><span>Get ClassicPress</span></a></li>';
+			$items = $items . $new_item . $get_btn;
 		}
 	}
 	return $items;

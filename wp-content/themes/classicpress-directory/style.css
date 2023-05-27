@@ -1707,6 +1707,9 @@ ul.aside-items {
 	margin: 0;
 	width: 100%;
 }
+.home-search .home-search-form form input[type=submit]{
+	text-align: center;
+}
 .featured-software h2,
 .home-content h2{
 	margin-top: 3.5rem;

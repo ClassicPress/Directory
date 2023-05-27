@@ -22,7 +22,7 @@
 	<div id="page">
 		<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e('Skip to content', 'bedrock'); ?></a>
 
-		<section class="home-hero-container">
+		<!--<section class="home-hero-container">
 			<div id="inner-header" class="outer-width">
 				<span class="logo" role="banner">
 					<a href="https://www.classicpress.net/" rel="home"><img src="https://www.classicpress.net/wp-content/themes/classicpress-susty-child/images/logo-white.svg" alt="ClassicPress logo" width="250"> <span class="screen-reader-text">Home</span></a>
@@ -54,10 +54,10 @@
 							<li class="menu-item menu-item-type-post_type menu-item-object-page"><a id="get" href="https://www.classicpress.net/get-classicpress/">Get ClassicPress</a></li>
 						</ul>
 					</div>
-				</nav><!-- #site-navigation -->
+				</nav><-- #site-navigation ->
 
 			</div>
-		</section>
+		</section>-->
 
 		<header id="masthead" class="masthead">
 			<div id="search-form-wrapper" style="display: none;">
@@ -86,7 +86,9 @@
 			<div id="masthead-inner" class="masthead-inner outer-width aligncenter">
 
 				<div class="site-introduction">
-					<h1 class="masthead-title"><a href="<?php echo esc_url(home_url('/')); ?>" rel="home"><?php _e('Directory', 'classicpress'); ?></a></h1>
+					<span class="logo" role="banner">
+						<a href="https://www.classicpress.net/" rel="home"><img src="https://www.classicpress.net/wp-content/themes/classicpress-susty-child/images/logo-white.svg" alt="ClassicPress logo" width="250"> <span class="screen-reader-text">Home</span></a>
+					</span>
 				</div>
 
 				<div class="menu-toggles">
