@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Functions which enhance the theme by hooking into ClassicPress
  */
@@ -9,36 +10,34 @@
  * @param array $classes Classes for the body element.
  * @return array
  */
-function bedrock_wp_body_classes( $classes ) {
+function bedrock_wp_body_classes($classes)
+{
 
 	# Adds a class of hfeed to non-singular pages
-	if ( ! is_singular() ) {
+	if (!is_singular()) {
 		$classes[] = 'hfeed';
 	}
 
 	# Adds classes according to whether sidebar exists
 	$sidebars = wp_get_sidebars_widgets();
-	if ( ! is_active_sidebar( 'sidebar-1' ) && ! is_active_sidebar( 'sidebar-2' ) ) {
+	if (!is_active_sidebar('sidebar-1') && !is_active_sidebar('sidebar-2')) {
 		$classes[] = 'no-sidebars';
-	}
-	elseif ( is_active_sidebar( 'sidebar-1' ) && is_active_sidebar( 'sidebar-2' ) ) {
+	} elseif (is_active_sidebar('sidebar-1') && is_active_sidebar('sidebar-2')) {
 		$classes[] = 'two-sidebars';
-	}
-	else {
+	} else {
 		$classes[] = 'one-sidebar';
 	}
 
 	# Adds a class for when logged in or out
-	if ( is_user_logged_in() ) {
+	if (is_user_logged_in()) {
 		$classes[] = 'logged-in';
-	}
-	else {
+	} else {
 		$classes[] = 'logged-out';
 	}
 
 	return $classes;
 }
-add_filter( 'body_class', 'bedrock_wp_body_classes' );
+add_filter('body_class', 'bedrock_wp_body_classes');
 
 
 /**
@@ -47,15 +46,15 @@ add_filter( 'body_class', 'bedrock_wp_body_classes' );
  * @param array $attr	Attributes of the featured post.
  * @return array
  */
-function bedrock_check_featured_image_attributes( $attr, $attachment, $size ) {
+function bedrock_check_featured_image_attributes($attr, $attachment, $size)
+{
 
-	if ( is_singular() ) {
+	if (is_singular()) {
 
 		/*
 		 * Ensure featured image is loaded without delay on singular pages.
 		 */
 		$attr['loading'] = 'eager';
-
 	} else {
 
 		global $wp_query;
@@ -65,24 +64,25 @@ function bedrock_check_featured_image_attributes( $attr, $attachment, $size ) {
 		 * Other featured images are lazy-loaded.
 		 */
 		$attr['loading'] = 'lazy';
-		if ( $wp_query->current_post === 0 ) {
+		if ($wp_query->current_post === 0) {
 			$attr['loading'] = 'eager';
 		}
 
 		/*
 		 * If no alt tag is set, use the post title.
 		 */
-		if ( empty( $attr['alt'] ) ) {
+		if (empty($attr['alt'])) {
 			$attr['alt'] = get_the_title();
 		}
 	}
 	return $attr;
 }
-add_filter( 'wp_get_attachment_image_attributes', 'bedrock_check_featured_image_attributes', 10, 3 );
+add_filter('wp_get_attachment_image_attributes', 'bedrock_check_featured_image_attributes', 10, 3);
 
 
 /* DEVELOPERS ALPHABET */
-function kts_developers_alphabet() {
+function kts_developers_alphabet()
+{
 	$list = '<div class="alphadevelopers" role="tablist">
 		<button id="letter-all" class="letter" role="tab" aria-selected="true" aria-controls="developers">ALL</button>
 		<button id="letter-a" class="letter" tabindex="-1" role="tab" aria-selected="false" aria-controls="letter-a-panel">A</button>
@@ -117,34 +117,35 @@ function kts_developers_alphabet() {
 
 
 /* DISPLAY LIST OF DEVELOPERS */
-function kts_list_developers() {
-	$developers = get_transient( 'developers' );
+function kts_list_developers()
+{
+	$developers = get_transient('developers');
 
-	if ( empty( $developers ) ) {
+	if (empty($developers)) {
 		$args = array(
 			'role__not_in'	=> 'subscriber',
 			'orderby'		=> 'display_name',
 		);
-		$users = get_users( $args );
+		$users = get_users($args);
 
 		$previous_initial = 'A';
 		$developers = '<div id="developers" class="developers"><ul id="letter-a-panel" class="developer-panel" role="tabpanel">';
 
-		if ( ! empty( $users ) ) {
-			foreach ( $users as $user ) {
-				if ( count_user_posts( $user->ID, [ 'plugin', 'theme' ], true ) === '0' ) {
+		if (!empty($users)) {
+			foreach ($users as $user) {
+				if (count_user_posts($user->ID, ['plugin', 'theme'], true) === '0') {
 					continue;
 				}
 
-				$initial = strtoupper( remove_accents( $user->display_name[0] ) ); // first letter
-				if ( $initial !== $previous_initial ) {
-					$developers .= '</ul><ul id="letter-' . strtolower( $initial ) . '-panel" class="developer-panel" role="tabpanel">';
+				$initial = strtoupper(remove_accents($user->display_name[0])); // first letter
+				if ($initial !== $previous_initial) {
+					$developers .= '</ul><ul id="letter-' . strtolower($initial) . '-panel" class="developer-panel" role="tabpanel">';
 					$previous_initial = $initial;
 				}
 
-				$developers .= '<li><span>' . get_avatar( $user->ID, 24 ) . '</span> <a href="' . esc_url( get_author_posts_url( $user->ID ) ) . '" class="developer">' . esc_html( $user->display_name ) . '</a>&emsp;<a href="' . esc_url( 'https://github.com/' . get_user_meta( $user->ID, 'github_username', true ) . '/' ) . '" title="' . __( 'GitHub Repository for ', 'classicpress' ) . esc_attr( $user->display_name ) . '"><i class="cpicon-github dev-github"></i></a></li>';
+				$developers .= '<li><span>' . get_avatar($user->ID, 24) . '</span> <a href="' . esc_url(get_author_posts_url($user->ID)) . '" class="developer">' . esc_html($user->display_name) . '</a>&emsp;<a href="' . esc_url('https://github.com/' . get_user_meta($user->ID, 'github_username', true) . '/') . '" title="' . __('GitHub Repository for ', 'classicpress') . esc_attr($user->display_name) . '"><i class="cpicon-github dev-github"></i></a></li>';
 
-				if ( $user === end( $users ) ) { // last name in list
+				if ($user === end($users)) { // last name in list
 					$developers .= '</ul>';
 				}
 			}
@@ -152,7 +153,7 @@ function kts_list_developers() {
 
 		$developers .= '</div>';
 
-		set_transient( 'developers', $developers, MONTH_IN_SECONDS );
+		set_transient('developers', $developers, MONTH_IN_SECONDS);
 	}
 
 	echo $developers;
@@ -160,40 +161,48 @@ function kts_list_developers() {
 
 
 /* REFRESH DEVELOPERS TRANSIENT AS NECESSARY */
-function kts_purge_developers_cache( $user_id ) {
-	delete_transient( 'developers' );
-	delete_transient( 'dir-user-stats' );
+function kts_purge_developers_cache($user_id)
+{
+	delete_transient('developers');
+	delete_transient('dir-user-stats');
 }
 
-add_action( 'user_register', 'kts_purge_developers_cache' );
-add_action( 'delete_user', 'kts_purge_developers_cache' );
-add_action( 'profile_update', 'kts_purge_developers_cache' );
+add_action('user_register', 'kts_purge_developers_cache');
+add_action('delete_user', 'kts_purge_developers_cache');
+add_action('profile_update', 'kts_purge_developers_cache');
 
-function kts_purge_developers_cpt_cache( $post_id ) {
+function kts_purge_developers_cpt_cache($post_id)
+{
 
 	# Bail if an autosave
-	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
 		return;
 	}
 
 	# Bail if not a plugin or theme CPT
-	if ( ! in_array( get_post_type( $post_id ), ['plugin', 'theme'] ) ) {
+	if (!in_array(get_post_type($post_id), ['plugin', 'theme'])) {
 		return;
 	}
 
-	delete_transient( 'developers' );
-	delete_transient( 'dir-user-stats' );
+	delete_transient('developers');
+	delete_transient('dir-user-stats');
 }
-add_action( 'save_post', 'kts_purge_developers_cpt_cache' );
-add_action( 'delete_post', 'kts_purge_developers_cpt_cache' );
+add_action('save_post', 'kts_purge_developers_cpt_cache');
+add_action('delete_post', 'kts_purge_developers_cpt_cache');
 
 
 /* SPECIAL EXCERPT FUNCTION */
-function kts_excerpt_fallback( $post ) {
+function kts_excerpt_fallback($post)
+{
 	$excerpt = $post->post_excerpt;
-	if ( empty( $excerpt ) ) {
-		$excerpt = substr( strip_tags( $post->post_content ), 0, 150 );
-		if ( strlen( $post->post_content ) > 150 ) {
+
+	if (empty($excerpt)) {
+		$excerpt = substr(strip_tags($post->post_content), 0, 150);
+
+		// Remove '= Text =' pattern
+		$excerpt = preg_replace('/=\s*[^=]*\s*=/i', '', $excerpt);
+
+		if (strlen($post->post_content) > 150) {
 			$excerpt = $excerpt . ' ...';
 		}
 	}
@@ -202,59 +211,60 @@ function kts_excerpt_fallback( $post ) {
 
 
 /* SHOW CPTs ON CATEGORY, TAGS, AND AUTHOR ARCHIVE PAGES */
-function kts_query_post_type( $query ) {
+function kts_query_post_type($query)
+{
 
 	# Don't run on admin pages
-	if ( is_admin() ) {
+	if (is_admin()) {
 		return;
 	}
 
 	# Don't run if not the main query
-	if ( ! $query->is_main_query() ) {
+	if (!$query->is_main_query()) {
 		return;
 	}
 
-    if ( is_category() ) {
-        $query->set( 'post_type', 'plugin' );
-    }
-    elseif ( is_tag() ) {
-        $query->set( 'post_type', 'theme' );
-    }
-    elseif ( is_author() ) {
-		$query->set( 'post_type', ['plugin', 'theme'] );
+	if (is_category()) {
+		$query->set('post_type', 'plugin');
+	} elseif (is_tag()) {
+		$query->set('post_type', 'theme');
+	} elseif (is_author()) {
+		$query->set('post_type', ['plugin', 'theme']);
 	}
 }
-add_action( 'pre_get_posts', 'kts_query_post_type' );
+add_action('pre_get_posts', 'kts_query_post_type');
 
 
 /* CACHE USER POST COUNT, USEFUL UNTIL COUNT_USER_POSTS WILL IMPLEMENT A CACHING SYSTEM. */
-function kts_get_user_stat ($id) {
-	$saved = get_transient( 'dir-user-stats' );
-	if ( $saved !== false && isset($saved[$id]) ) {
+function kts_get_user_stat($id)
+{
+	$saved = get_transient('dir-user-stats');
+	if ($saved !== false && isset($saved[$id])) {
 		return $saved[$id];
 	}
-	if ( $saved === false ) {
+	if ($saved === false) {
 		$saved = [];
 	}
-	foreach ( [ 'theme', 'plugin' ] as $item_type ) {
-		$saved[$id][$item_type] = count_user_posts( $id, $item_type, true );
+	foreach (['theme', 'plugin'] as $item_type) {
+		$saved[$id][$item_type] = count_user_posts($id, $item_type, true);
 	}
-	set_transient( 'dir-user-stats', $saved, 5 * MINUTE_IN_SECONDS );
+	set_transient('dir-user-stats', $saved, 5 * MINUTE_IN_SECONDS);
 	return $saved[$id];
 }
 
 /* RENDER USER TABS. RETURN THE ACTIVE ITEM TYPE*/
-function kts_render_user_tabs ( $cached_count ) {
+function kts_render_user_tabs($cached_count)
+{
 	$activated   = false;
 	$item_number = 0;
 	$active_item = '';
-	foreach ( [ 'plugin', 'theme' ] as $item_type ) {
+	foreach (['plugin', 'theme'] as $item_type) {
 		$item_number++;
 		$class         = 'ui-button ' . $item_type;
 		$aria_selected = 'aria-selected="false"';
 		$tabindex      = 'tabindex="-1"';
 		$name          = ucfirst($item_type) . 's (' . $cached_count[$item_type] . ')';
-		if ( $cached_count[$item_type] > 0 && $activated === false) {
+		if ($cached_count[$item_type] > 0 && $activated === false) {
 			$activated     = true;
 			$class        .= ' ui-state-active';
 			$aria_selected = 'aria-selected="true"';
@@ -262,7 +272,7 @@ function kts_render_user_tabs ( $cached_count ) {
 			$active_item   = $item_type;
 		}
 		$hidden = $cached_count[$item_type] === "0" ? ' hidden' : '';
-		echo '<button id="ui-id-' . $item_number . '" class="' . $class . '" aria-controls="tabs-' . $item_number .'" ' . $aria_selected .' role="tab"' . $hidden . '>' . $name . '</button>';
+		echo '<button id="ui-id-' . $item_number . '" class="' . $class . '" aria-controls="tabs-' . $item_number . '" ' . $aria_selected . ' role="tab"' . $hidden . '>' . $name . '</button>';
 	}
 	return $active_item;
 }

@@ -428,11 +428,11 @@ function get_random_plugin_posts()
 			$author = get_author_posts_url($post->post_author);
 			$author_name = get_the_author_meta('display_name', $post->post_author);
 
-			echo '<li>';
+			echo '<li><div class="software-item-info">';
 			echo '<h3 class="h3"><a href="' . esc_url($permalink) . '">' . esc_html($title) . '</a></h3>';
 			echo '<span class="software-author-link"><a href="' . esc_url($author) . '">' . esc_html($author_name) . '</a></span><p>';
 			kts_excerpt_fallback($post);
-			echo '</p></li>';
+			echo '</p></div></li>';
 		}
 		echo '</ul>';
 	} else {
@@ -490,11 +490,11 @@ function get_random_theme_posts()
 			$author = get_author_posts_url($post->post_author);
 			$author_name = get_the_author_meta('display_name', $post->post_author);
 
-			echo '<li>';
+			echo '<li><div class="software-item-info">';
 			echo '<h3 class="h3"><a href="' . esc_url($permalink) . '">' . esc_html($title) . '</a></h3>';
 			echo '<span class="software-author-link"><a href="' . esc_url($author) . '">' . esc_html($author_name) . '</a></span><p>';
 			kts_excerpt_fallback($post);
-			echo '</p></li>';
+			echo '</p></div></li>';
 		}
 		echo '</ul>';
 	} else {
