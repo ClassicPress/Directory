@@ -566,9 +566,8 @@ add_shortcode('total_theme_count', 'total_theme_count_shortcode');
 function custom_redirect() {
     // Get the requested URL path
     $request_uri = $_SERVER['REQUEST_URI'];
-	wp_die($request_uri);
 
-    // Check if $request_uri starts with '/github'
+    // Check if $request_uri starts with '/github-download - this allows multiple providers'
     if (strpos($request_uri, '/github-download') === 0) {
         // Define the new base URL
         $new_base_url = 'https://github.com';
