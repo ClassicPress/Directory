@@ -1677,6 +1677,7 @@ ul.aside-items {
 	display: flex;
     flex-direction: column;
     align-items: center;
+	padding: 4rem 0;
 }
 .home-search h1{
     font-size: 4rem;
@@ -1695,6 +1696,13 @@ ul.aside-items {
 .home-search .home-search-form form{
 	display: flex;
 	flex-direction: row;
+	gap: 1rem;
+}
+.home-search .home-search-form form .home-search-input{
+	flex: 1 1 auto;
+}
+.home-search .home-search-form form input{
+	margin: 0;
 }
 /*--------------------------------------------------------------
 ## CSS for larger tablets upwards

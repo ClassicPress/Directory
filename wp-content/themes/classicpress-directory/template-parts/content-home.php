@@ -27,7 +27,7 @@
             </form>
         </div>
     </section>
-
+    <hr>
     <section class="featured-software">
         <?php
         echo "<h2>Featured Plugins</h2>";
