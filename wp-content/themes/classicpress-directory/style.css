@@ -51,7 +51,7 @@ Susty was itself based on Underscores https://underscores.me/, (C) 2012-2017 Aut
 	--main-bg-color: #fffefc;
 	--cp-brand: #057f99;
 	--cp-brand-darker: #034a59;
-	--classic-bg-color: var(var(--cp-brand));
+	--classic-bg-color: var(--cp-brand);
 	--hover-bg-color: var(--cp-brand);
 	--font: "Source Sans Pro", "Helvetica Neue", Verdana, sans-serif;
 	--pre-font: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
@@ -1957,6 +1957,7 @@ ul.aside-items {
 		border: 1px solid #fff;
 		background: #fff;
 		color: var(--cp-brand);
+		border-radius: var(--border-radius);
 	}
 	.sub-menu {
 		width: 180px;
