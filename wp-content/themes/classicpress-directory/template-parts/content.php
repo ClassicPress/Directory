@@ -135,7 +135,7 @@
 			</ul>
 
 			<?php
-			$premium_link = filter_var(get_the_author_meta('premium_uri'), FILTER_VALIDATE_URL);
+			$premium_link = filter_var(get_post_meta($post->ID, 'premium_uri', true), FILTER_VALIDATE_URL);
 			if ($premium_link !== FALSE) :
 				?>
 			<div class="premium-notice">
@@ -148,11 +148,13 @@
 			<?php
 			// Tip box
 			$donation_link = filter_var(get_the_author_meta('donation_url'), FILTER_VALIDATE_URL);
+			$author_id = get_post_field( 'post_author', $post->ID );
+			$author_display_name = get_the_author_meta('display_name', $author_id);
 			if ($donation_link !== FALSE) :
 			?>
 				<div class="donation-box">
 					<p><?php printf(__('Thank developer and support future development of this %s by tipping them.', 'classicpress'), get_post_type()); ?></p>
-					<a href="<?php echo esc_url($donation_link); ?>" target="blank" class="btn" title="<?php _e('Click to tip', 'classicpress'); ?>" rel="nofollow ugc external noopener"><?php _e('Tip', 'classicpress'); ?></a>
+					<a href="<?php echo esc_url($donation_link); ?>" target="blank" class="btn" title="<?php _e('Click to tip', 'classicpress'); ?>" rel="nofollow ugc external noopener"><?php printf(__('Tip %s', 'classicpress'), $author_display_name); ?></a>
 				</div>
 			<?php endif; ?>
 		</aside>
