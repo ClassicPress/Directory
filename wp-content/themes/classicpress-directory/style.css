@@ -1521,6 +1521,21 @@ ul.aside-items {
 	right: 2px;
 }
 
+.premium-notice{
+	margin: 0 0 2rem;
+    border-bottom: 1px solid var(--gray-border);
+    padding: 2rem 0;
+}
+.premium-notice h3{
+	font-size: 1.3rem;
+    margin: 0;
+	text-transform: capitalize;
+}
+.premium-notice p,
+.premium-notice a{
+	margin: 0;
+    font-size: 1rem;
+}
 .donation-box{
 	text-align: center;
     background-color: var(--light-gray);

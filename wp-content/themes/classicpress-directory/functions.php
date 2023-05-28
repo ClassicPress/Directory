@@ -317,6 +317,22 @@ function classicpress_nofollow_callback($matches)
 };
 
 /**
+ * Remove H1 headings from the_content, which is the README.md content to improve accessability/SEO
+ */
+add_filter('the_content', 'remove_h1_tags');
+
+function remove_h1_tags($content) {
+    global $post;
+    $post_type = get_post_type($post);
+
+    if ($post_type == 'plugin' || $post_type == 'theme') {
+        $content = preg_replace('#<h1[^>]*>.*?</h1>#si', '', $content);
+    }
+    
+    return $content;
+}
+
+/**
  * Developer profile bio label
  */
 add_filter('gettext', 'dev_bio_label');

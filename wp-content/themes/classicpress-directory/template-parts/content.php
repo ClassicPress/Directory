@@ -36,7 +36,7 @@
 		</header>
 
 		<section id="software" class="software">
-			<h2 class="h5 description">
+			<h2 class="screen-reader-text">
 				<?php
 				switch (get_post_type()) {
 					case 'plugin':
@@ -135,12 +135,24 @@
 			</ul>
 
 			<?php
+			$premium_link = filter_var(get_the_author_meta('premium_uri'), FILTER_VALIDATE_URL);
+			if ($premium_link !== FALSE) :
+				?>
+			<div class="premium-notice">
+				<h3><?php printf(__('Commercial %s', 'classicpress'), get_post_type()); ?></h3>
+				<p><?php printf(__('This %s is free, but it offers a paid version, addons, or requires a paid account.', 'classicpress'), get_post_type()); ?>
+				<a href="<?php echo esc_url($premium_link); ?>" target="blank" title="<?php _e('Learn more', 'classicpress'); ?>" rel="nofollow ugc external noopener"><?php _e('Learn More', 'classicpress'); ?></a>
+				</p>
+			</div>
+			<?php endif; ?>
+			<?php
+			// Tip box
 			$donation_link = filter_var(get_the_author_meta('donation_url'), FILTER_VALIDATE_URL);
 			if ($donation_link !== FALSE) :
 			?>
 				<div class="donation-box">
-					<p><?php printf(__('Support development of this %s by donating directly to the author.', 'classicpress'), get_post_type()); ?></p>
-					<a href="<?php echo esc_url($donation_link); ?>" target="blank" class="btn" title="<?php _e('Click to donate', 'classicpress'); ?>" rel="nofollow ugc external noopener"><?php _e('Donate', 'classicpress'); ?></a>
+					<p><?php printf(__('Thank developer and support future development of this %s by tipping them.', 'classicpress'), get_post_type()); ?></p>
+					<a href="<?php echo esc_url($donation_link); ?>" target="blank" class="btn" title="<?php _e('Click to tip', 'classicpress'); ?>" rel="nofollow ugc external noopener"><?php _e('Tip', 'classicpress'); ?></a>
 				</div>
 			<?php endif; ?>
 		</aside>
