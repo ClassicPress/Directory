@@ -141,7 +141,7 @@
 			<div class="premium-notice">
 				<h3><?php printf(__('Commercial %s', 'classicpress'), get_post_type()); ?></h3>
 				<p><?php printf(__('This %s is free, but it offers a paid version, addons, or requires a paid account.', 'classicpress'), get_post_type()); ?>
-				<a href="<?php echo esc_url($premium_link); ?>" target="blank" title="<?php _e('Learn more', 'classicpress'); ?>" rel="nofollow ugc external noopener"><?php _e('Learn More', 'classicpress'); ?></a>
+				<a href="<?php echo esc_url($premium_link); ?>" target="blank" class="external" title="<?php _e('Learn more', 'classicpress'); ?>" rel="nofollow ugc external noopener"><?php _e('Learn more', 'classicpress'); ?></a>
 				</p>
 			</div>
 			<?php endif; ?>
