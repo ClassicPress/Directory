@@ -154,7 +154,7 @@
 			?>
 				<div class="donation-box">
 					<p><?php printf(__('Thank developer and support future development of this %s by tipping them.', 'classicpress'), get_post_type()); ?></p>
-					<a href="<?php echo esc_url($donation_link); ?>" target="blank" class="btn" title="<?php _e('Click to tip', 'classicpress'); ?>" rel="nofollow ugc external noopener"><?php printf(__('Tip %s', 'classicpress'), $author_display_name); ?></a>
+					<a href="<?php echo esc_url($donation_link); ?>" target="blank" class="external btn" title="<?php _e('Click to tip', 'classicpress'); ?>" rel="nofollow ugc external noopener"><?php printf(__('Tip %s', 'classicpress'), $author_display_name); ?></a>
 				</div>
 			<?php endif; ?>
 		</aside>
