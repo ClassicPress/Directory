@@ -417,13 +417,11 @@ input[type="submit"],
 
 [type="reset"] {
 	float: right;
-	background: var(--dark-gray);
 }
 
 button:hover,
 button:focus,
 input[type="button"]:hover,
-input[type="reset"]:hover,
 input[type="submit"]:hover,
 .btn:hover {
 	background: var(--button-bg-hover);
@@ -433,8 +431,6 @@ button:active,
 button:focus,
 input[type="button"]:active,
 input[type="button"]:focus,
-input[type="reset"]:active,
-input[type="reset"]:focus,
 input[type="submit"]:active,
 input[type="submit"]:focus,
 .btn:active,
@@ -1047,13 +1043,16 @@ nav ul li:focus-within ul {
 	background: var(--font-alt-color) !important;
 }
 
-.close-search button {
+.close-search button,
+[type="reset"] {
 	background: var(--pre-bg-color);
 	border-color: var(--pre-bg-color);
 	color: var(--dark-gray);
 }
 .close-search button:hover,
-.close-search button:focus{
+.close-search button:focus,
+[type="reset"]:hover,
+[type="reset"]:focus{
 	background: var(--gray);
 	border-color: var(--gray);
 	color: var(--font-color);
