@@ -575,3 +575,18 @@ function total_theme_count_shortcode() {
     return get_total_theme_count();
 }
 add_shortcode('total_theme_count', 'total_theme_count_shortcode');
+
+/**
+ * Human readable numbers
+ */
+function human_readable_number($number) {
+    if ($number >= 1000000000) {
+        return number_format($number / 1000000000, 1) . 'B';
+    } elseif ($number >= 1000000) {
+        return number_format($number / 1000000, 1) . 'M';
+    } elseif ($number >= 1000) {
+        return number_format($number / 1000, 1) . 'K';
+    } else {
+        return $number;
+    }
+}

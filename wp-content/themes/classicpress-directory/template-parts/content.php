@@ -132,23 +132,30 @@
 				<?php _e('Repository', 'classicpress'); ?>
 				<span class="item-data repo-link"><a href="<?php echo esc_url($repo['url']); ?>" target="_blank" rel="noopener noreferrer" title="<?php _e('Visit repository', 'classicpress'); ?>"><img src="<?php echo esc_url(get_template_directory_uri() . '/images/' . $repo['name'] . '.svg'); ?>" alt="<?php echo $repo['name']; ?>" width="14" height="14" aria-hidden="true"><?php echo $repo['name']; ?></a></span>
 			</li>
+			<?php $active_installations = filter_var(get_post_meta($post->ID, 'active_installations', true), FILTER_VALIDATE_INT);
+			if ($active_installations) : ?>
+				<li class="aside-item">
+					<?php _e('Active Installations', 'classicpress'); ?>
+					<span class="item-data repo-link" title="<?php echo $active_installations; ?>"><?php echo human_readable_number($active_installations); ?></span>
+				</li>
+			<?php endif; ?>
 			</ul>
 
 			<?php
 			$premium_link = filter_var(get_post_meta($post->ID, 'premium_uri', true), FILTER_VALIDATE_URL);
 			if ($premium_link !== FALSE) :
-				?>
-			<div class="premium-notice">
-				<h3><?php printf(__('Commercial %s', 'classicpress'), get_post_type()); ?></h3>
-				<p><?php printf(__('This %s is free, but it offers a paid version, addons, or requires a paid account.', 'classicpress'), get_post_type()); ?>
-				<a href="<?php echo esc_url($premium_link); ?>" target="blank" class="external" title="<?php _e('Learn more', 'classicpress'); ?>" rel="nofollow ugc external noopener"><?php _e('Learn more', 'classicpress'); ?></a>
-				</p>
-			</div>
+			?>
+				<div class="premium-notice">
+					<h3><?php printf(__('Commercial %s', 'classicpress'), get_post_type()); ?></h3>
+					<p><?php printf(__('This %s is free, but it offers a paid version, addons, or requires a paid account.', 'classicpress'), get_post_type()); ?>
+						<a href="<?php echo esc_url($premium_link); ?>" target="blank" class="external" title="<?php _e('Learn more', 'classicpress'); ?>" rel="nofollow ugc external noopener"><?php _e('Learn more', 'classicpress'); ?></a>
+					</p>
+				</div>
 			<?php endif; ?>
 			<?php
 			// Tip box
 			$donation_link = filter_var(get_the_author_meta('donation_url'), FILTER_VALIDATE_URL);
-			$author_id = get_post_field( 'post_author', $post->ID );
+			$author_id = get_post_field('post_author', $post->ID);
 			$author_display_name = get_the_author_meta('display_name', $author_id);
 			if ($donation_link !== FALSE) :
 			?>
