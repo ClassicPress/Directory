@@ -1048,8 +1048,9 @@ nav ul li:focus-within ul {
 }
 
 .close-search button {
-	background: var(--gray);
-	color: var(--font-color);
+	background: var(--pre-bg-color);
+	border-color: var(--pre-bg-color);
+	color: var(--dark-gray);
 }
 
 .open-search a {
