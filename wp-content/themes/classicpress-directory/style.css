@@ -1746,17 +1746,17 @@ ul.aside-items {
 	width: 100%;
 }
 
-.home-search .home-search-form form {
+.home-search .home-search-form form div{
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
 }
 
-.home-search .home-search-form form .home-search-input {
+.home-search .home-search-form form div .home-search-input {
 	flex: 1 1 auto;
 }
 
-.home-search .home-search-form form input {
+.home-search .home-search-form form div input {
 	margin: 0;
 	width: 100%;
 	padding: 0.5rem 1rem;
@@ -1764,7 +1764,7 @@ ul.aside-items {
     line-height: 1.5;
 }
 
-.home-search .home-search-form form input[type=submit] {
+.home-search .home-search-form form div input[type=submit] {
 	text-align: center;
 }
 
@@ -2131,7 +2131,7 @@ ul.aside-items {
 		max-width: 50%;
 	}
 
-	.home-search .home-search-form form {
+	.home-search .home-search-form form div {
 		flex-direction: row;
 	}
 }
