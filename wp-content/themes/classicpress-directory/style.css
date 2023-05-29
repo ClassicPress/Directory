@@ -55,6 +55,7 @@ Susty was itself based on Underscores https://underscores.me/, (C) 2012-2017 Aut
 	--classic-bg-color: var(--cp-brand);
 	--hover-bg-color: var(--cp-brand);
 	--font: "Source Sans Pro", "Helvetica Neue", Verdana, sans-serif;
+	--font-size-default: calc(16px + 2 * (100vw / 1500));
 	--pre-font: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
 	--code-font: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
 	--readme-font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
@@ -117,7 +118,7 @@ optgroup,
 textarea {
 	color: var(--font-color);
 	font-family: var(--font);
-	font-size: calc(15px + 2 * (100vw / 1500));
+	font-size: var(--font-size-default);
 	line-height: 1.5;
 }
 
@@ -361,7 +362,7 @@ input[type="button"],
 input[type="reset"],
 input[type="submit"],
 .btn {
-	border: 1px solid var(--nav-link-color);
+	border: 1px solid var(--button-bg);
 	border-radius: var(--border-radius);
 	background: var(--button-bg);
 	color: var(--font-alt-color);
@@ -1758,6 +1759,9 @@ ul.aside-items {
 .home-search .home-search-form form input {
 	margin: 0;
 	width: 100%;
+	padding: 0.5rem 1rem;
+    font-size: var(--font-size-default);
+    line-height: 1.5;
 }
 
 .home-search .home-search-form form input[type=submit] {

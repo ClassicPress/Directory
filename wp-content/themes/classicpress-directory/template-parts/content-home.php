@@ -16,13 +16,15 @@
         <p class="home-lead">Extend your ClassicPress website with <mark><?php echo do_shortcode('[total_plugin_count]'); ?> plugins</mark> and <mark><?php echo do_shortcode('[total_theme_count]'); ?> themes</mark>.</p>
         <div class="home-search-form">
             <form action="/" method="get">
-                <div class="home-search-input">
-                    <label for="ofsearch" class="screen-reader-text">Search plugins and themes</label>
-                    <input type="text" id="ofsearch" name="s" placeholder="Search plugins and themes" value="" required="required">
-                    <input type="hidden" name="post_types" value="plugin,theme">
-                </div>
-                <div class="home-search-btn">
-                    <input type="submit" value="Search">
+                <div role="search">
+                    <div class="home-search-input">
+                        <label for="ofsearch" class="screen-reader-text">Search plugins and themes</label>
+                        <input type="text" id="ofsearch" name="s" placeholder="Search plugins and themes" value="" required="required">
+                        <input type="hidden" name="post_types" value="plugin,theme">
+                    </div>
+                    <div class="home-search-btn">
+                        <input type="submit" value="Search">
+                    </div>
                 </div>
             </form>
         </div>
