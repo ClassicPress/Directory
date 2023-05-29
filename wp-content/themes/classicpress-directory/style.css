@@ -1052,7 +1052,12 @@ nav ul li:focus-within ul {
 	border-color: var(--pre-bg-color);
 	color: var(--dark-gray);
 }
-
+.close-search button:hover,
+.close-search button:focus{
+	background: var(--gray);
+	border-color: var(--gray);
+	color: var(--font-color);
+}
 .open-search a {
 	position: relative;
 }
