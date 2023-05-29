@@ -1774,11 +1774,16 @@ ul.aside-items {
 	text-align: center;
 }
 
-.featured-software h2,
-.home-content h2 {
-	margin-top: 3.5rem;
+.featured-heading{
+	display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 3.5rem 0 1rem;
+    align-items: flex-end;
 }
-
+.featured-heading h2{
+	margin: 0;
+}
 /*--------------------------------------------------------------
 ## CSS for larger tablets upwards
 --------------------------------------------------------------*/
