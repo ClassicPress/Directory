@@ -13,7 +13,7 @@
 
     <section class="home-search">
         <h1><?php _e('ClassicPress Directory', 'classicpress'); ?></h1>
-        <p class="home-lead"><p><?php printf(__('Extend your ClassicPress website with <mark>%s plugins</mark> and <mark>%s themes</mark>.', 'classicpress'), do_shortcode('[total_plugin_count]'), do_shortcode('[total_theme_count]')); ?></p>
+        <p class="home-lead"><?php printf(__('Extend your ClassicPress website with <mark>%s plugins</mark> and <mark>%s themes</mark>.', 'classicpress'), do_shortcode('[total_plugin_count]'), do_shortcode('[total_theme_count]')); ?></p>
         <div class="home-search-form">
             <form action="/" method="get">
                 <div role="search">
