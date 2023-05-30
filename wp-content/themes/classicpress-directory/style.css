@@ -580,7 +580,7 @@ textarea {
 /*--------------------------------------------------------------
 # Links
 --------------------------------------------------------------*/
-a {
+a:not(.btn) {
 	color: var(--link-color);
 	text-decoration: none;
 	cursor: pointer;
@@ -589,12 +589,17 @@ article .readme-md-content a:not(.anchor),
 article .narrow-page a{
 	border-bottom: 1.7px solid var(--cp-brand);
 }
-a:hover,
-a:focus,
-a:active {
+a:not(.btn):hover,
+a:not(.btn):focus,
+a:not(.btn):active {
 	text-decoration: none;
 	color: var(--cp-brand-darker);
-	border-color: var(--cp-brand-darker);
+}
+article .readme-md-content a:not(.anchor):hover,
+article .readme-md-content a:not(.anchor):focus,
+article .narrow-page a:hover,
+article .narrow-page a:focus{
+	border-bottom: 1.7px solid var(--cp-brand);
 }
 
 nav a:focus {
