@@ -599,7 +599,7 @@ article .readme-md-content a:not(.anchor):hover,
 article .readme-md-content a:not(.anchor):focus,
 article .narrow-page a:hover,
 article .narrow-page a:focus{
-	border-bottom: 1.7px solid var(--cp-brand);
+	border-bottom: 1.7px solid var(--cp-brand-darker);
 }
 
 nav a:focus {
@@ -944,18 +944,18 @@ svg * {
 	height: 100%;
 }
 
-nav ul {
+nav.main-navigation ul {
 	margin: 0 auto;
 	padding: 0;
 	width: 100%;
 	overflow: hidden;
 }
 
-nav ul li {
+nav.main-navigation ul li {
 	border-bottom: 1px solid var(--hover-bg-color);
 }
 
-nav ul li a {
+nav.main-navigation ul li a {
 	color: var(--nav-link-color);
 	padding: 0.5em 1em;
 	display: block;
@@ -963,18 +963,18 @@ nav ul li a {
 	text-decoration: none;
 }
 
-nav ul li a:hover,
-nav ul li a:focus {
+nav.main-navigation ul li a:hover,
+nav.main-navigation ul li a:focus {
 	background-color: var(--hover-bg-color);
 	color: var(--font-alt-color);
 }
 
-nav ul li ul {
+nav.main-navigation ul li ul {
 	display: none;
 }
 
-nav ul li:hover ul,
-nav ul li:focus-within ul {
+nav.main-navigation ul li:hover ul,
+nav.main-navigation ul li:focus-within ul {
 	display: flex;
 }
 
@@ -1267,7 +1267,7 @@ body:not(.developer-visit) .software-item-footer {
 
 #colophon li a:hover,
 #colophon li a:focus {
-	border-bottom: 1px solid var(--font-alt-color);
+	border-bottom: 1.6px solid var(--font-alt-color);
 }
 
 .social-menu {
@@ -1552,7 +1552,10 @@ ul.aside-items {
 .aside-item .item-data a {
 	font-weight: normal;
 }
-
+.aside-item .item-data a:hover,
+.aside-item .item-data a:focus{
+	border-bottom: 1.7px solid var(--cp-brand);
+}
 .repo-link img {
 	position: relative;
 	top: 2px;
@@ -1930,20 +1933,20 @@ ul.aside-items {
 		padding: 0.5em;
 	}
 
-	nav ul {
+	nav.main-navigation ul {
 		display: flex;
 		justify-content: center;
 		flex-wrap: wrap;
 	}
 
-	nav ul li {
+	nav.main-navigation ul li {
 		float: left;
 		border-bottom: none;
 		margin: 0 0.25em;
 		color: var(--font-alt-color);
 	}
 
-	nav ul li a {
+	nav.main-navigation ul li a {
 		color: var(--font-alt-color);
 		background: transparent;
 	}
