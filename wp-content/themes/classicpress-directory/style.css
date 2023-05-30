@@ -582,12 +582,19 @@ textarea {
 --------------------------------------------------------------*/
 a {
 	color: var(--link-color);
-	text-decoration: underline;
+	text-decoration: none;
 	cursor: pointer;
 }
-
-a:hover {
+article .readme-md-content a:not(.anchor),
+article .narrow-page a{
+	border-bottom: 1.7px solid var(--cp-brand);
+}
+a:hover,
+a:focus,
+a:active {
 	text-decoration: none;
+	color: var(--cp-brand-darker);
+	border-color: var(--cp-brand-darker);
 }
 
 nav a:focus {
@@ -1250,12 +1257,12 @@ body:not(.developer-visit) .software-item-footer {
 
 #colophon li a {
 	text-decoration: none;
-	border-bottom: 1px solid var(--font-alt-color);
+	border-color: transparent;
 }
 
 #colophon li a:hover,
 #colophon li a:focus {
-	border-bottom: 1px solid transparent;
+	border-bottom: 1px solid var(--font-alt-color);
 }
 
 .social-menu {
