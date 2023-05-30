@@ -1237,8 +1237,8 @@ body:not(.developer-visit) .software-item-footer {
 }
 
 .pagination .page-numbers:hover {
-	padding: 1px 0.86666666666em;
-	border: 1px solid var(--link-color);
+	padding: 0 0.83333333333em;
+	border: 2px solid var(--link-color);
 }
 
 .pagination .page-numbers:focus {
