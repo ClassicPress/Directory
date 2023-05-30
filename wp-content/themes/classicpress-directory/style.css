@@ -872,7 +872,7 @@ object {
 
 .menu-toggle {
 	margin-bottom: 1em;
-	border: 1px solid var(--hover-bg-color);
+	border: 1px solid var(--font-alt-color);
 	border-radius: var(--border-radius);
 	background: var(--font-alt-color) !important;
 	font-size: 0.75rem;
@@ -929,7 +929,7 @@ nav.main-navigation .sub-menu {
 	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
 	z-index: 1;
 	background: var(--cp-brand);
-	border-radius: 0 0 6px 6px;
+	border-radius: 0;
 }
 
 #menu-header .sub-menu {
@@ -937,7 +937,7 @@ nav.main-navigation .sub-menu {
 }
 
 .sub-menu li:first-child {
-	border-top: 1px solid var(--hover-bg-color);
+	border-top: 1px solid var(--gray-border);
 }
 
 .sub-menu li:last-child {
@@ -962,8 +962,8 @@ nav.main-navigation ul {
 	overflow: hidden;
 }
 
-nav.main-navigation ul li {
-	border-bottom: 1px solid var(--hover-bg-color);
+nav.main-navigation ul.sub-menu li {
+	border-bottom: 1px solid var(--gray-border);
 }
 
 nav.main-navigation ul li a {
@@ -1990,6 +1990,7 @@ ul.aside-items {
 
 	nav.main-navigation .sub-menu {
 		position: absolute;
+		border-radius: 0 0 6px 6px;
 	}
 
 	.menu-item-has-children>a::after {
