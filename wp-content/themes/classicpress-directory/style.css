@@ -902,6 +902,7 @@ object {
 	font-size: 1em;
 	text-transform: none;
 	letter-spacing: 0;
+	color: var(--font-alt-color);
 }
 
 .menu-item-has-children>a::after {
@@ -947,7 +948,7 @@ nav.main-navigation .sub-menu {
 nav.main-navigation ul.sub-menu li a:hover,
 nav.main-navigation ul.sub-menu li a:focus {
 	background: var(--button-bg-hover);
-	border: 0;
+	border-color: var(--button-bg-hover);
 }
 
 svg * {
@@ -970,7 +971,7 @@ nav.main-navigation ul li a {
 	color: var(--nav-link-color);
 	padding: 0.5em 1em;
 	display: block;
-	background: #fcf8f3;
+	background: var(--cp-brand);
 	text-decoration: none;
 }
 
