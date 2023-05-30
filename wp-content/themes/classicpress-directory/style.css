@@ -586,19 +586,21 @@ a:not(.btn) {
 	cursor: pointer;
 }
 article .readme-md-content a:not(.anchor),
-article .narrow-page a{
+.narrow-page article a{
 	border-bottom: 1.7px solid var(--cp-brand);
 }
 a:not(.btn):hover,
 a:not(.btn):focus,
-a:not(.btn):active {
+a:not(.btn):active{
 	text-decoration: none;
 	color: var(--cp-brand-darker);
 }
 article .readme-md-content a:not(.anchor):hover,
 article .readme-md-content a:not(.anchor):focus,
 article .narrow-page a:hover,
-article .narrow-page a:focus{
+article .narrow-page a:focus,
+.software-item-info header a:hover,
+.software-item-info header a:focus{
 	border-bottom: 1.7px solid var(--cp-brand-darker);
 }
 
@@ -1163,8 +1165,11 @@ nav.main-navigation ul li:focus-within ul {
 	-webkit-line-clamp: 3;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
+	font-size: 1rem;
 }
-
+.software-grid .software-item-info h2.h3{
+	margin-bottom: 0;
+}
 .software-item-meta {
 	padding: 1em;
 	margin: 0 -1em;
@@ -1196,7 +1201,10 @@ body:not(.developer-visit) .software-item-footer {
 	display: flex;
 	justify-content: space-around;
 }
-
+.meta-item a:hover span,
+.meta-item a:focus span{
+	border-bottom: 1.7px solid var(--cp-brand);
+}
 .meta-item a img,
 .meta-item span {
 	margin: 0 0.5em;
