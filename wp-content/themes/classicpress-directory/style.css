@@ -1812,10 +1812,11 @@ ul.aside-items {
 
 .featured-heading {
 	display: flex;
-	flex-direction: row;
 	justify-content: space-between;
 	margin: 3.5rem 0 1rem;
-	align-items: flex-end;
+	flex-direction: column;
+    align-items: center;
+	margin: 3.5rem 0 2rem;
 }
 
 .featured-heading h2 {
@@ -1851,6 +1852,11 @@ ul.aside-items {
 	.software-grid {
 		margin: 0 0 2em;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+	.featured-heading{
+		flex-direction: row;
+		align-items: flex-end;
+		margin: 3.5rem 0 1rem;
 	}
 }
 
