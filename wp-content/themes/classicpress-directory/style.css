@@ -902,7 +902,6 @@ object {
 	font-size: 1em;
 	text-transform: none;
 	letter-spacing: 0;
-	color: var(--font-alt-color);
 }
 
 .menu-item-has-children>a::after {
@@ -971,7 +970,7 @@ nav.main-navigation ul li a {
 	color: var(--nav-link-color);
 	padding: 0.5em 1em;
 	display: block;
-	background: var(--cp-brand);
+	background: var(--pre-bg-color);
 	text-decoration: none;
 }
 
@@ -1996,11 +1995,13 @@ ul.aside-items {
 	.menu-item-has-children>a::after {
 		border-top: 5px solid rgba(255, 255, 255, 0.72);
 	}
-
 	.menu-item-has-children ul.sub-menu li a {
 		padding-left: .85em;
+		color: var(--font-alt-color);
 	}
-
+	nav.main-navigation ul li a{
+		background-color: var(--cp-brand);
+	}
 	#get {
 		font-weight: 600;
 		background: var(--link-color);
