@@ -913,7 +913,7 @@ object {
 	border-top: 5px solid var(--gray);
 }
 
-.sub-menu {
+nav.main-navigation .sub-menu {
 	padding: 0;
 	-webkit-box-orient: vertical;
 	-webkit-box-direction: normal;
@@ -1951,7 +1951,7 @@ ul.aside-items {
 		background: transparent;
 	}
 
-	.sub-menu {
+	nav.main-navigation .sub-menu {
 		position: absolute;
 	}
 
@@ -2045,7 +2045,7 @@ ul.aside-items {
 		border-radius: var(--border-radius);
 	}
 
-	.sub-menu {
+	nav.main-navigation .sub-menu {
 		width: 180px;
 	}
 
