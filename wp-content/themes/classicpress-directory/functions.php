@@ -597,13 +597,20 @@ function human_readable_number($number) {
 add_filter('the_content', 'remove_link_from_images');
 
 function remove_link_from_images($content) {
-
     $doc = new DOMDocument();
-    @$doc->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8'));
+    @$doc->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
 
     $tags = $doc->getElementsByTagName('a');
 
-    foreach($tags as $tag) {
+    // Create a stack to hold the nodes we want to process. This will allow us to loop in reverse.
+    $stack = array();
+    foreach ($tags as $tag) {
+        $stack[] = $tag;
+    }
+
+    // Now loop through the stack in reverse
+    for($i = count($stack) - 1; $i >= 0; $i--) {
+        $tag = $stack[$i];
         $childElement = $tag->firstChild;
 
         if($childElement->tagName == 'img') {
