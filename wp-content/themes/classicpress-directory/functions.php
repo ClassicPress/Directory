@@ -594,7 +594,7 @@ function human_readable_number($number) {
 /**
  * Remove <a> wrapped around <img>, which link to non-existent files 
  */
-//add_filter('the_content', 'remove_link_from_images');
+add_filter('the_content', 'remove_link_from_images');
 
 function remove_link_from_images($content) {
     $doc = new DOMDocument();
@@ -623,5 +623,9 @@ function remove_link_from_images($content) {
         }
     }
 
-    return $doc->saveHTML();
+    // This will save HTML without adding unwanted tags
+    $html = $doc->saveHTML($doc->documentElement);
+    $html = str_replace(array('<html><body>', '</body></html>'), '', $html);
+
+    return $html;
 }
