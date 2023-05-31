@@ -592,9 +592,9 @@ function human_readable_number($number) {
 }
 
 /**
- * Remove <a> wrapped around <img>, which link to non-existent files
+ * Remove <a> wrapped around <img>, which link to non-existent files 
  */
-add_filter('the_content', 'remove_link_from_images');
+//add_filter('the_content', 'remove_link_from_images');
 
 function remove_link_from_images($content) {
     $doc = new DOMDocument();
