@@ -590,3 +590,31 @@ function human_readable_number($number) {
         return $number;
     }
 }
+
+/**
+ * Remove <a> wrapped around <img>, which link to non-existent files
+ */
+add_filter('the_content', 'remove_link_from_images');
+
+function remove_link_from_images($content) {
+
+    $doc = new DOMDocument();
+    @$doc->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8'));
+
+    $tags = $doc->getElementsByTagName('a');
+
+    foreach($tags as $tag) {
+        $childElement = $tag->firstChild;
+
+        if($childElement->tagName == 'img') {
+            $new_node = $doc->createElement('img');
+            foreach($childElement->attributes as $attr_name => $attr_node) {
+                $new_node->setAttribute($attr_name, $attr_node->nodeValue);
+            }
+
+            $tag->parentNode->replaceChild($new_node, $tag);
+        }
+    }
+
+    return $doc->saveHTML();
+}
