@@ -597,35 +597,10 @@ function human_readable_number($number) {
 add_filter('the_content', 'remove_link_from_images');
 
 function remove_link_from_images($content) {
-    $doc = new DOMDocument();
-    @$doc->loadHTML(mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+    $pattern = '/<a(.*?)><img(.*?)><\/a>/i';
+    $replacement = '<img$2>';
 
-    $tags = $doc->getElementsByTagName('a');
+    $content = preg_replace($pattern, $replacement, $content);
 
-    // Create a stack to hold the nodes we want to process. This will allow us to loop in reverse.
-    $stack = array();
-    foreach ($tags as $tag) {
-        $stack[] = $tag;
-    }
-
-    // Now loop through the stack in reverse
-    for($i = count($stack) - 1; $i >= 0; $i--) {
-        $tag = $stack[$i];
-        $childElement = $tag->firstChild;
-
-        if($childElement->tagName == 'img') {
-            $new_node = $doc->createElement('img');
-            foreach($childElement->attributes as $attr_name => $attr_node) {
-                $new_node->setAttribute($attr_name, $attr_node->nodeValue);
-            }
-
-            $tag->parentNode->replaceChild($new_node, $tag);
-        }
-    }
-
-    // This will save HTML without adding unwanted tags
-    $html = $doc->saveHTML($doc->documentElement);
-    $html = str_replace(array('<html><body>', '</body></html>'), '', $html);
-
-    return $html;
+    return $content;
 }
