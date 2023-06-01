@@ -608,6 +608,8 @@ function remove_images_from_content($content)
 	$pattern_img = '/<img(.*?)>/i';
 	// Pattern to match <a><img></a> tags
 	$pattern_a_img = '/<a(.*?)><img(.*?)><\/a>/i';
+	// Pattern to match empty <p> tags
+	$pattern_empty_p = '/<p>\s*<\/p>/i';
 
 	global $post;
 	$current_user = wp_get_current_user();
@@ -618,11 +620,15 @@ function remove_images_from_content($content)
 		$content = preg_replace($pattern_a_img, $alert, $content);
 		// Removing <img> tags
 		$content = preg_replace($pattern_img, $alert, $content);
+		// Removing empty <p> tags
+		$content = preg_replace($pattern_empty_p, '', $content);
 	} else {
 		// Removing <a><img></a> tags
 		$content = preg_replace($pattern_a_img, '', $content);
 		// Removing <img> tags
 		$content = preg_replace($pattern_img, '', $content);
+		// Removing empty <p> tags
+		$content = preg_replace($pattern_empty_p, '', $content);
 	}
 	return $content;
 }
