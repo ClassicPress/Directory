@@ -592,15 +592,20 @@ function human_readable_number($number) {
 }
 
 /**
- * Remove <a> wrapped around <img>, which link to non-existent files 
+ * Remove <img> and <a><img></a> from the_content for GDPR compliance
  */
-add_filter('the_content', 'remove_link_from_images');
+add_filter('the_content', 'remove_images_from_content');
 
-function remove_link_from_images($content) {
-    $pattern = '/<a(.*?)><img(.*?)><\/a>/i';
-    $replacement = '<img$2>';
+function remove_images_from_content($content) {
+    // Pattern to match <img> tags
+    $pattern_img = '/<img(.*?)>/i';
+    // Pattern to match <a><img></a> tags
+    $pattern_a_img = '/<a(.*?)><img(.*?)><\/a>/i';
 
-    $content = preg_replace($pattern, $replacement, $content);
+    // Removing <img> tags
+    $content = preg_replace($pattern_img, '', $content);
+    // Removing <a><img></a> tags
+    $content = preg_replace($pattern_a_img, '', $content);
 
     return $content;
 }
