@@ -606,7 +606,7 @@ function remove_images_from_content($content) {
 	$current_user = wp_get_current_user();
 
 	if ( $post->post_author == $current_user->ID ) {
-		$alert = '<div class="img-removed alert warning-message" role="alert">Image was removed due to GDPR/privacy compliance. Only</div>';
+		$alert = '<div class="img-removed alert warning-message" role="alert">Image was removed due to GDPR/privacy compliance. <small>Only you can see this.</small></div>';
 		// Removing <img> tags
 		$content = preg_replace($pattern_img, $alert, $content);
 		// Removing <a><img></a> tags
