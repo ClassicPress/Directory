@@ -608,8 +608,8 @@ function remove_images_from_content($content)
 	$pattern_img = '/<img(.*?)>/i';
 	// Pattern to match <a><img></a> tags
 	$pattern_a_img = '/<a(.*?)><img(.*?)><\/a>/i';
-	// Pattern to match empty <p> tags
-	$pattern_empty_p = '/<p>\s*<\/p>/i';
+	// Pattern to match empty <p> tags and <p> tags that only contain <br> tags
+	$pattern_empty_p = '/<p>(\s*<br\s*\/?>)*\s*<\/p>/i';
 
 	global $post;
 	$current_user = wp_get_current_user();
