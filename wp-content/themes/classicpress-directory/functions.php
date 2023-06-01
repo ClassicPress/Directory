@@ -321,15 +321,16 @@ function classicpress_nofollow_callback($matches)
  */
 add_filter('the_content', 'remove_h1_tags');
 
-function remove_h1_tags($content) {
-    global $post;
-    $post_type = get_post_type($post);
+function remove_h1_tags($content)
+{
+	global $post;
+	$post_type = get_post_type($post);
 
-    if ($post_type == 'plugin' || $post_type == 'theme') {
-        $content = preg_replace('#<h1[^>]*>.*?</h1>#si', '', $content);
-    }
-    
-    return $content;
+	if ($post_type == 'plugin' || $post_type == 'theme') {
+		$content = preg_replace('#<h1[^>]*>.*?</h1>#si', '', $content);
+	}
+
+	return $content;
 }
 
 /**
@@ -522,73 +523,78 @@ function get_random_theme_posts()
 /**
  * Total counts and shortcodes
  */
-function get_total_plugin_count() {
-    // Try to get data from the transient
-    $count = get_transient('total_plugin_count');
+function get_total_plugin_count()
+{
+	// Try to get data from the transient
+	$count = get_transient('total_plugin_count');
 
-    // If the transient doesn't exist or has expired
-    if (false === $count) {
-        // Query to get total plugin posts count
-        $args = array(
-            'post_type' => 'plugin',
-            'post_status' => 'publish',
-        );
+	// If the transient doesn't exist or has expired
+	if (false === $count) {
+		// Query to get total plugin posts count
+		$args = array(
+			'post_type' => 'plugin',
+			'post_status' => 'publish',
+		);
 
-        $query = new WP_Query($args);
-        $count = $query->found_posts;
+		$query = new WP_Query($args);
+		$count = $query->found_posts;
 
-        // Store the count in a transient, set to expire after 12 hours
-        set_transient('total_plugin_count', $count, 12 * HOUR_IN_SECONDS);
-    }
+		// Store the count in a transient, set to expire after 12 hours
+		set_transient('total_plugin_count', $count, 12 * HOUR_IN_SECONDS);
+	}
 
-    return $count;
+	return $count;
 }
 
-function get_total_theme_count() {
-    // Try to get data from the transient
-    $count = get_transient('total_theme_count');
+function get_total_theme_count()
+{
+	// Try to get data from the transient
+	$count = get_transient('total_theme_count');
 
-    // If the transient doesn't exist or has expired
-    if (false === $count) {
-        // Query to get total theme posts count
-        $args = array(
-            'post_type' => 'theme',
-            'post_status' => 'publish',
-        );
+	// If the transient doesn't exist or has expired
+	if (false === $count) {
+		// Query to get total theme posts count
+		$args = array(
+			'post_type' => 'theme',
+			'post_status' => 'publish',
+		);
 
-        $query = new WP_Query($args);
-        $count = $query->found_posts;
+		$query = new WP_Query($args);
+		$count = $query->found_posts;
 
-        // Store the count in a transient, set to expire after 12 hours
-        set_transient('total_theme_count', $count, 12 * HOUR_IN_SECONDS);
-    }
+		// Store the count in a transient, set to expire after 12 hours
+		set_transient('total_theme_count', $count, 12 * HOUR_IN_SECONDS);
+	}
 
-    return $count;
+	return $count;
 }
 
-function total_plugin_count_shortcode() {
-    return get_total_plugin_count();
+function total_plugin_count_shortcode()
+{
+	return get_total_plugin_count();
 }
 add_shortcode('total_plugin_count', 'total_plugin_count_shortcode');
 
-function total_theme_count_shortcode() {
-    return get_total_theme_count();
+function total_theme_count_shortcode()
+{
+	return get_total_theme_count();
 }
 add_shortcode('total_theme_count', 'total_theme_count_shortcode');
 
 /**
  * Human readable numbers
  */
-function human_readable_number($number) {
-    if ($number >= 1000000000) {
-        return number_format($number / 1000000000, 1) . 'B';
-    } elseif ($number >= 1000000) {
-        return number_format($number / 1000000, 1) . 'M';
-    } elseif ($number >= 1000) {
-        return number_format($number / 1000, 1) . 'K';
-    } else {
-        return $number;
-    }
+function human_readable_number($number)
+{
+	if ($number >= 1000000000) {
+		return number_format($number / 1000000000, 1) . 'B';
+	} elseif ($number >= 1000000) {
+		return number_format($number / 1000000, 1) . 'M';
+	} elseif ($number >= 1000) {
+		return number_format($number / 1000, 1) . 'K';
+	} else {
+		return $number;
+	}
 }
 
 /**
@@ -596,26 +602,27 @@ function human_readable_number($number) {
  */
 add_filter('the_content', 'remove_images_from_content');
 
-function remove_images_from_content($content) {
-    // Pattern to match <img> tags
-    $pattern_img = '/<img(.*?)>/i';
-    // Pattern to match <a><img></a> tags
-    $pattern_a_img = '/<a(.*?)><img(.*?)><\/a>/i';
+function remove_images_from_content($content)
+{
+	// Pattern to match <img> tags
+	$pattern_img = '/<img(.*?)>/i';
+	// Pattern to match <a><img></a> tags
+	$pattern_a_img = '/<a(.*?)><img(.*?)><\/a>/i';
 
 	global $post;
 	$current_user = wp_get_current_user();
 
-	if ( $post->post_author == $current_user->ID ) {
+	if ($post->post_author == $current_user->ID) {
 		$alert = '<div class="img-removed alert warning-message" role="alert">Image was removed due to GDPR/privacy compliance. <small>Only you can see this.</small></div>';
-		// Removing <img> tags
-		$content = preg_replace($pattern_img, $alert, $content);
 		// Removing <a><img></a> tags
 		$content = preg_replace($pattern_a_img, $alert, $content);
-	}else{
 		// Removing <img> tags
-		$content = preg_replace($pattern_img, '', $content);
+		$content = preg_replace($pattern_img, $alert, $content);
+	} else {
 		// Removing <a><img></a> tags
 		$content = preg_replace($pattern_a_img, '', $content);
+		// Removing <img> tags
+		$content = preg_replace($pattern_img, '', $content);
 	}
-    return $content;
+	return $content;
 }
