@@ -602,10 +602,20 @@ function remove_images_from_content($content) {
     // Pattern to match <a><img></a> tags
     $pattern_a_img = '/<a(.*?)><img(.*?)><\/a>/i';
 
-    // Removing <img> tags
-    $content = preg_replace($pattern_img, '', $content);
-    // Removing <a><img></a> tags
-    $content = preg_replace($pattern_a_img, '', $content);
+	global $post;
+	$current_user = wp_get_current_user();
 
+	if ( $post->post_author == $current_user->ID ) {
+		$alert = '<div class="img-removed alert warning-message" role="alert">Image was removed due to GDPR/privacy compliance. Only</div>';
+		// Removing <img> tags
+		$content = preg_replace($pattern_img, $alert, $content);
+		// Removing <a><img></a> tags
+		$content = preg_replace($pattern_a_img, $alert, $content);
+	}else{
+		// Removing <img> tags
+		$content = preg_replace($pattern_img, '', $content);
+		// Removing <a><img></a> tags
+		$content = preg_replace($pattern_a_img, '', $content);
+	}
     return $content;
 }
