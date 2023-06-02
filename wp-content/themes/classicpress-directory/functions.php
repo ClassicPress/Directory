@@ -675,3 +675,14 @@ function save_message_status_metabox($post_id) {
     }
 }
 add_action('save_post_message', 'save_message_status_metabox');
+
+// Move metabox to the top
+// Enqueue JavaScript on edit page for "message" custom post type
+function enqueue_custom_js_for_message_edit() {
+    global $pagenow, $post_type;
+
+    if ($pagenow === 'post.php' && $post_type === 'message') {
+        wp_enqueue_script('message-status-js', get_template_directory_uri() . '/js/message-status.js', array('jquery'), '1.0', true);
+    }
+}
+add_action('admin_enqueue_scripts', 'enqueue_custom_js_for_message_edit');
