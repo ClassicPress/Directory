@@ -258,7 +258,7 @@ add_filter('manage_message_posts_columns', 'add_message_status_column');
 function populate_message_status_column($column, $post_id)
 {
 	if ($column === 'message_status') {
-		$message_status = get_post_meta($post_id, 'message_status', true);
+		$message_status = get_post_meta($post_id, 'message_status', true) ?? 'Unread';
 		echo esc_html($message_status);
 	}
 }
