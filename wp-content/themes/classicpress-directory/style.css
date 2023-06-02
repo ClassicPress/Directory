@@ -396,8 +396,8 @@ input[type="submit"].btn-alt:hover,
 input[type="submit"].btn-alt:focus,
 .btn.btn-alt:hover,
 .btn.btn-alt:focus {
-	background-color: var(--button-alt-bg-hover);
-	border-color: var(--button-alt-bg-hover);
+	background-color: var(--button-alt-hover);
+	border-color: var(--button-alt-hover);
 }
 
 .alphadevelopers {
