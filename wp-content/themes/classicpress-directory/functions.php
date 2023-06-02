@@ -632,3 +632,46 @@ function remove_images_from_content($content)
 	}
 	return $content;
 }
+
+
+/** Messages status metabox */
+function add_message_status_metabox() {
+    add_meta_box(
+        'message_status_metabox',
+        'Message Status',
+        'render_message_status_metabox',
+        'message',
+        'side',
+        'default'
+    );
+}
+add_action('add_meta_boxes', 'add_message_status_metabox');
+
+// Render the metabox content
+function render_message_status_metabox($post) {
+    // Retrieve the current status from the custom field
+    $current_status = get_post_meta($post->ID, 'message_status', true);
+
+    // Set default value if no status is saved
+    if (empty($current_status)) {
+        $current_status = 'Unread';
+    }
+
+    // Output the dropdown HTML
+    ?>
+    <label for="message_status">Status:</label>
+    <select name="message_status" id="message_status">
+        <option value="Unread" <?php selected($current_status, 'Unread'); ?>>Unread</option>
+        <option value="Read" <?php selected($current_status, 'Read'); ?>>Read</option>
+        <option value="Responded" <?php selected($current_status, 'Responded'); ?>>Responded</option>
+    </select>
+    <?php
+}
+
+// Save the metabox data
+function save_message_status_metabox($post_id) {
+    if (isset($_POST['message_status'])) {
+        update_post_meta($post_id, 'message_status', sanitize_text_field($_POST['message_status']));
+    }
+}
+add_action('save_post_message', 'save_message_status_metabox');
