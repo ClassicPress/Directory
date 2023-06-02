@@ -1320,7 +1320,9 @@ body:not(.developer-visit) .software-item-footer {
 }
 
 #colophon li a:hover,
-#colophon li a:focus {
+#colophon li a:focus,
+#legal p a:hover,
+#legal p a:focus {
 	border-bottom: 1.7px solid var(--font-alt-color);
 }
 
@@ -1357,16 +1359,19 @@ body:not(.developer-visit) .software-item-footer {
 	width: 100%;
 	max-width: 550px;
 	padding: 0 1em;
+	display: flex;
+	flex-direction: row;
+	gap: 1rem;
 }
 
 #footer-logo {
-	display: inline-block;
+	max-width: 90px;
+	width: 100%;
 }
 
 .footerleft img {
-	width: 90px;
-	float: left;
-	margin: 0 1em 1em 0;
+	width: 100%;
+	margin: 0;
 }
 
 .registration {
@@ -1376,14 +1381,14 @@ body:not(.developer-visit) .software-item-footer {
 footer#legal {
 	max-width: unset;
 	margin: 0;
-	background: #002e38;
+	background: var(--heading-color);
 }
 
 #legal p {
 	color: var(--font-alt-color);
-	margin-bottom: 0.6em;
-	font-size: .8em;
+	font-size: 1rem;
 	line-height: 1.3;
+	margin: 0;
 }
 
 .cplegal {
@@ -1397,15 +1402,13 @@ footer#legal {
 
 .cpcopyright,
 .cppolicy {
-	width: 40%;
 	padding: 0 1em;
+	align-items: center;
 }
 
-.cppolicy {
-	text-align: right;
-}
-
-.cppolicy p a {
+.cppolicy p a,
+.cppolicy p a:hover,
+.cppolicy p a:focus {
 	color: var(--font-alt-color);
 }
 
