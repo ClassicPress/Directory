@@ -146,6 +146,9 @@ function kts_contact_form_redirect()
 		'post_type'		=> 'message',
 		'post_status'	=> 'publish',
 		'post_author'	=> get_current_user_id(),
+		'meta_input'    => array(
+			'message_status' => 'Unread', // Set default value as 'Unread'
+		),
 	);
 
 	# Save post
@@ -258,7 +261,7 @@ add_filter('manage_message_posts_columns', 'add_message_status_column');
 function populate_message_status_column($column, $post_id)
 {
 	if ($column === 'message_status') {
-		$message_status = get_post_meta($post_id, 'message_status', true) ?? 'Unread';
+		$message_status = get_post_meta($post_id, 'message_status', true);
 		echo esc_html($message_status);
 	}
 }
