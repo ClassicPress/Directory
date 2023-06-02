@@ -65,6 +65,8 @@ Susty was itself based on Underscores https://underscores.me/, (C) 2012-2017 Aut
 	--link-color: var(--cp-brand);
 	--button-bg: var(--cp-brand);
 	--button-bg-hover: #006b81;
+	--button-alt-bg: #5d6a74;
+	--button-alt-hover: #6c7c89;
 	--link-hover-color: var(--font-color);
 	--nav-link-color: #444;
 	--focus-outline: 2px dotted #555;
@@ -372,6 +374,30 @@ input[type="submit"],
 	padding: 0.55em 1em 0.5em;
 	cursor: default;
 	text-decoration: none;
+}
+
+button.btn-alt,
+input[type="button"].btn-alt,
+input[type="reset"].btn-alt,
+input[type="submit"].btn-alt,
+.btn.btn-alt {
+	color: var(--font-alt-color);
+	background-color: var(--button-alt-bg);
+	border-color: var(--button-alt-bg);
+}
+
+button.btn-alt:hover,
+button.btn-alt:focus,
+input[type="button"].btn-alt:hover,
+input[type="button"].btn-alt:focus,
+input[type="reset"].btn-alt:hover,
+input[type="reset"].btn-alt:focus,
+input[type="submit"].btn-alt:hover,
+input[type="submit"].btn-alt:focus,
+.btn.btn-alt:hover,
+.btn.btn-alt:focus {
+	background-color: var(--button-alt-bg-hover);
+	border-color: var(--button-alt-bg-hover);
 }
 
 .alphadevelopers {
@@ -1726,7 +1752,7 @@ ul.aside-items {
 	text-decoration: none;
 	padding: 2px 7px 3px;
 	font-size: 14px;
-	background: var(--gray-border);
+	background: var(--pre-bg-color);
 	color: var(--font-color);
 	border-radius: var(--border-radius);
 	margin-right: 0.5em;
@@ -1737,10 +1763,11 @@ ul.aside-items {
 	margin-right: 0;
 }
 
-.tag-badge a:hover,
-.tag-badge a:active,
-.tag-badge a:focus {
-	background: var(--light-gray)
+.aside-item .item-data .tag-badge a:hover,
+.aside-item .item-data .tag-badge a:active,
+.aside-item .item-data .tag-badge a:focus {
+	background: var(--light-gray);
+	border: 0;
 }
 
 .software-action .btn img {
