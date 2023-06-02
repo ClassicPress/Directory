@@ -50,7 +50,7 @@
 
 				<div class="site-introduction">
 					<span class="logo" role="banner">
-						<a href="<?php echo esc_url(home_url()); ?>" rel="home" title="<?php esc_attr_e('Directory home', 'classicpress'); ?>"><img src="<?php echo esc_url(get_stylesheet_directory_uri() . '/images/logo-white.svg'); ?>" alt="<?php esc_attr_e('ClassicPress logo', 'classicpress'); ?>" width="250"> <span class="screen-reader-text"><?php _e('Directory Home', 'classicpress'); ?></span></a>
+						<a href="<?php echo esc_url(home_url()); ?>" rel="home" title="<?php esc_attr_e('Directory home', 'classicpress'); ?>"><img src="<?php echo esc_url(get_stylesheet_directory_uri() . '/images/classicpress-logo-white.svg'); ?>" alt="<?php esc_attr_e('ClassicPress logo', 'classicpress'); ?>" width="250"> <span class="screen-reader-text"><?php _e('Directory Home', 'classicpress'); ?></span></a>
 					</span>
 				</div>
 
