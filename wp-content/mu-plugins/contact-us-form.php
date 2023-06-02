@@ -217,13 +217,13 @@ function render_message_status_metabox($post)
 	// Output the dropdown HTML
 	?>
 	<label for="message_status">Status:</label>
-	<p>
+	<div>
 		<select name="message_status" id="message_status">
 			<option value="Unread" <?php selected($current_status, 'Unread'); ?>>Unread</option>
 			<option value="Read" <?php selected($current_status, 'Read'); ?>>Read</option>
 			<option value="Responded" <?php selected($current_status, 'Responded'); ?>>Responded</option>
 		</select>
-	</p>
+	</div>
 <?php
 }
 
