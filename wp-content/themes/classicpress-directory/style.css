@@ -1340,7 +1340,8 @@ body:not(.developer-visit) .software-item-footer {
 	margin: 0;
 }
 
-.social-menu a:hover {
+#colophon .social-menu a:hover,
+#colophon .social-menu a:focus {
 	color: var(--font-alt-color);
 	background-color: var(--hover-bg-color);
 	border: 0;
