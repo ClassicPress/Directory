@@ -686,3 +686,20 @@ function enqueue_custom_js_for_message_edit() {
     }
 }
 add_action('admin_enqueue_scripts', 'enqueue_custom_js_for_message_edit');
+
+// Message status column
+// Add custom column to the "message" custom post type listing page
+function add_message_status_column($columns) {
+    $columns['message_status'] = 'Message Status';
+    return $columns;
+}
+add_filter('manage_message_posts_columns', 'add_message_status_column');
+
+// Populate the custom column with metabox value
+function populate_message_status_column($column, $post_id) {
+    if ($column === 'message_status') {
+        $message_status = get_post_meta($post_id, 'message_status', true);
+        echo esc_html($message_status);
+    }
+}
+add_action('manage_message_posts_custom_column', 'populate_message_status_column', 10, 2);
