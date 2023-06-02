@@ -1329,20 +1329,21 @@ body:not(.developer-visit) .software-item-footer {
 .social-menu {
 	width: 100%;
 	display: flex;
-	justify-content: center;
+	justify-content: flex-start;
 }
 
 #colophon .social-menu a {
-	display: inline-block;
 	border: 0;
 	padding: .75em .75em;
 	text-decoration: none;
 	color: var(--font-alt-color);
+	margin: 0;
 }
 
 .social-menu a:hover {
 	color: var(--font-alt-color);
 	background-color: var(--hover-bg-color);
+	border: 0;
 }
 
 .classic {
@@ -2184,23 +2185,8 @@ ul.aside-items {
 		order: -1;
 	}
 
-	#footer-logo {
-		float: left;
-		padding: 1em 0 0 1em;
-		margin: -1em 0 0 -1em;
-	}
-
 	.registration {
 		margin-top: 0;
-	}
-
-	.social-menu {
-		width: 30%;
-		min-width: 240px;
-	}
-
-	.social-menu li:first-child {
-		margin-left: -34%;
 	}
 
 	.footerright {
