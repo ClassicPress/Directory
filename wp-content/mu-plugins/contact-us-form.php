@@ -44,7 +44,7 @@ function kts_register_message_post_type()
 		'show_in_nav_menus'		=> false,
 		'menu_position'			=> 9,
 		'menu_icon' 			=> 'dashicons-images-alt2',
-		'supports' 				=> array('title', 'editor', 'author'),
+		'supports' 				=> array('title', 'editor', 'author', 'custom-fields'),
 		'can_export'			=> true,
 		'has_archive'			=> false,
 		'exclude_from_search'	=> true,
