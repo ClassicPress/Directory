@@ -648,7 +648,7 @@ function display_author_plugins() {
     $custom_posts = new WP_Query($args);
 
     if ($custom_posts->have_posts()) {
-        echo '<h2>Other plugins by ' . $author_display_name . '</h2>'; // Display the author's name
+        echo '<div class="single-developer-plugins"><h2>Other plugins by ' . $author_display_name . '</h2>'; // Display the author's name
 
         echo '<ul>';
 
@@ -656,7 +656,6 @@ function display_author_plugins() {
             $custom_posts->the_post();
             echo '<li>';
             echo '<a href="' . get_permalink() . '">' . get_the_title() . '</a>';
-            echo '<p>' . get_the_excerpt() . '</p>';
             echo '</li>';
         }
 
@@ -683,7 +682,7 @@ function display_author_themes() {
     $custom_posts = new WP_Query($args);
 
     if ($custom_posts->have_posts()) {
-        echo '<h2>Other themes by ' . $author_display_name . '</h2>'; // Display the author's name
+        echo '<div class="single-developer-themes"><h2>Other themes by ' . $author_display_name . '</h2>'; // Display the author's name
 
         echo '<ul>';
 
@@ -691,11 +690,10 @@ function display_author_themes() {
             $custom_posts->the_post();
             echo '<li>';
             echo '<a href="' . get_permalink() . '">' . get_the_title() . '</a>';
-            echo '<p>' . get_the_excerpt() . '</p>';
             echo '</li>';
         }
 
-        echo '</ul>';
+        echo '</ul></div>';
     } else {
         return false; // Return false if no posts are found
     }

@@ -67,7 +67,7 @@
 			</div>
 
 			<?php if (display_author_themes() || display_author_plugins()) : ?>
-				<footer>
+				<footer class="developer-items-wrapper">
 					<?php
 					switch (get_post_type()) {
 						case 'plugin':
