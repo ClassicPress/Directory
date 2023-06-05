@@ -632,3 +632,73 @@ function remove_images_from_content($content)
 	}
 	return $content;
 }
+
+/**
+ * Display plugins by the same author
+ */
+function display_author_plugins() {
+    $author_id = get_the_author_meta('ID'); // Get the ID of the current author
+    $author_display_name = get_the_author_meta('display_name', $author_id); // Get the author's display name
+    $args = array(
+        'post_type' => 'plugin', // Custom post type slug
+        'posts_per_page' => 5, // Number of posts to display
+        'author' => $author_id // Display posts from the current author
+    );
+
+    $custom_posts = new WP_Query($args);
+
+    if ($custom_posts->have_posts()) {
+        echo '<h2>Other plugins by ' . $author_display_name . '</h2>'; // Display the author's name
+
+        echo '<ul>';
+
+        while ($custom_posts->have_posts()) {
+            $custom_posts->the_post();
+            echo '<li>';
+            echo '<a href="' . get_permalink() . '">' . get_the_title() . '</a>';
+            echo '<p>' . get_the_excerpt() . '</p>';
+            echo '</li>';
+        }
+
+        echo '</ul>';
+    } else {
+        return false; // Return false if no posts are found
+    }
+
+    wp_reset_postdata();
+}
+
+/**
+ * Display themes by the same author
+ */
+function display_author_themes() {
+    $author_id = get_the_author_meta('ID'); // Get the ID of the current author
+    $author_display_name = get_the_author_meta('display_name', $author_id); // Get the author's display name
+    $args = array(
+        'post_type' => 'theme', // Custom post type slug
+        'posts_per_page' => 5, // Number of posts to display
+        'author' => $author_id // Display posts from the current author
+    );
+
+    $custom_posts = new WP_Query($args);
+
+    if ($custom_posts->have_posts()) {
+        echo '<h2>Other themes by ' . $author_display_name . '</h2>'; // Display the author's name
+
+        echo '<ul>';
+
+        while ($custom_posts->have_posts()) {
+            $custom_posts->the_post();
+            echo '<li>';
+            echo '<a href="' . get_permalink() . '">' . get_the_title() . '</a>';
+            echo '<p>' . get_the_excerpt() . '</p>';
+            echo '</li>';
+        }
+
+        echo '</ul>';
+    } else {
+        return false; // Return false if no posts are found
+    }
+
+    wp_reset_postdata();
+}
