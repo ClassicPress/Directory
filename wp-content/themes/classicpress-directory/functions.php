@@ -636,67 +636,75 @@ function remove_images_from_content($content)
 /**
  * Display plugins by the same author
  */
-function display_author_plugins() {
-    $author_id = get_the_author_meta('ID'); // Get the ID of the current author
-    $author_display_name = get_the_author_meta('display_name', $author_id); // Get the author's display name
-    $args = array(
-        'post_type' => 'plugin', // Custom post type slug
-        'posts_per_page' => 5, // Number of posts to display
-        'author' => $author_id // Display posts from the current author
-    );
+function display_author_plugins()
+{
+	global $post; // Get the current post object
+	$current_post_id = $post->ID; // Get the ID of the current post
+	$author_id = get_the_author_meta('ID'); // Get the ID of the current author
+	$author_display_name = get_the_author_meta('display_name', $author_id); // Get the author's display name
+	$args = array(
+		'post_type' => 'plugin', // Custom post type slug
+		'posts_per_page' => 5, // Number of posts to display
+		'author' => $author_id, // Display posts from the current author
+		'post__not_in' => array($current_post_id) // Exclude the current post
+	);
 
-    $custom_posts = new WP_Query($args);
+	$custom_posts = new WP_Query($args);
 
-    if ($custom_posts->have_posts()) {
-        echo '<div class="single-developer-plugins"><h2>Other plugins by ' . esc_html( $author_display_name ) . '</h2>'; // Display the author's name
+	if ($custom_posts->have_posts()) {
+		echo '<div class="single-developer-plugins"><h2>Other plugins by ' . esc_html($author_display_name) . '</h2>'; // Display the author's name
 
-        echo '<ul>';
+		echo '<ul>';
 
-        while ($custom_posts->have_posts()) {
-            $custom_posts->the_post();
-            echo '<li>';
-            echo '<a href="' . esc_url( get_permalink() ) . '">' . esc_html( get_the_title() ) . '</a>';
-            echo '</li>';
-        }
+		while ($custom_posts->have_posts()) {
+			$custom_posts->the_post();
+			echo '<li>';
+			echo '<a href="' . esc_url(get_permalink()) . '">' . esc_html(get_the_title()) . '</a>';
+			echo '</li>';
+		}
 
-        echo '</ul>';
-    } else {
-        return false; // Return false if no posts are found
-    }
+		echo '</ul>';
+	} else {
+		return false; // Return false if no posts are found
+	}
 
-    wp_reset_postdata();
+	wp_reset_postdata();
 }
 
 /**
  * Display themes by the same author
  */
-function display_author_themes() {
-    $author_id = get_the_author_meta('ID'); // Get the ID of the current author
-    $author_display_name = get_the_author_meta('display_name', $author_id); // Get the author's display name
-    $args = array(
-        'post_type' => 'theme', // Custom post type slug
-        'posts_per_page' => 5, // Number of posts to display
-        'author' => $author_id // Display posts from the current author
-    );
+function display_author_themes()
+{
+	global $post; // Get the current post object
+	$current_post_id = $post->ID; // Get the ID of the current post
+	$author_id = get_the_author_meta('ID'); // Get the ID of the current author
+	$author_display_name = get_the_author_meta('display_name', $author_id); // Get the author's display name
+	$args = array(
+		'post_type' => 'theme', // Custom post type slug
+		'posts_per_page' => 5, // Number of posts to display
+		'author' => $author_id, // Display posts from the current author
+		'post__not_in' => array($current_post_id) // Exclude the current post
+	);
 
-    $custom_posts = new WP_Query($args);
+	$custom_posts = new WP_Query($args);
 
-    if ($custom_posts->have_posts()) {
-        echo '<div class="single-developer-themes"><h2>Other themes by ' . esc_html( $author_display_name ) . '</h2>'; // Display the author's name
+	if ($custom_posts->have_posts()) {
+		echo '<div class="single-developer-themes"><h2>Other themes by ' . esc_html($author_display_name) . '</h2>'; // Display the author's name
 
-        echo '<ul>';
+		echo '<ul>';
 
-        while ($custom_posts->have_posts()) {
-            $custom_posts->the_post();
-            echo '<li>';
-            echo '<a href="' . esc_url( get_permalink() ) . '">' . esc_html( get_the_title() ) . '</a>';
-            echo '</li>';
-        }
+		while ($custom_posts->have_posts()) {
+			$custom_posts->the_post();
+			echo '<li>';
+			echo '<a href="' . esc_url(get_permalink()) . '">' . esc_html(get_the_title()) . '</a>';
+			echo '</li>';
+		}
 
-        echo '</ul></div>';
-    } else {
-        return false; // Return false if no posts are found
-    }
+		echo '</ul></div>';
+	} else {
+		return false; // Return false if no posts are found
+	}
 
-    wp_reset_postdata();
+	wp_reset_postdata();
 }
