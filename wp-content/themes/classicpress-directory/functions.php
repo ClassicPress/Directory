@@ -648,14 +648,14 @@ function display_author_plugins() {
     $custom_posts = new WP_Query($args);
 
     if ($custom_posts->have_posts()) {
-        echo '<div class="single-developer-plugins"><h2>Other plugins by ' . $author_display_name . '</h2>'; // Display the author's name
+        echo '<div class="single-developer-plugins"><h2>Other plugins by ' . esc_html( $author_display_name ) . '</h2>'; // Display the author's name
 
         echo '<ul>';
 
         while ($custom_posts->have_posts()) {
             $custom_posts->the_post();
             echo '<li>';
-            echo '<a href="' . get_permalink() . '">' . get_the_title() . '</a>';
+            echo '<a href="' . esc_url( get_permalink() ) . '">' . esc_html( get_the_title() ) . '</a>';
             echo '</li>';
         }
 
@@ -682,14 +682,14 @@ function display_author_themes() {
     $custom_posts = new WP_Query($args);
 
     if ($custom_posts->have_posts()) {
-        echo '<div class="single-developer-themes"><h2>Other themes by ' . $author_display_name . '</h2>'; // Display the author's name
+        echo '<div class="single-developer-themes"><h2>Other themes by ' . esc_html( $author_display_name ) . '</h2>'; // Display the author's name
 
         echo '<ul>';
 
         while ($custom_posts->have_posts()) {
             $custom_posts->the_post();
             echo '<li>';
-            echo '<a href="' . get_permalink() . '">' . get_the_title() . '</a>';
+            echo '<a href="' . esc_url( get_permalink() ) . '">' . esc_html( get_the_title() ) . '</a>';
             echo '</li>';
         }
 
