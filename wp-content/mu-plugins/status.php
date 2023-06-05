@@ -32,7 +32,55 @@ class Status{
 		add_action('add_meta_boxes', [$this, 'status_add_meta_box']);
 		add_action('save_post_plugin', [$this, 'status_save'], 10, 1);
 		add_action('save_post_theme', [$this, 'status_save'], 10, 1);
+		add_filter('manage_plugin_posts_columns', [$this, 'status_column'], 10, 1);
+		add_action('manage_plugin_posts_custom_column', [$this, 'status_render'], 10, 2);
+		add_filter('manage_edit-plugin_sortable_columns', [$this, 'status_sortable'], 10, 1);
+		add_filter('manage_theme_posts_columns', [$this, 'status_column'], 10, 1);
+		add_action('manage_theme_posts_custom_column', [$this, 'status_render'], 10, 2);
+		add_filter('manage_edit-theme_sortable_columns', [$this, 'status_sortable'], 10, 1);
+		add_action('pre_get_posts', [$this, 'sort_query'], 10, 1);
+	}
 
+	public function sort_query($query) {
+		$orderby = $query->get('orderby');
+		if ($orderby !== 'status') {
+			return;
+		}
+		$meta_query = [
+			'relation' => 'OR',
+			[
+				'key'     => 'item_status',
+				'compare' => 'NOT EXISTS',
+			],
+			[
+				'key'     => 'item_status',
+				'compare' => 'meta_value',
+				'order' => 'DESC',
+			],
+		];
+        $query->set( 'meta_query', $meta_query );
+        $query->set( 'orderby', 'meta_value' );
+	}
+
+	public function status_sortable($columns) {
+		$columns['status'] = 'status';
+		return $columns;
+	}
+
+	public function status_render($column, $id) {
+		if ($column !== 'status') {
+			return;
+		}
+		$status = get_post_meta($id, 'item_status', true);
+		if (!array_key_exists($status,$this->statuses)) {
+			return;
+		}
+		esc_html_e($this->statuses[$status]);
+	}
+
+	public function status_column($columns) {
+		$columns['status'] = esc_html__('Status', 'classicpress-directory');
+		return $columns;
 	}
 
 	public function status_add_meta_box() {
