@@ -69,15 +69,20 @@
 			<?php if (display_author_themes() !== false || display_author_plugins() !== false) : ?>
 				<footer class="developer-items-wrapper">
 					<?php
-					switch (get_post_type()) {
-						case 'plugin':
-							display_author_themes();
-							display_author_plugins();
-							break;
-						case 'theme':
-							display_author_plugins();
-							display_author_themes();
-							break;
+					if (get_post_type() === 'plugin') {
+						if (display_author_plugins() !== false) {
+							echo display_author_plugins();
+						}
+						if (display_author_themes() !== false) {
+							echo display_author_themes();
+						}
+					} elseif (get_post_type() === 'theme') {
+						if (display_author_themes() !== false) {
+							echo display_author_themes();
+						}
+						if (display_author_plugins() !== false) {
+							echo display_author_plugins();
+						}
 					}
 					?>
 				</footer>
