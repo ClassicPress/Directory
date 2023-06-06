@@ -71,12 +71,20 @@
 					<?php
 					switch (get_post_type()) {
 						case 'plugin':
-							display_author_themes();
-							display_author_plugins();
+							if (display_author_plugins() !== false) {
+								display_author_plugins();
+							}
+							if (display_author_themes() !== false) {
+								display_author_themes();
+							}
 							break;
 						case 'theme':
-							display_author_plugins();
-							display_author_themes();
+							if (display_author_themes() !== false) {
+								display_author_themes();
+							}
+							if (display_author_plugins() !== false) {
+								display_author_plugins();
+							}
 							break;
 					}
 					?>
