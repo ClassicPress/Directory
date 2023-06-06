@@ -1310,9 +1310,9 @@ body:not(.developer-visit) .software-item-footer {
 #colophon li a {
 	color: var(--font-alt-color);
 	margin-bottom: 0.6em;
-    font-size: 1rem;
-    line-height: 1.3;
-    margin-top: 0;
+	font-size: 1rem;
+	line-height: 1.3;
+	margin-top: 0;
 }
 
 #colophon li a {
@@ -1375,6 +1375,7 @@ body:not(.developer-visit) .software-item-footer {
 .footerleft img {
 	width: 100%;
 	margin: 0;
+	max-width: 90px;
 }
 
 .registration {
@@ -1810,6 +1811,36 @@ ul.aside-items {
 	text-align: center;
 	padding: 2em;
 	color: var(--dark-gray)
+}
+
+/* Developer items on single pages */
+.developer-items-wrapper ul {
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.developer-items-wrapper ul li {
+	margin-left: 0;
+	line-height: 1;
+	width: 100%;
+}
+
+.developer-items-wrapper ul li a {
+	padding: 1rem;
+	display: block;
+	width: 100%;
+	border-bottom: 1px solid var(--gray-border);
+}
+
+.developer-items-wrapper ul li a:first {
+	border-top: 1px solid var(--gray-border);
+}
+
+.developer-items-wrapper ul li a:hover,
+.developer-items-wrapper ul li a:focus {
+	background-color: var(--pre-bg-color);
 }
 
 /* Homepage */

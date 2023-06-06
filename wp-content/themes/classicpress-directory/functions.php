@@ -652,8 +652,9 @@ function display_author_plugins()
 	$custom_posts = new WP_Query($args);
 
 	if ($custom_posts->have_posts()) {
-		echo '<div class="single-developer-plugins"><h2>Other plugins by ' . esc_html($author_display_name) . '</h2>'; // Display the author's name
-
+		echo '<div class="single-developer-plugins"><h2 class="h3">';
+		printf(__('Other plugins by %s', 'classicpress'), esc_html($author_display_name));
+		echo '</h2>';
 		echo '<ul>';
 
 		while ($custom_posts->have_posts()) {
@@ -663,7 +664,7 @@ function display_author_plugins()
 			echo '</li>';
 		}
 
-		echo '</ul>';
+		echo '</ul></div>';
 	} else {
 		return false; // Return false if no posts are found
 	}
@@ -690,8 +691,9 @@ function display_author_themes()
 	$custom_posts = new WP_Query($args);
 
 	if ($custom_posts->have_posts()) {
-		echo '<div class="single-developer-themes"><h2>Other themes by ' . esc_html($author_display_name) . '</h2>'; // Display the author's name
-
+		echo '<div class="single-developer-themes"><h2 class="h3">';
+		printf(__('Other themes by %s', 'classicpress'), esc_html($author_display_name));
+		echo '</h2>';
 		echo '<ul>';
 
 		while ($custom_posts->have_posts()) {
