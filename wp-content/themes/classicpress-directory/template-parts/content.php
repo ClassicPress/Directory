@@ -65,28 +65,27 @@
 				));
 				?>
 			</div>
-
-			<hr>
-			<?php echo display_author_plugins(); ?>
-			</hr>
-			<?php echo display_author_themes(); ?>
-			<?php if (display_author_themes() !== false || display_author_plugins() !== false) : ?>
+			
+			<?php 
+				$display_author_themes = display_author_themes();
+				$display_author_plugins = display_author_plugins();
+				if ($display_author_themes || $display_author_plugins) : ?>
 				<footer class="developer-items-wrapper">
 					<?php
 					// Note: functions exclude current post
 					if (get_post_type() === 'plugin') {
-						if (display_author_plugins() !== false) {
-							echo display_author_plugins();
+						if ($display_author_plugins) {
+							echo $display_author_plugins;
 						}
-						if (display_author_themes() !== false) {
-							echo display_author_themes();
+						if ($display_author_themes !== false) {
+							echo $display_author_themes;
 						}
 					} elseif (get_post_type() === 'theme') {
-						if (display_author_themes() !== false) {
-							echo display_author_themes();
+						if ($display_author_themes !== false) {
+							echo $display_author_themes;
 						}
-						if (display_author_plugins() !== false) {
-							echo display_author_plugins();
+						if ($display_author_plugins) {
+							echo $display_author_plugins;
 						}
 					}
 					?>
