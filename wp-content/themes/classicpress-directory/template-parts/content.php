@@ -66,6 +66,10 @@
 				?>
 			</div>
 
+			<hr>
+			<?php echo display_author_plugins(); ?>
+			</hr>
+			<?php echo display_author_themes(); ?>
 			<?php if (display_author_themes() !== false || display_author_plugins() !== false) : ?>
 				<footer class="developer-items-wrapper">
 					<?php
