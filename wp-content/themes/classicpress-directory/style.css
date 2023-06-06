@@ -1676,6 +1676,7 @@ ul.aside-items {
 	font-family: var(--readme-font);
 	font-size: 16px;
 	line-height: 1.5;
+	padding-bottom: 3rem;
 }
 
 .readme-md-content b,
