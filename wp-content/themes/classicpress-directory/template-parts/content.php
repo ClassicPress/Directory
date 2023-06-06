@@ -68,12 +68,6 @@
 
 			<?php if (display_author_themes() !== false || display_author_plugins() !== false) : ?>
 				<footer class="developer-items-wrapper">
-					<pre>
-						<?php var_dump(display_author_themes());?>
-					</pre>
-					<pre>
-						<?php var_dump(display_author_plugins());?>
-					</pre>
 					<?php
 					// Note: functions exclude current post
 					if (get_post_type() === 'plugin') {
