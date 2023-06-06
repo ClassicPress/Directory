@@ -77,11 +77,11 @@
 						if ($display_author_plugins) {
 							echo $display_author_plugins;
 						}
-						if ($display_author_themes !== false) {
+						if ($display_author_themes) {
 							echo $display_author_themes;
 						}
 					} elseif (get_post_type() === 'theme') {
-						if ($display_author_themes !== false) {
+						if ($display_author_themes) {
 							echo $display_author_themes;
 						}
 						if ($display_author_plugins) {
