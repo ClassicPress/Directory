@@ -660,7 +660,7 @@ function display_author_plugins()
 		while ($custom_posts->have_posts()) {
 			$custom_posts->the_post();
 			$content .= '<li>';
-			$content .= sprintf('<a href="%s" title="%s plugin">%s</a>', esc_url(get_permalink(), esc_attr(get_the_title()),esc_html(get_the_title())));
+			$content .= sprintf('<a href="%s" title="%s plugin">%s</a>', esc_url(get_permalink()), esc_attr(get_the_title()),esc_html(get_the_title()));
 			$content .= '</li>';
 		}
 
@@ -701,7 +701,7 @@ function display_author_themes()
 		while ($custom_posts->have_posts()) {
 			$custom_posts->the_post();
 			$content .= '<li>';
-			$content .= sprintf('<a href="%s" title="%s theme">%s</a>', esc_url(get_permalink(), esc_attr(get_the_title()), esc_html(get_the_title())));
+			$content .= sprintf('<a href="%s" title="%s theme">%s</a>', esc_url(get_permalink()), esc_attr(get_the_title()), esc_html(get_the_title()));
 			$content .= '</li>';
 		}
 
