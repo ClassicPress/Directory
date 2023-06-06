@@ -652,19 +652,21 @@ function display_author_plugins()
 	$custom_posts = new WP_Query($args);
 
 	if ($custom_posts->have_posts()) {
-		echo '<div class="single-developer-plugins"><h2 class="h3">';
-		printf(__('Other plugins by %s', 'classicpress'), esc_html($author_display_name));
-		echo '</h2>';
-		echo '<ul>';
+		$content = '<div class="single-developer-plugins"><h2 class="h3">';
+		$content .= sprintf(__('Other plugins by %s', 'classicpress'), esc_html($author_display_name));
+		$content .= '</h2>';
+		$content .= '<ul>';
 
 		while ($custom_posts->have_posts()) {
 			$custom_posts->the_post();
-			echo '<li>';
-			echo '<a href="' . esc_url(get_permalink()) . '">' . esc_html(get_the_title()) . '</a>';
-			echo '</li>';
+			$content .= '<li>';
+			$content .= '<a href="' . esc_url(get_permalink()) . '">' . esc_html(get_the_title()) . '</a>';
+			$content .= '</li>';
 		}
 
-		echo '</ul></div>';
+		$content .= '</ul></div>';
+
+		return $content;
 	} else {
 		return false; // Return false if no posts are found
 	}
@@ -691,19 +693,21 @@ function display_author_themes()
 	$custom_posts = new WP_Query($args);
 
 	if ($custom_posts->have_posts()) {
-		echo '<div class="single-developer-themes"><h2 class="h3">';
-		printf(__('Other themes by %s', 'classicpress'), esc_html($author_display_name));
-		echo '</h2>';
-		echo '<ul>';
+		$content = '<div class="single-developer-themes"><h2 class="h3">';
+		$content .= sprintf(__('Other themes by %s', 'classicpress'), esc_html($author_display_name));
+		$content .= '</h2>';
+		$content .= '<ul>';
 
 		while ($custom_posts->have_posts()) {
 			$custom_posts->the_post();
-			echo '<li>';
-			echo '<a href="' . esc_url(get_permalink()) . '">' . esc_html(get_the_title()) . '</a>';
-			echo '</li>';
+			$content .= '<li>';
+			$content .= '<a href="' . esc_url(get_permalink()) . '">' . esc_html(get_the_title()) . '</a>';
+			$content .= '</li>';
 		}
 
-		echo '</ul></div>';
+		$content .= '</ul></div>';
+
+		return $content;
 	} else {
 		return false; // Return false if no posts are found
 	}
