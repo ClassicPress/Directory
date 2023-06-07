@@ -1828,6 +1828,10 @@ ul.aside-items {
 	width: 100%;
 }
 
+.developer-items-wrapper {
+	padding-bottom: 2rem;
+}
+
 .developer-items-wrapper ul li a {
 	padding: 1rem;
 	display: block;
@@ -1835,7 +1839,7 @@ ul.aside-items {
 	border-bottom: 1px solid var(--gray-border);
 }
 
-.developer-items-wrapper ul li a:first {
+.developer-items-wrapper ul li:first-child a {
 	border-top: 1px solid var(--gray-border);
 }
 
