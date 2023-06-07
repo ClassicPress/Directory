@@ -1828,7 +1828,8 @@ ul.aside-items {
 	width: 100%;
 }
 
-.developer-items-wrapper {
+.developer-items-wrapper,
+.single-developer-plugins {
 	padding-bottom: 2rem;
 }
 
