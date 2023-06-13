@@ -109,6 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		if (!regex.test(url)) {
 			var errorMessage = document.querySelector('.url-error');
 			errorMessage.style.display = 'block';
+			urlInput.classList.add('input-error');
 		} else {
 			form.submit();
 		}
