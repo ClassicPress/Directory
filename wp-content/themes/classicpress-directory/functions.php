@@ -747,3 +747,26 @@ function get_author_drafts_list($author_id, $post_type_slug)
 
 	return $output;
 }
+
+/**
+ * Display author's public profile link in admin bar
+ */
+function add_author_page_menu_item($wp_admin_bar)
+{
+	if (current_user_can_for_blog(get_current_blog_id(), 'edit_posts')) {
+		$author_id = get_current_user_id();
+		$author_url = get_author_posts_url($author_id);
+
+		$args = array(
+			'id'    => 'author_page',
+			'title' => 'My Public Profile',
+			'href'  => $author_url,
+			'meta'  => array(
+				'class' => 'author-page',
+			),
+		);
+
+		$wp_admin_bar->add_node($args);
+	}
+}
+add_action('admin_bar_menu', 'add_author_page_menu_item', 999);
