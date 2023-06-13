@@ -1818,6 +1818,27 @@ ul.aside-items {
 	color: var(--dark-gray)
 }
 
+.under-review-items {
+	padding: 1rem;
+	border: 1px solid var(--alert-warning-bg);
+}
+
+.under-review-items h2 {
+	margin-top: 0;
+}
+
+.under-review-items ul {
+	margin-bottom: 2rem;
+}
+
+.under-review-items ul li:not(:last-child) {
+	margin-bottom: 1rem;
+}
+
+.under-review-items ul li code {
+	margin-right: 1rem;
+}
+
 /* Developer items on single pages */
 .developer-items-wrapper ul {
 	list-style: none;

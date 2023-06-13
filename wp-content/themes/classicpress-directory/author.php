@@ -41,11 +41,11 @@ get_header();
 			if ($author_drafts_plugins || $author_drafts_themes) {
 				echo '<section class="under-review-items">';
 				if ($author_drafts_plugins) {
-					echo '<h2 class="h3">' . _('Plugins Under Review', 'classicpress') . '</h3>';
+					echo '<h2 class="h3">' . __('Plugins Under Review', 'classicpress') . '</h3>';
 					echo $author_drafts_plugins;
 				}
 				if ($author_drafts_themes) {
-					echo '<h2 class="h3">' . _('Themes Under Review', 'classicpress') . '</h3>';
+					echo '<h2 class="h3">' . __('Themes Under Review', 'classicpress') . '</h3>';
 					echo $author_drafts_themes;
 				}
 				echo "</section>";
