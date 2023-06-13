@@ -638,41 +638,41 @@ function remove_images_from_content($content)
  */
 function display_author_plugins()
 {
-    global $post; // Get the current post object
-    $current_post_id = $post->ID; // Get the ID of the current post
-    $author_id = get_the_author_meta('ID'); // Get the ID of the current author
-    $author_display_name = get_the_author_meta('display_name', $author_id); // Get the author's display name
-    $args = array(
-        'post_type' => 'plugin', // Custom post type slug
-        'posts_per_page' => 5, // Number of posts to display
-        'author' => $author_id, // Display posts from the current author
-        'post__not_in' => array($current_post_id) // Exclude the current post
-    );
+	global $post; // Get the current post object
+	$current_post_id = $post->ID; // Get the ID of the current post
+	$author_id = get_the_author_meta('ID'); // Get the ID of the current author
+	$author_display_name = get_the_author_meta('display_name', $author_id); // Get the author's display name
+	$args = array(
+		'post_type' => 'plugin', // Custom post type slug
+		'posts_per_page' => 5, // Number of posts to display
+		'author' => $author_id, // Display posts from the current author
+		'post__not_in' => array($current_post_id) // Exclude the current post
+	);
 
-    $custom_posts = new WP_Query($args);
-    $content = '';
+	$custom_posts = new WP_Query($args);
+	$content = '';
 
-    if ($custom_posts->have_posts()) {
-        $content = '<div class="single-developer-plugins"><h2 class="h3">';
-        $content .= sprintf(__('Other plugins by %s', 'classicpress'), esc_html($author_display_name));
-        $content .= '</h2>';
-        $content .= '<ul>';
+	if ($custom_posts->have_posts()) {
+		$content = '<div class="single-developer-plugins"><h2 class="h3">';
+		$content .= sprintf(__('Other plugins by %s', 'classicpress'), esc_html($author_display_name));
+		$content .= '</h2>';
+		$content .= '<ul>';
 
-        while ($custom_posts->have_posts()) {
-            $custom_posts->the_post();
-            $content .= '<li>';
-            $content .= sprintf('<a href="%s" title="%s plugin">%s</a>', esc_url(get_permalink()), esc_attr(get_the_title()), esc_html(get_the_title()));
-            $content .= '</li>';
-        }
+		while ($custom_posts->have_posts()) {
+			$custom_posts->the_post();
+			$content .= '<li>';
+			$content .= sprintf('<a href="%s" title="%s plugin">%s</a>', esc_url(get_permalink()), esc_attr(get_the_title()), esc_html(get_the_title()));
+			$content .= '</li>';
+		}
 
-        $content .= '</ul></div>';
-    } 
+		$content .= '</ul></div>';
+	}
 
-    // Call wp_reset_postdata before function ends, regardless if posts were found or not
-    wp_reset_postdata();
+	// Call wp_reset_postdata before function ends, regardless if posts were found or not
+	wp_reset_postdata();
 
-    // If content was generated, return it. Otherwise return false.
-    return $content !== '' ? $content : false;
+	// If content was generated, return it. Otherwise return false.
+	return $content !== '' ? $content : false;
 }
 
 /**
@@ -680,39 +680,70 @@ function display_author_plugins()
  */
 function display_author_themes()
 {
-    global $post; // Get the current post object
-    $current_post_id = $post->ID; // Get the ID of the current post
-    $author_id = get_the_author_meta('ID'); // Get the ID of the current author
-    $author_display_name = get_the_author_meta('display_name', $author_id); // Get the author's display name
-    $args = array(
-        'post_type' => 'theme', // Custom post type slug
-        'posts_per_page' => 5, // Number of posts to display
-        'author' => $author_id, // Display posts from the current author
-        'post__not_in' => array($current_post_id) // Exclude the current post
-    );
+	global $post; // Get the current post object
+	$current_post_id = $post->ID; // Get the ID of the current post
+	$author_id = get_the_author_meta('ID'); // Get the ID of the current author
+	$author_display_name = get_the_author_meta('display_name', $author_id); // Get the author's display name
+	$args = array(
+		'post_type' => 'theme', // Custom post type slug
+		'posts_per_page' => 5, // Number of posts to display
+		'author' => $author_id, // Display posts from the current author
+		'post__not_in' => array($current_post_id) // Exclude the current post
+	);
 
-    $custom_posts = new WP_Query($args);
-    $content = '';
+	$custom_posts = new WP_Query($args);
+	$content = '';
 
-    if ($custom_posts->have_posts()) {
-        $content = '<div class="single-developer-themes"><h2 class="h3">';
-        $content .= sprintf(__('Other themes by %s', 'classicpress'), esc_html($author_display_name));
-        $content .= '</h2>';
-        $content .= '<ul>';
+	if ($custom_posts->have_posts()) {
+		$content = '<div class="single-developer-themes"><h2 class="h3">';
+		$content .= sprintf(__('Other themes by %s', 'classicpress'), esc_html($author_display_name));
+		$content .= '</h2>';
+		$content .= '<ul>';
 
-        while ($custom_posts->have_posts()) {
-            $custom_posts->the_post();
-            $content .= '<li>';
-            $content .= sprintf('<a href="%s" title="%s theme">%s</a>', esc_url(get_permalink()), esc_attr(get_the_title()), esc_html(get_the_title()));
-            $content .= '</li>';
-        }
+		while ($custom_posts->have_posts()) {
+			$custom_posts->the_post();
+			$content .= '<li>';
+			$content .= sprintf('<a href="%s" title="%s theme">%s</a>', esc_url(get_permalink()), esc_attr(get_the_title()), esc_html(get_the_title()));
+			$content .= '</li>';
+		}
 
-        $content .= '</ul></div>';
-    } 
+		$content .= '</ul></div>';
+	}
 
-    // Call wp_reset_postdata before function ends, regardless if posts were found or not
-    wp_reset_postdata();
+	// Call wp_reset_postdata before function ends, regardless if posts were found or not
+	wp_reset_postdata();
 
-    // If content was generated, return it. Otherwise return false.
-    return $content !== '' ? $content : false;
+	// If content was generated, return it. Otherwise return false.
+	return $content !== '' ? $content : false;
+}
+
+/**
+ * Display author's drafts
+ */
+function get_author_drafts_list($author_id, $post_type_slug)
+{
+	$args = array(
+		'post_type'      => $post_type_slug,
+		'post_status'    => array('draft'),
+		'author'         => $author_id,
+		'posts_per_page' => -1,
+	);
+
+	$drafts = new WP_Query($args);
+
+	$output = '';
+
+	if ($drafts->have_posts()) {
+		$output .= '<ul>';
+		while ($drafts->have_posts()) {
+			$drafts->the_post();
+			$output .= '<li><code>ID ' . esc_html(get_the_ID()) . '</code> <a href="' . esc_url(get_permalink()) . '">' . esc_html(get_the_title()) . '</a></li>';
+		}
+		$output .= '</ul>';
+		wp_reset_postdata();
+	} else {
+		$output = false;
+	}
+
+	return $output;
 }
