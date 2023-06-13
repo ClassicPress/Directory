@@ -1818,11 +1818,15 @@ ul.aside-items {
 	color: var(--dark-gray)
 }
 
+.under-review-items {
+	padding: 1rem 2rem;
+}
+
 .under-review-items h2 {
 	margin-top: 0;
 }
 
-.under-review-items ul {
+.under-review-items ul:not(:last-child) {
 	margin-bottom: 2rem;
 }
 

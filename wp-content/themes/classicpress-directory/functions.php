@@ -737,7 +737,7 @@ function get_author_drafts_list($author_id, $post_type_slug)
 		$output .= '<ul>';
 		while ($drafts->have_posts()) {
 			$drafts->the_post();
-			$output .= '<li><code>ID ' . esc_html(get_the_ID()) . '</code> <a href="' . esc_url(get_permalink()) . '">' . esc_html(get_the_title()) . '</a></li>';
+			$output .= '<li><a href="' . esc_url(get_permalink()) . '">' . esc_html(get_the_title()) . '</a> (ID ' . esc_html(get_the_ID()) . ')</li>';
 		}
 		$output .= '</ul>';
 		wp_reset_postdata();
