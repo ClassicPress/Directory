@@ -798,3 +798,14 @@ function add_author_page_menu_item($wp_admin_bar) {
     }
 }
 add_action('admin_bar_menu', 'add_author_page_menu_item', 999);
+
+/**
+ * Remove New and comments menus
+ */
+function remove_menu_items_for_contributor($wp_admin_bar) {
+    if (current_user_can('contributor')) {
+        $wp_admin_bar->remove_node('new-content');
+        $wp_admin_bar->remove_node('comments');
+    }
+}
+add_action('admin_bar_menu', 'remove_menu_items_for_contributor', 999);
