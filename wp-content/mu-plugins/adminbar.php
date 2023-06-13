@@ -166,15 +166,26 @@ function add_author_page_menu_item($wp_admin_bar) {
 add_action('admin_bar_menu', 'add_author_page_menu_item', 999);
 
 /**
- * Remove New and comments menus
+ * Remove New, dashboard and comments menus
  */
 function remove_menu_items_for_contributor($wp_admin_bar) {
     if (current_user_can('contributor')) {
         $wp_admin_bar->remove_node('new-content');
         $wp_admin_bar->remove_node('comments');
+		$wp_admin_bar->remove_node('dashboard');
     }
 }
 add_action('admin_bar_menu', 'remove_menu_items_for_contributor', 999);
+
+/**
+ * Remove dashboard menu
+ */
+function remove_dashboard_menu() {
+    if (current_user_can('contributor')) {
+        remove_menu_page('index.php');
+    }
+}
+add_action('admin_menu', 'remove_dashboard_menu');
 
 /**
  * Show adminbar
