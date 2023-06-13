@@ -166,12 +166,12 @@ function kts_render_software_submit_form()
 					<div class="clear"></div>
 					<label for="plugin">
 						<input id="plugin" class="mgr-lg" name="software_type" type="radio" value="plugin" required>
-						Plugin
+						<?php _e('Plugin', 'classicpress'); ?>
 					</label>
 					<br>
 					<label for="theme">
 						<input id="theme" class="mgr-lg" name="software_type" type="radio" value="theme" required>
-						Theme
+						<?php _e('Theme', 'classicpress'); ?>
 					</label>
 				</fieldset>
 
@@ -191,11 +191,12 @@ function kts_render_software_submit_form()
 
 					<?php
 					foreach ($categories as $category) {
-						echo '<input id="cat-' . $category->slug . '" class="mgr-lg" name="categories[]" type="checkbox" value="' . $category->cat_ID . '"  disabled>';
-						echo '<label for="cat-' . $category->slug . '">' . $category->name . '</label>';
+						echo '<input id="cat-' . esc_attr($category->slug) . '" class="mgr-lg" name="categories[]" type="checkbox" value="' . esc_attr($category->cat_ID) . '"  disabled>';
+						echo '<label for="cat-' . esc_attr($category->slug) . '">' . esc_html($category->name) . '</label>';
 						echo '<br>';
 					}
 					?>
+
 
 				</fieldset>
 
@@ -210,28 +211,29 @@ function kts_render_software_submit_form()
 					<div class="clear"></div>
 					<label for="github">
 						<input id="github" class="mgr-lg" name="git_provider" type="radio" value="github" checked required>
-						GitHub
+						<?php _e('GitHub', 'classicpress'); ?>
 					</label>
 					<br>
 					<label for="gitlab">
 						<input id="gitlab" class="mgr-lg" name="git_provider" type="radio" value="gitlab" disabled>
-						GitLab
+						<?php _e('GitLab', 'classicpress'); ?>
 					</label>
 				</fieldset>
 
 				<div class="form-group">
 					<label for="download_link"><?php _e('Software Download Link (full URL including https://)', 'classicpress'); ?></label>
 					<div class="alert error-message url-error" role="alert" style="display:none;">
-						<p><small>Invalid GitHub URL. You must use correct GitHub release URL. See example below.</small></p>
+						<p><small><?php _e('Invalid GitHub URL. You must use correct GitHub release URL. See example below.', 'classicpress'); ?></small></p>
 					</div>
 					<input id="download_link" name="download_link" class="mb-0" type="url" placeholder="https://" required>
-					<small class="form-text">Example: https://github.com/classicpress/classic-seo/releases/download/v1.0.0/classic-seo.zip</small>
+					<small class="form-text"><?php _e('Example: https://github.com/classicpress/classic-seo/releases/download/v1.0.0/classic-seo.zip', 'classicpress'); ?></small>
 				</div>
-				<input type="hidden" name="cp-nonce-name" value="<?php echo $cp_nonce['name']; ?>">
-				<input type="hidden" name="cp-nonce-value" value="<?php echo $cp_nonce['value']; ?>">
+				<input type="hidden" name="cp-nonce-name" value="<?php echo esc_attr($cp_nonce['name']); ?>">
+				<input type="hidden" name="cp-nonce-value" value="<?php echo esc_attr($cp_nonce['value']); ?>">
+
 				<div class="form-btn">
-					<button id="submit-btn" type="submit" enterkeyhint="send">Submit</button>
-					<button type="reset" enterkeyhint="go">Clear</button>
+					<button id="submit-btn" type="submit" enterkeyhint="send"><?php _e('Submit', 'classicpress'); ?></button>
+					<button type="reset" enterkeyhint="go"><?php _e('Clear', 'classicpress'); ?></button>
 				</div>
 			</form>
 		</section>

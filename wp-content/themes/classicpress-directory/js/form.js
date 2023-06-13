@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	form.addEventListener('submit', function (event) {
 		event.preventDefault();
 
-		var urlInput = document.getElementById('submit-cp-code-form');
+		var urlInput = document.getElementById('download_link');
 		var url = urlInput.value.trim();
 
 		// Regular expression to match the URL format for Github

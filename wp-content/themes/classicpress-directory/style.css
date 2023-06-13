@@ -1483,7 +1483,7 @@ a.external.btn:after {
 }
 
 .input-error {
-	border-color: var(--alert-danger-border);
+	border-color: var(--alert-danger-border) !important;
 }
 
 .alert.warning-message {
