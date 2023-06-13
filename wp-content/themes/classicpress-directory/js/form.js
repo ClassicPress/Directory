@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	const submitBtn = document.getElementById('submit-btn');
 	softwares.forEach(software => {
 		software.addEventListener('change', function () {
-			console.log('Yes');
 			if (plugin.checked) {
 				category.removeAttribute('hidden');
 				categories.forEach(cat => {
@@ -95,5 +94,24 @@ document.addEventListener('DOMContentLoaded', function () {
 	};
 
 	excerptTxt.addEventListener('input', countCharacters);
+
+	// Download URL validation
+	var form = document.getElementById('submit-cp-code-form');
+	form.addEventListener('submit', function (event) {
+		event.preventDefault();
+
+		var urlInput = document.getElementById('submit-cp-code-form');
+		var url = urlInput.value.trim();
+
+		// Regular expression to match the URL format for Github
+		var regex = /^https:\/\/github\.com\/.*\/releases\/download\/.*\.zip$/;
+
+		if (!regex.test(url)) {
+			var errorMessage = document.querySelector('.url-error');
+			errorMessage.style.display = 'block';
+		} else {
+			form.submit();
+		}
+	});
 
 });

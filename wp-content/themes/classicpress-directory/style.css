@@ -1482,6 +1482,10 @@ a.external.btn:after {
 	border-color: var(--alert-danger-border);
 }
 
+.input-error {
+	border-color: var(--alert-danger-border);
+}
+
 .alert.warning-message {
 	background-color: var(--alert-warning-bg);
 	color: var(--alert-warning-color);
