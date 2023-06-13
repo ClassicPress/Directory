@@ -8,13 +8,6 @@
  * License: MIT
 */
 
-function kts_adminbar() {
-	add_theme_support( 'admin-bar', array(
-		'callback' => '__return_false' // prevents pushing header down
-	) );
-}
-add_action( 'after_setup_theme', 'kts_adminbar' );
-
 function kts_override_admin_bar_css() {
 	if ( ! is_admin_bar_showing() ) {
 		return;
@@ -166,13 +159,15 @@ function add_author_page_menu_item($wp_admin_bar) {
 add_action('admin_bar_menu', 'add_author_page_menu_item', 999);
 
 /**
- * Remove New, dashboard and comments menus
+ * Remove New, dashboard, site name, logo, and comments menus
  */
 function remove_menu_items_for_contributor($wp_admin_bar) {
     if (current_user_can('contributor')) {
         $wp_admin_bar->remove_node('new-content');
         $wp_admin_bar->remove_node('comments');
 		$wp_admin_bar->remove_node('dashboard');
+		$wp_admin_bar->remove_node('wp-logo');
+		$wp_admin_bar->remove_node('site-name');
     }
 }
 add_action('admin_bar_menu', 'remove_menu_items_for_contributor', 999);
