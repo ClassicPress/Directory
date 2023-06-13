@@ -8,6 +8,13 @@
  * License: MIT
 */
 
+function kts_adminbar() {
+	add_theme_support( 'admin-bar', array(
+		'callback' => '__return_false' // prevents pushing header down
+	) );
+}
+add_action( 'after_setup_theme', 'kts_adminbar' );
+
 function kts_override_admin_bar_css() {
 	if ( ! is_admin_bar_showing() ) {
 		return;
@@ -168,3 +175,13 @@ function remove_menu_items_for_contributor($wp_admin_bar) {
     }
 }
 add_action('admin_bar_menu', 'remove_menu_items_for_contributor', 999);
+
+/**
+ * Show adminbar
+ */
+function show_admin_bar_on_frontend() {
+    if (is_user_logged_in()) {
+        show_admin_bar(true);
+    }
+}
+add_action('after_setup_theme', 'show_admin_bar_on_frontend');
