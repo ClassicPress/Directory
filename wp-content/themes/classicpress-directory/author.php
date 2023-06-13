@@ -39,7 +39,7 @@ get_header();
 					$author_id = get_queried_object_id();
 					$is_author = is_user_logged_in() && $current_user->ID === $author_id;
 					$author_items_status = ($is_author) ? array('publish', 'draft') : array('publish');
-
+					echo "<pre>";var_dump($is_author);echo "</pre>";
 					if ($cached_count['plugin'] > 0 || $is_author) : ?>
 					<ul class="software-grid">
 
