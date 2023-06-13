@@ -67,7 +67,7 @@
 			</div>
 
 			<?php
-			if (function_exists('display_author_themes') && function_exists('display_author_plugins')) :
+			/*if (function_exists('display_author_themes') && function_exists('display_author_plugins')) :
 				$display_author_themes = display_author_themes();
 				$display_author_plugins = display_author_plugins();
 				if ($display_author_themes || $display_author_plugins) : ?>
@@ -92,12 +92,13 @@
 						?>
 					</footer>
 			<?php endif;
-			endif;
+			endif;*/
 			?>
 
 		</section>
 
 		<aside>
+			<pre><?php var_dump($post->ID); ?></pre>
 			<h2 class="screen-reader-text"><?php _e('Meta', 'classicpress'); ?></h2>
 			<ul class="aside-items">
 				<li class="aside-item">
