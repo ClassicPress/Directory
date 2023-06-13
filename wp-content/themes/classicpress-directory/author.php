@@ -39,7 +39,7 @@ get_header();
 			$author_drafts_themes = get_author_drafts_list($author_id, 'theme');
 
 			if ($author_drafts_plugins || $author_drafts_themes) {
-				echo '<section class="under-review-items">';
+				echo '<section class="under-review-items alert warning-message">';
 				if ($author_drafts_plugins) {
 					echo '<h2 class="h3">' . __('Plugins Under Review', 'classicpress') . '</h3>';
 					echo $author_drafts_plugins;
