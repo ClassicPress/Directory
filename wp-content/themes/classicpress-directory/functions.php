@@ -770,7 +770,6 @@ function add_author_page_menu_item($wp_admin_bar) {
         $wp_admin_bar->add_menu(array(
             'id'     => 'forms',
             'title'  => 'Forms',
-            'parent' => 'top-secondary',
         ));
 
         $form1_url = home_url('/software-submission-form');
