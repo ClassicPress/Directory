@@ -34,14 +34,20 @@ get_header();
 			</div><!-- #ui-tabs-nav -->
 
 			<div id="tabs-1" class="ui-panel" role="tabpanel" <?php echo $active_tab === 'plugin' ? '' : ' hidden' ?>>
-				<?php if ($cached_count['plugin'] > 0) : ?>
+				<?php 
+					$current_user = wp_get_current_user();
+					$author_id = get_queried_object_id();
+					$is_author = is_user_logged_in() && $current_user->ID === $author_id;
+					$author_items_status = ($is_author) ? array('publish', 'draft') : array('publish');
+
+					if ($cached_count['plugin'] > 0 || $is_author) : ?>
 					<ul class="software-grid">
 
 						<?php
 						$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 						$plugin_args = array(
 							'post_type'		=> 'plugin',
-							'post_status'	=> 'publish',
+							'post_status'	=> $author_items_status,
 							'author'		=> $author->ID,
 							'paged'			=> $paged,
 						);
@@ -102,7 +108,7 @@ get_header();
 
 			<div id="tabs-2" class="ui-panel" role="tabpanel" <?php echo $active_tab === 'theme' ? '' : ' hidden' ?>>
 			
-			<?php if ($cached_count['theme'] > 0) : ?>
+			<?php if ($cached_count['theme'] > 0 || $is_author) : ?>
 				<ul class="software-grid">
 
 					<?php
@@ -174,7 +180,7 @@ get_header();
 				<h2 id="my-dialog-title"></h2>
 
 				<div id="my-dialog-description"></div>
-				<button id="bottom-close" data-a11y-dialog-hide aria-label="Close this dialog window">Close</button>
+				<button id="bottom-close" data-a11y-dialog-hide aria-label="Close this dialog window"><?php _e('Close', 'classicpress'); ?></button>
 			</div>
 		</div>
 
