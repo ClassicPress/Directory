@@ -33,13 +33,13 @@ get_header();
 				<?php $active_tab = kts_render_user_tabs($cached_count); ?>
 			</div><!-- #ui-tabs-nav -->
 
-			<div id="tabs-1" class="ui-panel" role="tabpanel" <?php echo $active_tab === 'plugin' ? '' : ' hidden' ?>>
+			<div id="tabs-1" class="ui-panel" role="tabpanel" <?php echo $active_tab === 'plugin' && !$is_author ? '' : ' hidden'; ?>>
 				<?php 
 					$current_user = wp_get_current_user();
 					$author_id = get_queried_object_id();
 					$is_author = is_user_logged_in() && $current_user->ID === $author_id;
 					$author_items_status = ($is_author) ? array('publish', 'draft') : array('publish');
-					echo "<pre>";var_dump($is_author);echo "</pre>";
+
 					if ($cached_count['plugin'] > 0 || $is_author) : ?>
 					<ul class="software-grid">
 
@@ -106,7 +106,7 @@ get_header();
 
 			</div><!-- #tabs-1 -->
 
-			<div id="tabs-2" class="ui-panel" role="tabpanel" <?php echo $active_tab === 'theme' ? '' : ' hidden' ?>>
+			<div id="tabs-2" class="ui-panel" role="tabpanel" <?php echo $active_tab === 'theme' && !$is_author ? '' : ' hidden'; ?>>
 			
 			<?php if ($cached_count['theme'] > 0 || $is_author) : ?>
 				<ul class="software-grid">
