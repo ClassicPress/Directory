@@ -1,0 +1,56 @@
+{
+    "name": "madwizard/webauthn",
+    "description": "Web Authentication API server for PHP",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "MadWizard\\WebAuthn\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MadWizard\\WebAuthn\\Tests\\": "tests/",
+            "MadWizard\\WebAuthn\\Conformance\\": "conformance/src/"
+        }
+    },
+    "require": {
+        "php": "^7.2.0|^8.0",
+        "sop/x509": "^0.7.0",
+        "ext-openssl": "*",
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "^6.5|^7.0",
+        "psr/cache": "^1.0|^2.0|^3.0",
+        "kevinrob/guzzle-cache-middleware": "^3.3",
+        "psr/log": "^1.1|^2.0|^3.0",
+        "sop/asn1": "^4.1",
+        "sop/x501": "^0.6.1",
+        "sop/crypto-types": "^0.3.0",
+        "sop/crypto-bridge": "^0.3.1",
+        "sop/crypto-encoding": "^0.3.0",
+        "ext-sodium": "*",
+        "symfony/cache": "^4.4|^5.2|^6.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.5.29",
+        "phpstan/phpstan": "^0.12.64",
+        "symfony/var-dumper": "^5.2",
+        "symfony/console": "^5.2",
+        "symfony/dotenv": "^5.2",
+        "phpseclib/phpseclib": "^3.0.1",
+        "sebastian/comparator": "^3.0.5"
+    },
+    "archive": {
+        "exclude": [
+            "/tests",
+            "/phpunit.xml.dist",
+            "/conformance"
+        ]
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Thomas Bleeker",
+            "email": "support@madwizard.org"
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+build:
+  environment:
+    php:
+      version: 7.4
+  nodes:
+    analysis:
+      tests:
+        override:
+          - php-scrutinizer-run
+
+    coverage:
+      tests:
+        override:
+         - command: php -dxdebug.mode=coverage -dxdebug.overload_var_dump=off vendor/bin/phpunit --coverage-clover=coverage.xml
+           coverage:
+             file: coverage.xml
+             format: php-clover
+filter:
+    paths: ["src/*"]
+    dependency_paths:
+        - vendor/
