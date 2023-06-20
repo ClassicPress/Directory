@@ -197,7 +197,7 @@ class Table extends \WP_List_Table {
 	 * @return array<int,string> Array of class names.
 	 */
 	protected function get_table_classes() {
-		return array( 'widefat', 'striped', $this->_args['plural'] );
+		return array( 'widefat', 'striped', 'table-view-list', $this->_args['plural'] );
 	}
 
 	/**
@@ -380,7 +380,7 @@ class Table extends \WP_List_Table {
 			$link = add_query_arg( $link, admin_url( 'tools.php' ) );
 			$link = wp_nonce_url( $link, "crontrol-run-cron_{$event->hook}_{$event->sig}" );
 
-			$links[] = "<a href='" . esc_url( $link ) . "'>" . esc_html__( 'Run Now', 'wp-crontrol' ) . '</a>';
+			$links[] = "<a href='" . esc_url( $link ) . "'>" . esc_html__( 'Run now', 'wp-crontrol' ) . '</a>';
 		}
 
 		if ( is_paused( $event ) ) {
@@ -392,8 +392,8 @@ class Table extends \WP_List_Table {
 			$link = add_query_arg( $link, admin_url( 'tools.php' ) );
 			$link = wp_nonce_url( $link, "crontrol-resume-hook_{$event->hook}" );
 
-			/* translators: Verb */
-			$links[] = "<a href='" . esc_url( $link ) . "'>" . esc_html__( 'Resume', 'wp-crontrol' ) . '</a>';
+			/* translators: Resume is a verb */
+			$links[] = "<a href='" . esc_url( $link ) . "'>" . esc_html__( 'Resume this hook', 'wp-crontrol' ) . '</a>';
 		} elseif ( 'crontrol_cron_job' !== $event->hook ) {
 			$link = array(
 				'page'            => 'crontrol_admin_manage_page',
@@ -403,8 +403,8 @@ class Table extends \WP_List_Table {
 			$link = add_query_arg( $link, admin_url( 'tools.php' ) );
 			$link = wp_nonce_url( $link, "crontrol-pause-hook_{$event->hook}" );
 
-			/* translators: Verb */
-			$links[] = "<a href='" . esc_url( $link ) . "'>" . esc_html__( 'Pause', 'wp-crontrol' ) . '</a>';
+			/* translators: Pause is a verb */
+			$links[] = "<a href='" . esc_url( $link ) . "'>" . esc_html__( 'Pause this hook', 'wp-crontrol' ) . '</a>';
 		}
 
 		if ( ! in_array( $event->hook, self::$persistent_core_hooks, true ) && ( ( 'crontrol_cron_job' !== $event->hook ) || self::$can_manage_php_crons ) ) {
@@ -431,12 +431,7 @@ class Table extends \WP_List_Table {
 				$link = add_query_arg( $link, admin_url( 'tools.php' ) );
 				$link = wp_nonce_url( $link, "crontrol-delete-hook_{$event->hook}" );
 
-				$text = sprintf(
-					/* translators: %s: Number of events with a given name */
-					_n( 'Delete All %s', 'Delete All %s', self::$count_by_hook[ $event->hook ], 'wp-crontrol' ),
-					number_format_i18n( self::$count_by_hook[ $event->hook ] )
-				);
-				$links[] = "<span class='delete'><a href='" . esc_url( $link ) . "'>" . esc_html( $text ) . '</a></span>';
+				$links[] = "<span class='delete'><a href='" . esc_url( $link ) . "'>" . esc_html__( 'Delete all events with this hook', 'wp-crontrol' ) . '</a></span>';
 			}
 		}
 

@@ -39,9 +39,9 @@ class KTS_Email_Logs extends WP_List_Table {
 	
 	/* ENQUEUE CSS AND JAVASCRIPT */
 	function enqueue_scripts() {
-		wp_enqueue_style( 'micromodal-css', esc_url( plugins_url( 'css/micromodal.css', dirname( __FILE__ ) ) ) );
-		wp_enqueue_script( 'micromodal-js', esc_url( plugins_url( 'js/micromodal.min.js', dirname( __FILE__ ) ) ), null, null, true );
-		wp_enqueue_script( 'display-email', esc_url( plugins_url( 'js/display-email.js', dirname( __FILE__ ) ) ), array( 'micromodal-js' ), null, true );
+		wp_enqueue_style( 'micromodal-css', plugins_url( 'css/micromodal.css', dirname( __FILE__ ) ) );
+		wp_enqueue_script( 'micromodal-js', plugins_url( 'js/micromodal.min.js', dirname( __FILE__ ) ), null, null, true );
+		wp_enqueue_script( 'display-email', plugins_url( 'js/display-email.js', dirname( __FILE__ ) ), array( 'micromodal-js' ), null, true );
 	}
 
 	/**
@@ -204,18 +204,18 @@ class KTS_Email_Logs extends WP_List_Table {
 					}
 				}
 			case 'recipient':
-				return $item[$column_name];
+				return esc_html( $item[$column_name] );
 			case 'email':
 				return make_clickable( esc_html( $item[$column_name] ) );
 			case 'subject':
-				return $item[$column_name];
+				return esc_html( $item[$column_name] );
 			case 'message':
-				return apply_filters( 'email_message', $item[$column_name] ) . '<div class="hidden">' . $item[$column_name] . '</div>';
+				return apply_filters( 'email_message', $item[$column_name] ) . '<div class="hidden">' . esc_html( $item[$column_name] ) . '</div>';
 			case 'headers':
 				$headers = '';
 				if ( ! empty( $item[$column_name] ) ) {
 					foreach( maybe_unserialize( $item[$column_name] ) as $header ) {
-						$headers .= $header . '<br>';
+						$headers .= esc_html( $header ) . '<br>';
 					}
 				}
 				return $headers;
@@ -223,12 +223,15 @@ class KTS_Email_Logs extends WP_List_Table {
 				$attachments = '';
 				if ( ! empty( $item[$column_name] ) ) {
 					foreach( maybe_unserialize( $item[$column_name] ) as $attachment ) {
-						$attachments .= basename( $attachment ) . '<br>';
+						$attachments .= esc_html( basename( $attachment ) ) . '<br>';
 					}
 				}
 				return $attachments;
 			case 'sent':
-				return kts_ts2time( $item[$column_name], $timezone );
+				$date = new DateTime();
+				$date->setTimestamp( $item[$column_name] );
+				$date->setTimezone( new DateTimeZone( $timezone ) );
+				return $date->format( 'l, F jS, Y \a\t g:ia' );
 			case 'message_id':
 				return absint( $item[$column_name] );
 			default:
@@ -269,11 +272,11 @@ class KTS_Email_Logs extends WP_List_Table {
 
 		$actions = array(
 
-			'delete'	=> sprintf( '<a href="?page=%s&action=%s&log=%s&_wpnonce=%s">Delete</a>', $page, 'delete', $message_id, $nonce ),
+			'delete' => sprintf( '<a href="?page=%s&action=%s&log=%s&_wpnonce=%s">Delete</a>', $page, 'delete', $message_id, $nonce ),
 
-			'resend'	=> sprintf( '<a href="?page=%s&action=%s&log=%s&_wpnonce=%s">Resend</a>', $page,'resend', $message_id, $nonce ),
+			'resend' => sprintf( '<a href="?page=%s&action=%s&log=%s&_wpnonce=%s">Resend</a>', $page,'resend', $message_id, $nonce ),
 
-			'show'	=> sprintf( '<a class="email-show" data-id="' . $message_id . '" data-micromodal-trigger="modal-1" href="?page=%s&action=%s&log=%s&_wpnonce=%s#email-logs-modal">Show</a>', $page, 'show', $message_id, $nonce )
+			'show'	 => sprintf( '<a class="email-show" data-id="' . $message_id . '" data-micromodal-trigger="modal-1" href="?page=%s&action=%s&log=%s&_wpnonce=%s#email-logs-modal">Show</a>', $page, 'show', $message_id, $nonce )
 
 		);
 
@@ -550,11 +553,11 @@ class KTS_Email_Logs extends WP_List_Table {
 				case 'resend':
 					$log = self::get_log( $id );
 					wp_mail(
-						$log['email'],
-						$log['subject'],
-						$log['message'],
-						$log['headers'],
-						$log['attachments']
+						esc_html( $log['email'] ),
+						esc_html( $log['subject'] ),
+						esc_html( $log['message'] ),
+						esc_html( $log['headers'] ),
+						esc_html( $log['attachments'] ),
 					);
 
 					echo '<div class="notice notice-success is-dismissible"><p>Email ID ' . $id . ' resent.</p></div>';
@@ -564,11 +567,11 @@ class KTS_Email_Logs extends WP_List_Table {
 					foreach( $ids as $id ) {
 						$log = self::get_log( $id );
 						wp_mail(
-							$log['email'],
-							$log['subject'],
-							$log['message'],
-							$log['headers'],
-							$log['attachments']
+							esc_html( $log['email'] ),
+							esc_html( $log['subject'] ),
+							esc_html( $log['message'] ),
+							esc_html( $log['headers'] ),
+							esc_html( $log['attachments'] ),
 						);
 					}
 

@@ -396,6 +396,7 @@ function relevanssi_create_database_tables( $relevanssi_db_version ) {
 	time timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 	user_id bigint(20) NOT NULL DEFAULT '0',
 	ip varchar(40) NOT NULL DEFAULT '',
+	session_id varchar(32) NOT NULL DEFAULT '',
 	PRIMARY KEY id (id)) $charset_collate;";
 
 	dbDelta( $sql );
@@ -439,7 +440,7 @@ function relevanssi_create_database_tables( $relevanssi_db_version ) {
 
 	$stopwords = relevanssi_fetch_stopwords();
 	if ( empty( $stopwords ) ) {
-		relevanssi_populate_stopwords();
+		relevanssi_populate_stopwords( false, $relevanssi_stopword_table );
 	}
 }
 
