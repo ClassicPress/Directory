@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------------------
  * Plugin Name: SMTP
  * Description: Simple Mail Transport Protocol (SMTP) plugin.
- * Version: 2.1.2
+ * Version: 2.1.3
  * Author: azurecurve
  * Author URI: https://development.azurecurve.co.uk/classicpress-plugins/
  * Plugin URI: https://development.azurecurve.co.uk/classicpress-plugins/smtp/

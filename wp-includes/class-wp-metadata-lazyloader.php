@@ -4,7 +4,7 @@
  *
  * @package ClassicPress
  * @subpackage Meta
- * @since WP-4.5.0
+ * @since 4.5.0
  */
 
 /**
@@ -26,13 +26,14 @@
  *
  * Do not access this class directly. Use the wp_metadata_lazyloader() function.
  *
- * @since WP-4.5.0
+ * @since 4.5.0
  */
+#[AllowDynamicProperties]
 class WP_Metadata_Lazyloader {
 	/**
 	 * Pending objects queue.
 	 *
-	 * @since WP-4.5.0
+	 * @since 4.5.0
 	 * @var array
 	 */
 	protected $pending_objects;
@@ -40,7 +41,7 @@ class WP_Metadata_Lazyloader {
 	/**
 	 * Settings for supported object types.
 	 *
-	 * @since WP-4.5.0
+	 * @since 4.5.0
 	 * @var array
 	 */
 	protected $settings = array();
@@ -48,7 +49,7 @@ class WP_Metadata_Lazyloader {
 	/**
 	 * Constructor.
 	 *
-	 * @since WP-4.5.0
+	 * @since 4.5.0
 	 */
 	public function __construct() {
 		$this->settings = array(
@@ -66,15 +67,15 @@ class WP_Metadata_Lazyloader {
 	/**
 	 * Adds objects to the metadata lazy-load queue.
 	 *
-	 * @since WP-4.5.0
+	 * @since 4.5.0
 	 *
 	 * @param string $object_type Type of object whose meta is to be lazy-loaded. Accepts 'term' or 'comment'.
 	 * @param array  $object_ids  Array of object IDs.
-	 * @return bool|WP_Error True on success, WP_Error on failure.
+	 * @return void|WP_Error WP_Error on failure.
 	 */
 	public function queue_objects( $object_type, $object_ids ) {
 		if ( ! isset( $this->settings[ $object_type ] ) ) {
-			return new WP_Error( 'invalid_object_type', __( 'Invalid object type' ) );
+			return new WP_Error( 'invalid_object_type', __( 'Invalid object type.' ) );
 		}
 
 		$type_settings = $this->settings[ $object_type ];
@@ -95,9 +96,9 @@ class WP_Metadata_Lazyloader {
 		/**
 		 * Fires after objects are added to the metadata lazy-load queue.
 		 *
-		 * @since WP-4.5.0
+		 * @since 4.5.0
 		 *
-		 * @param array                  $object_ids  Object IDs.
+		 * @param array                  $object_ids  Array of object IDs.
 		 * @param string                 $object_type Type of object being queued.
 		 * @param WP_Metadata_Lazyloader $lazyloader  The lazy-loader object.
 		 */
@@ -107,14 +108,14 @@ class WP_Metadata_Lazyloader {
 	/**
 	 * Resets lazy-load queue for a given object type.
 	 *
-	 * @since WP-4.5.0
+	 * @since 4.5.0
 	 *
 	 * @param string $object_type Object type. Accepts 'comment' or 'term'.
-	 * @return bool|WP_Error True on success, WP_Error on failure.
+	 * @return void|WP_Error WP_Error on failure.
 	 */
 	public function reset_queue( $object_type ) {
 		if ( ! isset( $this->settings[ $object_type ] ) ) {
-			return new WP_Error( 'invalid_object_type', __( 'Invalid object type' ) );
+			return new WP_Error( 'invalid_object_type', __( 'Invalid object type.' ) );
 		}
 
 		$type_settings = $this->settings[ $object_type ];
@@ -129,7 +130,7 @@ class WP_Metadata_Lazyloader {
 	 * This method is public so that it can be used as a filter callback. As a rule, there
 	 * is no need to invoke it directly.
 	 *
-	 * @since WP-4.5.0
+	 * @since 4.5.0
 	 *
 	 * @param mixed $check The `$check` param passed from the 'get_term_metadata' hook.
 	 * @return mixed In order not to short-circuit `get_metadata()`. Generally, this is `null`, but it could be
@@ -152,7 +153,7 @@ class WP_Metadata_Lazyloader {
 	 * This method is public so that it can be used as a filter callback. As a rule, there is no need to invoke it
 	 * directly, from either inside or outside the `WP_Query` object.
 	 *
-	 * @since WP-4.5.0
+	 * @since 4.5.0
 	 *
 	 * @param mixed $check The `$check` param passed from the {@see 'get_comment_metadata'} hook.
 	 * @return mixed The original value of `$check`, so as not to short-circuit `get_comment_metadata()`.

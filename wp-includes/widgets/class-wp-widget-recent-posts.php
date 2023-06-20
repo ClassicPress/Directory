@@ -4,13 +4,13 @@
  *
  * @package ClassicPress
  * @subpackage Widgets
- * @since WP-4.4.0
+ * @since 4.4.0
  */
 
 /**
  * Core class used to implement a Recent Posts widget.
  *
- * @since WP-2.8.0
+ * @since 2.8.0
  *
  * @see WP_Widget
  */
@@ -19,13 +19,14 @@ class WP_Widget_Recent_Posts extends WP_Widget {
 	/**
 	 * Sets up a new Recent Posts widget instance.
 	 *
-	 * @since WP-2.8.0
+	 * @since 2.8.0
 	 */
 	public function __construct() {
 		$widget_ops = array(
 			'classname'                   => 'widget_recent_entries',
 			'description'                 => __( 'Your site&#8217;s most recent Posts.' ),
 			'customize_selective_refresh' => true,
+			'show_instance_in_rest'       => true,
 		);
 		parent::__construct( 'recent-posts', __( 'Recent Posts' ), $widget_ops );
 		$this->alt_option_name = 'widget_recent_entries';
@@ -34,7 +35,7 @@ class WP_Widget_Recent_Posts extends WP_Widget {
 	/**
 	 * Outputs the content for the current Recent Posts widget instance.
 	 *
-	 * @since WP-2.8.0
+	 * @since 2.8.0
 	 *
 	 * @param array $args     Display arguments including 'before_title', 'after_title',
 	 *                        'before_widget', and 'after_widget'.
@@ -45,7 +46,8 @@ class WP_Widget_Recent_Posts extends WP_Widget {
 			$args['widget_id'] = $this->id;
 		}
 
-		$title = ( ! empty( $instance['title'] ) ) ? $instance['title'] : __( 'Recent Posts' );
+		$default_title = __( 'Recent Posts' );
+		$title         = ( ! empty( $instance['title'] ) ) ? $instance['title'] : $default_title;
 
 		/** This filter is documented in wp-includes/widgets/class-wp-widget-pages.php */
 		$title = apply_filters( 'widget_title', $title, $instance, $this->id_base );
@@ -56,18 +58,18 @@ class WP_Widget_Recent_Posts extends WP_Widget {
 		}
 		$show_date = isset( $instance['show_date'] ) ? $instance['show_date'] : false;
 
-		/**
-		 * Filters the arguments for the Recent Posts widget.
-		 *
-		 * @since WP-3.4.0
-		 * @since WP-4.9.0 Added the `$instance` parameter.
-		 *
-		 * @see WP_Query::get_posts()
-		 *
-		 * @param array $args     An array of arguments used to retrieve the recent posts.
-		 * @param array $instance Array of settings for the current widget.
-		 */
 		$r = new WP_Query(
+			/**
+			 * Filters the arguments for the Recent Posts widget.
+			 *
+			 * @since 3.4.0
+			 * @since 4.9.0 Added the `$instance` parameter.
+			 *
+			 * @see WP_Query::get_posts()
+			 *
+			 * @param array $args     An array of arguments used to retrieve the recent posts.
+			 * @param array $instance Array of settings for the current widget.
+			 */
 			apply_filters(
 				'widget_posts_args',
 				array(
@@ -84,34 +86,59 @@ class WP_Widget_Recent_Posts extends WP_Widget {
 			return;
 		}
 		?>
+
 		<?php echo $args['before_widget']; ?>
+
 		<?php
 		if ( $title ) {
 			echo $args['before_title'] . $title . $args['after_title'];
 		}
+
+		$format = current_theme_supports( 'html5', 'navigation-widgets' ) ? 'html5' : 'xhtml';
+
+		/** This filter is documented in wp-includes/widgets/class-wp-nav-menu-widget.php */
+		$format = apply_filters( 'navigation_widgets_format', $format );
+
+		if ( 'html5' === $format ) {
+			// The title may be filtered: Strip out HTML and make sure the aria-label is never empty.
+			$title      = trim( strip_tags( $title ) );
+			$aria_label = $title ? $title : $default_title;
+			echo '<nav aria-label="' . esc_attr( $aria_label ) . '">';
+		}
 		?>
+
 		<ul>
 			<?php foreach ( $r->posts as $recent_post ) : ?>
 				<?php
-				$post_title = get_the_title( $recent_post->ID );
-				$title      = ( ! empty( $post_title ) ) ? $post_title : __( '(no title)' );
+				$post_title   = get_the_title( $recent_post->ID );
+				$title        = ( ! empty( $post_title ) ) ? $post_title : __( '(no title)' );
+				$aria_current = '';
+
+				if ( get_queried_object_id() === $recent_post->ID ) {
+					$aria_current = ' aria-current="page"';
+				}
 				?>
 				<li>
-					<a href="<?php the_permalink( $recent_post->ID ); ?>"><?php echo $title; ?></a>
+					<a href="<?php the_permalink( $recent_post->ID ); ?>"<?php echo $aria_current; ?>><?php echo $title; ?></a>
 					<?php if ( $show_date ) : ?>
 						<span class="post-date"><?php echo get_the_date( '', $recent_post->ID ); ?></span>
 					<?php endif; ?>
 				</li>
 			<?php endforeach; ?>
 		</ul>
+
 		<?php
+		if ( 'html5' === $format ) {
+			echo '</nav>';
+		}
+
 		echo $args['after_widget'];
 	}
 
 	/**
 	 * Handles updating the settings for the current Recent Posts widget instance.
 	 *
-	 * @since WP-2.8.0
+	 * @since 2.8.0
 	 *
 	 * @param array $new_instance New settings for this instance as input by the user via
 	 *                            WP_Widget::form().
@@ -129,7 +156,7 @@ class WP_Widget_Recent_Posts extends WP_Widget {
 	/**
 	 * Outputs the settings form for the Recent Posts widget.
 	 *
-	 * @since WP-2.8.0
+	 * @since 2.8.0
 	 *
 	 * @param array $instance Current settings.
 	 */

@@ -50,6 +50,10 @@ function relevanssi_query( $posts, $query = false ) {
 		$search_ok = false; // No search term.
 	}
 
+	if ( $query->is_feed ) {
+		$search_ok = false;
+	}
+
 	if ( $query->get( 'relevanssi' ) ) {
 		$search_ok = true; // Manual override, always search.
 	}
@@ -87,7 +91,6 @@ function relevanssi_query( $posts, $query = false ) {
 			relevanssi_debug_posts( $posts );
 			exit();
 		}
-
 	}
 
 	return $posts;
@@ -111,6 +114,8 @@ function relevanssi_query( $posts, $query = false ) {
  */
 function relevanssi_search( $args ) {
 	global $wpdb;
+
+	relevanssi_is_debug() && relevanssi_debug_search_settings();
 
 	/**
 	 * Filters the search parameters.
@@ -671,6 +676,9 @@ function relevanssi_do_query( &$query ) {
 	$return_posts    = empty( $search_params['fields'] );
 
 	$hits_to_show = array_slice( $hits, $search_low_boundary, $search_high_boundary - $search_low_boundary + 1 );
+	if ( ! is_array( $hits_to_show ) ) {
+		$hits_to_show = array();
+	}
 	/**
 	 * Filters the displayed hits.
 	 *
@@ -683,9 +691,6 @@ function relevanssi_do_query( &$query ) {
 	 * @return array An array of post objects.
 	 */
 	$hits_to_show = apply_filters( 'relevanssi_hits_to_show', $hits_to_show, $query );
-	if ( ! is_array( $hits_to_show ) ) {
-		$hits_to_show = array();
-	}
 	foreach ( $hits_to_show as $post ) {
 		if ( $highlight_title && $return_posts ) {
 			relevanssi_highlight_post_title( $post, $q );

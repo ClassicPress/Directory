@@ -4,13 +4,13 @@
  *
  * @package ClassicPress
  * @subpackage Widgets
- * @since WP-4.4.0
+ * @since 4.4.0
  */
 
 /**
  * Core class used to implement a Pages widget.
  *
- * @since WP-2.8.0
+ * @since 2.8.0
  *
  * @see WP_Widget
  */
@@ -19,13 +19,14 @@ class WP_Widget_Pages extends WP_Widget {
 	/**
 	 * Sets up a new Pages widget instance.
 	 *
-	 * @since WP-2.8.0
+	 * @since 2.8.0
 	 */
 	public function __construct() {
 		$widget_ops = array(
 			'classname'                   => 'widget_pages',
 			'description'                 => __( 'A list of your site&#8217;s Pages.' ),
 			'customize_selective_refresh' => true,
+			'show_instance_in_rest'       => true,
 		);
 		parent::__construct( 'pages', __( 'Pages' ), $widget_ops );
 	}
@@ -33,19 +34,20 @@ class WP_Widget_Pages extends WP_Widget {
 	/**
 	 * Outputs the content for the current Pages widget instance.
 	 *
-	 * @since WP-2.8.0
+	 * @since 2.8.0
 	 *
 	 * @param array $args     Display arguments including 'before_title', 'after_title',
 	 *                        'before_widget', and 'after_widget'.
 	 * @param array $instance Settings for the current Pages widget instance.
 	 */
 	public function widget( $args, $instance ) {
-		$title = ! empty( $instance['title'] ) ? $instance['title'] : __( 'Pages' );
+		$default_title = __( 'Pages' );
+		$title         = ! empty( $instance['title'] ) ? $instance['title'] : $default_title;
 
 		/**
 		 * Filters the widget title.
 		 *
-		 * @since WP-2.6.0
+		 * @since 2.6.0
 		 *
 		 * @param string $title    The widget title. Default 'Pages'.
 		 * @param array  $instance Array of settings for the current widget.
@@ -56,22 +58,22 @@ class WP_Widget_Pages extends WP_Widget {
 		$sortby  = empty( $instance['sortby'] ) ? 'menu_order' : $instance['sortby'];
 		$exclude = empty( $instance['exclude'] ) ? '' : $instance['exclude'];
 
-		if ( $sortby == 'menu_order' ) {
+		if ( 'menu_order' === $sortby ) {
 			$sortby = 'menu_order, post_title';
 		}
 
-		/**
-		 * Filters the arguments for the Pages widget.
-		 *
-		 * @since WP-2.8.0
-		 * @since WP-4.9.0 Added the `$instance` parameter.
-		 *
-		 * @see wp_list_pages()
-		 *
-		 * @param array $args     An array of arguments to retrieve the pages list.
-		 * @param array $instance Array of settings for the current widget.
-		 */
-		$out = wp_list_pages(
+		$output = wp_list_pages(
+			/**
+			 * Filters the arguments for the Pages widget.
+			 *
+			 * @since 2.8.0
+			 * @since 4.9.0 Added the `$instance` parameter.
+			 *
+			 * @see wp_list_pages()
+			 *
+			 * @param array $args     An array of arguments to retrieve the pages list.
+			 * @param array $instance Array of settings for the current widget.
+			 */
 			apply_filters(
 				'widget_pages_args',
 				array(
@@ -84,16 +86,34 @@ class WP_Widget_Pages extends WP_Widget {
 			)
 		);
 
-		if ( ! empty( $out ) ) {
+		if ( ! empty( $output ) ) {
 			echo $args['before_widget'];
 			if ( $title ) {
 				echo $args['before_title'] . $title . $args['after_title'];
 			}
+
+			$format = current_theme_supports( 'html5', 'navigation-widgets' ) ? 'html5' : 'xhtml';
+
+			/** This filter is documented in wp-includes/widgets/class-wp-nav-menu-widget.php */
+			$format = apply_filters( 'navigation_widgets_format', $format );
+
+			if ( 'html5' === $format ) {
+				// The title may be filtered: Strip out HTML and make sure the aria-label is never empty.
+				$title      = trim( strip_tags( $title ) );
+				$aria_label = $title ? $title : $default_title;
+				echo '<nav aria-label="' . esc_attr( $aria_label ) . '">';
+			}
 			?>
-		<ul>
-			<?php echo $out; ?>
-		</ul>
+
+			<ul>
+				<?php echo $output; ?>
+			</ul>
+
 			<?php
+			if ( 'html5' === $format ) {
+				echo '</nav>';
+			}
+
 			echo $args['after_widget'];
 		}
 	}
@@ -101,7 +121,7 @@ class WP_Widget_Pages extends WP_Widget {
 	/**
 	 * Handles updating settings for the current Pages widget instance.
 	 *
-	 * @since WP-2.8.0
+	 * @since 2.8.0
 	 *
 	 * @param array $new_instance New settings for this instance as input by the user via
 	 *                            WP_Widget::form().
@@ -125,12 +145,12 @@ class WP_Widget_Pages extends WP_Widget {
 	/**
 	 * Outputs the settings form for the Pages widget.
 	 *
-	 * @since WP-2.8.0
+	 * @since 2.8.0
 	 *
 	 * @param array $instance Current settings.
 	 */
 	public function form( $instance ) {
-		//Defaults
+		// Defaults.
 		$instance = wp_parse_args(
 			(array) $instance,
 			array(

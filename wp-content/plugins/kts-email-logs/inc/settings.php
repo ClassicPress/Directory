@@ -122,6 +122,7 @@ function kts_email_logs_storage_render() {
 	# Set default storage time to one week
 	$storage_options = array( 604800, 1209600, 1814400, 2419200, 15780000 );
 	if ( empty( $email_logs ) || empty( $email_logs['storage'] ) || ! in_array( $email_logs['timescale'], $storage_options ) ) {
+		$email_logs['storage'] = 1;
 		$email_logs['timescale'] = 604800;
 	} ?>
 

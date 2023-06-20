@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		MicroModal.init({
 			onClose: modal => {
 				document.getElementById('modal-1-title').innerHTML = '';
-				document.getElementById('modal-1-content').innerHTML = '';				
+				document.getElementById('modal-1-content').innerHTML = '';
 				document.getElementById('modal-1-headers').innerHTML = '';
 			},
 			disableScroll: true,

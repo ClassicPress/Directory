@@ -1,0 +1,339 @@
+#screen-meta-links {
+    display: none;
+}
+
+.dlm-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 24px;
+    padding: 20px;
+    background-color: #fafafa;
+    border-bottom: 1px solid #f5f5f5;
+    transition: .25s;
+}
+
+.dlm-header.dlm-sticky {
+    box-shadow: 0 5px 10px rgb(0 0 0 / 10%);
+}
+
+.dlm-header-left {
+}
+
+.dlm-header-right {
+    display: flex;
+}
+
+.dlm-body {
+    padding: 20px;
+    background-color: #fff;
+}
+
+.dlm-footer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 20px;
+    background-color: #fafafa;
+    border-top: 1px solid #f5f5f5;
+}
+
+.dlm-footer-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.dlm-top-border {
+    border-top: 1px solid #dcdcde;
+    margin-top: 8px;
+    padding-top: 8px;
+}
+
+.dlm-footer-button {
+    margin-left: 12px !important;
+}
+
+.wrap h1.dlm-heading {
+    font-size: 1.5em;
+    line-height: 26px;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+}
+
+.dlm-heading a {
+    text-decoration: none;
+    transition: .25s;
+}
+
+.dlm-heading a:hover {
+    text-decoration: underline;
+}
+
+.dlm-heading small {
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+}
+
+.dlm-header-action {
+    margin-left: 16px;
+    text-decoration: none;
+    transition: .25s;
+    line-height: 30px;
+}
+
+.dlm-header-action:first-child {
+    margin-left: 0;
+}
+
+.dlm-header-action:hover {
+    text-decoration: underline;
+}
+
+.dlm-log-management {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.dlm-logging-status,
+.dlm-autorefresh-status {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.dlm-log-status {
+    line-height: 30px;
+    margin-right: 20px;
+}
+
+.dlm-faint {
+    opacity: 0.5;
+}
+
+#dlm-log-file-size {
+    font-weight: bold;
+}
+
+/* CSS On / Off switcher -- https://codepen.io/MoorLex/pen/GZaavy */
+
+input[type="checkbox"] {
+    display: none;
+}
+
+input[type="checkbox"] + label {
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    position: relative;
+    transition: 0.3s;
+    margin: 0 8px 0 0;
+    box-sizing: border-box;
+}
+
+input[type="checkbox"] + label:after,
+input[type="checkbox"] + label:before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 20px;
+    height: 20px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+input[type="checkbox"].inset-3:checked + label.red {
+  background: #ECA9A7;
+}
+
+input[type="checkbox"].inset-3:checked + label.red:after {
+  background: #D9534F;
+}
+
+input[type="checkbox"].inset-3:checked + label.green {
+  background: #AEDCAE;
+}
+
+input[type="checkbox"].inset-3:checked + label.green:after {
+  background: #5CB85C;
+}
+
+input[type="checkbox"].inset-3:checked + label:after {
+  left: calc(100% - 18px);
+}
+
+input[type="checkbox"].inset-3 + label {
+  background: #ddd;
+  border-radius: 20px;
+}
+
+input[type="checkbox"].inset-3 + label:after {
+  background: #fff;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  top: 2px;
+  left: 2px;
+}
+
+/* DataTables */
+
+/* https://stackoverflow.com/a/20206637 */
+table#debug-log {
+    table-layout: fixed;
+    width: 100%;
+}
+
+table.dataTable {
+    margin: 0 auto 8px;
+}
+
+table.dataTable thead th, 
+table.dataTable tfoot th {
+    font-weight: 500 !important;
+}
+
+#debug-log .dlm-entry-no {
+    width: 16px;
+}
+
+#debug-log .dlm-entry-type {
+    width: 96px;
+}
+
+#debug-log .dlm-entry-datetime {
+    width: 160px;
+}
+
+#debug-log .dlm-entry-details {
+    width: calc(100% - 16px - 96px - 160px);
+}
+
+#debug-log .dlm-entry-details a.error-source-link,
+#debug-log tr td:nth-child(3) a.error-source-link {
+    color: #50575e;
+}
+
+#debug-log .dlm-entry-details a.error-source-link span,
+#debug-log tr td:nth-child(3) a.error-source-link span {
+    position: relative;
+    margin-left: 2px;
+    color: #777;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    transition: .25s;
+}
+
+#debug-log .dlm-entry-details a.error-source-link span.offset-up,
+#debug-log tr td:nth-child(3) a.error-source-link span.offset-up {
+    top: -1px;
+}
+
+#debug-log .dlm-entry-details a.error-source-link span.offset-down,
+#debug-log tr td:nth-child(3) a.error-source-link span.offset-down {
+    top: 1px;
+}
+
+#debug-log .dlm-entry-details a.error-source-link:hover,
+#debug-log tr td:nth-child(3) a.error-source-link:hover,
+#debug-log .dlm-entry-details a.error-source-link:hover span,
+#debug-log tr td:nth-child(3) a.error-source-link:hover span {
+    color: #2271b1;
+}
+
+#debug-log .dlm-entry-details a.error-source-link:hover,
+#debug-log tr td:nth-child(3) a.error-source-link:hover {
+    text-decoration: underline;
+}
+
+#debug-log .dlm-entry-details a.error-source-link:hover span,
+#debug-log tr td:nth-child(3) a.error-source-link:hover span {
+    text-decoration: none;
+}
+
+#debug-log td {
+    word-wrap:  break-word; /* All browsers since IE 5.5+ */
+    overflow-wrap: break-word; /* Renamed property in CSS3 draft spec */
+}
+
+#debug-log td pre {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter {
+    margin-bottom: 8px;
+}
+
+.dataTables_wrapper .dataTables_length select {
+    min-width: 52px;
+}
+
+.wp-core-ui select.dlm-error-type-filter {
+    margin-left: 6px;
+    min-height: 40px;
+    border-color: #aaa;
+}
+
+/* Button Style - Outlined */
+
+.wp-core-ui .vi-header .button-primary {
+    font-weight: 500;
+    transition: .1s;
+}
+
+.wp-core-ui .button-primary.plugin-sponsor {
+    margin-left: 16px;
+    color: #de4c73;
+    background: transparent;
+    border-color: #de4c73;
+}
+
+.wp-core-ui .button-primary.plugin-sponsor:hover {
+    color: #fff;
+    background: #de4c73;
+}
+
+.wp-core-ui .button-primary.plugin-upgrade {
+    margin-left: 8px;
+    color: green;
+    background: transparent;
+    border-color: green;
+}
+
+.wp-core-ui .button-primary.plugin-upgrade:hover {
+    color: #fff;
+    background: green;
+}
+
+.wp-core-ui .button-primary.plugin-sponsor:focus,
+.wp-core-ui .button-primary.plugin-upgrade:focus {
+    box-shadow: none;
+}
+
+/* jQuery Toast */
+
+.jq-toast-single h2 {
+    margin: 0 0 4px !important;
+}
+
+.jq-toast-single {
+    font-size: 14px !important;
+}
+
+.jq-toast-wrap.bottom-right {
+    bottom: 10px !important;
+    right: 20px !important;
+}

@@ -36,6 +36,9 @@ function init_hooks() {
 	add_action( 'crontrol_cron_job',     __NAMESPACE__ . '\action_php_cron_event' );
 	add_action( 'admin_enqueue_scripts', __NAMESPACE__ . '\enqueue_assets' );
 	add_action( 'crontrol/tab-header',   __NAMESPACE__ . '\show_cron_status', 20 );
+	add_action( 'activated_plugin',      __NAMESPACE__ . '\flush_status_cache', 10, 0 );
+	add_action( 'deactivated_plugin',    __NAMESPACE__ . '\flush_status_cache', 10, 0 );
+	add_action( 'switch_theme',          __NAMESPACE__ . '\flush_status_cache', 10, 0 );
 }
 
 /**
@@ -94,13 +97,20 @@ function filter_plugin_row_meta( array $plugin_meta, $plugin_file ) {
 function action_init() {
 	load_plugin_textdomain( 'wp-crontrol', false, dirname( plugin_basename( PLUGIN_FILE ) ) . '/languages' );
 
-	/** @var array<string, true>|false $paused */
-	$paused = get_option( PAUSED_OPTION, array() );
+	/** @var array<array-key, true>|false $paused */
+	$paused = get_option( PAUSED_OPTION );
 
-	if ( is_array( $paused ) ) {
-		foreach ( $paused as $hook => $value ) {
-			add_action( $hook, __NAMESPACE__ . '\\pauser', -99999 );
+	if ( ! is_array( $paused ) ) {
+		$paused = array();
+		update_option( PAUSED_OPTION, $paused, true );
+	}
+
+	foreach ( $paused as $hook => $value ) {
+		if ( ! is_string( $hook ) ) {
+			continue;
 		}
+
+		add_action( $hook, __NAMESPACE__ . '\\pauser', -99999, 0 );
 	}
 }
 
@@ -1028,7 +1038,7 @@ function admin_options_page() {
  * What on earth does this function do, and why?
  *
  * Good question. The purpose of this function is to prevent other overdue cron events from firing when an event is run
- * manually with the "Run Now" action. WP Crontrol works very hard to ensure that when cron event runs manually that it
+ * manually with the "Run now" action. WP Crontrol works very hard to ensure that when cron event runs manually that it
  * runs in the exact same way it would run as part of its schedule - via a properly spawned cron with a queued event in
  * place. It does this by queueing an event at time `1` (1 second into 1st January 1970) and then immediately spawning
  * cron (see the `Event\run()` function).
@@ -1153,6 +1163,15 @@ function test_cron_spawn( $cache = true ) {
 		return true;
 	}
 
+}
+
+/**
+ * Deletes the cached value of the cron status check.
+ *
+ * @return void
+ */
+function flush_status_cache() {
+	delete_transient( 'crontrol-cron-test-ok' );
 }
 
 /**
@@ -1841,7 +1860,7 @@ function get_hook_callbacks( $name ) {
 			foreach ( $callbacks as $callback ) {
 				$callback = populate_callback( $callback );
 
-				if ( __NAMESPACE__ . '\\pauser' === $callback['function'] ) {
+				if ( __NAMESPACE__ . '\\pauser()' === $callback['name'] ) {
 					continue;
 				}
 
@@ -1973,17 +1992,17 @@ function interval( $since ) {
 	// Array of time period chunks.
 	$chunks = array(
 		/* translators: 1: The number of years in an interval of time. */
-		array( 60 * 60 * 24 * 365, _n_noop( '%s year', '%s years', 'wp-crontrol' ) ),
+		array( YEAR_IN_SECONDS, _n_noop( '%s year', '%s years', 'wp-crontrol' ) ),
 		/* translators: 1: The number of months in an interval of time. */
-		array( 60 * 60 * 24 * 30, _n_noop( '%s month', '%s months', 'wp-crontrol' ) ),
+		array( MONTH_IN_SECONDS, _n_noop( '%s month', '%s months', 'wp-crontrol' ) ),
 		/* translators: 1: The number of weeks in an interval of time. */
-		array( 60 * 60 * 24 * 7, _n_noop( '%s week', '%s weeks', 'wp-crontrol' ) ),
+		array( WEEK_IN_SECONDS, _n_noop( '%s week', '%s weeks', 'wp-crontrol' ) ),
 		/* translators: 1: The number of days in an interval of time. */
-		array( 60 * 60 * 24, _n_noop( '%s day', '%s days', 'wp-crontrol' ) ),
+		array( DAY_IN_SECONDS, _n_noop( '%s day', '%s days', 'wp-crontrol' ) ),
 		/* translators: 1: The number of hours in an interval of time. */
-		array( 60 * 60, _n_noop( '%s hour', '%s hours', 'wp-crontrol' ) ),
+		array( HOUR_IN_SECONDS, _n_noop( '%s hour', '%s hours', 'wp-crontrol' ) ),
 		/* translators: 1: The number of minutes in an interval of time. */
-		array( 60, _n_noop( '%s minute', '%s minutes', 'wp-crontrol' ) ),
+		array( MINUTE_IN_SECONDS, _n_noop( '%s minute', '%s minutes', 'wp-crontrol' ) ),
 		/* translators: 1: The number of seconds in an interval of time. */
 		array( 1, _n_noop( '%s second', '%s seconds', 'wp-crontrol' ) ),
 	);

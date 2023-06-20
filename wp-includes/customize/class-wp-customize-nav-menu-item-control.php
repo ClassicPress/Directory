@@ -4,20 +4,22 @@
  *
  * @package ClassicPress
  * @subpackage Customize
- * @since WP-4.4.0
+ * @since 4.4.0
  */
 
 /**
  * Customize control to represent the name field for a given menu.
  *
- * @since WP-4.3.0
+ * @since 4.3.0
+ *
+ * @see WP_Customize_Control
  */
 class WP_Customize_Nav_Menu_Item_Control extends WP_Customize_Control {
 
 	/**
 	 * Control type.
 	 *
-	 * @since WP-4.3.0
+	 * @since 4.3.0
 	 * @var string
 	 */
 	public $type = 'nav_menu_item';
@@ -25,7 +27,7 @@ class WP_Customize_Nav_Menu_Item_Control extends WP_Customize_Control {
 	/**
 	 * The nav menu item setting.
 	 *
-	 * @since WP-4.3.0
+	 * @since 4.3.0
 	 * @var WP_Customize_Nav_Menu_Item_Setting
 	 */
 	public $setting;
@@ -33,13 +35,15 @@ class WP_Customize_Nav_Menu_Item_Control extends WP_Customize_Control {
 	/**
 	 * Constructor.
 	 *
-	 * @since WP-4.3.0
+	 * @since 4.3.0
 	 *
 	 * @see WP_Customize_Control::__construct()
 	 *
 	 * @param WP_Customize_Manager $manager Customizer bootstrap instance.
 	 * @param string               $id      The control ID.
-	 * @param array                $args    Optional. Overrides class property defaults.
+	 * @param array                $args    Optional. Arguments to override class property defaults.
+	 *                                      See WP_Customize_Control::__construct() for information
+	 *                                      on accepted arguments. Default empty array.
 	 */
 	public function __construct( $manager, $id, $args = array() ) {
 		parent::__construct( $manager, $id, $args );
@@ -48,14 +52,14 @@ class WP_Customize_Nav_Menu_Item_Control extends WP_Customize_Control {
 	/**
 	 * Don't render the control's content - it's rendered with a JS template.
 	 *
-	 * @since WP-4.3.0
+	 * @since 4.3.0
 	 */
 	public function render_content() {}
 
 	/**
 	 * JS/Underscore template for the control UI.
 	 *
-	 * @since WP-4.3.0
+	 * @since 4.3.0
 	 */
 	public function content_template() {
 		?>
@@ -69,13 +73,13 @@ class WP_Customize_Nav_Menu_Item_Control extends WP_Customize_Control {
 				<span class="item-controls">
 					<button type="button" class="button-link item-edit" aria-expanded="false"><span class="screen-reader-text">
 					<?php
-						/* translators: 1: Title of a menu item, 2: Type of a menu item */
+						/* translators: 1: Title of a menu item, 2: Type of a menu item. */
 						printf( __( 'Edit menu item: %1$s (%2$s)' ), '{{ data.title || wp.customize.Menus.data.l10n.untitled }}', '{{ data.item_type_label }}' );
 					?>
 					</span><span class="toggle-indicator" aria-hidden="true"></span></button>
 					<button type="button" class="button-link item-delete submitdelete deletion"><span class="screen-reader-text">
 					<?php
-						/* translators: 1: Title of a menu item, 2: Type of a menu item */
+						/* translators: 1: Title of a menu item, 2: Type of a menu item. */
 						printf( __( 'Remove Menu Item: %1$s (%2$s)' ), '{{ data.title || wp.customize.Menus.data.l10n.untitled }}', '{{ data.item_type_label }}' );
 					?>
 					</span></button>
@@ -126,15 +130,26 @@ class WP_Customize_Nav_Menu_Item_Control extends WP_Customize_Control {
 				<label for="edit-menu-item-description-{{ data.menu_item_id }}">
 					<?php _e( 'Description' ); ?><br />
 					<textarea id="edit-menu-item-description-{{ data.menu_item_id }}" class="widefat edit-menu-item-description" rows="3" cols="20" name="menu-item-description">{{ data.description }}</textarea>
-					<span class="description"><?php _e( 'The description will be displayed in the menu if the current theme supports it.' ); ?></span>
+					<span class="description"><?php _e( 'The description will be displayed in the menu if the active theme supports it.' ); ?></span>
 				</label>
 			</p>
+
+			<?php
+			/**
+			 * Fires at the end of the form field template for nav menu items in the customizer.
+			 *
+			 * Additional fields can be rendered here and managed in JavaScript.
+			 *
+			 * @since 5.4.0
+			 */
+			do_action( 'wp_nav_menu_item_custom_fields_customize_template' );
+			?>
 
 			<div class="menu-item-actions description-thin submitbox">
 				<# if ( ( 'post_type' === data.item_type || 'taxonomy' === data.item_type ) && '' !== data.original_title ) { #>
 				<p class="link-to-original">
 					<?php
-						/* translators: Nav menu item original title. 1: Original title */
+						/* translators: Nav menu item original title. %s: Original title. */
 						printf( __( 'Original: %s' ), '<a class="original-link" href="{{ data.url }}">{{ data.original_title }}</a>' );
 					?>
 				</p>
@@ -153,7 +168,7 @@ class WP_Customize_Nav_Menu_Item_Control extends WP_Customize_Control {
 	/**
 	 * Return parameters for this control.
 	 *
-	 * @since WP-4.3.0
+	 * @since 4.3.0
 	 *
 	 * @return array Exported parameters.
 	 */

@@ -6,7 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'Crontrol\\Event\\Table' => $baseDir . '/src/event-list-table.php',
     'Crontrol\\Request' => $baseDir . '/src/request.php',
     'Crontrol\\Schedule_List_Table' => $baseDir . '/src/schedule-list-table.php',
