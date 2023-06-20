@@ -104,7 +104,7 @@
 					<?php _e('Version', 'classicpress'); ?>
 					<span class="item-data"><?php echo esc_html(get_post_meta($post->ID, 'current_version', true)); ?></span>
 					<?php
-					$published_at = get_post_meta($post->ID, 'published_at', true);
+					$published_at = strtotime( get_post_meta($post->ID, 'published_at', true) );
 					$published_at_atom = date(DateTimeInterface::ATOM, $published_at);
 					$published_at_human = date("F j, Y - g:i a", $published_at);
 					$published_at_diff = human_time_diff($published_at, current_time('timestamp'));
@@ -147,6 +147,7 @@
 			$download_url = get_post_meta($post->ID, 'download_link', true);
 
 			// check if GitHub and get repo URL
+			$repo = null;
 			if (strpos($download_url, 'github.com') !== false) {
 				$url_parts = explode('releases', $download_url);
 				$repo = array(
