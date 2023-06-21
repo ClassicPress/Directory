@@ -28,7 +28,7 @@ class FixDirImages {
 
 	public function load_fix_images_script() {
 
-		if (!is_singular(['plugin','theme','snippet'])) {
+		if (!is_singular(['plugin','theme'])) {
 			return;
 		}
 

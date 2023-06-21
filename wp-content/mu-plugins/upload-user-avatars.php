@@ -492,3 +492,61 @@ function kts_delete_avatar_when_user_deleted( $user_id ) {
 	wp_delete_file( $svg );
 }
 add_action( 'delete_user', 'kts_delete_avatar_when_user_deleted' );
+
+/* BULK ACTION TO REGENERATE AVATARS */
+# Add bulk action option to user list
+add_filter('bulk_actions-users', 'register_my_bulk_actions');
+function register_my_bulk_actions($bulk_actions)
+{
+	$bulk_actions['regenerate_avatars'] = __('Regenerate Avatars', 'domain');
+	return $bulk_actions;
+}
+
+# Handle the bulk action
+add_filter('handle_bulk_actions-users', 'my_bulk_action_handler', 10, 3);
+function my_bulk_action_handler($redirect_to, $doaction, $users_ids)
+{
+	if ($doaction !== 'regenerate_avatars') {
+		return $redirect_to;
+	}
+
+	foreach ($users_ids as $user_id) {
+		kts_bulk_svg_initial_avatar_generator($user_id);
+	}
+
+	$redirect_to = add_query_arg('avatars_regenerated', count($users_ids), $redirect_to);
+	return $redirect_to;
+}
+
+# Display the result notice
+add_action('admin_notices', 'my_bulk_action_admin_notice');
+function my_bulk_action_admin_notice()
+{
+	if (!empty($_REQUEST['avatars_regenerated'])) {
+		$processed_count = intval($_REQUEST['avatars_regenerated']);
+		printf('<div id="message" class="updated fade">' .
+			_n(
+				'%s avatar regenerated.',
+				'%s avatars regenerated.',
+				$processed_count,
+				'domain'
+			) . '</div>', $processed_count);
+	}
+}
+
+# The modified function to regenerate avatars
+function kts_bulk_svg_initial_avatar_generator($user_id)
+{
+	$user = get_user_by('id', $user_id);
+
+	# Delete current SVG fallback
+	$uploads = wp_upload_dir();
+	$folder = get_option('upload_user_avatars_folder');
+	$folder = trim($folder, '/') . '/';
+	$display_name = sanitize_file_name($user->display_name);
+	$svg = $uploads['basedir'] . '/' . $folder . 'svg/' . $display_name . '.svg';
+	wp_delete_file($svg);
+
+	# Create new SVG fallback avatar
+	kts_svg_initial_avatar_generator($user->display_name);
+}
