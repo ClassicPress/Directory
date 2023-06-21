@@ -104,7 +104,7 @@
 					<?php _e('Version', 'classicpress'); ?>
 					<span class="item-data"><?php echo esc_html(get_post_meta($post->ID, 'current_version', true)); ?></span>
 					<?php
-					$published_at = strtotime( get_post_meta($post->ID, 'published_at', true) );
+					$published_at = (int) get_post_meta($post->ID, 'published_at', true);
 					$published_at_atom = date(DateTimeInterface::ATOM, $published_at);
 					$published_at_human = date("F j, Y - g:i a", $published_at);
 					$published_at_diff = human_time_diff($published_at, current_time('timestamp'));
