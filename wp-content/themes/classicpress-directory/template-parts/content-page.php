@@ -22,6 +22,9 @@
 		if ( is_page( 'software-submission-form' ) ) {
 			kts_render_software_submit_form();
 		}
+		elseif ( is_page( 'image-submit-form' ) ) {
+			xsx_render_image_submit_form();
+		}
 		elseif ( is_page( 'code-review-response-form' ) ) {
 			kts_render_review_response_form();
 		}

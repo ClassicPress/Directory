@@ -246,7 +246,6 @@ function kts_render_software_submit_form()
 /* PROCESS SUBMISSION FORM */
 function kts_software_submit_form_redirect()
 {
-
 	# Check that user has the capability to submit software for review
 	if (!current_user_can('edit_posts')) { // Contributor role or above
 		return;
@@ -254,6 +253,11 @@ function kts_software_submit_form_redirect()
 
 	# Check for nonce
 	if (empty($_POST['cp-nonce-name'])) {
+		return;
+	}
+
+	# Exit if outside the form
+	if (strpos($_POST['cp-nonce-name'], 'software_nonce_') !== 0) {
 		return;
 	}
 
