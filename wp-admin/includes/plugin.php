@@ -1160,7 +1160,7 @@ function validate_plugin_requirements( $plugin ) {
 			'plugin_wp_php_incompatible',
 			'<p>' . sprintf(
 				/* translators: 1: Current WordPress version, 2: Current PHP version, 3: Plugin name, 4: Required WordPress version, 5: Required PHP version. */
-				_x( '<strong>Error:</strong> Current versions of WordPress (%1$s) and PHP (%2$s) do not meet minimum requirements for %3$s. The plugin requires WordPress %4$s and PHP %5$s.', 'plugin' ),
+				_x( '<strong>Error:</strong> Current versions of ClassicPress (%1$s) and PHP (%2$s) do not meet minimum requirements for %3$s. The plugin requires WordPress %4$s and PHP %5$s.', 'plugin' ),
 				get_bloginfo( 'version' ),
 				PHP_VERSION,
 				$plugin_headers['Name'],
@@ -1184,7 +1184,7 @@ function validate_plugin_requirements( $plugin ) {
 			'plugin_wp_incompatible',
 			'<p>' . sprintf(
 				/* translators: 1: Current WordPress version, 2: Plugin name, 3: Required WordPress version. */
-				_x( '<strong>Error:</strong> Current WordPress version (%1$s) does not meet minimum requirements for %2$s. The plugin requires WordPress %3$s.', 'plugin' ),
+				_x( '<strong>Error:</strong> Current ClassicPress version (%1$s) does not meet minimum requirements for %2$s. The plugin requires WordPress %3$s.', 'plugin' ),
 				get_bloginfo( 'version' ),
 				$plugin_headers['Name'],
 				$requirements['requires']
@@ -2290,8 +2290,8 @@ function remove_allowed_options( $del_options, $options = '' ) {
  *                             used in register_setting().
  */
 function settings_fields( $option_group ) {
-	echo "<input type='hidden' name='option_page' value='" . esc_attr( $option_group ) . "' />";
-	echo '<input type="hidden" name="action" value="update" />';
+	echo "<input type='hidden' name='option_page' value='" . esc_attr( $option_group ) . "'>";
+	echo '<input type="hidden" name="action" value="update">';
 	wp_nonce_field( "$option_group-options" );
 }
 

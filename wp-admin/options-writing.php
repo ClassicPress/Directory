@@ -32,7 +32,7 @@ if ( apply_filters( 'enable_post_by_email_configuration', true ) ) {
 		array(
 			'id'      => 'options-postemail',
 			'title'   => __( 'Post Via Email' ),
-			'content' => '<p>' . __( 'Post via email settings allow you to send your WordPress installation an email with the content of your post. You must set up a secret email account with POP3 access to use this, and any mail received at this address will be posted, so it&#8217;s a good idea to keep this address very secret.' ) . '</p>',
+			'content' => '<p>' . __( 'Post via email settings allow you to send your ClassicPress installation an email with the content of your post. You must set up a secret email account with POP3 access to use this, and any mail received at this address will be posted, so it&#8217;s a good idea to keep this address very secret.' ) . '</p>',
 		)
 	);
 }
@@ -74,9 +74,9 @@ require_once ABSPATH . 'wp-admin/admin-header.php';
 	?>
 </span></legend>
 <label for="use_smilies">
-<input name="use_smilies" type="checkbox" id="use_smilies" value="1" <?php checked( '1', get_option( 'use_smilies' ) ); ?> />
-	<?php _e( 'Convert emoticons like <code>:-)</code> and <code>:-P</code> to graphics on display' ); ?></label><br />
-<label for="use_balanceTags"><input name="use_balanceTags" type="checkbox" id="use_balanceTags" value="1" <?php checked( '1', get_option( 'use_balanceTags' ) ); ?> /> <?php _e( 'WordPress should correct invalidly nested XHTML automatically' ); ?></label>
+<input name="use_smilies" type="checkbox" id="use_smilies" value="1" <?php checked( '1', get_option( 'use_smilies' ) ); ?>>
+	<?php _e( 'Convert emoticons like <code>:-)</code> and <code>:-P</code> to graphics on display' ); ?></label><br>
+<label for="use_balanceTags"><input name="use_balanceTags" type="checkbox" id="use_balanceTags" value="1" <?php checked( '1', get_option( 'use_balanceTags' ) ); ?>> <?php _e( 'ClassicPress should correct invalidly nested XHTML automatically' ); ?></label>
 </fieldset></td>
 </tr>
 <?php endif; ?>
@@ -148,7 +148,7 @@ if ( apply_filters( 'enable_post_by_email_configuration', true ) ) {
 	<?php
 	printf(
 		/* translators: 1, 2, 3: Examples of random email addresses. */
-		__( 'To post to WordPress by email, you must set up a secret email account with POP3 access. Any mail received at this address will be posted, so it&#8217;s a good idea to keep this address very secret. Here are three random strings you could use: %1$s, %2$s, %3$s.' ),
+		__( 'To post to ClassicPress by email, you must set up a secret email account with POP3 access. Any mail received at this address will be posted, so it&#8217;s a good idea to keep this address very secret. Here are three random strings you could use: %1$s, %2$s, %3$s.' ),
 		sprintf( '<kbd>%s</kbd>', wp_generate_password( 8, false ) ),
 		sprintf( '<kbd>%s</kbd>', wp_generate_password( 8, false ) ),
 		sprintf( '<kbd>%s</kbd>', wp_generate_password( 8, false ) )
@@ -159,19 +159,19 @@ if ( apply_filters( 'enable_post_by_email_configuration', true ) ) {
 <table class="form-table" role="presentation">
 <tr>
 <th scope="row"><label for="mailserver_url"><?php _e( 'Mail Server' ); ?></label></th>
-<td><input name="mailserver_url" type="text" id="mailserver_url" value="<?php form_option( 'mailserver_url' ); ?>" class="regular-text code" />
+<td><input name="mailserver_url" type="text" id="mailserver_url" value="<?php form_option( 'mailserver_url' ); ?>" class="regular-text code">
 <label for="mailserver_port"><?php _e( 'Port' ); ?></label>
-<input name="mailserver_port" type="text" id="mailserver_port" value="<?php form_option( 'mailserver_port' ); ?>" class="small-text" />
+<input name="mailserver_port" type="text" id="mailserver_port" value="<?php form_option( 'mailserver_port' ); ?>" class="small-text">
 </td>
 </tr>
 <tr>
 <th scope="row"><label for="mailserver_login"><?php _e( 'Login Name' ); ?></label></th>
-<td><input name="mailserver_login" type="text" id="mailserver_login" value="<?php form_option( 'mailserver_login' ); ?>" class="regular-text ltr" /></td>
+<td><input name="mailserver_login" type="text" id="mailserver_login" value="<?php form_option( 'mailserver_login' ); ?>" class="regular-text ltr"></td>
 </tr>
 <tr>
 <th scope="row"><label for="mailserver_pass"><?php _e( 'Password' ); ?></label></th>
 <td>
-<input name="mailserver_pass" type="text" id="mailserver_pass" value="<?php form_option( 'mailserver_pass' ); ?>" class="regular-text ltr" />
+<input name="mailserver_pass" type="text" id="mailserver_pass" value="<?php form_option( 'mailserver_pass' ); ?>" class="regular-text ltr">
 </td>
 </tr>
 <tr>
@@ -212,7 +212,7 @@ if ( apply_filters( 'enable_update_services_configuration', true ) ) {
 		<?php
 		printf(
 			/* translators: %s: Documentation URL. */
-			__( 'When you publish a new post, WordPress automatically notifies the following site update services. For more about this, see the <a href="%s">Update Services</a> documentation article. Separate multiple service URLs with line breaks.' ),
+			__( 'When you publish a new post, ClassicPress automatically notifies the following site update services. For more about this, see the <a href="%s">Update Services</a> documentation article. Separate multiple service URLs with line breaks.' ),
 			__( 'https://wordpress.org/documentation/article/update-services/' )
 		);
 		?>
@@ -226,7 +226,7 @@ if ( apply_filters( 'enable_update_services_configuration', true ) ) {
 		<?php
 		printf(
 			/* translators: 1: Documentation URL, 2: URL to Reading Settings screen. */
-			__( 'WordPress is not notifying any <a href="%1$s">Update Services</a> because of your site&#8217;s <a href="%2$s">visibility settings</a>.' ),
+			__( 'ClassicPress is not notifying any <a href="%1$s">Update Services</a> because of your site&#8217;s <a href="%2$s">visibility settings</a>.' ),
 			__( 'https://wordpress.org/documentation/article/update-services/' ),
 			'options-reading.php'
 		);

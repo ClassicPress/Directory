@@ -465,7 +465,7 @@ class WP_Comments_List_Table extends WP_List_Table {
 		$columns = array();
 
 		if ( $this->checkbox ) {
-			$columns['cb'] = '<input type="checkbox" />';
+			$columns['cb'] = '<input type="checkbox">';
 		}
 
 		$columns['author']  = __( 'Author' );
@@ -640,6 +640,19 @@ class WP_Comments_List_Table extends WP_List_Table {
 		}
 
 		$this->user_can = current_user_can( 'edit_comment', $comment->comment_ID );
+
+		$edit_post_cap = $post ? 'edit_post' : 'edit_posts';
+		if (
+			current_user_can( $edit_post_cap, $comment->comment_post_ID ) ||
+			(
+				empty( $post->post_password ) &&
+				current_user_can( 'read_post', $comment->comment_post_ID )
+			)
+		) {
+			// The user has access to the post
+		} else {
+			return false;
+		}
 
 		echo "<tr id='comment-$comment->comment_ID' class='$the_comment_class'>";
 		$this->single_row_columns( $comment );
@@ -891,7 +904,7 @@ class WP_Comments_List_Table extends WP_List_Table {
 			_e( 'Select comment' );
 			?>
 		</label>
-		<input id="cb-select-<?php echo $comment->comment_ID; ?>" type="checkbox" name="delete_comments[]" value="<?php echo $comment->comment_ID; ?>" />
+		<input id="cb-select-<?php echo $comment->comment_ID; ?>" type="checkbox" name="delete_comments[]" value="<?php echo $comment->comment_ID; ?>">
 			<?php
 		}
 	}
@@ -953,12 +966,12 @@ class WP_Comments_List_Table extends WP_List_Table {
 
 		echo '<strong>';
 		comment_author( $comment );
-		echo '</strong><br />';
+		echo '</strong><br>';
 
 		if ( ! empty( $author_url_display ) ) {
 			// Print link to author URL, and disallow referrer information (without using target="_blank").
 			printf(
-				'<a href="%s" rel="noopener noreferrer">%s</a><br />',
+				'<a href="%s" rel="noopener noreferrer">%s</a><br>',
 				esc_url( $author_url ),
 				esc_html( $author_url_display )
 			);
@@ -970,7 +983,7 @@ class WP_Comments_List_Table extends WP_List_Table {
 				$email = apply_filters( 'comment_email', $comment->comment_author_email, $comment );
 
 				if ( ! empty( $email ) && '@' !== $email ) {
-					printf( '<a href="%1$s">%2$s</a><br />', esc_url( 'mailto:' . $email ), esc_html( $email ) );
+					printf( '<a href="%1$s">%2$s</a><br>', esc_url( 'mailto:' . $email ), esc_html( $email ) );
 				}
 			}
 

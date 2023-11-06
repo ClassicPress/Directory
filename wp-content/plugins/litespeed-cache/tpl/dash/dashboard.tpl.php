@@ -17,6 +17,8 @@ if ($img_finished_percentage == 100 && $img_count['groups_new']) {
 	$img_finished_percentage = 99;
 }
 
+$__cloud = Cloud::cls();
+
 $cloud_summary = Cloud::get_summary();
 $css_summary = CSS::get_summary();
 $ucss_summary = UCSS::get_summary();
@@ -187,7 +189,15 @@ $vpi_queue_count = count($this->load_queue('vpi'));
 		<?php endif; ?>
 	</div>
 
-	<p class="litespeed-right litespeed-qc-dashboard-link"><a href="<?php echo Cloud::CLOUD_SERVER_DASH; ?>" class="litespeed-link-with-icon" target="_blank"><?php echo __('Go to QUIC.cloud dashboard', 'litespeed-cache'); ?> <span class="dashicons dashicons-external"></span></a></p>
+	<p class="litespeed-right litespeed-qc-dashboard-link">
+		<?php if (!empty($cloud_summary['is_linked'])) : ?>
+			<a href="<?php echo Cloud::cls()->qc_link(); ?>" class="litespeed-link-with-icon" target="_blank"><?php echo __('Go to QUIC.cloud dashboard', 'litespeed-cache'); ?> <span class="dashicons dashicons-external"></span></a>
+		<?php elseif ($__cloud->can_link_qc()) : ?>
+			<?php Doc::learn_more(Utility::build_url(Router::ACTION_CLOUD, Cloud::TYPE_LINK), __('Link to QUIC.cloud', 'litespeed-cache'), true, 'button litespeed-btn-warning'); ?>
+		<?php else : ?>
+			<?php Doc::learn_more('javascript:;', __('Link to QUIC.cloud', 'litespeed-cache'), true, 'button disabled litespeed-btn-warning'); ?>
+		<?php endif; ?>
+	</p>
 
 	<div class="litespeed-dashboard-group">
 		<hr>
@@ -596,9 +606,29 @@ $vpi_queue_count = count($this->load_queue('vpi'));
 				</div>
 			</div>
 
+			<div class="postbox litespeed-postbox litespeed-postbox-quiccloud litespeed-bg-quic-cloud">
+				<div class="inside litespeed-text-center">
+					<h3 class="litespeed-title">
+						QUIC.cloud
+						<a href="https://www.quic.cloud/quic-cloud-services-and-features/litespeed-cache-service/" class="litespeed-title-right-icon">Learn More</a>
+					</h3>
+					<p class="litespeed-top20 litespeed-text-bold litespeed-margin-bottom20">
+						<a href="https://www.quic.cloud/docs/onboarding/" class="">Try QUIC.cloud CDN!</a>
+					</p>
+					<p class="litespeed-margin-y5">
+						Best available WordPress performance
+					</p>
+					<p class="litespeed-margin-y5">
+						Globally fast TTFB, easy setup, and <a href="https://www.quic.cloud/quic-cloud-services-and-features/litespeed-cache-service/">more</a>!
+					</p>
+					<div class="litespeed-top10">
+						<img src="<?php echo LSWCP_PLUGIN_URL; ?>assets/img/quic-cloud-logo.svg" alt="QUIC.cloud" width="45%" height="auto">
+					</div>
+				</div>
+			</div>
+
 		</div>
 
 	</div>
-
 
 </div>

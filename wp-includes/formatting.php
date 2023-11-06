@@ -429,7 +429,7 @@ function _wptexturize_pushpop_element( $text, &$stack, $disabled_elements ) {
  *
  * A group of regex replaces used to identify text formatted with newlines and
  * replace double line breaks with HTML paragraph tags. The remaining line breaks
- * after conversion become `<br />` tags, unless `$br` is set to '0' or 'false'.
+ * after conversion become `<br>` tags, unless `$br` is set to '0' or 'false'.
  *
  * @since 0.71
  *
@@ -571,20 +571,20 @@ function wpautop( $text, $br = true ) {
 		$text = preg_replace_callback( '/<(script|style|svg|math).*?<\/\\1>/s', '_autop_newline_preservation_helper', $text );
 
 		// Normalize <br>
-		$text = str_replace( array( '<br>', '<br/>' ), '<br />', $text );
+		$text = str_replace( array( '<br />', '<br/>' ), '<br>', $text );
 
-		// Replace any new line characters that aren't preceded by a <br /> with a <br />.
-		$text = preg_replace( '|(?<!<br />)\s*\n|', "<br />\n", $text );
+		// Replace any new line characters that aren't preceded by a <br> with a <br>.
+		$text = preg_replace( '|(?<!<br>)\s*\n|', "<br>\n", $text );
 
 		// Replace newline placeholders with newlines.
 		$text = str_replace( '<WPPreserveNewline />', "\n", $text );
 	}
 
-	// If a <br /> tag is after an opening or closing block tag, remove it.
-	$text = preg_replace( '!(</?' . $allblocks . '[^>]*>)\s*<br />!', '$1', $text );
+	// If a <br> tag is after an opening or closing block tag, remove it.
+	$text = preg_replace( '!(</?' . $allblocks . '[^>]*>)\s*<br>!', '$1', $text );
 
-	// If a <br /> tag is before a subset of opening or closing block tags, remove it.
-	$text = preg_replace( '!<br />(\s*</?(?:p|li|div|dl|dd|dt|th|pre|td|ul|ol)[^>]*>)!', '$1', $text );
+	// If a <br> tag is before a subset of opening or closing block tags, remove it.
+	$text = preg_replace( '!<br>(\s*</?(?:p|li|div|dl|dd|dt|th|pre|td|ul|ol)[^>]*>)!', '$1', $text );
 	$text = preg_replace( "|\n</p>$|", '</p>', $text );
 
 	// Replace placeholder <pre> tags with their original content.
@@ -2677,7 +2677,7 @@ function force_balance_tags( $text ) {
 
 			// Attributes.
 			if ( $has_self_closer && $is_single_tag ) {
-				// We need some space - avoid <br/> and prefer <br />.
+				// We need some space - avoid <br /> and prefer <br>.
 				$pre_attribute_ws = ' ';
 			}
 
@@ -3218,7 +3218,7 @@ function wp_rel_nofollow( $text ) {
 	$text = stripslashes( $text );
 	$text = preg_replace_callback(
 		'|<a (.+?)>|i',
-		static function( $matches ) {
+		static function ( $matches ) {
 			return wp_rel_callback( $matches, 'nofollow' );
 		},
 		$text
@@ -3252,7 +3252,7 @@ function wp_rel_ugc( $text ) {
 	$text = stripslashes( $text );
 	$text = preg_replace_callback(
 		'|<a (.+?)>|i',
-		static function( $matches ) {
+		static function ( $matches ) {
 			return wp_rel_callback( $matches, 'nofollow ugc' );
 		},
 		$text
@@ -3441,7 +3441,7 @@ function translate_smiley( $matches ) {
 	 */
 	$src_url = apply_filters( 'smilies_src', includes_url( "images/smilies/$img" ), $img, site_url() );
 
-	return sprintf( '<img src="%s" alt="%s" class="wp-smiley" style="height: 1em; max-height: 1em;" />', esc_url( $src_url ), esc_attr( $smiley ) );
+	return sprintf( '<img src="%s" alt="%s" class="wp-smiley" style="height: 1em; max-height: 1em;">', esc_url( $src_url ), esc_attr( $smiley ) );
 }
 
 /**
@@ -4405,6 +4405,10 @@ function esc_sql( $data ) {
  *                those in `$protocols`, or if `$url` contains an empty string.
  */
 function esc_url( $url, $protocols = null, $_context = 'display' ) {
+	if ( is_null( $url ) ) {
+		return '';
+	}
+
 	$original_url = $url;
 
 	if ( '' === $url ) {
@@ -4684,7 +4688,7 @@ EOF;
 
 	$safe_text = (string) preg_replace_callback(
 		$regex,
-		static function( $matches ) {
+		static function ( $matches ) {
 			if ( ! isset( $matches[0] ) ) {
 				return '';
 			}
@@ -4895,7 +4899,7 @@ function sanitize_option( $option, $value ) {
 				if ( preg_match( '#http(s?)://(.+)#i', $value ) ) {
 					$value = sanitize_url( $value );
 				} else {
-					$error = __( 'The WordPress address you entered did not appear to be a valid URL. Please enter a valid URL.' );
+					$error = __( 'The ClassicPress address you entered did not appear to be a valid URL. Please enter a valid URL.' );
 				}
 			}
 			break;
@@ -5114,31 +5118,6 @@ function wp_pre_kses_less_than_callback( $matches ) {
 		return esc_html( $matches[0] );
 	}
 	return $matches[0];
-}
-
-/**
- * Removes non-allowable HTML from parsed block attribute values when filtering
- * in the post context.
- *
- * @since 5.3.1
- *
- * @param string         $content           Content to be run through KSES.
- * @param array[]|string $allowed_html      An array of allowed HTML elements
- *                                          and attributes, or a context name
- *                                          such as 'post'.
- * @param string[]       $allowed_protocols Array of allowed URL protocols.
- * @return string Filtered text to run through KSES.
- */
-function wp_pre_kses_block_attributes( $content, $allowed_html, $allowed_protocols ) {
-	/*
-	 * `filter_block_content` is expected to call `wp_kses`. Temporarily remove
-	 * the filter to avoid recursion.
-	 */
-	remove_filter( 'pre_kses', 'wp_pre_kses_block_attributes', 10 );
-	$content = filter_block_content( $content, $allowed_html, $allowed_protocols );
-	add_filter( 'pre_kses', 'wp_pre_kses_block_attributes', 10, 3 );
-
-	return $content;
 }
 
 /**
@@ -5779,10 +5758,8 @@ function print_emoji_styles() {
 	}
 
 	$printed = true;
-
-	$type_attr = current_theme_supports( 'html5', 'style' ) ? '' : ' type="text/css"';
 	?>
-<style<?php echo $type_attr; ?>>
+<style>
 img.wp-smiley,
 img.emoji {
 	display: inline !important;
@@ -5862,8 +5839,6 @@ function _print_emoji_detection_script() {
 		'svgExt'  => apply_filters( 'emoji_svg_ext', '.svg' ),
 	);
 
-	$type_attr = current_theme_supports( 'html5', 'style' ) ? '' : ' type="text/javascript"';
-
 	if ( SCRIPT_DEBUG ) {
 		$version_wpemoji = 'ver=' . classicpress_asset_version( 'script', 'wpemoji' );
 		$version_twemoji = 'ver=' . classicpress_asset_version( 'script', 'twemoji' );
@@ -5876,7 +5851,7 @@ function _print_emoji_detection_script() {
 		);
 
 		?>
-		<script<?php echo $type_attr; ?>>
+		<script>
 			window._wpemojiSettings = <?php echo wp_json_encode( $settings ); ?>;
 			<?php readfile( ABSPATH . WPINC . '/js/wp-emoji-loader.js' ); ?>
 		</script>
@@ -5899,7 +5874,7 @@ function _print_emoji_detection_script() {
 		 * and edit wp-emoji-loader.js directly.
 		 */
 		?>
-		<script<?php echo $type_attr; ?>>
+		<script>
 			window._wpemojiSettings = <?php echo wp_json_encode( $settings ); ?>;
 			!function(e,t,a){var r,n,o,i,p=t.createElement("canvas"),s=p.getContext&&p.getContext("2d");function c(e,t){var a=String.fromCharCode;s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,e),0,0);var r=p.toDataURL();return s.clearRect(0,0,p.width,p.height),s.fillText(a.apply(this,t),0,0),r===p.toDataURL()}function l(e){if(!s||!s.fillText)return!1;switch(s.textBaseline="top",s.font="600 32px Arial",e){case"flag":return!c([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])&&(!c([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!c([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]));case"emoji":return!c([129777,127995,8205,129778,127999],[129777,127995,8203,129778,127999])}return!1}function d(e){var a=t.createElement("script");a.src=e,a.defer=a.type="text/javascript",t.getElementsByTagName("head")[0].appendChild(a)}for(i=Array("flag","emoji"),a.supports={everything:!0,everythingExceptFlag:!0},o=0;o<i.length;o++)a.supports[i[o]]=l(i[o]),a.supports.everything=a.supports.everything&&a.supports[i[o]],"flag"!==i[o]&&(a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&a.supports[i[o]]);a.supports.everythingExceptFlag=a.supports.everythingExceptFlag&&!a.supports.flag,a.DOMReady=!1,a.readyCallback=function(){a.DOMReady=!0},a.supports.everything||(n=function(){a.readyCallback()},t.addEventListener?(t.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),t.attachEvent("onreadystatechange",(function(){"complete"===t.readyState&&a.readyCallback()}))),(r=a.source||{}).concatemoji?d(r.concatemoji):r.wpemoji&&r.twemoji&&(d(r.twemoji),d(r.wpemoji)))}(window,document,window._wpemojiSettings);
 		</script>
@@ -6005,7 +5980,7 @@ function wp_staticize_emoji( $text ) {
 				$file = str_replace( ';&#x', '-', $emojum );
 				$file = str_replace( array( '&#x', ';' ), '', $file );
 
-				$entity = sprintf( '<img src="%s" alt="%s" class="wp-smiley" style="height: 1em; max-height: 1em;" />', $cdn_url . $file . $ext, $emoji_char );
+				$entity = sprintf( '<img src="%s" alt="%s" class="wp-smiley" style="height: 1em; max-height: 1em;">', $cdn_url . $file . $ext, $emoji_char );
 
 				$content = str_replace( $emojum, $entity, $content );
 			}

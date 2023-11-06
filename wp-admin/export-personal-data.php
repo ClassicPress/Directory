@@ -25,7 +25,7 @@ get_current_screen()->add_help_tab(
 					'<p>' . __( 'This screen is where you manage requests for an export of personal data.' ) . '</p>' .
 					'<p>' . __( 'Privacy Laws around the world require businesses and online services to provide an export of some of the data they collect about an individual, and to deliver that export on request. The rights those laws enshrine are sometimes called the "Right of Data Portability". It allows individuals to obtain and reuse their personal data for their own purposes across different services. It allows them to move, copy or transfer personal data easily from one IT environment to another.' ) . '</p>' .
 					'<p>' . __( 'The tool associates data stored in ClassicPress with a supplied email address, including profile data and comments.' ) . '</p>' .
-					'<p><strong>' . __( 'Note: Since this tool only gathers data from WordPress and participating plugins, you may need to do more to comply with export requests. For example, you should also send the requester some of the data collected from or stored with the 3rd party services your organization uses.' ) . '</strong></p>',
+					'<p><strong>' . __( 'Note: Since this tool only gathers data from ClassicPress and participating plugins, you may need to do more to comply with export requests. For example, you should also send the requester some of the data collected from or stored with the 3rd party services your organization uses.' ) . '</strong></p>',
 	)
 );
 
@@ -106,7 +106,7 @@ require_once ABSPATH . 'wp-admin/admin-header.php';
 <div class="wrap nosubsub">
 	<h1><?php esc_html_e( 'Export Personal Data' ); ?></h1>
 	<p><?php _e( 'This tool helps site owners comply with local laws and regulations by exporting known data for a given user in a .zip file.' ); ?></p>
-	<hr class="wp-header-end" />
+	<hr class="wp-header-end">
 
 	<?php settings_errors(); ?>
 
@@ -119,7 +119,7 @@ require_once ABSPATH . 'wp-admin/admin-header.php';
 						<label for="username_or_email_for_privacy_request"><?php esc_html_e( 'Username or email address' ); ?></label>
 					</th>
 					<td>
-						<input type="text" required class="regular-text ltr" id="username_or_email_for_privacy_request" name="username_or_email_for_privacy_request" />
+						<input type="text" required class="regular-text ltr" id="username_or_email_for_privacy_request" name="username_or_email_for_privacy_request">
 					</td>
 				</tr>
 				<tr>
@@ -128,7 +128,7 @@ require_once ABSPATH . 'wp-admin/admin-header.php';
 					</th>
 					<td>
 						<label for="send_confirmation_email">
-							<input type="checkbox" name="send_confirmation_email" id="send_confirmation_email" value="1" checked="checked" />
+							<input type="checkbox" name="send_confirmation_email" id="send_confirmation_email" value="1" checked>
 							<?php _e( 'Send personal data export confirmation email.' ); ?>
 						</label>
 					</td>
@@ -139,18 +139,18 @@ require_once ABSPATH . 'wp-admin/admin-header.php';
 			</p>
 		</div>
 		<?php wp_nonce_field( 'personal-data-request' ); ?>
-		<input type="hidden" name="action" value="add_export_personal_data_request" />
-		<input type="hidden" name="type_of_action" value="export_personal_data" />
+		<input type="hidden" name="action" value="add_export_personal_data_request">
+		<input type="hidden" name="type_of_action" value="export_personal_data">
 	</form>
-	<hr />
+	<hr>
 
 	<?php $requests_table->views(); ?>
 
 	<form class="search-form wp-clearfix">
 		<?php $requests_table->search_box( __( 'Search Requests' ), 'requests' ); ?>
-		<input type="hidden" name="filter-status" value="<?php echo isset( $_REQUEST['filter-status'] ) ? esc_attr( sanitize_text_field( $_REQUEST['filter-status'] ) ) : ''; ?>" />
-		<input type="hidden" name="orderby" value="<?php echo isset( $_REQUEST['orderby'] ) ? esc_attr( sanitize_text_field( $_REQUEST['orderby'] ) ) : ''; ?>" />
-		<input type="hidden" name="order" value="<?php echo isset( $_REQUEST['order'] ) ? esc_attr( sanitize_text_field( $_REQUEST['order'] ) ) : ''; ?>" />
+		<input type="hidden" name="filter-status" value="<?php echo isset( $_REQUEST['filter-status'] ) ? esc_attr( sanitize_text_field( $_REQUEST['filter-status'] ) ) : ''; ?>">
+		<input type="hidden" name="orderby" value="<?php echo isset( $_REQUEST['orderby'] ) ? esc_attr( sanitize_text_field( $_REQUEST['orderby'] ) ) : ''; ?>">
+		<input type="hidden" name="order" value="<?php echo isset( $_REQUEST['order'] ) ? esc_attr( sanitize_text_field( $_REQUEST['order'] ) ) : ''; ?>">
 	</form>
 
 	<form method="post">

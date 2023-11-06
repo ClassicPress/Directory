@@ -27,7 +27,7 @@
  *
  * @global string $cp_version
  */
-$cp_version = '2.0.0+nightly.20230620';
+$cp_version = '2.0.0+nightly.20231105';
 
 /**
  * The WordPress version string.
@@ -39,7 +39,7 @@ $cp_version = '2.0.0+nightly.20230620';
  *
  * @global string $wp_version
  */
-$wp_version = '6.2';
+$wp_version = '6.2.3';
 
 /**
  * Holds the WordPress DB revision, increments when changes are made to the WordPress DB schema.

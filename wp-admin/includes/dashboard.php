@@ -247,7 +247,7 @@ function _wp_dashboard_control_callback( $dashboard, $meta_box ) {
 	echo '<form method="post" class="dashboard-widget-control-form wp-clearfix">';
 	wp_dashboard_trigger_widget_control( $meta_box['id'] );
 	wp_nonce_field( 'edit-dashboard-widget_' . $meta_box['id'], 'dashboard-widget-nonce' );
-	echo '<input type="hidden" name="widget_id" value="' . esc_attr( $meta_box['id'] ) . '" />';
+	echo '<input type="hidden" name="widget_id" value="' . esc_attr( $meta_box['id'] ) . '">';
 	submit_button( __( 'Save Changes' ) );
 	echo '</form>';
 }
@@ -284,7 +284,6 @@ function wp_dashboard() {
 	<?php
 	wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false );
 	wp_nonce_field( 'meta-box-order', 'meta-box-order-nonce', false );
-
 }
 
 //
@@ -475,7 +474,7 @@ function wp_network_dashboard_right_now() {
 		echo '</ul>';
 	}
 	?>
-	<br class="clear" />
+	<br class="clear">
 
 	<p class="youhave"><?php echo $sentence; ?></p>
 
@@ -498,7 +497,7 @@ function wp_network_dashboard_right_now() {
 				_e( 'Search Users' );
 				?>
 			</label>
-			<input type="search" name="s" value="" size="30" autocomplete="off" id="search-users" />
+			<input type="search" name="s" value="" size="30" autocomplete="off" id="search-users">
 			<?php submit_button( __( 'Search Users' ), '', false, false, array( 'id' => 'submit_users' ) ); ?>
 		</p>
 	</form>
@@ -511,7 +510,7 @@ function wp_network_dashboard_right_now() {
 				_e( 'Search Sites' );
 				?>
 			</label>
-			<input type="search" name="s" value="" size="30" autocomplete="off" id="search-sites" />
+			<input type="search" name="s" value="" size="30" autocomplete="off" id="search-sites">
 			<?php submit_button( __( 'Search Sites' ), '', false, false, array( 'id' => 'submit_sites' ) ); ?>
 		</p>
 	</form>
@@ -585,7 +584,7 @@ function wp_dashboard_quick_press( $error_msg = false ) {
 				echo apply_filters( 'enter_title_here', __( 'Title' ), $post );
 				?>
 			</label>
-			<input type="text" name="post_title" id="title" autocomplete="off" />
+			<input type="text" name="post_title" id="title" autocomplete="off">
 		</div>
 
 		<div class="textarea-wrap" id="description-wrap">
@@ -594,12 +593,12 @@ function wp_dashboard_quick_press( $error_msg = false ) {
 		</div>
 
 		<p class="submit">
-			<input type="hidden" name="action" id="quickpost-action" value="post-quickdraft-save" />
-			<input type="hidden" name="post_ID" value="<?php echo $post_ID; ?>" />
-			<input type="hidden" name="post_type" value="post" />
+			<input type="hidden" name="action" id="quickpost-action" value="post-quickdraft-save">
+			<input type="hidden" name="post_ID" value="<?php echo $post_ID; ?>">
+			<input type="hidden" name="post_type" value="post">
 			<?php wp_nonce_field( 'add-post' ); ?>
 			<?php submit_button( __( 'Save Draft' ), 'primary', 'save', false, array( 'id' => 'save-post' ) ); ?>
-			<br class="clear" />
+			<br class="clear">
 		</p>
 
 	</form>
@@ -1101,7 +1100,17 @@ function wp_dashboard_recent_comments( $total_items = 5 ) {
 
 		echo '<ul id="the-comment-list" data-wp-lists="list:comment">';
 		foreach ( $comments as $comment ) {
-			_wp_dashboard_recent_comments_row( $comment );
+
+			$comment_post = get_post( $comment->comment_post_ID );
+			if (
+				current_user_can( 'edit_post', $comment->comment_post_ID ) ||
+				(
+					empty( $comment_post->post_password ) &&
+					current_user_can( 'read_post', $comment->comment_post_ID )
+				)
+			) {
+				_wp_dashboard_recent_comments_row( $comment );
+			}
 		}
 		echo '</ul>';
 
@@ -1281,25 +1290,32 @@ function wp_dashboard_rss_control( $widget_id, $form_inputs = array() ) {
 
 
 /**
- * Renders the Events and News dashboard widget.
+ * Renders ClassicPress News dashboard widget.
  *
  * @since 4.8.0
+ * @since 1.0.0 Events section removed
  */
 function wp_dashboard_events_news() {
 	?>
 	<div class="classicpress-news-inline-notice">
-	<div class="rss-widget">
 		<?php
 		printf(
 			/* translators: link to ClassicPress blog */
-			__( 'You can always find the latest ClassicPress news on our <a href="%s">official&nbsp;blog</a>.' ),
+			__( 'You can always find the latest ClassicPress news on our <a href="%s" target="_blank">official blog <span aria-hidden="true" class="dashicons dashicons-external"></span></a>.' ),
 			'https://www.classicpress.net/blog/'
 		);
 		?>
 	</div>
-	</div>
-	<div class="wordpress-news hide-if-no-js">
+	<div class="classicpress-news hide-if-no-js">
 		<?php wp_dashboard_primary(); ?>
+	</div>
+	<div class="classicpress-news-footer">
+		<ul>
+			<li><a href="https://forums.classicpress.net/" target="_blank"><?php _e( 'Get Help' ); ?> <span aria-hidden="true" class="dashicons dashicons-external"></span></a></li>
+			<li><a href="https://github.com/ClassicPress/ClassicPress/issues/new/choose" target="_blank"><?php _e( 'Feature Requests' ); ?> <span aria-hidden="true" class="dashicons dashicons-external"></span></a></li>
+			<li><a href="https://classicpress.net/volunteer/" target="_blank"><?php _e( 'Volunteer' ); ?> <span aria-hidden="true" class="dashicons dashicons-external"></span></a></li>
+			<li><a href="https://classicpress.net/donate/" target="_blank"><?php _e( 'Donate' ); ?> <span aria-hidden="true" class="dashicons dashicons-external"></span></a></li>
+		</ul>
 	</div>
 
 	<?php
@@ -1474,7 +1490,7 @@ function wp_dashboard_browser_nag() {
 		if ( ! empty( $response['img_src'] ) ) {
 			$img_src = ( is_ssl() && ! empty( $response['img_src_ssl'] ) ) ? $response['img_src_ssl'] : $response['img_src'];
 
-			$notice           .= '<div class="alignright browser-icon"><img src="' . esc_url( $img_src ) . '" alt="" /></div>';
+			$notice           .= '<div class="alignright browser-icon"><img src="' . esc_url( $img_src ) . '" alt=""></div>';
 			$browser_nag_class = ' has-browser-icon';
 		}
 		$notice .= "<p class='browser-update-nag{$browser_nag_class}'>{$msg}</p>";
@@ -1638,7 +1654,7 @@ function wp_dashboard_php_nag() {
 
 	<p><?php _e( 'What is PHP and how does it affect my site?' ); ?></p>
 	<p>
-		<?php _e( 'PHP is one of the programming languages used to build WordPress. Newer versions of PHP receive regular security updates and may increase your site&#8217;s performance.' ); ?>
+		<?php _e( 'PHP is one of the programming languages used to build ClassicPress. Newer versions of PHP receive regular security updates and may increase your site&#8217;s performance.' ); ?>
 		<?php
 		if ( ! empty( $response['recommended_version'] ) ) {
 			printf(

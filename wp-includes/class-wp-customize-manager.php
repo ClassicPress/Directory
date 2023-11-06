@@ -2195,7 +2195,7 @@ final class WP_Customize_Manager {
 		}
 
 		?>
-		<script type="text/javascript">
+		<script>
 			var _wpCustomizeSettings = <?php echo wp_json_encode( $settings ); ?>;
 			_wpCustomizeSettings.values = {};
 			(function( v ) {
@@ -4298,7 +4298,7 @@ final class WP_Customize_Manager {
 		<script type="text/html" id="tmpl-customize-changeset-locked-notification">
 			<li class="notice notice-{{ data.type || 'info' }} {{ data.containerClasses || '' }}" data-code="{{ data.code }}" data-type="{{ data.type }}">
 				<div class="notification-message customize-changeset-locked-message">
-					<img class="customize-changeset-locked-avatar" src="{{ data.lockUser.avatar }}" alt="{{ data.lockUser.name }}" />
+					<img class="customize-changeset-locked-avatar" src="{{ data.lockUser.avatar }}" alt="{{ data.lockUser.name }}">
 					<p class="currently-editing">
 						<# if ( data.message ) { #>
 							{{{ data.message }}}
@@ -4970,7 +4970,7 @@ final class WP_Customize_Manager {
 		}
 
 		?>
-		<script type="text/javascript">
+		<script>
 			var _wpCustomizeSettings = <?php echo wp_json_encode( $settings ); ?>;
 			_wpCustomizeSettings.initialClientTimestamp = _.now();
 			_wpCustomizeSettings.controls = {};
@@ -5191,7 +5191,7 @@ final class WP_Customize_Manager {
 				array(
 					'label'       => __( 'Site Icon' ),
 					'description' => sprintf(
-						'<p>' . __( 'Site Icons are what you see in browser tabs, bookmark bars, and within the WordPress mobile apps. Upload one here!' ) . '</p>' .
+						'<p>' . __( 'Site Icons are what you see in browser tabs, bookmark bars, and within the ClassicPress mobile apps. Upload one here!' ) . '</p>' .
 						/* translators: %s: Site icon size in pixels. */
 						'<p>' . __( 'Site Icons should be square and at least %s pixels.' ) . '</p>',
 						'<strong>512 &times; 512</strong>'

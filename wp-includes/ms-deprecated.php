@@ -92,9 +92,9 @@ function graceful_fail( $message ) {
 	$message_template = apply_filters( 'graceful_fail_template',
 '<!DOCTYPE html>
 <html><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Error!</title>
-<style type="text/css">
+<style>
 img {
 	border: 0;
 }
@@ -616,7 +616,7 @@ function install_blog( $blog_id, $blog_title = '' ) {
 
 	$suppress = $wpdb->suppress_errors();
 	if ( $wpdb->get_results( "DESCRIBE {$wpdb->posts}" ) ) {
-		die( '<h1>' . __( 'Already Installed' ) . '</h1><p>' . __( 'You appear to have already installed WordPress. To reinstall please clear your old database tables first.' ) . '</p></body></html>' );
+		die( '<h1>' . __( 'Already Installed' ) . '</h1><p>' . __( 'You appear to have already installed ClassicPress. To reinstall please clear your old database tables first.' ) . '</p></body></html>' );
 	}
 	$wpdb->suppress_errors( $suppress );
 

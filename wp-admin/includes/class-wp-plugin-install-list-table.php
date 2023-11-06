@@ -368,12 +368,12 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 					?>
 				</div>
 				<?php $this->pagination( $which ); ?>
-				<br class="clear" />
+				<br class="clear">
 			</div>
 		<?php } else { ?>
 			<div class="tablenav bottom">
 				<?php $this->pagination( $which ); ?>
-				<br class="clear" />
+				<br class="clear">
 			</div>
 			<?php
 		}
@@ -527,7 +527,7 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 								);
 							} else {
 								$action_links[] = sprintf(
-									'<button type="button" class="button button-disabled" disabled="disabled">%s</button>',
+									'<button type="button" class="button button-disabled" disabled>%s</button>',
 									_x( 'Cannot Install', 'plugin' )
 								);
 							}
@@ -549,7 +549,7 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 								);
 							} else {
 								$action_links[] = sprintf(
-									'<button type="button" class="button button-disabled" disabled="disabled">%s</button>',
+									'<button type="button" class="button button-disabled" disabled>%s</button>',
 									_x( 'Cannot Update', 'plugin' )
 								);
 							}
@@ -560,7 +560,7 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 					case 'newer_installed':
 						if ( is_plugin_active( $status['file'] ) ) {
 							$action_links[] = sprintf(
-								'<button type="button" class="button button-disabled" disabled="disabled">%s</button>',
+								'<button type="button" class="button button-disabled" disabled>%s</button>',
 								_x( 'Active', 'plugin' )
 							);
 						} elseif ( current_user_can( 'activate_plugin', $status['file'] ) ) {
@@ -592,13 +592,13 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 								);
 							} else {
 								$action_links[] = sprintf(
-									'<button type="button" class="button button-disabled" disabled="disabled">%s</button>',
+									'<button type="button" class="button button-disabled" disabled>%s</button>',
 									_x( 'Cannot Activate', 'plugin' )
 								);
 							}
 						} else {
 							$action_links[] = sprintf(
-								'<button type="button" class="button button-disabled" disabled="disabled">%s</button>',
+								'<button type="button" class="button button-disabled" disabled>%s</button>',
 								_x( 'Installed', 'plugin' )
 							);
 						}
@@ -649,11 +649,11 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 			if ( ! $compatible_php || ! $compatible_wp ) {
 				echo '<div class="notice inline notice-error notice-alt"><p>';
 				if ( ! $compatible_php && ! $compatible_wp ) {
-					_e( 'This plugin does not work with your versions of WordPress and PHP.' );
+					_e( 'This plugin does not work with your versions of ClassicPress and PHP.' );
 					if ( current_user_can( 'update_core' ) && current_user_can( 'update_php' ) ) {
 						printf(
 							/* translators: 1: URL to WordPress Updates screen, 2: URL to Update PHP page. */
-							' ' . __( '<a href="%1$s">Please update WordPress</a>, and then <a href="%2$s">learn more about updating PHP</a>.' ),
+							' ' . __( '<a href="%1$s">Please update ClassicPress</a>, and then <a href="%2$s">learn more about updating PHP</a>.' ),
 							self_admin_url( 'update-core.php' ),
 							esc_url( wp_get_update_php_url() )
 						);
@@ -661,7 +661,7 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 					} elseif ( current_user_can( 'update_core' ) ) {
 						printf(
 							/* translators: %s: URL to WordPress Updates screen. */
-							' ' . __( '<a href="%s">Please update WordPress</a>.' ),
+							' ' . __( '<a href="%s">Please update ClassicPress</a>.' ),
 							self_admin_url( 'update-core.php' )
 						);
 					} elseif ( current_user_can( 'update_php' ) ) {
@@ -673,11 +673,11 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 						wp_update_php_annotation( '</p><p><em>', '</em>' );
 					}
 				} elseif ( ! $compatible_wp ) {
-					_e( 'This plugin does not work with your version of WordPress.' );
+					_e( 'This plugin does not work with your version of ClassicPress.' );
 					if ( current_user_can( 'update_core' ) ) {
 						printf(
 							/* translators: %s: URL to WordPress Updates screen. */
-							' ' . __( '<a href="%s">Please update WordPress</a>.' ),
+							' ' . __( '<a href="%s">Please update ClassicPress</a>.' ),
 							self_admin_url( 'update-core.php' )
 						);
 					}
@@ -700,7 +700,7 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 					<h3>
 						<a href="<?php echo esc_url( $details_link ); ?>" class="thickbox open-plugin-details-modal">
 						<?php echo $title; ?>
-						<img src="<?php echo esc_url( $plugin_icon_url ); ?>" class="plugin-icon" alt="" />
+						<img src="<?php echo esc_url( $plugin_icon_url ); ?>" class="plugin-icon" alt="">
 						</a>
 					</h3>
 				</div>
@@ -757,11 +757,11 @@ class WP_Plugin_Install_List_Table extends WP_List_Table {
 				<div class="column-compatibility">
 					<?php
 					if ( ! $tested_wp ) {
-						echo '<span class="compatibility-untested">' . __( 'Untested with your version of WordPress' ) . '</span>';
+						echo '<span class="compatibility-untested">' . __( 'Untested with your version of ClassicPress' ) . '</span>';
 					} elseif ( ! $compatible_wp ) {
-						echo '<span class="compatibility-incompatible">' . __( '<strong>Incompatible</strong> with your version of WordPress' ) . '</span>';
+						echo '<span class="compatibility-incompatible">' . __( '<strong>Incompatible</strong> with your version of ClassicPress' ) . '</span>';
 					} else {
-						echo '<span class="compatibility-compatible">' . __( '<strong>Compatible</strong> with your version of WordPress' ) . '</span>';
+						echo '<span class="compatibility-compatible">' . __( '<strong>Compatible</strong> with your version of ClassicPress' ) . '</span>';
 					}
 					?>
 				</div>

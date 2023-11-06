@@ -231,14 +231,14 @@ if ( 'auto-draft' === $post->post_status ) {
 		$post->post_title = '';
 	}
 	$autosave    = false;
-	$form_extra .= "<input type='hidden' id='auto_draft' name='auto_draft' value='1' />";
+	$form_extra .= "<input type='hidden' id='auto_draft' name='auto_draft' value='1'>";
 } else {
 	$autosave = wp_get_post_autosave( $post->ID );
 }
 
 $form_action  = 'editpost';
 $nonce_action = 'update-post_' . $post->ID;
-$form_extra  .= "<input type='hidden' id='post_ID' name='post_ID' value='" . esc_attr( $post->ID ) . "' />";
+$form_extra  .= "<input type='hidden' id='post_ID' name='post_ID' value='" . esc_attr( $post->ID ) . "'>";
 
 // Detect if there exists an autosave newer than the post and if that autosave is different than the post.
 if ( $autosave && mysql2date( 'U', $autosave->post_modified_gmt, false ) > mysql2date( 'U', $post->post_modified_gmt, false ) ) {
@@ -431,6 +431,46 @@ echo esc_html( $title );
 <?php
 if ( isset( $post_new_file ) && current_user_can( $post_type_object->cap->create_posts ) ) {
 	echo ' <a href="' . esc_url( admin_url( $post_new_file ) ) . '" class="page-title-action">' . esc_html( $post_type_object->labels->add_new ) . '</a>';
+
+	/**
+	 * Adds Previous and Next links alongside Add New link.
+	 * Setting works per user per post type.
+	 *
+	 * @since CP-2.0.0
+	 */
+	$nav_display = 'inline';
+	$metaboxhidden = (array) get_user_meta( get_current_user_id(), 'metaboxhidden_' . $post_type_object->name, true );
+
+	if ( in_array( 'adminpostnavspan', $metaboxhidden ) ) {
+		$nav_display = 'none';
+	}
+
+	$next_post = get_next_post();
+	$previous_post = get_previous_post();
+
+	echo '<span id="adminpostnavspan" class="postbox" style="background: transparent; border: none; box-shadow: none; display: ' . $nav_display . ';">';
+
+	if ( ! empty( $previous_post ) ) {
+
+		$previous_link = esc_url( admin_url() . 'post.php?post=' . $previous_post->ID . '&amp;action=edit' );
+
+		$prev_title = _x( 'Previous post: ', 'Admin Post Navigation' ) . esc_attr( $previous_post->post_title );
+
+		echo ' <a href="' . $previous_link . '" id="adminpostnav-prev" title="' . $prev_title . ' " class="add-new-h2">' . _x( '&larr; Previous', 'Admin Post Navigation' ) . '</a>';
+
+	}
+
+	if ( ! empty( $next_post ) ) {
+
+		$next_link = esc_url( admin_url() . 'post.php?post=' . $next_post->ID . '&amp;action=edit' );
+
+		$next_title = _x( 'Next post: ', 'Admin Post Navigation' ) . esc_attr( $next_post->post_title );
+
+		echo ' <a href="' . $next_link . '" id="adminpostnav-next" title="' . $next_title . ' " class="add-new-h2">' . _x( 'Next &rarr;', 'Admin Post Navigation' ) . '</a>';
+
+	}
+
+	echo '</span>';
 }
 ?>
 
@@ -462,15 +502,15 @@ $referer = wp_get_referer();
 ?>
 >
 <?php wp_nonce_field( $nonce_action ); ?>
-<input type="hidden" id="user-id" name="user_ID" value="<?php echo (int) $user_ID; ?>" />
-<input type="hidden" id="hiddenaction" name="action" value="<?php echo esc_attr( $form_action ); ?>" />
-<input type="hidden" id="originalaction" name="originalaction" value="<?php echo esc_attr( $form_action ); ?>" />
-<input type="hidden" id="post_author" name="post_author" value="<?php echo esc_attr( $post->post_author ); ?>" />
-<input type="hidden" id="post_type" name="post_type" value="<?php echo esc_attr( $post_type ); ?>" />
-<input type="hidden" id="original_post_status" name="original_post_status" value="<?php echo esc_attr( $post->post_status ); ?>" />
-<input type="hidden" id="referredby" name="referredby" value="<?php echo $referer ? esc_url( $referer ) : ''; ?>" />
+<input type="hidden" id="user-id" name="user_ID" value="<?php echo (int) $user_ID; ?>">
+<input type="hidden" id="hiddenaction" name="action" value="<?php echo esc_attr( $form_action ); ?>">
+<input type="hidden" id="originalaction" name="originalaction" value="<?php echo esc_attr( $form_action ); ?>">
+<input type="hidden" id="post_author" name="post_author" value="<?php echo esc_attr( $post->post_author ); ?>">
+<input type="hidden" id="post_type" name="post_type" value="<?php echo esc_attr( $post_type ); ?>">
+<input type="hidden" id="original_post_status" name="original_post_status" value="<?php echo esc_attr( $post->post_status ); ?>">
+<input type="hidden" id="referredby" name="referredby" value="<?php echo $referer ? esc_url( $referer ) : ''; ?>">
 <?php if ( ! empty( $active_post_lock ) ) { ?>
-<input type="hidden" id="active_post_lock" value="<?php echo esc_attr( implode( ':', $active_post_lock ) ); ?>" />
+<input type="hidden" id="active_post_lock" value="<?php echo esc_attr( implode( ':', $active_post_lock ) ); ?>">
 	<?php
 }
 if ( 'draft' !== get_post_status( $post ) ) {
@@ -515,7 +555,7 @@ do_action( 'edit_form_top', $post );
 	$title_placeholder = apply_filters( 'enter_title_here', __( 'Add title' ), $post );
 	?>
 	<label class="screen-reader-text" id="title-prompt-text" for="title"><?php echo $title_placeholder; ?></label>
-	<input type="text" name="post_title" size="30" value="<?php echo esc_attr( $post->post_title ); ?>" id="title" spellcheck="true" autocomplete="off" />
+	<input type="text" name="post_title" size="30" value="<?php echo esc_attr( $post->post_title ); ?>" id="title" spellcheck="true" autocomplete="off">
 </div>
 	<?php
 	/**
@@ -537,7 +577,7 @@ do_action( 'edit_form_top', $post );
 			$shortlink = wp_get_shortlink( $post->ID, 'post' );
 
 			if ( ! empty( $shortlink ) && $shortlink !== $permalink && home_url( '?page_id=' . $post->ID ) !== $permalink ) {
-				$sample_permalink_html .= '<input id="shortlink" type="hidden" value="' . esc_attr( $shortlink ) . '" />' .
+				$sample_permalink_html .= '<input id="shortlink" type="hidden" value="' . esc_attr( $shortlink ) . '">' .
 					'<button type="button" class="button button-small" onclick="prompt(&#39;URL:&#39;, jQuery(\'#shortlink\').val());">' .
 					__( 'Get Shortlink' ) .
 					'</button>';
@@ -629,7 +669,7 @@ if ( post_type_supports( $post_type, 'editor' ) ) {
 	}
 	?>
 	</td>
-	<td id="content-resize-handle" class="hide-if-no-js"><br /></td>
+	<td id="content-resize-handle" class="hide-if-no-js"><br></td>
 </tr></tbody></table>
 
 </div>
@@ -720,7 +760,7 @@ do_action( 'dbx_post_sidebar', $post );
 
 ?>
 </div><!-- /post-body -->
-<br class="clear" />
+<br class="clear">
 </div><!-- /poststuff -->
 </form>
 </div>
@@ -732,7 +772,7 @@ if ( post_type_supports( $post_type, 'comments' ) ) {
 ?>
 
 <?php if ( ! wp_is_mobile() && post_type_supports( $post_type, 'title' ) && '' === $post->post_title ) : ?>
-<script type="text/javascript">
+<script>
 try{document.post.title.focus();}catch(e){}
 </script>
 <?php endif; ?>

@@ -940,12 +940,12 @@ function rest_output_link_wp_head() {
 		return;
 	}
 
-	printf( '<link rel="https://api.w.org/" href="%s" />', esc_url( $api_root ) );
+	printf( '<link rel="https://api.w.org/" href="%s">', esc_url( $api_root ) );
 
 	$resource = rest_get_queried_resource_route();
 
 	if ( $resource ) {
-		printf( '<link rel="alternate" type="application/json" href="%s" />', esc_url( rest_url( $resource ) ) );
+		printf( '<link rel="alternate" type="application/json" href="%s">', esc_url( rest_url( $resource ) ) );
 	}
 }
 
@@ -1024,6 +1024,7 @@ function rest_cookie_check_errors( $result ) {
 	$result = wp_verify_nonce( $nonce, 'wp_rest' );
 
 	if ( ! $result ) {
+		add_filter( 'rest_send_nocache_headers', '__return_true', 20 );
 		return new WP_Error( 'rest_cookie_invalid_nonce', __( 'Cookie check failed' ), array( 'status' => 403 ) );
 	}
 

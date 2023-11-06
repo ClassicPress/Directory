@@ -3,9 +3,9 @@ Contributors: msaari
 Donate link: https://www.relevanssi.com/buy-premium/
 Tags: search, relevance, better search, product search, woocommerce search
 Requires at least: 4.9
-Tested up to: 6.2
+Tested up to: 6.3
 Requires PHP: 7.0
-Stable tag: 4.20.0
+Stable tag: 4.21.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -128,6 +128,26 @@ Each document database is full of useless words. All the little words that appea
 * John Calahan for extensive 4.0 beta testing.
 
 == Changelog ==
+= 4.21.2 =
+* Minor fix: Meta query boolean to array conversion.
+
+= 4.21.1 =
+* Changed behaviour: The 'relevanssi_index_content' and 'relevanssi_index_titles' filter hooks now get the post object as a second parameter.
+* Minor fix: Relevanssi is now blocked in the reusable content block search.
+* Minor fix: Stop Relevanssi from blocking the feed searches.
+* Minor fix: Improve exact match boosts with accented letters.
+* Minor fix: Entering synonyms in Polylang all languages mode was possible; it shouldn't be.
+
+= 4.21.0 =
+* New feature: New filter hook `relevanssi_highlight_regex` makes it possible to adjust the regex used for highlighting.
+* New feature: New filter hook `relevanssi_excerpt_custom_fields` filters the list of custom fields used for creating the excerpt.
+* New feature: New filter hook `relevanssi_phrase_custom_fields` filters the list of custom fields used for phrase matching. Return an empty array to disable phrase matching in custom fields.
+* New feature: New filter hook `relevanssi_phrase_taxonomies` filters the list of taxonomies used for phrase matching. Return an empty array to disable phrase matching in taxonomies.
+* New feature: If RELEVANSSI_DEBUG, WP_DEBUG and WP_DEBUG_DISPLAY are all true, Relevanssi will print out indexing debugging messages to the error log (PHP error log or whatever is defined in WP_DEBUG_LOG).
+* Minor fix: Some ACF fields change the global $post, leading to indexing problems. Relevanssi tries to prevent that now.
+* Minor fix: Avoid fatal errors from `action` query variable being a non-string.
+* Minor fix: Term indexing with WPML only indexed the terms in the current admin language. Now the terms are indexed in all languages.
+
 = 4.20.0 =
 * New feature: Relevanssi can now create custom field specific excerpts that come from one custom field only and know which field that is.
 * New feature: You can see the list of indexed custom field names in the indexing and excerpt settings.
@@ -173,6 +193,15 @@ Each document database is full of useless words. All the little words that appea
 * Minor fix: Taxonomy query handling was improved. This should help in particular Polylang users who've had problems with Relevanssi ignoring Polylang language restrictions.
 
 == Upgrade notice ==
+= 4.21.2 =
+* Bug fixes: meta query boolean to array conversion errors.
+
+= 4.21.1 =
+* Bug fixes: Polylang compatibility, feed searches, accented letters.
+
+= 4.21.0 =
+* New filter hooks, debugging tools and bug fixes.
+
 = 4.20.0 =
 * Better method for handling custom fields in excerpts, bug fixes.
 

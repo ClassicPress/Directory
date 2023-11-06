@@ -11,6 +11,7 @@
  * Core walker class used to create an HTML list of comments.
  *
  * @since 2.7.0
+ * @since CP-2.0.0 Default to HTML5. Removed obsolete markup function.
  *
  * @see Walker
  */
@@ -150,7 +151,6 @@ class Walker_Comment extends Walker {
 
 			unset( $children_elements[ $id ] );
 		}
-
 	}
 
 	/**
@@ -159,6 +159,7 @@ class Walker_Comment extends Walker {
 	 * @since 2.7.0
 	 * @since 5.9.0 Renamed `$comment` to `$data_object` and `$id` to `$current_object_id`
 	 *              to match parent class for PHP 8 named parameter support.
+	 * @since CP-2.0.0 Default to 'html' output for comments.
 	 *
 	 * @see Walker::start_el()
 	 * @see wp_list_comments()
@@ -194,13 +195,9 @@ class Walker_Comment extends Walker {
 			ob_start();
 			$this->ping( $comment, $depth, $args );
 			$output .= ob_get_clean();
-		} elseif ( 'html5' === $args['format'] ) {
-			ob_start();
-			$this->html5_comment( $comment, $depth, $args );
-			$output .= ob_get_clean();
 		} else {
 			ob_start();
-			$this->comment( $comment, $depth, $args );
+			$this->html5_comment( $comment, $depth, $args );
 			$output .= ob_get_clean();
 		}
 
@@ -287,119 +284,10 @@ class Walker_Comment extends Walker {
 	}
 
 	/**
-	 * Outputs a single comment.
-	 *
-	 * @since 3.6.0
-	 *
-	 * @see wp_list_comments()
-	 *
-	 * @param WP_Comment $comment Comment to display.
-	 * @param int        $depth   Depth of the current comment.
-	 * @param array      $args    An array of arguments.
-	 */
-	protected function comment( $comment, $depth, $args ) {
-		if ( 'div' === $args['style'] ) {
-			$tag       = 'div';
-			$add_below = 'comment';
-		} else {
-			$tag       = 'li';
-			$add_below = 'div-comment';
-		}
-
-		$commenter          = wp_get_current_commenter();
-		$show_pending_links = isset( $commenter['comment_author'] ) && $commenter['comment_author'];
-
-		if ( $commenter['comment_author_email'] ) {
-			$moderation_note = __( 'Your comment is awaiting moderation.' );
-		} else {
-			$moderation_note = __( 'Your comment is awaiting moderation. This is a preview; your comment will be visible after it has been approved.' );
-		}
-		?>
-		<<?php echo $tag; ?> <?php comment_class( $this->has_children ? 'parent' : '', $comment ); ?> id="comment-<?php comment_ID(); ?>">
-		<?php if ( 'div' !== $args['style'] ) : ?>
-		<div id="div-comment-<?php comment_ID(); ?>" class="comment-body">
-		<?php endif; ?>
-		<div class="comment-author vcard">
-			<?php
-			if ( 0 != $args['avatar_size'] ) {
-				echo get_avatar( $comment, $args['avatar_size'] );
-			}
-			?>
-			<?php
-			$comment_author = get_comment_author_link( $comment );
-
-			if ( '0' == $comment->comment_approved && ! $show_pending_links ) {
-				$comment_author = get_comment_author( $comment );
-			}
-
-			printf(
-				/* translators: %s: Comment author link. */
-				__( '%s <span class="says">says:</span>' ),
-				sprintf( '<cite class="fn">%s</cite>', $comment_author )
-			);
-			?>
-		</div>
-		<?php if ( '0' == $comment->comment_approved ) : ?>
-		<em class="comment-awaiting-moderation"><?php echo $moderation_note; ?></em>
-		<br />
-		<?php endif; ?>
-
-		<div class="comment-meta commentmetadata">
-			<?php
-			printf(
-				'<a href="%s">%s</a>',
-				esc_url( get_comment_link( $comment, $args ) ),
-				sprintf(
-					/* translators: 1: Comment date, 2: Comment time. */
-					__( '%1$s at %2$s' ),
-					get_comment_date( '', $comment ),
-					get_comment_time()
-				)
-			);
-
-			edit_comment_link( __( '(Edit)' ), ' &nbsp;&nbsp;', '' );
-			?>
-		</div>
-
-		<?php
-		comment_text(
-			$comment,
-			array_merge(
-				$args,
-				array(
-					'add_below' => $add_below,
-					'depth'     => $depth,
-					'max_depth' => $args['max_depth'],
-				)
-			)
-		);
-		?>
-
-		<?php
-		comment_reply_link(
-			array_merge(
-				$args,
-				array(
-					'add_below' => $add_below,
-					'depth'     => $depth,
-					'max_depth' => $args['max_depth'],
-					'before'    => '<div class="reply">',
-					'after'     => '</div>',
-				)
-			)
-		);
-		?>
-
-		<?php if ( 'div' !== $args['style'] ) : ?>
-		</div>
-		<?php endif; ?>
-		<?php
-	}
-
-	/**
 	 * Outputs a comment in the HTML5 format.
 	 *
 	 * @since 3.6.0
+	 * @since CP-2.0.0 Comment author and metadata are moved to template functions and called via hooks.
 	 *
 	 * @see wp_list_comments()
 	 *
@@ -423,42 +311,27 @@ class Walker_Comment extends Walker {
 			<article id="div-comment-<?php comment_ID(); ?>" class="comment-body">
 				<footer class="comment-meta">
 					<div class="comment-author vcard">
-						<?php
-						if ( 0 != $args['avatar_size'] ) {
-							echo get_avatar( $comment, $args['avatar_size'] );
-						}
-						?>
-						<?php
-						$comment_author = get_comment_author_link( $comment );
-
-						if ( '0' == $comment->comment_approved && ! $show_pending_links ) {
-							$comment_author = get_comment_author( $comment );
-						}
-
-						printf(
-							/* translators: %s: Comment author link. */
-							__( '%s <span class="says">says:</span>' ),
-							sprintf( '<b class="fn">%s</b>', $comment_author )
-						);
-						?>
+					<?php
+						/**
+						 * Hook for including comment author data.
+						 * Default action `display_comment_author_data` in wp-includes/comment-template.php includes comment author's name and avatar.
+						 *
+						 * @since CP-2.0.0
+						 */
+						do_action( 'comment_author_data', $comment, $args, $show_pending_links );
+					?>
 					</div><!-- .comment-author -->
 
 					<div class="comment-metadata">
-						<?php
-						printf(
-							'<a href="%s"><time datetime="%s">%s</time></a>',
-							esc_url( get_comment_link( $comment, $args ) ),
-							get_comment_time( 'c' ),
-							sprintf(
-								/* translators: 1: Comment date, 2: Comment time. */
-								__( '%1$s at %2$s' ),
-								get_comment_date( '', $comment ),
-								get_comment_time()
-							)
-						);
-
-						edit_comment_link( __( 'Edit' ), ' <span class="edit-link">', '</span>' );
-						?>
+					<?php
+						/**
+						 * Hook for including comment metadata.
+						 * Default action `display_comment_metadata` in wp-includes/comment-template.php includes a comment's date and an edit link.
+						 *
+						 * @since CP-2.0.0
+						 */
+						do_action( 'comment_metadata', $comment, $args );
+					?>
 					</div><!-- .comment-metadata -->
 
 					<?php if ( '0' == $comment->comment_approved ) : ?>

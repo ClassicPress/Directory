@@ -86,7 +86,7 @@ class WP_Customize_Themes_Section extends WP_Customize_Section {
 							<?php
 							printf(
 								/* translators: %s: Support forums URL. */
-								__( 'An unexpected error occurred. Something may be wrong with WordPress.org or this server&#8217;s configuration. If you continue to have problems, please try the <a href="%s">support forums</a>.' ),
+								__( 'An unexpected error occurred. Something may be wrong with WordPress.org, ClassicPress.net or this server&#8217;s configuration. If you continue to have problems, please try the <a href="%s">support forums</a>.' ),
 								__( 'https://wordpress.org/support/forums/' )
 							);
 							?>
@@ -155,7 +155,7 @@ class WP_Customize_Themes_Section extends WP_Customize_Section {
 					_e( 'Search themes&hellip;' );
 					?>
 				</label>
-				<input type="search" id="{{ data.id }}-themes-filter" placeholder="<?php esc_attr_e( 'Search themes&hellip;' ); ?>" aria-describedby="{{ data.id }}-live-search-desc" class="wp-filter-search wp-filter-search-themes" />
+				<input type="search" id="{{ data.id }}-themes-filter" placeholder="<?php esc_attr_e( 'Search themes&hellip;' ); ?>" aria-describedby="{{ data.id }}-live-search-desc" class="wp-filter-search wp-filter-search-themes">
 				<div class="search-icon" aria-hidden="true"></div>
 				<span id="{{ data.id }}-live-search-desc" class="screen-reader-text">
 					<?php
@@ -195,7 +195,7 @@ class WP_Customize_Themes_Section extends WP_Customize_Section {
 						<legend><?php echo esc_html( $feature_name ); ?></legend>
 						<div class="filter-group-feature">
 							<?php foreach ( $features as $feature => $feature_name ) : ?>
-								<input type="checkbox" id="filter-id-<?php echo esc_attr( $feature ); ?>" value="<?php echo esc_attr( $feature ); ?>" />
+								<input type="checkbox" id="filter-id-<?php echo esc_attr( $feature ); ?>" value="<?php echo esc_attr( $feature ); ?>">
 								<label for="filter-id-<?php echo esc_attr( $feature ); ?>"><?php echo esc_html( $feature_name ); ?></label>
 							<?php endforeach; ?>
 						</div>

@@ -3,9 +3,9 @@
 Contributors: johnbillion, scompt  
 Tags: cron, wp-cron, crontrol, debug  
 Requires at least: 4.4  
-Tested up to: 6.2  
-Stable tag: 1.15.2  
-Requires PHP: 5.6  
+Tested up to: 6.3  
+Stable tag: 1.16.0  
+Requires PHP: 7.4  
 Donate link: https://github.com/sponsors/johnbillion
 
 WP Crontrol enables you to view and control what's happening in the WP-Cron system.
@@ -157,9 +157,9 @@ Only users with the `manage_options` capability can manage cron events and sched
 
 ### Which users can manage PHP cron events? Is this dangerous?
 
-Only users with the `edit_files` capability can manage PHP cron events. This means if a user cannot edit files on the site (eg. through the Plugin Editor or Theme Editor) then they cannot edit or add a PHP cron event. By default, only Administrators have this capability, and with Multisite enabled only Super Admins have this capability.
+Only users with the `edit_files` capability can manage PHP cron events. This means if a user cannot edit files via the WordPress admin area (i.e. through the Plugin Editor or Theme Editor) then they also cannot add, edit, or delete a PHP cron event in WP Crontrol. By default only Administrators have this capability, and with Multisite enabled only Super Admins have this capability.
 
-If file editing has been disabled via the `DISALLOW_FILE_MODS` or `DISALLOW_FILE_EDIT` configuration constants then no user will have the `edit_files` capability, which means editing or adding a PHP cron event will not be permitted.
+If file editing has been disabled via the `DISALLOW_FILE_MODS` or `DISALLOW_FILE_EDIT` configuration constants then no user will have the `edit_files` capability, which means adding, editing, or deleting a PHP cron event will not be permitted.
 
 Therefore, the user access level required to execute arbitrary PHP code does not change with WP Crontrol activated.
 
@@ -186,6 +186,20 @@ The photo was taken by <a href="https://www.flickr.com/photos/michaelpardo/21453
 3. New cron schedules can be added, giving plugin developers more options when scheduling events<br>![](.wordpress-org/screenshot-3.png)
 
 ## Changelog ##
+
+### 1.16.0 ###
+
+* Allow persistent WordPress core hooks to be cleared if there's more than one event with that hook
+* Add the number of matching events to the hook deletion link text
+* Scrap the Ajax request that checks if the current page of cron events has changed since loading
+* Make some improvements to sorting the cron event list table columns
+* Increase the minimum supported PHP version to 7.4
+
+
+### 1.15.3 ###
+
+* Pass the `$doing_wp_cron` value to the `cron_request` filter so it matches WordPress core
+* Miscellaneous code quality improvements
 
 ### 1.15.2 ###
 
@@ -351,20 +365,4 @@ The photo was taken by <a href="https://www.flickr.com/photos/michaelpardo/21453
 - Add the ability for a PHP cron event to be given an optional display name.
 - Better UX for users who cannot edit files and therefore cannot add or edit PHP cron events.
 - Terminology and i18n improvements.
-
-
-### 1.3.1 ###
-
-- Display a less scary looking message when `DISABLE_WP_CRON` is defined.
-- Correct the example code for cron event arguments.
-
-
-### 1.3 ###
-
-- Improvements to the UI.
-- More error detection when testing WP-Cron functionality.
-- Improve the capability checks for single site and multisite.
-- Lots of escaping and sanitising.
-- Fix various issues with multiple events with the same hook name.
-- Removed the WP-CLI commands, as these have now been added to WP-CLI core (see `wp help cron` for more info)
 

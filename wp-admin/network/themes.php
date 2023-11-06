@@ -160,12 +160,12 @@ if ( $action ) {
 					<p><?php _e( 'Are you sure you want to delete these themes?' ); ?></p>
 				<?php endif; ?>
 				<form method="post" action="<?php echo esc_url( $_SERVER['REQUEST_URI'] ); ?>" style="display:inline;">
-					<input type="hidden" name="verify-delete" value="1" />
-					<input type="hidden" name="action" value="delete-selected" />
+					<input type="hidden" name="verify-delete" value="1">
+					<input type="hidden" name="action" value="delete-selected">
 					<?php
 
 					foreach ( (array) $themes as $theme ) {
-						echo '<input type="hidden" name="checked[]" value="' . esc_attr( $theme ) . '" />';
+						echo '<input type="hidden" name="checked[]" value="' . esc_attr( $theme ) . '">';
 					}
 
 					wp_nonce_field( 'bulk-themes' );
@@ -312,7 +312,7 @@ if ( current_user_can( 'update_themes' ) && wp_is_auto_update_enabled_for_type( 
 			'title'   => __( 'Auto-updates' ),
 			'content' =>
 				'<p>' . __( 'Auto-updates can be enabled or disabled for each individual theme. Themes with auto-updates enabled will display the estimated date of the next auto-update. Auto-updates depends on the WP-Cron task scheduling system.' ) . '</p>' .
-				'<p>' . __( 'Please note: Third-party themes and plugins, or custom code, may override WordPress scheduling.' ) . '</p>',
+				'<p>' . __( 'Please note: Third-party themes and plugins, or custom code, may override ClassicPress scheduling.' ) . '</p>',
 		)
 	);
 
@@ -433,8 +433,8 @@ if ( 'broken' === $status ) {
 ?>
 
 <form id="bulk-action-form" method="post">
-<input type="hidden" name="theme_status" value="<?php echo esc_attr( $status ); ?>" />
-<input type="hidden" name="paged" value="<?php echo esc_attr( $page ); ?>" />
+<input type="hidden" name="theme_status" value="<?php echo esc_attr( $status ); ?>">
+<input type="hidden" name="paged" value="<?php echo esc_attr( $page ); ?>">
 
 <?php $wp_list_table->display(); ?>
 </form>

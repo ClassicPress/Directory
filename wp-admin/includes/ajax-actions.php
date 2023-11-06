@@ -1001,7 +1001,7 @@ function wp_ajax_add_link_category( $action ) {
 			array(
 				'what'     => 'link-category',
 				'id'       => $cat_id,
-				'data'     => "<li id='link-category-$cat_id'><label for='in-link-category-$cat_id' class='selectit'><input value='" . esc_attr( $cat_id ) . "' type='checkbox' checked='checked' name='link_category[]' id='in-link-category-$cat_id'/> $cat_name</label></li>",
+				'data'     => "<li id='link-category-$cat_id'><label for='in-link-category-$cat_id' class='selectit'><input value='" . esc_attr( $cat_id ) . "' type='checkbox' checked name='link_category[]' id='in-link-category-$cat_id'> $cat_name</label></li>",
 				'position' => -1,
 			)
 		);
@@ -2176,7 +2176,7 @@ function wp_ajax_find_posts() {
 		wp_send_json_error( __( 'No items found.' ) );
 	}
 
-	$html = '<table class="widefat"><thead><tr><th class="found-radio"><br /></th><th>' . __( 'Title' ) . '</th><th class="no-break">' . __( 'Type' ) . '</th><th class="no-break">' . __( 'Date' ) . '</th><th class="no-break">' . __( 'Status' ) . '</th></tr></thead><tbody>';
+	$html = '<table class="widefat"><thead><tr><th class="found-radio"><br></th><th>' . __( 'Title' ) . '</th><th class="no-break">' . __( 'Type' ) . '</th><th class="no-break">' . __( 'Date' ) . '</th><th class="no-break">' . __( 'Status' ) . '</th></tr></thead><tbody>';
 	$alt  = '';
 	foreach ( $posts as $post ) {
 		$title = trim( $post->post_title ) ? $post->post_title : __( '(no title)' );
@@ -3740,7 +3740,7 @@ function wp_ajax_parse_embed() {
 		$mce_styles = wpview_media_sandbox_styles();
 
 		foreach ( $mce_styles as $style ) {
-			$styles .= sprintf( '<link rel="stylesheet" href="%s" />', $style );
+			$styles .= sprintf( '<link rel="stylesheet" href="%s">', $style );
 		}
 
 		$html = do_shortcode( $parsed );
@@ -3803,13 +3803,29 @@ function wp_ajax_parse_media_shortcode() {
 
 	$shortcode = wp_unslash( $_POST['shortcode'] );
 
+	// Only process previews for media related shortcodes:
+	$found_shortcodes = get_shortcode_tags_in_content( $shortcode );
+	$media_shortcodes = array(
+		'audio',
+		'embed',
+		'playlist',
+		'video',
+		'gallery',
+	);
+
+	$other_shortcodes = array_diff( $found_shortcodes, $media_shortcodes );
+
+	if ( ! empty( $other_shortcodes ) ) {
+		wp_send_json_error();
+	}
+
 	if ( ! empty( $_POST['post_ID'] ) ) {
 		$post = get_post( (int) $_POST['post_ID'] );
 	}
 
 	// The embed shortcode requires a post.
 	if ( ! $post || ! current_user_can( 'edit_post', $post->ID ) ) {
-		if ( 'embed' === $shortcode ) {
+		if ( in_array( 'embed', $found_shortcodes, true ) ) {
 			wp_send_json_error();
 		}
 	} else {
@@ -3831,7 +3847,7 @@ function wp_ajax_parse_media_shortcode() {
 	$styles = wpview_media_sandbox_styles();
 
 	foreach ( $styles as $style ) {
-		$head .= '<link type="text/css" rel="stylesheet" href="' . $style . '">';
+		$head .= '<link rel="stylesheet" href="' . $style . '">';
 	}
 
 	if ( ! empty( $wp_scripts ) ) {

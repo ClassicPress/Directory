@@ -47,8 +47,9 @@
 ?>
 <div class='azrcrv-donate'>
 	<?php
-		printf( esc_html__( 'Support %s', 'azrcrv-smtp' ), esc_html( DEVELOPER_NAME ) );
+		esc_html_e( 'Support', 'azrcrv-cf' );
 	?>
+	azurecurve | Development
 	<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 		<input type="hidden" name="cmd" value="_s-xclick">
 		<input type="hidden" name="hosted_button_id" value="MCJQN9SJZYLWJ">

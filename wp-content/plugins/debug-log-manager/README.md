@@ -4,8 +4,8 @@ Contributors: qriouslad
 Donate link: https://bowo.io/dotorg-sponsor-dlm  
 Tags: debug, errors, developer  
 Requires at least: 4.6  
-Tested up to: 6.1.1  
-Stable tag: 2.1.4  
+Tested up to: 6.2.2  
+Stable tag: 2.2.0  
 Requires PHP: 5.6  
 License: GPLv2 or later  
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -32,6 +32,14 @@ Debug Log Manager allows you to:
 * **Use `error_log()`** to output error info into your debug log. e.g. `error_log( $error_message )` for simple, string-based error message, or `error_log( json_encode( $error ) )` when inspecting a more complex error info, e.g. array or object.
 
 A simpler and more compact version of Debug Log Manager is included as part of the [System Dashboard plugin](https://wordpress.org/plugins/system-dashboard/), should you prefer a single plugin that does more.
+
+### What Users Say
+
+_"This is **a great plugin for dev** especially for people who tinker in the code."_ ~[PK Son](https://wordpress.org/support/topic/great-for-dev/)
+
+_"I have used a couple of other logger plugins and **this is by far the best one**."_ ~[Brian Henry](https://wordpress.org/support/topic/must-have-plugin-485/)
+
+_"**Another massive time-saving tool.**"_ ~[Jeff Starr](https://digwp.com/2023/06/plugins-troubleshoot-debug-wordpress/)
 
 ### Give Back
 
@@ -73,6 +81,11 @@ Maybe. It's been tested with Kinsta and GridPane (with Secure Debug turned off).
 Debug Log Manager is built using the excellent [WPConfigTransformer class](https://plugins.svn.wordpress.org/debug-log-config-tool/tags/1.1/src/Classes/vendor/WPConfigTransformer.php) from [WP Debug Log – Config Tool](https://wordpress.org/plugins/debug-log-config-tool/), [DataTables.js](https://datatables.net/), [jSticky](https://github.com/AndrewHenderson/jSticky) and [jQuery Toast](https://github.com/kamranahmedse/jquery-toast-plugin).
 
 ## Changelog
+
+### 2.2.0 (2023.06.26)
+
+* Hide dashboard widget and admin bar icon for non-administrator users
+* Stop public.js from loading on the frontend if logging is disabled
 
 ### 2.1.4 (2023.04.15)
 

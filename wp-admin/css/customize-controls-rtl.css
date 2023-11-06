@@ -564,6 +564,7 @@ body.trashing #publish-settings {
 #customize-theme-controls .accordion-section-title:after,
 #customize-outer-theme-controls .accordion-section-title:after {
 	content: "\f341";
+	font: normal 20px/1 dashicons;
 	color: #a7aaad;
 }
 
@@ -1606,6 +1607,7 @@ p.customize-section-description {
 	font-size: 12px;
 	padding: 6px 8px;
 	-moz-tab-size: 2;
+	-o-tab-size: 2;
 	tab-size: 2;
 }
 .customize-control-code_editor textarea,
@@ -2739,7 +2741,7 @@ body.adding-widget .add-new-widget:before,
 #available-widgets .widget-tpl,
 #available-menu-items .item-tpl {
 	position: relative;
-	padding: 15px 60px 15px 15px;
+	padding: 15px;
 	background: #fff;
 	border-bottom: 1px solid #dcdcde;
 	border-right: 4px solid #fff;

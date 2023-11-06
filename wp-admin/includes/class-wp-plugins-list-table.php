@@ -410,7 +410,7 @@ class WP_Plugins_List_Table extends WP_List_Table {
 
 			// We assume that somebody who can install plugins in multisite is experienced enough to not need this helper link.
 			if ( ! is_multisite() && current_user_can( 'install_plugins' ) ) {
-				echo ' <a href="' . esc_url( admin_url( 'plugin-install.php?tab=search&s=' . urlencode( $s ) ) ) . '">' . __( 'Search for plugins in the WordPress Plugin Directory.' ) . '</a>';
+				echo ' <a href="' . esc_url( admin_url( 'plugin-install.php?tab=search&s=' . urlencode( $s ) ) ) . '">' . __( 'Search for plugins in the ClassicPress Plugin Directory.' ) . '</a>';
 			}
 		} elseif ( ! empty( $plugins['all'] ) ) {
 			_e( 'No plugins found.' );
@@ -435,15 +435,15 @@ class WP_Plugins_List_Table extends WP_List_Table {
 		$input_id = $input_id . '-search-input';
 
 		if ( ! empty( $_REQUEST['orderby'] ) ) {
-			echo '<input type="hidden" name="orderby" value="' . esc_attr( $_REQUEST['orderby'] ) . '" />';
+			echo '<input type="hidden" name="orderby" value="' . esc_attr( $_REQUEST['orderby'] ) . '">';
 		}
 		if ( ! empty( $_REQUEST['order'] ) ) {
-			echo '<input type="hidden" name="order" value="' . esc_attr( $_REQUEST['order'] ) . '" />';
+			echo '<input type="hidden" name="order" value="' . esc_attr( $_REQUEST['order'] ) . '">';
 		}
 		?>
 		<p class="search-box">
 			<label class="screen-reader-text" for="<?php echo esc_attr( $input_id ); ?>"><?php echo $text; ?>:</label>
-			<input type="search" id="<?php echo esc_attr( $input_id ); ?>" class="wp-filter-search" name="s" value="<?php _admin_search_query(); ?>" placeholder="<?php esc_attr_e( 'Search installed plugins...' ); ?>" />
+			<input type="search" id="<?php echo esc_attr( $input_id ); ?>" class="wp-filter-search" name="s" value="<?php _admin_search_query(); ?>" placeholder="<?php esc_attr_e( 'Search installed plugins...' ); ?>">
 			<?php submit_button( $text, 'hide-if-js', '', false, array( 'id' => 'search-submit' ) ); ?>
 		</p>
 		<?php
@@ -457,7 +457,7 @@ class WP_Plugins_List_Table extends WP_List_Table {
 		global $status;
 
 		$columns = array(
-			'cb'          => ! in_array( $status, array( 'mustuse', 'dropins' ), true ) ? '<input type="checkbox" />' : '',
+			'cb'          => ! in_array( $status, array( 'mustuse', 'dropins' ), true ) ? '<input type="checkbox">' : '',
 			'name'        => __( 'Plugin' ),
 			'description' => __( 'Description' ),
 		);
@@ -663,7 +663,7 @@ class WP_Plugins_List_Table extends WP_List_Table {
 		} elseif ( 'top' === $which && 'dropins' === $status ) {
 			echo '<p>' . sprintf(
 				/* translators: %s: wp-content directory name. */
-				__( 'Drop-ins are single files, found in the %s directory, that replace or enhance WordPress features in ways that are not possible for traditional plugins.' ),
+				__( 'Drop-ins are single files, found in the %s directory, that replace or enhance ClassicPress features in ways that are not possible for traditional plugins.' ),
 				'<code>' . str_replace( ABSPATH, '', WP_CONTENT_DIR ) . '</code>'
 			) . '</p>';
 		}
@@ -750,7 +750,7 @@ class WP_Plugins_List_Table extends WP_List_Table {
 			$plugin_name = $plugin_file;
 
 			if ( $plugin_file !== $plugin_data['Name'] ) {
-				$plugin_name .= '<br />' . $plugin_data['Name'];
+				$plugin_name .= '<br>' . $plugin_data['Name'];
 			}
 
 			if ( true === ( $dropins[ $plugin_file ][1] ) ) { // Doesn't require a constant.
@@ -983,7 +983,7 @@ class WP_Plugins_List_Table extends WP_List_Table {
 		} else {
 			$checkbox = sprintf(
 				'<label class="screen-reader-text" for="%1$s">%2$s</label>' .
-				'<input type="checkbox" name="checked[]" value="%3$s" id="%1$s" />',
+				'<input type="checkbox" name="checked[]" value="%3$s" id="%1$s">',
 				$checkbox_id,
 				/* translators: Hidden accessibility text. %s: Plugin name. */
 				sprintf( __( 'Select %s' ), $plugin_data['Name'] ),
@@ -1270,11 +1270,11 @@ class WP_Plugins_List_Table extends WP_List_Table {
 			);
 
 			if ( ! $compatible_php && ! $compatible_wp ) {
-				_e( 'This plugin does not work with your versions of WordPress and PHP.' );
+				_e( 'This plugin does not work with your versions of ClassicPress and PHP.' );
 				if ( current_user_can( 'update_core' ) && current_user_can( 'update_php' ) ) {
 					printf(
 						/* translators: 1: URL to WordPress Updates screen, 2: URL to Update PHP page. */
-						' ' . __( '<a href="%1$s">Please update WordPress</a>, and then <a href="%2$s">learn more about updating PHP</a>.' ),
+						' ' . __( '<a href="%1$s">Please update ClassicPress</a>, and then <a href="%2$s">learn more about updating PHP</a>.' ),
 						self_admin_url( 'update-core.php' ),
 						esc_url( wp_get_update_php_url() )
 					);
@@ -1282,7 +1282,7 @@ class WP_Plugins_List_Table extends WP_List_Table {
 				} elseif ( current_user_can( 'update_core' ) ) {
 					printf(
 						/* translators: %s: URL to WordPress Updates screen. */
-						' ' . __( '<a href="%s">Please update WordPress</a>.' ),
+						' ' . __( '<a href="%s">Please update ClassicPress</a>.' ),
 						self_admin_url( 'update-core.php' )
 					);
 				} elseif ( current_user_can( 'update_php' ) ) {
@@ -1294,11 +1294,11 @@ class WP_Plugins_List_Table extends WP_List_Table {
 					wp_update_php_annotation( '</p><p><em>', '</em>' );
 				}
 			} elseif ( ! $compatible_wp ) {
-				_e( 'This plugin does not work with your version of WordPress.' );
+				_e( 'This plugin does not work with your version of ClassicPress.' );
 				if ( current_user_can( 'update_core' ) ) {
 					printf(
 						/* translators: %s: URL to WordPress Updates screen. */
-						' ' . __( '<a href="%s">Please update WordPress</a>.' ),
+						' ' . __( '<a href="%s">Please update ClassicPress</a>.' ),
 						self_admin_url( 'update-core.php' )
 					);
 				}

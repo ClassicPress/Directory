@@ -66,7 +66,7 @@ function translations_api( $type, $args = null ) {
 			trigger_error(
 				sprintf(
 					/* translators: %s: support forums URL */
-					__( 'An unexpected error occurred. Something may be wrong with ClassicPress.net or this server&#8217;s configuration. If you continue to have problems, please try the <a href="%s">support forums</a>.' ),
+					__( 'An unexpected error occurred. Something may be wrong with WordPress.org, ClassicPress.net or this server&#8217;s configuration. If you continue to have problems, please try the <a href="%s">support forums</a>.' ),
 					__( 'https://forums.classicpress.net/c/support' )
 				) . ' ' . __( '(ClassicPress could not establish a secure connection to ClassicPress.net. Please contact your server administrator.)' ),
 				headers_sent() || WP_DEBUG ? E_USER_WARNING : E_USER_NOTICE
@@ -81,7 +81,7 @@ function translations_api( $type, $args = null ) {
 				'translations_api_failed',
 				sprintf(
 					/* translators: %s: Support forums URL. */
-					__( 'An unexpected error occurred. Something may be wrong with WordPress.org or this server&#8217;s configuration. If you continue to have problems, please try the <a href="%s">support forums</a>.' ),
+					__( 'An unexpected error occurred. Something may be wrong with WordPress.org, ClassicPress.net or this server&#8217;s configuration. If you continue to have problems, please try the <a href="%s">support forums</a>.' ),
 					__( 'https://wordpress.org/support/forums/' )
 				),
 				$request->get_error_message()
@@ -93,7 +93,7 @@ function translations_api( $type, $args = null ) {
 					'translations_api_failed',
 					sprintf(
 						/* translators: %s: Support forums URL. */
-						__( 'An unexpected error occurred. Something may be wrong with WordPress.org or this server&#8217;s configuration. If you continue to have problems, please try the <a href="%s">support forums</a>.' ),
+						__( 'An unexpected error occurred. Something may be wrong with WordPress.org, ClassicPress.net or this server&#8217;s configuration. If you continue to have problems, please try the <a href="%s">support forums</a>.' ),
 						__( 'https://wordpress.org/support/forums/' )
 					),
 					wp_remote_retrieve_body( $request )
@@ -170,7 +170,7 @@ function wp_install_language_form( $languages ) {
 
 	echo "<label class='screen-reader-text' for='language'>Select a default language</label>\n";
 	echo "<select size='14' name='language' id='language'>\n";
-	echo '<option value="" lang="en" selected="selected" data-continue="Continue" data-installed="1">English (United States)</option>';
+	echo '<option value="" lang="en" selected data-continue="Continue" data-installed="1">English (United States)</option>';
 	echo "\n";
 
 	if ( ! empty( $wp_local_package ) && isset( $languages[ $wp_local_package ] ) ) {
@@ -200,7 +200,7 @@ function wp_install_language_form( $languages ) {
 		);
 	}
 	echo "</select>\n";
-	echo '<p class="step"><span class="spinner"></span><input id="language-continue" type="submit" class="button button-primary button-large" value="Continue" /></p>';
+	echo '<p class="step"><span class="spinner"></span><input id="language-continue" type="submit" class="button button-primary button-large" value="Continue"></p>';
 }
 
 /**
