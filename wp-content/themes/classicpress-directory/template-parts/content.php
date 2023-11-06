@@ -36,6 +36,12 @@
 		</header>
 
 		<section id="software" class="software">
+
+			<?php if (has_post_thumbnail()) {
+				$thumbnail_url = get_the_post_thumbnail_url();
+				echo '<figure class="featured-image"><img src="' . esc_url($thumbnail_url) . '" alt="' . esc_attr(get_the_title()) . '"></figure>';
+			} ?>
+
 			<h2 class="screen-reader-text">
 				<?php
 				switch (get_post_type()) {

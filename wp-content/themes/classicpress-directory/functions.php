@@ -33,6 +33,7 @@ if (!function_exists('bedrock_setup')) :
 		 * @link https://docs.classicpress.net/reference/functions/the_post_thumbnail/
 		 */
 		add_theme_support('post-thumbnails');
+		set_post_thumbnail_size(828, 0, false);
 
 		// Set the default content width.
 		$GLOBALS['content_width'] = 525;
