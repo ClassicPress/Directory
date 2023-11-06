@@ -3,3 +3,4 @@
 /adminer-*.php
 /wp-content/debug.log
 /*.sql
+/*.swp
